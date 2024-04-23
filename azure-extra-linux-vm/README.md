@@ -22,7 +22,7 @@ https://gitforwindows.org/
 
 Page1
 
-![Quick 1 ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/page1.jpg)
+![Quick 1 ](https://github.com/spawnmarvel/linux-and-azure/tree/blob/main/images/page1.jpg)
 
 Page 2
 ![Quick 2 ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/page2.jpg)
