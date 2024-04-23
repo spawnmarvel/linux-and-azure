@@ -3,11 +3,11 @@
 https://learn.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-bicep?tabs=CLI
 
 
-![Linux tutorials ](https://github.com/spawnmarvel/azure-automation/blob/main/images/linux_tutorials.jpg)
+![Linux tutorials ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/linux_tutorials.jpg)
 
 Just follow next steps
 
-![Next step ](https://github.com/spawnmarvel/azure-automation/blob/main/images/next_steps.jpg)
+![Next step ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/next_steps.jpg)
 
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file
 
@@ -104,7 +104,7 @@ subnet: {
 * output hostname string = publicIPAddress.properties.dnsSettings.fqdn
 * output sshCommand string = 'ssh ${adminUsername}@${publicIPAddress.properties.dnsSettings.fqdn}'
 
-![Output ](https://github.com/spawnmarvel/azure-automation/blob/main/images/linux_output.jpg)
+![Output ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/linux_output.jpg)
 
 
 ```bash
@@ -116,7 +116,7 @@ ssh user@serverip
 
 Ref the disk is already attached in the bicep file
 
-![SDA, B, C](https://github.com/spawnmarvel/azure-automation/blob/main/images/sda_b_c.jpg)
+![SDA, B, C](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/sda_b_c.jpg)
 
 Or deploy a VM with just OS and then use the portal to attach a data disk to a Linux VM
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal?tabs=ubuntu
@@ -506,7 +506,7 @@ echo $osdiskid
 
   Add NSG inbound HTTP, sudo systemctl enable nginx, restart server and verify it.
 
-  ![nginx ](https://github.com/spawnmarvel/azure-automation/blob/main/images/nginx.jpg)
+  ![nginx ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/nginx.jpg)
 
 )
 
@@ -524,7 +524,7 @@ Do the rest in the Portal.
 
 Create snap, osDisk-backup01
 
- ![snap ](https://github.com/spawnmarvel/azure-automation/blob/main/images/snap.jpg)
+ ![snap ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/snap.jpg)
 
 
 
@@ -542,7 +542,7 @@ az disk create --resource-group $rgName --name mySnapshotDisk --source osDisk-ba
 
 ```
 
-![disk ](https://github.com/spawnmarvel/azure-automation/blob/main/images/disk.jpg)
+![disk ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/disk.jpg)
 
 
 Restore virtual machine from snapshot
@@ -558,11 +558,11 @@ Go to portal and Public IP address-> Dissocitate
 
 Go back to the disk and create VM
 
-![NEW VM ](https://github.com/spawnmarvel/azure-automation/blob/main/images/NEWVM.jpg)
+![NEW VM ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/NEWVM.jpg)
 
 Error
 
-![ERROR ](https://github.com/spawnmarvel/azure-automation/blob/main/images/error.jpg)
+![ERROR ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/error.jpg)
 
 from the Bicep file which the initial VM was deployd
 
@@ -600,7 +600,7 @@ Cloud-init also works across distributions. For example, you don't use apt-get i
 
 ### (cloud-init support for virtual machines in Azure)
 
-![Cloud init ](https://github.com/spawnmarvel/azure-automation/blob/main/images/cloudinit.jpg)
+![Cloud init ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/cloudinit.jpg)
 
 cloud-init support https://learn.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init
 
@@ -646,7 +646,7 @@ There are background tasks that continue to run after the Azure CLI returns you 
 
 http://<publicIpAddress> in the address bar.
 
-![Nginx ](https://github.com/spawnmarvel/azure-automation/blob/main/images/nginx2.jpg)
+![Nginx ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/nginx2.jpg)
 
 
 ### Inject certificates from Key Vault
@@ -676,7 +676,7 @@ Generate certificate and store in Key Vault
 az keyvault certificate create --vault-name $keyvault_name --name mycert01x01 --policy "$(az keyvault certificate get-default-policy --output json)"
 ```
 
-![certificate ](https://github.com/spawnmarvel/azure-automation/blob/main/images/certificate.jpg)
+![certificate ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/certificate.jpg)
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/tutorial-automate-vm-deployment
 
@@ -707,11 +707,11 @@ az vm open-port \
 
 https://<publicIpAddress> in the address bar. 
 
-![self signed ](https://github.com/spawnmarvel/azure-automation/blob/main/images/selfsigned.jpg)
+![self signed ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/selfsigned.jpg)
 
 CLIGetDefaultPolicy
 
-![self signed ](https://github.com/spawnmarvel/azure-automation/blob/main/images/selfsigneddefault.jpg)
+![self signed ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/selfsigneddefault.jpg)
 
 
 ## Tutorial: Create a custom image of an Azure VM with the Azure CLI

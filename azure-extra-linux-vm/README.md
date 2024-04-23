@@ -22,10 +22,10 @@ https://gitforwindows.org/
 
 Page1
 
-![Quick 1 ](https://github.com/spawnmarvel/azure-automation/blob/main/images/page1.jpg)
+![Quick 1 ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/page1.jpg)
 
 Page 2
-![Quick 2 ](https://github.com/spawnmarvel/azure-automation/blob/main/images/page2.jpg)
+![Quick 2 ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/page2.jpg)
 
 https://github.com/spawnmarvel/quickguides/blob/main/bash/bash.quickref.pdf
 
@@ -68,11 +68,11 @@ ref https://linuxjourney.com/lesson/filesystem-hierarchy
 
 https://linuxjourney.com/
 
-![File system ](https://github.com/spawnmarvel/azure-automation/blob/main/images/linuxfilesys2.jpg)
+![File system ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/linuxfilesys2.jpg)
 
 Unix philosphy
 
-![Unix ](https://github.com/spawnmarvel/azure-automation/blob/main/images/unix.jpg)
+![Unix ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/unix.jpg)
 ref https://bash.cyberciti.biz/guide/Unix_philosophy
 
 ## Azure CLI
@@ -539,7 +539,7 @@ printenv
 MY_VAR=GOT
 ```
 
-![Env var](https://github.com/spawnmarvel/azure-automation/blob/main/images/envvar1.jpg)
+![Env var](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/envvar1.jpg)
 https://tecadmin.net/setting-up-environment-variables-on-ubuntu/
 
  
