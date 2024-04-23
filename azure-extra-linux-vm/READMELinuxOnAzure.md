@@ -476,7 +476,7 @@ You see the index page, which includes a web form.
 Try adding a few books to the database. Each time you add a book, the page updates the complete list of books.
 
 
-![Output ](https://github.com/spawnmarvel/azure-automation/blob/main/images/meanstack.jpg)
+![Output ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/meanstack.jpg)
 
 https://learn.microsoft.com/en-us/training/modules/build-a-web-app-with-mean-on-a-linux-vm/?wt.mc_id=youtube_S-1076_video_reactor&source=learn
 
