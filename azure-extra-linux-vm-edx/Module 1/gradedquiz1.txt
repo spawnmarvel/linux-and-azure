@@ -1,0 +1,10 @@
+* true, Debian is stable, reliable, and fully open source.
+* which layer conaines sys daemons and shelles,  Application
+* which layer assigns software to users, helps detect errors, Operating system
+* whiche layer memory management, process management, device driver management, system calls and security, Kernel
+* standard directory, bin
+* GUI-based text editor, gedit
+* go to home, ~
+* Packages are, Archive files
+* convert package files between deb and RPM formats, alien
+* advantage of PackageKit is that, It automatically checks for updates at configurable intervals.

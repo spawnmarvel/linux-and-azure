@@ -1,0 +1,4 @@
+VAR1=TEST111
+VAR2=TEST2
+
+sed -i 's/VAR1=TEST111/VAR1=TEST1111/g' test_update.txt

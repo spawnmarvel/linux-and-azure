@@ -1,0 +1,90 @@
+Welcome to “Overview of Linux Architecture.”
+After watching this video, you will be able to:
+List the layers in a Linux system.
+Explain the role of each layer in a Linux system.
+And describe the Linux filesystem.
+The Linux system comprises five distinct layers.
+The outermost layer of the Linux architecture is the UI, or user interface, which allows
+users to interact with the system using a keyboard or mouse.
+The application layer includes system daemons, shells, user apps, and tools used to perform
+tasks in a Linux system.
+The applications communicate with the operating system to perform tasks. The OS is responsible
+for jobs that are vital for system stability such as job scheduling and keeping track of
+time.
+All Linux operating systems are built on top of the Linux kernel, which performs the most
+vital lower-level jobs. The kernel is the core component of the operating system and
+is responsible for managing memory, processing, and security.
+The kernel interacts with the hardware layer, which includes all the physical or electronic
+devices in the computer such as processors, memory modules, input devices, and storage.
+The first layer in a Linux system is the user interface.
+The UI allows users to perform tasks by controlling applications with the keyboard.
+Desktop versions of Linux include a Graphical User Interface, or GUI layer, which is similar
+to Microsoft Windows. This extends the UI functionality to other control devices, such
+as a mouse.
+You might use a Linux machine to:
+Use a web browser to send your friend an email.
+Or use a music player to listen to your favorite song.
+Applications are the software that enables a user to perform a task in a Linux system.
+Applications can include the following:
+System tools, such as compilers.
+Programming languages.
+Shells, which are special applications that are often part of the operating system itself.
+And user apps, which can be any kind of applications, from browsers, to text editors, to games.
+The operating system controls the jobs and programs that are vital to system health and
+stability. Its functions also include:
+Assigning software to users,
+Detecting errors and implementing measures to prevent complete system failures,
+And performing file management.
+In a Linux system, the operating system is built on top of the Linux kernel, which performs
+the most vital operations.
+The kernel is the lowest-level software in a Linux system and has complete control of
+the system.
+It starts as soon as your computer boots and remains in your computer’s memory while
+the system is running. It also acts as a bridge between your apps and your machine hardware,
+enabling the two to communicate effectively using "system calls."
+The kernel has four key jobs:
+Memory management,
+Process management,
+Managing device drivers for proper hardware support,
+And assuring the system remains secure
+The final layer in the Linux system is the hardware, consisting of the physical or electronic
+devices that make up your computer.
+This layer can include the following:
+The central processing unit, or CPU, which is responsible for executing most calculations.
+The random access memory, or RAM, which is a fast storage unit used to hold the temporary
+information your applications need to run.
+Storage for data that needs to persist when your computer is powered off.
+Your computer's screen.
+And any USB devices such as a keyboard, mouse, or USB drive.
+The Linux filesystem is the collection of files on your machine. It includes the files
+needed to run the machine and applications as well as your own files containing your
+work.
+The top level of the filesystem is the root directory, symbolized by a forward slash (/).
+Below this is a tree-like structure of the directories and files in the system.
+And the filesystem assigns appropriate access rights to the directories and files.
+The very top of the Linux filesystem is the root directory, which contains many other
+directories and files.
+One of the key directories is /bin, which contains user binary files. Binary files contain
+the code your machine reads to run programs and execute commands.
+It’s called "slash bin" to signify that it exists directly below the root directory.
+Other key directories include /usr, which contains user programs,
+/home, which is your personal working directory where you should store all your personal files,
+/boot, which contains your system boot files, the instructions vital for system startup,
+and /media, which contains files related to temporary media such as CD or USB drives that
+are connected to the system.
+There are several other directories in the root directory, but you will not need to access
+them during this course.
+All the files and directories in a Linux system are organized into one of these designated
+folders, depending on the purpose of the file or directory.
+In this video, you learned that:
+A Linux system consists of five key layers.
+The user interface is the layer that enables the user to interact with applications using
+control devices​.
+Applications enable users to perform certain tasks within the system.
+The operating system runs on top of the Linux kernel and is vital for system health and
+stability.
+The kernel is the lowest-level software and enables applications to interact with your
+hardware.
+Hardware includes all the physical or electronic components of your PC.
+And the Linux filesystem is a tree-like structure consisting of all directories and
+files on the system.

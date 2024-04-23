@@ -1,0 +1,21 @@
+########## docker vm
+vmdocker01
+Ubuntu Server 22.04 LTS
+Standard_B2s, 2 vcpu 4 gb ram, 34.46$
+x64
+imsdal
+Thismonday789
+Boot diagnostics, Enable with managed storage account (recommended)
+
+
+############ Login docker
+
+ssh imsdal@20.162.161.241
+Thismonday789
+
+############ update
+
+sudo apt update -y
+sudo apt upgrade -y
+
+############ Mount drive small drive E 16

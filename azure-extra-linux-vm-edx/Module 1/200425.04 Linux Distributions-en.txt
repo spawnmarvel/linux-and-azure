@@ -1,0 +1,80 @@
+Welcome to Linux Distributions.
+After watching this video, you will be able to:
+Describe what a Linux distribution is.
+Differentiate between some common Linux distributions.
+And identify the use cases of some popular Linux distributions.
+So, what is a Linux distribution?
+A Linux distribution is a specific flavor of the Linux operating system.
+It may also be referred to as a distro.
+All Linux distributions must use the Linux kernel.
+This is the core component of the Linux operating system
+that enables the system to properly use the computer's hardware.
+And today, there are hundreds of Linux distros, each tailored for a specific audience or task.
+Okay, so what differentiates Linux distros from each other?
+Each Linux distro includes a unique set of default utilities
+that are part of the operating system,
+such as commands and applications that come prepackaged with the distribution.
+Each distro has its own graphical user interface, or GUI,
+that you use to interact with the operating system.
+Each distro supports a specific set of commands that you can use in a shell,
+a window for entering and receiving output from commands.
+And lastly, each distro provides differing levels of support.
+It could be developed and managed as a community-backed project
+or maintained by a commercial enterprise.
+And it could be a long-term support version, or LTS,
+or a rolling release,
+where stable package updates are released on a rolling schedule.
+Debian is one of the earliest-rooted distros,
+with the first release in 1993 (named version 0.01)
+and the first official, stable release in 1996 (version 1.1).
+It is known for being stable, reliable, and fully open source.
+It supports many computer architectures (or types of hardware).
+These features result in Debian being highly regarded in the server space.
+And furthermore, Debian is the largest community-run distro currently available.
+Another popular distro is Ubuntu.
+This is also an early-rooted distro, with its first official release in 2004.
+Ubuntu is Debian-based, meaning that it’s built on top of Debian
+and uses a lot of the same tools as the Debian OS.
+Ubuntu is developed and managed by Canonical.
+And Ubuntu has three official editions:
+Desktop (for personal computers, laptops, and workstations)
+Server (for simple file servers or multinode clouds)
+and Core (for the Internet of Things).
+Red Hat Linux, like Debian, is a "core" Linux distro,
+meaning that it is not derived from another Linux distro.
+Red Hat is known for being stable, reliable, and fully open source.
+It’s managed by Red Hat, an IBM subsidiary.
+Today it ships as Red Hat Enterprise Linux (or RHEL),
+an edition focused entirely on enterprise customers.
+Next is Fedora, which is known as a stable operating system
+that supports many architectures.
+It’s also very reliable and secure, offering unique firewall and security features.
+It’s actively developed, with a large and growing community.
+And it’s sponsored by Red Hat.
+Consequently, Red Hat uses much of Fedora’s code base (after testing, of course).
+Another Linux distro is SUSE Linux Enterprise.
+Also known as SLE, SUSE Linux Enterprise is available in two editions:
+Server, or SLES, and Desktop, or SLED.
+It supports many architectures, such as ARM for Raspberry Pi,
+and uses the SUSE Package Hub,
+which enables users to install packages that aren’t officially part of SLE.
+And it's maintained by the small German open-source software company, SUSE.
+And finally, we have Arch Linux.
+The unique, do-it-yourself approach of Arch Linux
+allows users to customize every part of their system.
+This makes it highly configurable, a freedom that makes Arch very popular.
+But it also means that you need a strong understanding of Linux and system tools
+in order to use Arch effectively.
+And because Arch isn’t focused on stability in the same way as other distros,
+it has easy access to the newest software,
+which has little guarantee of being completely stable.
+In this video, you learned that:
+Linux distros can be differentiated by their user interfaces,
+their shell applications, and how the operating system is supported and built.
+The design of a Linux distro is catered toward a specific audience.
+Debian is highly regarded in the server space
+for its stability, reliability,
+and for being open source.
+Red Hat Enterprise Linux, an IBM subsidiary, is focused completely on enterprise customers.
+And SUSE Linux Enterprise supports many architectures,
+such as ARM for Raspberry Pi.

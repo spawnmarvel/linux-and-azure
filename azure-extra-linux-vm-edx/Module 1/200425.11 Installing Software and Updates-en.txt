@@ -1,0 +1,81 @@
+Welcome to Installing Software and Updates. After watching this video, you will be able to:
+Describe packages and package managers
+Differentiate between packages for deb- and RPM-based distros
+Use a package manager to install updates
+And use a package manager to install software.
+Both software updates and software installation files for Linux operating systems are distributed
+in files known as packages. These packages are archive files containing the required
+components for either installing new software or updating existing software.
+You use package managers to manage the download and installation of packages. Different Linux
+distros provide different package managers—some are GUI-based and some are command line tools.
+Deb and RPM packages are used by package managers in Linux operating systems. They
+are distinct file types containing software or updates for different Linux operating systems.
+.deb files are used for Debian-based distributions such as Debian, Ubuntu,
+and Mint. Deb stands for Debian.
+And .rpm files are used for Red Hat-based distributions such as CentOS/RHEL, Fedora,
+and openSUSE. RPM stands for Red Hat Package Manager.
+Deb and RPM formats are equivalent, so the contents of the file can be used on
+other types of Linux OSs. If you find that a package that you want to use is
+only available in the other format you can convert it using the alien tool.
+To convert packages from RPM format to deb, simply use the alien command and specify the package
+name that you want to convert. To convert to RPM format, use the –r switch with the alien command.
+Package managers provide several benefits:
+They can automatically resolve dependencies between packages
+They can notify you when updates are available
+GUI-based package managers can automatically check
+for security and software updates on a regular basis
+And they can automatically install updates or let you select and install just the ones you want.
+GUI-based Linux distro package managers include PackageKit and Update Manager.
+Update Manager is a GUI tool for updating deb-based Linux systems.
+By default, Update Manager checks for software updates daily, and automatically downloads
+and installs any security updates daily. All other updates are displayed weekly.
+You can also manually check for updates at any time.
+Update Manager will notify you when software updates are available:
+Select the updates you want to install
+Click ‘Install Updates’
+If prompted, enter your user password, and click OK.
+And Update Manager installs the updates in the background while you continue working.
+apt is a command-line tool for updating deb-based Linux systems.
+You use the “sudo apt update” command to find available packages for your distro.
+The output of this command lists each available package,
+builds a dependency tree, and lets you know how many packages can be upgraded.
+To install the packages, use the “sudo apt upgrade” command.
+If you want to only install a specific package, you can use “sudo apt upgrade <package-name>”
+PackageKit is a GUI tool for updating RPM-based Linux systems.
+When updates are available, PackageKit displays a starburst icon in the notification area.
+It automatically checks for updates at a configurable interval,
+and you can also manually check for them at any time.
+Clicking the starburst icon opens the Software Update window,
+which lists all available software updates:
+Select the updates you want to install
+and then click Install Updates.
+If requested, enter your user password, and click OK
+And PackageKit installs the updates in the background while you continue working.
+yum is a command-line tool for updating RPM-based systems. yum
+stands for Yellowdog Updater, Modified.
+To update all packages in your system, type "sudo yum update"
+After you enter your password,
+Yum fetches all available package updates.
+And then it displays a summary of the updates and asks you to confirm the download.
+If confirmed, yum downloads all the package updates, and updates the packages on your system.
+And when finished, it displays the success message "Complete!"
+You can also use command line tools to install new software.
+Use the apt command with the install switch to install a package on a deb-based system.
+And use the yum command with the install switch to install software on an RPM-based system.
+Many software applications use package managers,
+such as the popular pip or conda packages, for managing Python environments.
+For example, assuming you already have a Python environment and the relevant pip package,
+you can easily install the popular “pandas” library used for data wrangling in Python.
+Enter “pip install pandas” to instruct the pip package manager to:
+Search for the latest pandas package,
+Download the pandas package,
+Check for dependencies and update as required,
+And install the pandas package.
+When the installation is complete, the package manager displays the new software version number.
+In this video, you learned that:
+.deb and .rpm are distinct file types used by package managers in Linux operating systems
+deb and RPM formats can be converted from one to the other
+Update Manager and PackageKit are popular GUI-based package managers
+used in deb- and RPM-based distros, respectively
+And apt and yum are popular command line package managers
+used in deb- and RPM-based distros, respectively.

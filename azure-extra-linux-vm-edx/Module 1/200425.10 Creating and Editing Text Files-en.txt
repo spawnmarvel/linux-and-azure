@@ -1,0 +1,95 @@
+Welcome to Creating and Editing Text Files.
+After watching this video, you will be able to:
+List popular text editors for Linux
+Describe a popular GUI-based text editor
+And use command-line editors to work with a file.
+You use text editors to write code in your Linux environment.
+There are many editors to choose from and they can be grouped into two main categories:
+Command-line text editors
+And GUI text editors
+Examples of command-line text editors are:
+GNU nano, a small and friendly modeless text editor
+vi, a traditional command-line editor originally created for Unix
+And vim, a powerful mode-based command line-editor based on vi
+A popular GUI-based editor is gedit, which is the default editor from the GNOME environment.
+And emacs (e’-max) is another text editor that is one of the oldest free, open source
+projects still under development.
+You can use emacs in GUI mode or within a command line.
+Gedit is a popular, modern text editor that comes preinstalled on most Linux distros.
+It’s designed as a general-purpose text editor and in keeping with the philosophy
+of the GNOME project, it emphasizes simplicity and ease of use, with a clean and simple GUI.
+Gedit provides many features to enhance your text editing experience, including:
+An integrated file browser
+Undo and redo functionality
+Search and replace functions with support for regular expressions in the search string
+And extensibility using plugins from the gedit-plugins package.
+The text editor uses syntax color coding to help you interpret and focus on different
+aspects of your code.
+GNU nano is a command-line text editor that provides:
+Undo and redo features
+Search and replace with support for regular expressions in the search string
+Syntax highlighting
+Automatic indentation of code
+Line numbering
+Line-by-line scrolling
+And multiple buffers so you can work with many files at the same time
+To open a text file in nano, type nano followed by the filename to open.
+This opens a new text editor window in which you can edit the file.
+Here is what the nano app looks like.
+The main area displays the text of the open file, which in this case is the source text
+from the nano Wikipedia page.
+The cursor is currently located at the beginning of the file, but you can navigate within the
+text using the arrow keys, page up and down keys, or ‘home’ and ‘end’ keys.
+Any text you type is entered at the cursor.
+You can also delete text using the Delete and Backspace keys.
+Pressing Enter starts a new line.
+At the bottom of the nano window there is a list of commands that you can use in the
+editor.
+To access the commands, simultaneously press ‘control’ and the letter for the command.
+For example, to Get Help, press the ‘control’ and ‘G’ keys.
+Let’s see how to use a few of the editing options.
+To search for a text string, you can press ‘control W’ to use the ‘Where Is’
+option.
+This opens a new pane at the bottom of the app window.
+Here’s a closer view of that new pane.
+Within the square brackets you can see the most recently searched string, which here
+is 1999.
+Type the string you want to find, for example ‘https’, and press Enter.
+The cursor moves to the first instance of the search string it finds after the current
+position of the cursor, here.
+Nano supports many other editing features which you will explore in one of the labs
+for this course.
+Vim is a traditional and very powerful command-line editor.
+It takes some time to get accustomed to how it works, but with some practice your fingers
+will develop the muscle memory to accomplish all of your text editing tasks at speed.
+Entering vim at the command prompt opens the vim app
+You can also specify a filename to edit a new or existing file.
+Vim has two basic modes: Insert mode, where you enter text, and Command mode, where you
+do everything else.
+After you start a vim session,
+press i to enter Insert mode.
+Type some text, for example “some text,”
+and press the Escape key to exit Insert mode and switch to Command mode.
+And the text is written to the buffer at the current cursor location.
+Now you are back in Command mode, and you can save your file with a filename using the
+‘colon save’ command along with a filename, such as ‘example dot txt’.
+The buffer is written to the file and a message is displayed, showing the filename, that it
+is a new file, it has one line with 10 columns, and that it was successfully written.
+Now that your file already exists, you can use the more common ‘colon w’ command
+to write any changes to the file.
+To quit your vim session, enter ‘colon q’.
+And to quit and discard any changes made since the last write operation, include the ‘bang,’
+or exclamation mark, as in ‘colon q bang’.
+This was a very short introduction to vim.
+There are many commands that you can use to navigate the text buffer and perform operations
+such as searching, copying, pasting, and moving text around.
+You’ll get to practice some of these commands in an upcoming lab.
+In this video, you learned that:
+You can use a variety of command-line or GUI-based text editors to work with your Linux code.
+gedit is a GUI-based editor that provides many features to simplify your work.
+GNU nano is a command-line editor that provides similar functionality in a command-line format.
+And vim is another command-line editor that uses Insert mode to enter data and Command
+mode to work with the file.
+So, you’ve seen how to use a text editor to work with existing files.
+This will be helpful as you learn how to use Linux commands to create files and append
+text to them.
