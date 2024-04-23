@@ -20,7 +20,7 @@ sudo apt install apache2
 # Open HTTP if ufw is enabled and open NSG inbound HTTP
 
 ```
-![Apache home ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/apache.jpg)
+![Apache home ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/apache.jpg)
 
 3 Creating Your Own Website
 
@@ -95,7 +95,7 @@ sudo service apache2 reload
 sudo systemctl enable apache2
 
 ```
-![Apache app new ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/apacheapp.jpg)
+![Apache app new ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/apacheapp.jpg)
 
 Logic and configuration 
 * We have it named gci here but any name will work, as long as we point to it in the virtual hosts configuration file later.
@@ -117,7 +117,7 @@ http://public-ip
 http://hostname.azure.public.dnz.com
 
 
-![Apache config ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/configapache.jpg)
+![Apache config ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/configapache.jpg)
 
 https://ubuntu.com/tutorials/install-and-configure-apache#1-overview
 
@@ -141,7 +141,7 @@ https://www.tecmint.com/find-apache-documentroot-in-linux/
 Now let's configure SSL for the above app.
 Let's take a snaphot of the OS drive before we do that, HTTP configuration.
 
-![Snapshot ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/snapshot.jpg)
+![Snapshot ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/snapshot.jpg)
 
 ```bash
 sudo apt update
@@ -179,7 +179,7 @@ Go to http://ip
 
 Go to http://your_domain.uksouth.cloudapp.azure.com/
 
-![Apache home ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/apache.jpg)
+![Apache home ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/apache.jpg)
 
 Step 2 creating the SSL Certificate
 
@@ -261,7 +261,7 @@ Open NSG HTTPS
 
 Done, you can now update all files in the \var\www\gci folder.
 
-![Done ](https://github.com/spawnmarvel/linux-and-azure/tree/main/images/done.jpg)
+![Done ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/done.jpg)
 
 
 
