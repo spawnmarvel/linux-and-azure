@@ -181,6 +181,7 @@ az upgrade --yes
 | whoami    | Get the active username |
 | export    | The export command is specially used when exporting environment variables in runtime | export dbCon="MySql:1245", echo $dbCon
 | tar       | The tar command in Linux is used to create and extract archived files, -cvf compress, -xvf extract | tar -cvf compFolder.tar folder <br/> tar -xvf compFolder.ta
+| gzip      | man gzip | d = decompress k = keep comp files also. gzip -dk server.sql.gz
 | zip       | sudo apt install zip | zip -r folder.zip folder1
 | unzip     | sudo apt install unzip | unzip folder.zip, unzip folder.zip -d destinationfolder
 | ssh       | Secure Shell command | ssh user@ipaddress
