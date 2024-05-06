@@ -2,6 +2,8 @@
 
 https://trainingportal.linuxfoundation.org/learn/course/introduction-to-linux-lfs101/course-introduction/course-information
 
+06.05.2024 12 months
+
 ## 01 Course Overview, Objectives and Timing
 
 ## 02 Introduction
@@ -33,10 +35,20 @@ Key Facts About the Debian Family
 
 ## 03 Linux philosophy and concepts
 
+History = Done
+
+Philosophy =  Done
+
+Community = Done
+
+Terminology = Done
+
+Distributions = Done 
 
 
+## 04 Linuxc basics and system startup
 
-## 04-19
+## 05-19
 
 ## 20 Course completion
 
