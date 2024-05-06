@@ -6,10 +6,9 @@ https://trainingportal.linuxfoundation.org/learn/course/introduction-to-linux-lf
 
 ## 02 Introduction
 
-* In order to fully benefit from this course, you will need to have at least one Linux distribution installed.
-* I take, Debian Family Systems (including Ubuntu and Linux Mint).
+In order to fully benefit from this course, you will need to have at least one Linux distribution installed.
 
-3 major
+3 major distros
 
 Key Facts About the Red Hat Family
 
