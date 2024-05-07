@@ -97,8 +97,15 @@ Partitions and Filesystems
 | Mounting parameters | Driveletter | Mountpoint |
 | Base folder (where OS stored) | C:\ | / |
 
+The Filesystem Hierarchy Standard
 
-## 05-19
+* Have that on front page.
+* All Linux filesystem names are case-sensitive, so /boot, /Boot, and /BOOT represent three different directories (or folders).
+
+
+## 05 Graphical interface
+
+## 06-19
 
 ## 20 Course completion
 
