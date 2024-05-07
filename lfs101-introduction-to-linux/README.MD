@@ -90,8 +90,8 @@ sudo systemctl status httpd.service
 
 Partitions and Filesystems
 
-|#| Windows | Linux 
-|*|******** |******
+|#| Windows | Linux |
+|*|******** |****** |
 |Partition|Disk1|/dev/sda1
 
 
