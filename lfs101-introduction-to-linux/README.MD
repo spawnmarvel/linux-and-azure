@@ -93,6 +93,9 @@ Partitions and Filesystems
 | name | Windows | Linux |
 | -----|-------- | ------- |
 | Partition | Disk1 | /dev/sda1 |
+| Filesystem type | NTFS/FAT | EXT3/EXT4/XFS/BTRFS|
+| Mounting parameters | Driveletter | Mountpoint |
+| Base folder (where OS stored) | C:\ | / |
 
 
 ## 05-19
