@@ -48,6 +48,53 @@ Distributions = Done
 
 ## 04 Linuxc basics and system startup
 
+BIOS - The First Step
+
+Master Boot Record (MBR), EFI Partition, and Boot Loader
+
+The Initial RAM Disk
+
+* * The initramfs filesystem image contains programs and binary files that perform all actions needed to mount the proper root filesystem
+* * The mount program instructs the operating system that a filesystem is ready for use and associates it with a particular point in the overall hierarchy of the filesystem (the mount point)
+
+Text-Mode Login
+
+* * Near the end of the boot process, init starts a number of text-mode login prompts. These enable you to type your username, followed by your password, and to eventually get a command shell. 
+
+The Linux Kernel
+
+* * The boot loader loads both the kernel and an initial RAM–based file system (initramfs) into memory, so it can be used directly by the kernel.
+* * Once the kernel has set up all its hardware and mounted the root filesystem, the kernel runs /sbin/init. This then becomes the initial process, which then starts other processes to get the system running.
+
+Startup Alternatives
+
+* SysVinit viewed things as a serial process, divided into a series of sequential stages.
+* Upstart, Developed by Ubuntu and first included in 2006, adopted in fedora in 9 2008
+* systemd, Adopted by Fedora first (in 2011), rhel 7  and suse, replaced upstart in ubuntu 16.04
+
+systemd Features
+
+* Systems with systemd start up faster than those with earlier init methods.
+* One thing to note is that /sbin/init now just points to /lib/systemd/systemd; i.e. systemd takes over the init process.
+* One systemd command (systemctl) is used for most basic tasks. 
+
+```bash
+# apahce
+sudo systemctl start|stop|restart httpd.service
+
+sudo systemctl enable|disable httpd.service
+
+sudo systemctl status httpd.service
+
+```
+
+Partitions and Filesystems
+
+|#| Windows | Linux 
+|*|******** |******
+|Partition|Disk1|/dev/sda1
+
+
 ## 05-19
 
 ## 20 Course completion
