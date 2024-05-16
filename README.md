@@ -8,6 +8,12 @@ Moved from https://github.com/spawnmarvel/azure-automation
 
 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
 
+## Run Linux on Windows
+
+Git for Windows provides a BASH emulation used to run Git from the command line. *NIX users should feel right at home, as the BASH emulation behaves just like the "git" command in LINUX and UNIX environments.
+
+https://gitforwindows.org/
+
 
 
 ## VSC Terminal Shell Integration
