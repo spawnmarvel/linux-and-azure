@@ -14,6 +14,29 @@ Git for Windows provides a BASH emulation used to run Git from the command line.
 
 https://gitforwindows.org/
 
+```bash
+
+mdkdir testfolder
+
+cd testfolder
+
+pwd
+# /c/Users/username/testfolder
+
+nano file
+
+$ cat file
+#!/bin/bash
+echo "we are on windows"
+v="my var"
+echo "$v"
+
+$ bash file
+# we are on windows
+# my var
+
+```
+
 
 
 ## VSC Terminal Shell Integration

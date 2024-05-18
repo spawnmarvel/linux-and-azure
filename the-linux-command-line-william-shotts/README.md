@@ -37,5 +37,5 @@ ls
 ### 7 I/O Redirection
 ### 8 Expansion
 ### 9 Permissions
-### 10Job Control
+### 10 Job Control
 
