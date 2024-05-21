@@ -43,7 +43,34 @@ cd ..
 cd ~
 
 ```
+
+***Important facts about file names***
+
+* .filesThatStartsWith . are hidden
+
+```bash
+# use
+ls -a
+```
+* File1 is not file, case sensitive
+* Linux has no file extension, does not care, but program does
+* File names use: ., -, _ and no space
+
 ### 3 Looking Around
+
+```bash
+# list files and dirs
+ls
+
+# view text files
+less
+
+# classify a files content
+file
+
+
+
+```
 ### 4 A Guided Tour
 ### 5 Manipulating Files
 ### 6 Working with Commands
