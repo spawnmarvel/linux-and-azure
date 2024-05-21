@@ -24,11 +24,24 @@ Unless you absolutely need administrative privileges, do not operate as the supe
 ### 2 Navigation
 
 ```bash
+# work dir
 pwd
 
+# list files
+ls
+
+# go to
 cd
 
-ls
+# working dir
+cd .
+
+# parent dir
+cd ..
+
+# home 
+cd ~
+
 ```
 ### 3 Looking Around
 ### 4 A Guided Tour
