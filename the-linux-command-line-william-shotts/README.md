@@ -72,9 +72,11 @@ less
 # classify a files content
 file
 
-![Long format ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/longformat.jpg)
 
 ```
+
+![Long format](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/longformat.jpg)
+
 ### 4 A Guided Tour
 ### 5 Manipulating Files
 ### 6 Working with Commands
