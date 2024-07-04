@@ -66,18 +66,29 @@ ls /bin
 # list files long format
 ls -l /etc
 
-# view text files
-less
+# view text files, one page at the time
+# cd /var/log
+less syslog
+# Page Up/Down and q for quit, G = go to end of file
 
 # classify a files content
-file
+file syslog
+syslog: ASCII text, with very long lines (390)
 
+file zabbix-agent/
+zabbix-agent/: directory
+
+file dmesg.1.gz
+dmesg.1.gz: gzip compressed data, was "dmesg.0", last modified: Wed Jul  3 09:55:54 2024, max compression, from Unix, original size modulo 2^32 40595
 
 ```
 
 ![Long format](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/longformat.jpg)
 
 ### 4 A Guided Tour
+
+https://linuxcommand.org/lc3_lts0040.php
+
 ### 5 Manipulating Files
 ### 6 Working with Commands
 ### 7 I/O Redirection
