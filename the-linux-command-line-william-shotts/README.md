@@ -61,6 +61,10 @@ ls -a
 ```bash
 # list files and dirs
 ls
+# list files in bin
+ls /bin
+# list files long format
+ls -l /etc
 
 # view text files
 less
@@ -68,7 +72,7 @@ less
 # classify a files content
 file
 
-
+![Long format ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/longformat.jpg)
 
 ```
 ### 4 A Guided Tour
