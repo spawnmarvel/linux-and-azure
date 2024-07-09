@@ -192,6 +192,17 @@ lrwxrwxrwx 1 root root       24 Jul  3 10:00 vmlinuz.old -> vmlinuz-6.5.0-1021-a
 # To create symbolic links, we use the
 ln
 
+touch mainfile1
+sudo nano mainfile1
+# add txt This is the main
+
+ln mainfile1 main
+sudo nano mainfile1
+# add txt update after symlink
+cat main
+# This is the main
+# update after symlink
+
 ```
 
 ### 5 Manipulating Files
