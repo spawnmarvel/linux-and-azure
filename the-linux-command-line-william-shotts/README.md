@@ -197,15 +197,34 @@ sudo nano mainfile1
 # add txt This is the main
 
 ln mainfile1 main
+# add a sumlink to a new file
 sudo nano mainfile1
 # add txt update after symlink
 cat main
+# all changes are reflected via the link
 # This is the main
 # update after symlink
 
 ```
 
 ### 5 Manipulating Files
+
+```bash
+cp
+# copy files and directories
+mv
+# move or rename files and directories
+rm
+# remove files and directories
+mkdir
+
+```
+Wildcards
+
+- * 
+- ?
+ 
+
 
 https://linuxcommand.org/lc3_lts0050.php
 
