@@ -137,12 +137,67 @@ sudo su
 
 /lib
 # shared libraries (like dll's in win)
-```
-Continue with more navigation
 
-https://linuxcommand.org/lc3_lts0040.php
+/home
+# is where users keep their personal work. In general, this is the only place users are allowed to write files. This keeps things nice and clean :-)
+
+/root
+
+/tmp
+
+/dev
+# special
+# devices that are available to system, in linux devices are treated like file
+# you can read/write devices as if they were files
+# dev/sda = first hd
+# dev/root
+
+/proc
+# special
+# does not exist, only virtual
+# The /proc directory contains little peep holes into the kernel itself.
+# Try viewing (/proc/cpuinfo) This entry will tell you what the kernel thinks of the system's CPU.
+cd /proc/cpuinfo
+
+/media
+# The /media directory is used for mount points.
+# This process of attaching a device to the tree is called mounting. For a device to be available, it must first be mounted.
+# When your system boots, it reads a list of mounting instructions in the /etc/fstab file, which describes which device is mounted at which mount point in the directory tree.
+# This takes care of the hard drives,
+# but we may also have devices that are considered temporary, such as optical disks and USB storage devices. Since these are removable, they do not stay mounted all the time. 
+# The /media directory is used by the automatic device mounting mechanisms found in modern desktop oriented Linux distributions. To see what devices and mount points are used, type 
+mount
+
+[...]
+/dev/sda1 on /datadrive type xfs
+# example
+
+cd /boot
+ls -l
+
+[...]
+
+# See the strange notation after the file names?
+# Files such as this are called symbolic links. Symbolic links are a special type of file that points to another file. With symbolic links, it is possible for a single file to have multiple names.
+lrwxrwxrwx 1 root root       27 Jul  3 10:00 initrd.img.old -> initrd.img-6.5.0-1021-azure
+lrwxrwxrwx 1 root root       24 Jul  3 10:00 vmlinuz -> vmlinuz-6.5.0-1023-azure
+-rw------- 1 root root 13190088 Nov 21  2023 vmlinuz-6.2.0-1018-azure
+-rw------- 1 root root 13613672 Apr 30 15:15 vmlinuz-6.5.0-1021-azure
+-rw------- 1 root root 13623304 Jun 12 18:56 vmlinuz-6.5.0-1023-azure
+lrwxrwxrwx 1 root root       24 Jul  3 10:00 vmlinuz.old -> vmlinuz-6.5.0-1021-azure
+
+# These programs might expect the kernel to simply be called "vmlinuz". Here is where the beauty of the symbolic link comes in. 
+# By creating a symbolic link called vmlinuz that points to vmlinuz-4.0.36-3, we have solved the problem.
+
+# To create symbolic links, we use the
+ln
+
+```
 
 ### 5 Manipulating Files
+
+https://linuxcommand.org/lc3_lts0050.php
+
 ### 6 Working with Commands
 ### 7 I/O Redirection
 ### 8 Expansion
