@@ -87,6 +87,59 @@ dmesg.1.gz: gzip compressed data, was "dmesg.0", last modified: Wed Jul  3 09:55
 
 ### 4 A Guided Tour
 
+```bash
+# It's time to take our tour. The table below lists some interesting places to explore. This is by no means a complete list, but it should prove to be an interesting adventure.
+
+cd
+ls
+file
+# for text files use 
+less
+
+/
+
+file *
+# list all files and types
+
+/boot 
+# kernel
+
+state *
+# show stats for each file
+
+/etc
+#configuration files
+
+sudo su
+# mys be root
+/etc/passwd
+# each user
+/etc/fstab
+# mounted drives
+/etc/hosts
+# network and ip that the system knows 
+/etc/init.d
+# scripts for boot time
+
+
+/bin
+# essential programs for system
+/user/bin
+# applications for syste users
+
+
+/usr
+# support for usr apps
+
+/var
+# files that change while system is running
+/var/logs
+
+/lib
+# shared libraries (like dll's in win)
+```
+Continue with more navigation
+
 https://linuxcommand.org/lc3_lts0040.php
 
 ### 5 Manipulating Files
