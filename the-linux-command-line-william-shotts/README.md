@@ -242,6 +242,14 @@ find rmq*
 find send*zabbix*
 # send_2_zabbix_data.sh
 
+# We can use wildcards with any command that accepts filename arguments.
+
+find
+cp
+move
+rm
+#etc
+
 
 ```
 
