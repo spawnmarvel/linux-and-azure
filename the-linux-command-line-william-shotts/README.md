@@ -227,6 +227,23 @@ Using wildcards
 
 ![Patterns ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/patten.jpg)
 
+```bash
+find *.yml
+#compose.yml
+
+find rmq*
+# rmq-non-ssl
+# rmq-non-ssl/compose.yml
+# rmq-non-ssl/rabbitmq.conf
+# rmq-non-ssl/Dockerfile
+# [...]
+
+find send*zabbix*
+# send_2_zabbix_data.sh
+
+
+```
+
 https://linuxcommand.org/lc3_lts0050.php
 
 ### 6 Working with Commands
