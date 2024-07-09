@@ -225,7 +225,8 @@ Wildcards
 
 Using wildcards 
 
-![Patterns ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/patten.jpg)
+![Patterns ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/pattern.jpg)
+
 
 ```bash
 find *.yml
