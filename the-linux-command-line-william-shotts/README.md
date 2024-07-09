@@ -221,9 +221,7 @@ mkdir
 ```
 Wildcards
 
-- * 
-- ?
- 
+![Wildcard ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/wildcard.jpg)
 
 
 https://linuxcommand.org/lc3_lts0050.php
