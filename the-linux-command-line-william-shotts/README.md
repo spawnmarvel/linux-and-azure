@@ -223,6 +223,9 @@ Wildcards
 
 ![Wildcard ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/wildcard.jpg)
 
+Using wildcards 
+
+![Patterns ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/pattens.jpg)
 
 https://linuxcommand.org/lc3_lts0050.php
 
