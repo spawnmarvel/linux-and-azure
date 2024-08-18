@@ -34,6 +34,10 @@ sudo service influxdb start
 sudo service influxdb status
 
 ```
+
+Python agent
+
+
 Telegraf
 
 https://docs.influxdata.com/telegraf/v1/install/
@@ -43,4 +47,21 @@ https://docs.influxdata.com/telegraf/v1/install/
 ## Github and Visuals elo
 
 https://github.com/spawnmarvel/linux-and-azure/tree/main/azure-extra-linux-vm/influxdb-telegraf
+
+## Influxdb Key concepts before you get started
+
+
+The InfluxDB data model organizes time series data into buckets and measurements. A bucket can contain multiple measurements. Measurements contain multiple tags and fields.
+
+
+* Bucket: Named location where time series data is stored. A bucket can contain multiple measurements.
+* * Measurement: Logical grouping for time series data. All points in a given measurement should have the same tags. A measurement contains multiple tags and fields.
+* * * Tags: Key-value pairs with values that differ, but do not change often. Tags are meant for storing metadata for each point–for example, something to identify the source of the data like host, location, station, etc.
+* * *  Fields: Key-value pairs with values that change over time–for example: temperature, pressure, stock price, etc.
+* * *  Timestamp: Timestamp associated with the data. When stored on disk and queried, all data is ordered by time.
+
+[...]
+
+
+https://docs.influxdata.com/influxdb/v2/get-started/#:~:text=The%20InfluxDB%20data%20model%20organizes,time%20series%20data%20is%20stored.
 
