@@ -75,3 +75,10 @@ By default, buckets in InfluxDB 2.7 have an implicit schema that lets you write 
 
 
 https://docs.influxdata.com/influxdb/v2/reference/glossary/#bucket
+
+
+Create a bucket
+
+https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CLI
+
+
