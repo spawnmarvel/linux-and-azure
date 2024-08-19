@@ -65,3 +65,13 @@ The InfluxDB data model organizes time series data into buckets and measurements
 
 https://docs.influxdata.com/influxdb/v2/get-started/#:~:text=The%20InfluxDB%20data%20model%20organizes,time%20series%20data%20is%20stored.
 
+
+bucket
+
+A bucket is a named location where time series data is stored. All buckets have a retention period. A bucket belongs to an organization.
+
+
+By default, buckets in InfluxDB 2.7 have an implicit schema that lets you write data without restrictions on columns, fields, or data types.
+
+
+https://docs.influxdata.com/influxdb/v2/reference/glossary/#bucket
