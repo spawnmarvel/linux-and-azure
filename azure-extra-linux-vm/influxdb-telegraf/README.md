@@ -25,6 +25,10 @@ Telegraf is an agent for collecting, processing, aggregating, and writing metric
 
 https://docs.influxdata.com/telegraf/v1/install/
 
+## Github and Visuals elo
+
+https://github.com/spawnmarvel/linux-and-azure/tree/main/azure-extra-linux-vm/influxdb-telegraf
+
 ## Telegraf docs
 
 https://docs.influxdata.com/telegraf/v1/
@@ -62,13 +66,10 @@ sudo service influxdb status
 
 ```
 
-Python agent
+## Python agent
 
+https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
 
-
-## Github and Visuals elo
-
-https://github.com/spawnmarvel/linux-and-azure/tree/main/azure-extra-linux-vm/influxdb-telegraf
 
 ## Influxdb Key concepts before you get started
 
