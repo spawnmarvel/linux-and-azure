@@ -69,19 +69,39 @@ sudo service influxdb status
 ## Python agent
 
 
+config.json
+
+
+```bash
+mkdir influx_runner
+
+ls
+
+config.json  run_influx.py
+```
 ```py
 {
     "connection_information" :[
         {
         "ip" : "10.0.0.255",
-        "token" : "sometok"
+        "token" : "sometok",
+         "bucket" : "bucket1",
+        "organization": "Liam"
         }
         
     ]
 }
 ```
 
+* Install Dependencies
+* * pip install influxdb-client
+* Get Token
+* Initialize Client
+* Write data
+
+
 https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
+
 
 
 ## Influxdb Key concepts before you get started
