@@ -140,6 +140,14 @@ https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CL
 
 ## Functions Influxdb
 
+* Query data
+* Visualize data
+* Process data
+* Monitor and alerts
+* Tools and integration
+* Administer Influxdb
+* Influxdb http api
+
 
 
 
