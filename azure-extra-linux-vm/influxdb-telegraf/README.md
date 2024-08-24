@@ -68,6 +68,19 @@ sudo service influxdb status
 
 ## Python agent
 
+
+```py
+{
+    "connection_information" :[
+        {
+        "ip" : "10.0.0.255",
+        "token" : "sometok"
+        }
+        
+    ]
+}
+```
+
 https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
 
 
