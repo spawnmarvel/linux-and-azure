@@ -1,29 +1,27 @@
+# pip install influxdb-client
 import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
 import time
 import random
+import json
 
-bucket = "myBucket"
-org = "myOrg"
-token = "randomTokenValue"
-# Store the URL of your InfluxDB instance
-url="http://172.27.0.2:8086"
+# for file in same dir
+from pathlib import Path
 
-client = influxdb_client.InfluxDBClient(
-    url=url,
-    token=token,
-    org=org
-)
+class RunInflux:
+
+    def __init__(self):
+        self.ip = None
+        self.token = None
+
+    def read_config(self):
+        with open("config.json") as f:
+            data = json.load(f)
+            for d in data["connection_information"]:
+                print(d["ip"])
+                print(d["token"])
 
 
-# Write script
-write_api = client.write_api(write_options=SYNCHRONOUS)
-
-for x in range(200):
-    ran1 = random.uniform(10.5, 35.9)
-    b = influxdb_client.Point("my_measurement").tag("location", "Bergen").field("temperature", ran1)
-    write_api.write(bucket=bucket, org=org, record=b)
-    o = influxdb_client.Point("my_measurement").tag("location", "Oslo").field("temperature", (ran1+5))
-    write_api.write(bucket=bucket, org=org, record=o)
-    print("inserted " + str(ran1))
-    time.sleep(5)
+if __name__ == "__main__":
+    runner = RunInflux()
+    runner.read_config()
