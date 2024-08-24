@@ -138,6 +138,9 @@ Create a bucket
 https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CLI
 
 
+## Functions Influxdb
+
+
 
 
 ## Telegraf TBD
