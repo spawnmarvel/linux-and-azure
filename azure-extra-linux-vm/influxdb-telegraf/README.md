@@ -103,6 +103,9 @@ config.json  run_influx.py
 https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
 
 
+## Python agent batch
+
+https://www.influxdata.com/blog/writing-data-to-influxdb-with-python/
 
 ## Influxdb Key concepts before you get started
 
