@@ -118,6 +118,8 @@ The InfluxDB data model organizes time series data into buckets and measurements
 
 [...]
 
+![Quick 1 ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/influxpoint.jpg)
+
 
 https://docs.influxdata.com/influxdb/v2/get-started/#:~:text=The%20InfluxDB%20data%20model%20organizes,time%20series%20data%20is%20stored.
 
