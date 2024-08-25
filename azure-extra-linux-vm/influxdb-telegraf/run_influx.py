@@ -51,6 +51,9 @@ class RunInflux:
                 point_brg = (Point("Tag-BRG").tag("location", "Bergen").field("temperature", ran1))
                 point_osl = (Point("Tag-OSL").tag("location", "Oslo").field("temperature", ran2))
 
+                # ADD TS
+                # point_osl = (Point("Tag-OSL").tag("location", "Oslo").field("temperature", ran2).time(dt))
+
                 write_api.write(bucket=bucket, org=self.org, record=point_brg)
                 write_api.write(bucket=bucket, org=self.org, record=point_osl)
 
