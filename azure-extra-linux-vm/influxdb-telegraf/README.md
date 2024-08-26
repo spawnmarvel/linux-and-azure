@@ -25,6 +25,10 @@ Telegraf is an agent for collecting, processing, aggregating, and writing metric
 
 https://docs.influxdata.com/telegraf/v1/install/
 
+## Youtube Infrastructure Monitoring Basics with Telegraf, Grafana and InfluxDB - Jay Clifford, InfluxData
+
+https://www.youtube.com/watch?v=ESub4SAKouI
+
 ## Github and Visuals elo
 
 https://github.com/spawnmarvel/linux-and-azure/tree/main/azure-extra-linux-vm/influxdb-telegraf
