@@ -40,12 +40,11 @@ class RunInflux:
         print(self.bucket)
         print(self.org)
         try:
-            dt = datetime.now(timezone.utc)
             self.client = influxdb_client.InfluxDBClient(url=url, token=self.token, org=self.org)
             print(self.client)
             write_api = self.client.write_api(write_options=SYNCHRONOUS)
             for x in range(200):
-
+                dt = datetime.now(timezone.utc)
                 #  bucket = str(self.bucket)
                 bucket = "bucketTemperature"
                 ran1 = random.uniform(10.5, 35.9)
@@ -57,7 +56,7 @@ class RunInflux:
                 write_api.write(bucket=bucket, org=self.org, record=point_osl)
 
                 time.sleep(5)
-                print("Write Tag-BRG " + str(ran1) + " and Tag-OSL " + str(ran2))
+                print("Write Tag-BRG " + str(ran1) + " and Tag-OSL " + str(ran2) + " " + str(dt))
         except Exception as ex:
             print(ex)
         return self.client
