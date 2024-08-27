@@ -10,6 +10,7 @@ import json
 
 # for file in same dir
 from pathlib import Path
+from datetime import datetime, timezone
 
 
 class RunInflux:
@@ -39,6 +40,7 @@ class RunInflux:
         print(self.bucket)
         print(self.org)
         try:
+            dt = datetime.now(timezone.utc)
             self.client = influxdb_client.InfluxDBClient(url=url, token=self.token, org=self.org)
             print(self.client)
             write_api = self.client.write_api(write_options=SYNCHRONOUS)
@@ -48,11 +50,8 @@ class RunInflux:
                 bucket = "bucketTemperature"
                 ran1 = random.uniform(10.5, 35.9)
                 ran2 = ran1 + 5
-                point_brg = (Point("Tag-BRG").tag("location", "Bergen").field("temperature", ran1))
-                point_osl = (Point("Tag-OSL").tag("location", "Oslo").field("temperature", ran2))
-
-                # ADD TS
-                # point_osl = (Point("Tag-OSL").tag("location", "Oslo").field("temperature", ran2).time(dt))
+                point_brg = (Point("Tag-BRG").tag("location", "Bergen").field("temperature", ran1).time(dt))
+                point_osl = (Point("Tag-OSL").tag("location", "Oslo").field("temperature", ran2).time(dt))
 
                 write_api.write(bucket=bucket, org=self.org, record=point_brg)
                 write_api.write(bucket=bucket, org=self.org, record=point_osl)
