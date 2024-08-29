@@ -31,7 +31,7 @@ https://www.youtube.com/watch?v=ESub4SAKouI
 
 ## Github and Visuals elo
 
-https://github.com/spawnmarvel/linux-and-azure/tree/main/azure-extra-linux-vm/influxdb-telegraf
+https://follow-e-lo.com/tag/influxdb/
 
 ## Telegraf docs
 
@@ -161,7 +161,7 @@ Create a bucket
 https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CLI
 
 
-## Functions Influxdb
+## Functions Influxdb dashboard
 
 * Query data
 * Visualize data
@@ -171,7 +171,7 @@ https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CL
 * Administer Influxdb
 * Influxdb http api
 
-
+View https://follow-e-lo.com/tag/influxdb/
 
 
 ## Telegraf TBD
