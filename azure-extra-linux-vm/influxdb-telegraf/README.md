@@ -174,6 +174,62 @@ https://docs.influxdata.com/influxdb/v2/admin/buckets/create-bucket/?t=influx+CL
 View https://follow-e-lo.com/tag/influxdb/
 
 
+## Administer InfluxDB
+
+TLS
+
+```bash
+sudo openssl req -x509 -nodes -newkey rsa:2048 \
+  -keyout /etc/ssl/influxdb-selfsigned.key \
+  -out /etc/ssl/influxdb-selfsigned.crt \
+  -days <NUMBER_OF_DAYS>
+
+
+
+sudo openssl -req x509 -nodes -newkey rsa:2048 -keyout /etc/ssl/influxdb-selfsigned.key -out /etc/ssl/influxdb-selfsigned.crt -days 3365
+
+# The openssl command prompts you for optional fields that you can fill out or leave blank; both actions generate valid certificate files.
+
+
+# 644 means you can read and write the file or directory and other users can only read it.
+# 600 permissions means that only the owner of the file has full read and write access to it
+sudo chmod 644 /etc/ssl/influxdb-selfsigned.crt
+sudo chmod 600 /etc/ssl/influxdb-selfsigned.key
+
+
+# config
+# https://docs.influxdata.com/enterprise_influxdb/v1/administration/configure/security/enable_tls/
+# https://docs.influxdata.com/influxdb/v2/reference/config-options/
+# https://community.influxdata.com/t/influxdb-2-config-file-ssl/17088/8
+
+cd /etc/influxdb
+cat config.toml
+# add
+
+tls-cert = "/etc/ssl/influxdb-selfsigned.crt"
+tls-key = "/etc/ssl/influxdb-selfsigned.key"
+
+
+sudo service influxdb stop
+sudo service influxdb start
+
+# To test your certificates, access InfluxDB using the https:// protocol–for example, using cURL
+curl --verbose https://localhost:8086/api/v2/ping
+
+# If using a self-signed certificate, skip certificate verification–for example, in a cURL command, pass the
+curl --verbose --insecure https://localhost:8086/api/v2/ping
+
+# or visit the site on https
+
+
+
+```
+
+
+https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#Copyright
+
+
+
 ## Telegraf TBD
 
 Telegraf supports both push-based and pull-based methods for these formats.
@@ -181,3 +237,8 @@ Telegraf supports both push-based and pull-based methods for these formats.
 Telegraf is an agent for collecting, processing, aggregating, and writing metrics, logs, and other arbitrary data.
 
 https://docs.influxdata.com/telegraf/v1/install/
+
+
+## To connect Telegraf to an InfluxDB 2.7 instance with TLS enabled
+
+https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-telegraf-to-a-secured-influxdb-instance
