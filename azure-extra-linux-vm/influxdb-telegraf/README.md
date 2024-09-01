@@ -204,8 +204,10 @@ sudo chmod 600 /etc/ssl/influxdb-selfsigned.key
 
 cd /etc/influxdb
 cat config.toml
-# add
+cp config.toml config.toml_bck
+sudo nano config.toml
 
+# add
 tls-cert = "/etc/ssl/influxdb-selfsigned.crt"
 tls-key = "/etc/ssl/influxdb-selfsigned.key"
 
@@ -213,7 +215,11 @@ tls-key = "/etc/ssl/influxdb-selfsigned.key"
 sudo service influxdb stop
 sudo service influxdb start
 
-# To test your certificates, access InfluxDB using the https:// protocol–for example, using cURL
+# https
+https://localhost:8086
+
+
+# Or to test your certificates, access InfluxDB using the https:// protocol–for example, using cURL
 curl --verbose https://localhost:8086/api/v2/ping
 
 # If using a self-signed certificate, skip certificate verification–for example, in a cURL command, pass the
