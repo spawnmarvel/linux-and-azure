@@ -68,6 +68,8 @@ sudo service influxdb start
 # verify services
 sudo service influxdb status
 
+# Installing the InfluxDB package creates a service file at /lib/systemd/system/influxdb.service to start InfluxDB as a background service on startup.
+
 ```
 
 ## Python agent
@@ -230,9 +232,71 @@ curl --verbose --insecure https://localhost:8086/api/v2/ping
 
 
 ```
-
-
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#Copyright
+
+### Config files
+
+***InfluxDB file structure***:
+
+Engine path: Directory path to the storage engine, where InfluxDB stores time series data, includes the following directories:
+
+* data: Stores time-structured merge tree (TSM) files
+* replicationq: Store the replication queue for the InfluxDB replication service
+* wal: Stores write-ahead log (WAL) files.
+ (To customize this path, use the engine-path configuration option)
+
+Bolt path:
+
+* File path to the Boltdb database, a file-based key-value store for non-time series data, such as InfluxDB users, dashboards, and tasks. 
+(To customize this path, use the bolt-path configuration option.)
+
+SQLite path: 
+* File path to the SQLite database, an SQL database for non-time series data, such as InfluxDB notebooks and annotations. 
+(To customize this path, use the sqlite-path configuration option.)
+
+Configs path:
+
+* File path to influx CLI connection configurations (configs).
+
+
+***File system layout***
+
+* macOs, Linux, Windows, Docker and Kubernets
+
+
+Installed as a package (as above step 1 or 2)
+
+InfluxDB 2.7 supports .deb- and .rpm-based Linux package managers. The file system layout is the same with each.
+
+```bash
+# Linux
+# Engine path (data)
+/var/lib/influxdb/engine/
+
+# Bolt path
+/var/lib/influxdb/influxd.bolt
+
+# SQLite path
+/var/lib/influxdb/influxd.sqlite
+
+# Configs path
+/var/lib/influxdb/configs
+
+# Default config file path
+/etc/influxdb/config.toml
+
+
+sudo su
+
+root@vmdocker01:/var/lib/influxdb# ls
+engine  influxd.bolt  influxd.pid  influxd.sqlite
+
+root@vmdocker01:/etc/influxdb# ls
+config.toml  config.toml_bck
+
+```
+
+https://docs.influxdata.com/influxdb/v2/reference/internals/file-system-layout/#Copyright
 
 
 
