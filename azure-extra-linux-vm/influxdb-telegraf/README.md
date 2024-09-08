@@ -51,7 +51,8 @@ Influxdb
 https://docs.influxdata.com/influxdb/v2/install/?t=Linux#install-influxdb-as-a-service-with-systemd
 
 
-This seems to have changed
+This seems to have changed on the install page, now it uses checksum and compare
+
 ```bash
 # check what we have
 dpkg --print-architecture
@@ -76,7 +77,7 @@ sudo service influxdb status
 InfluxDB Downloads
 
 ```bash
-# select vesrion stable and platform (ubuntu & debian)
+# select version stable and platform (ubuntu & debian)
 
 sudo nano influxdb_install.sh
 
