@@ -4,6 +4,8 @@ Moved from https://github.com/spawnmarvel/azure-automation
 
 # Set Up a Firewall with UFW on Ubuntu
 
+https://github.com/spawnmarvel/linux-and-azure/blob/main/README_linux_security.md
+
 # Azure Linux Ubuntu
 
 ## Install Azure CLI on Windows
