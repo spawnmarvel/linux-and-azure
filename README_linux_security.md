@@ -170,10 +170,101 @@ sudo ufw allow from 203.0.113.0/24 to any port 22
 
 ```
 
-###
+### Step 6 — Denying Connections
 
 ```bash
 
+# For example, to deny HTTP connections, you could use this command:
+
+sudo ufw deny http
+
+# Or if you want to deny all connections from 203.0.113.4 you could use this command:
+
+sudo ufw deny from 203.0.113.4
+
+# In some cases, you may also want to block outgoing connections from the server.
+
+sudo ufw deny out 25
+
+
+```
+### Step 7 — Deleting Rules
+
+```bash
+
+# To delete a UFW rule by its number, first you’ll want to obtain a numbered list of all your firewall rules. 
+# The UFW status command has an option to display numbers next to each rule, as demonstrated here:
+
+sudo ufw status numbered
+
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] OpenSSH                    ALLOW IN    Anywhere
+[ 2] 80/tcp                     ALLOW IN    Anywhere
+[ 3] 443                        ALLOW IN    Anywhere
+[ 4] 8086                       ALLOW IN    Anywhere
+[ 5] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+[ 6] 80/tcp (v6)                ALLOW IN    Anywhere (v6)
+[ 7] 443 (v6)                   ALLOW IN    Anywhere (v6)
+[ 8] 8086 (v6)                  ALLOW IN    Anywhere (v6)
+
+sudo ufw delete 2
+
+
+# Deleting a UFW Rule By Name
+sudo ufw delete allow "Apache Full"
+
+# The delete command works the same way for rules that were created referencing a service by its name or port. 
+# For example, if you previously set a rule to allow HTTP connections with sudo ufw allow http, this is how you could delete said rule:
+
+sudo ufw delete allow http
+
+# Because service names are interchangeable with port numbers when specifying rules, you could also refer to the same rule as allow 80, instead of allow http:
+
+sudo ufw delete allow 80
+
+
 ```
 
+### Step 8 — Checking UFW Status and Rules
+
+```bash
+
+sudo ufw status verbose
+
+# If UFW is disabled, which it is by default, you’ll see something like this:
+Status: inactive
+
+# If UFW is active
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+[...]
+
+```
+
+### Step 9 — Disable or Reset Firewall
+
+```bash
+
+# If you decide you don’t want to use the UFW firewall, you can deactivate it with this command:
+
+sudo ufw disable
+
+# If you already have UFW rules configured but you decide that you want to start over, you can use the reset command:
+
+sudo ufw reset
+
+
+
+```
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu
+
+## is ufw the best Linux server firewall?
+
+Stick with the one that's tailored for your distro. ufw is Ubuntu. firewalld is Red Hat/Fedora & openSUSE.
+
+https://www.reddit.com/r/linuxquestions/comments/xhlgwb/is_ufw_the_best_linux_server_firewall/?rdt=43899
