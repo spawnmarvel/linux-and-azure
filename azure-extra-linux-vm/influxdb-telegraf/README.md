@@ -209,6 +209,8 @@ View https://follow-e-lo.com/tag/influxdb/
 
 Lets tests the monitor and alerting functions.
 
+View https://follow-e-lo.com/tag/influxdb/
+
 ## Administer InfluxDB
 
 TLS
@@ -333,7 +335,7 @@ https://docs.influxdata.com/influxdb/v2/reference/internals/file-system-layout/#
 
 
 
-## Telegraf TBD
+## Telegraf
 
 Telegraf supports both push-based and pull-based methods for these formats.
 
@@ -345,3 +347,18 @@ https://docs.influxdata.com/telegraf/v1/install/
 ## To connect Telegraf to an InfluxDB 2.7 instance with TLS enabled
 
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-telegraf-to-a-secured-influxdb-instance
+
+# Telegraf 101 
+
+https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
+
+
+# Telegraf remote Digital Ocean tbd
+
+
+```bash
+
+
+```
+
+https://www.digitalocean.com/community/tutorials/how-to-monitor-system-metrics-with-the-tick-stack-on-ubuntu-16-04

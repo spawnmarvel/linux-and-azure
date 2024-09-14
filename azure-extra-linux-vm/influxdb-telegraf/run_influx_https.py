@@ -7,6 +7,8 @@ import os
 import time
 import random
 import json
+import urllib3
+urllib3.disable_warnings()
 
 # for file in same dir
 from pathlib import Path
