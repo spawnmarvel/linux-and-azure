@@ -103,6 +103,15 @@ https://www.influxdata.com/downloads/
 
 ## Python agent
 
+Example write_structured_data.py
+
+https://github.com/influxdata/influxdb-client-python/blob/master/examples/write_structured_data.py
+
+How to ingest large DataFrame by splitting into chunks.
+
+https://github.com/influxdata/influxdb-client-python/blob/master/examples/ingest_large_dataframe.py
+
+
 
 config.json
 
@@ -348,10 +357,6 @@ https://docs.influxdata.com/telegraf/v1/install/
 
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-telegraf-to-a-secured-influxdb-instance
 
-# Telegraf 101 
-
-https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
-
 
 # Telegraf remote Digital Ocean tbd
 
@@ -362,3 +367,40 @@ https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
 ```
 
 https://www.digitalocean.com/community/tutorials/how-to-monitor-system-metrics-with-the-tick-stack-on-ubuntu-16-04
+
+
+# Telegraf 101 
+
+https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
+
+## Telegraf on windows
+
+
+Download binaries
+
+```ps1
+
+cd ~\Downloads
+
+# replace wget with Invoke
+
+Invoke-WebRequest https://dl.influxdata.com/telegraf/releases/telegraf-1.32.0_windows_amd64.zip -OutFile telegraf.zip
+
+# Next, let’s extract the archive into Program Files folder, which will create C:\Program Files\telegraf folder:
+
+Expand-Archive .\telegraf.zip 'C:\Program Files\'
+
+
+
+```
+
+https://www.influxdata.com/downloads/
+
+
+https://www.influxdata.com/blog/using-telegraf-on-windows/
+
+
+
+
+### File input and output ***
+

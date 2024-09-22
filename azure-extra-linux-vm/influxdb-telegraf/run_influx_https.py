@@ -14,6 +14,8 @@ urllib3.disable_warnings()
 from pathlib import Path
 from datetime import datetime, timezone
 
+# https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
+
 
 class RunInflux:
 
@@ -47,6 +49,13 @@ class RunInflux:
             self.client = influxdb_client.InfluxDBClient(url=url_tls, token=self.token, org=self.org, verify_ssl=False)
             print(self.client)
             write_api = self.client.write_api(write_options=SYNCHRONOUS)
+            #TODO
+
+            # MAKE DICTIONARY FOR TAGS
+            tag1 = {"Name": "Tag-BRG", "Location": "Bergen", "Temperature": 0, "Timestamp": ""}
+            tag2 = {"Name": "Tag-BRG", "Location": "Bergen", "Temperature": 0, "Timestamp": ""}
+            li = [tag1, tag2]
+
             for x in range(200):
                 dt = datetime.now(timezone.utc)
                 #  bucket = str(self.bucket)
