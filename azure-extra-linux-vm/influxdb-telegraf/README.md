@@ -429,6 +429,31 @@ https://github.com/toml-lang/toml
 
 ```
 
+Now, create conf\outputs.conf file that specifies where the data should be sent.
+
+```ps1
+ "" > outputs.conf
+```
+
+In my case, I want the output to go file.
+
+```toml
+###############################################################################
+#                                  OUTPUTS                                     #
+###############################################################################
+
+
+# Send telegraf metrics to file(s)
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["stdout", "C:\Program Files\Telegraf\metrics.out"]
+
+```
+
+
+
+
+
 
 
 How to:
