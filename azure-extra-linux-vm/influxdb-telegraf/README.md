@@ -563,24 +563,22 @@ Version
 https://www.influxdata.com/downloads/
 
 
-Configuration options
 
-* Agent
-* Input
-* Aggregator
-* Processor
-* Output
+### File input and output example configuration
+
+Agent
+
+Input
+
+Aggregator
+
+Processor
+
+Output
 
 https://docs.influxdata.com/telegraf/v1/configuration/
 
 
-
-
-
-
-### File input and output
-
-Was coverd above.
 
 
 
