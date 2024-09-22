@@ -546,16 +546,10 @@ The Telegraf Data Collector Service service was started successfully.
 
 ```
 
-Configuration options
 
-* Agent
-* Input
-* Aggregator
-* Processor
-* Output
+View example elo
 
-https://docs.influxdata.com/telegraf/v1/configuration/
-
+https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
 
 
 
@@ -569,10 +563,26 @@ Version
 https://www.influxdata.com/downloads/
 
 
+Configuration options
+
+* Agent
+* Input
+* Aggregator
+* Processor
+* Output
+
+https://docs.influxdata.com/telegraf/v1/configuration/
 
 
 
 
 
-### File input and output ***
+
+### File input and output
+
+Was coverd above.
+
+
+
+
 
