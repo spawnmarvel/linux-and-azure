@@ -581,18 +581,33 @@ https://docs.influxdata.com/telegraf/v1/configuration/
 
 ### Plugins input
 
-#### File = ok
+File Input Plugin = ok
 
-#### WMI = 
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
+
+WMI Input Plugin = 
+
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_wmi/README.md
 
 ### Plugins output
 
-#### File = ok
+File Output Plugin=  ok
 
-#### RabbitMQ tbd
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/file/README.md
 
-#### InfluxDB tbd
 
+RabbitMQ Output Plugin = 
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
+
+InfluxDB Output Plugin = 
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/influxdb_v2/README.md
+
+
+Zabbix Output Plugin =
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
 
 
 
