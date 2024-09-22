@@ -438,14 +438,18 @@ https://github.com/toml-lang/toml
  interval = "30s" 
  round_interval = true
  metric_batch_size = 1000 
- metric_buffer_limit = 10000
+ metric_buffer_limit = 10000 
  collection_jitter = "0s" 
  flush_interval = "30s"
  flush_jitter = "5s" precision = ""
- debug = false
- quiet = true
+ debug = true
+ quiet = false # quiet: Log only error level messages.
  logfile = "C://Program Files//Telegraf//telegraf-1.32.0//telegraf.logs"
-
+ logfile_rotation_max_size = "10MB"
+ logfile_rotation_max_archives = 10
+ 
+# Readme
+# https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md#agent
 
 ###############################################################################
 #                                  INPUTS                                     #
@@ -542,6 +546,15 @@ The Telegraf Data Collector Service service was started successfully.
 
 ```
 
+Configuration options
+
+* Agent
+* Input
+* Aggregator
+* Processor
+* Output
+
+https://docs.influxdata.com/telegraf/v1/configuration/
 
 
 
