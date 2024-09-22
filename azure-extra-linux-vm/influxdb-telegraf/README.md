@@ -579,7 +579,17 @@ Output
 https://docs.influxdata.com/telegraf/v1/configuration/
 
 
-### OPC DA
+### Plugins input
+
+#### File = ok
+
+### Plugins output
+
+#### File = ok
+
+#### RABBITMQ
+
+
 
 
 
