@@ -408,34 +408,80 @@ mkdir conf
 
 cd conf
 
-copy ..\telegraf.conf inputs.conf
+copy ..\telegraf.conf telegraf.conf
 
 
 ```
 
-We’re going to separate the outputs section of the file.
-
-We’ll remove the outputs section from inputs.conf. Edit the file and remove all of the content before the inputs section, leaving the content of the file starting with and including the below lines:
+Cleean the file to empty
 
 
-TOML
+Make the json file
+
+```json
+{
+    "tag1": {
+        "value": 100,
+        "active": 1,
+		"state": 0
+    }
+}
+
+```
+
+TOML for our Agent
 
 https://github.com/toml-lang/toml
 
 ```toml
+[agent]
+ interval = "30s" 
+ round_interval = true
+ metric_batch_size = 1000 
+ metric_buffer_limit = 10000
+ collection_jitter = "0s" 
+ flush_interval = "30s"
+ flush_jitter = "5s" precision = ""
+ debug = false
+ quiet = true
+ logfile = "C://Program Files//Telegraf//telegraf-1.32.0//telegraf.logs"
+
+
 ###############################################################################
 #                                  INPUTS                                     #
 ###############################################################################
+[[inputs.file]]
+  ## Files to parse each interval.  Accept standard unix glob matching rules,
+  ## as well as ** to match recursive files and directories.
+  files = ["C://Program Files//Telegraf//telegraf-1.32.0//metrics.in.json"]
+  
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
+  
+###############################################################################
+#                                  OUTPUTS                                     #
+###############################################################################
+
+
+# Send telegraf metrics to file(s)
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["C:/Program Files/Telegraf/telegraf-1.32.0//metrics.out.json"]
+  
+    ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
 
 ```
 
-Now, create conf\outputs.conf file that specifies where the data should be sent.
-
-```ps1
- "" > outputs.conf
-```
-
-In my case, I want the output to go file.
+Or splitt it in two, one input.conf and one output.conf for information used in output, db, user etc
 
 ```toml
 ###############################################################################
@@ -446,11 +492,55 @@ In my case, I want the output to go file.
 # Send telegraf metrics to file(s)
 [[outputs.file]]
   ## Files to write to, "stdout" is a specially handled file.
-  files = ["stdout", "C:\Program Files\Telegraf\metrics.out"]
+  files = ["C:/Program Files/Telegraf/telegraf-1.32.0//metrics.out.json"]
+  
+    ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
 
 ```
 
+At this point it is a good idea to test that Telegraf works correctly
 
+```ps1
+
+.\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
+
+2024-09-22T15:15:27Z I! Loading config: C:\Program Files\Telegraf\telegraf-1.32.0\conf\telegraf.conf
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"BER-0803"},"timestamp":1727018130}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"BER-0803"},"timestamp":1727018160}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"BER-0803"},"timestamp":1727018190}
+
+# It rolls 4 ever
+
+
+# Security for user and token
+# Next, let’s ensure that only the Local System user account can read the outputs.conf file to prevent unauthorized users from retrieving our access token for InfluxDB.
+# https://www.influxdata.com/blog/using-telegraf-on-windows/
+
+icacls outputs.conf /reset
+icacls outputs.conf /inheritance:r /grant system:r
+
+
+
+# We skip security for now, install it as a service
+
+.\telegraf --service install --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\'
+The use of --service is deprecated, please use the 'service' command instead!
+Successfully installed service "telegraf"
+
+# start it
+
+net start telegraf
+The Telegraf Data Collector Service service is starting.
+The Telegraf Data Collector Service service was started successfully.
+
+
+
+```
 
 
 
