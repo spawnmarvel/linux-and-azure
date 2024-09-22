@@ -587,7 +587,9 @@ https://docs.influxdata.com/telegraf/v1/configuration/
 
 #### File = ok
 
-#### RABBITMQ tbd
+#### RabbitMQ tbd
+
+#### InfluxDB tbd
 
 
 
