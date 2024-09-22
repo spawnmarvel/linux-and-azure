@@ -382,22 +382,66 @@ Download binaries
 
 cd ~\Downloads
 
+# https://www.influxdata.com/downloads/
+
 # replace wget with Invoke
 
 Invoke-WebRequest https://dl.influxdata.com/telegraf/releases/telegraf-1.32.0_windows_amd64.zip -OutFile telegraf.zip
 
 # Next, let’s extract the archive into Program Files folder, which will create C:\Program Files\telegraf folder:
 
-Expand-Archive .\telegraf.zip 'C:\Program Files\'
+mkdir 'C:\Program Files\Telegraf'
 
+Expand-Archive .\telegraf.zip 'C:\Program Files\Telegraf\'
+
+
+cd 'C:\Program Files\Telegraf\telegraf-1.32.0\'
+
+ls
+
+telegraf.conf
+telegraf.exe
+
+# Then create a conf subdirectory and copy the telegraf.conf as conf\inputs.conf:
+
+mkdir conf
+
+cd conf
+
+copy ..\telegraf.conf inputs.conf
 
 
 ```
 
+We’re going to separate the outputs section of the file.
+
+We’ll remove the outputs section from inputs.conf. Edit the file and remove all of the content before the inputs section, leaving the content of the file starting with and including the below lines:
+
+
+TOML
+
+https://github.com/toml-lang/toml
+
+'''toml
+###############################################################################
+#                                  INPUTS                                     #
+###############################################################################
+
+'''
+
+
+
+How to:
+
+https://www.influxdata.com/blog/using-telegraf-on-windows/
+
+
+Version
+
 https://www.influxdata.com/downloads/
 
 
-https://www.influxdata.com/blog/using-telegraf-on-windows/
+
 
 
 
