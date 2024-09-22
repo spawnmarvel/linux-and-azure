@@ -583,6 +583,8 @@ https://docs.influxdata.com/telegraf/v1/configuration/
 
 #### File = ok
 
+#### WMI = 
+
 ### Plugins output
 
 #### File = ok
