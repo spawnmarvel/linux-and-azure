@@ -476,7 +476,7 @@ https://github.com/toml-lang/toml
   ## Files to write to, "stdout" is a specially handled file.
   files = ["C:/Program Files/Telegraf/telegraf-1.32.0//metrics.out.json"]
   
-    ## Data format to consume.
+  ## Data format to output.
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
@@ -498,7 +498,7 @@ Or splitt it in two, one input.conf and one output.conf for information used in 
   ## Files to write to, "stdout" is a specially handled file.
   files = ["C:/Program Files/Telegraf/telegraf-1.32.0//metrics.out.json"]
   
-    ## Data format to consume.
+  ## Data format to output.
   ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
@@ -564,7 +564,7 @@ https://www.influxdata.com/downloads/
 
 
 
-### File input and output example configuration
+### Configuration
 
 Agent
 
@@ -578,6 +578,12 @@ Output
 
 https://docs.influxdata.com/telegraf/v1/configuration/
 
+
+### Telegraf Best Practices: Config Recommendations and Performance Monitoring
+
+https://www.influxdata.com/blog/telegraf-best-practices/
+
+In many use cases, Telegraf is being deployed to ingest data from multiple input sources and deliver that data to either InfluxDB or other enterprise platforms (as shown in the below example).
 
 ### Plugins input
 
@@ -596,7 +602,7 @@ File Output Plugin=  ok
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/file/README.md
 
 
-RabbitMQ Output Plugin = 
+RabbitMQ Output Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
 
