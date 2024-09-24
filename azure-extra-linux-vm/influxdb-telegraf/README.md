@@ -606,14 +606,18 @@ RabbitMQ Output Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
 
+Zabbix Output Plugin =
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
+
+
+
 InfluxDB Output Plugin = 
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/influxdb_v2/README.md
 
 
-Zabbix Output Plugin =
 
-https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
 
 
 
