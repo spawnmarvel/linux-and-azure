@@ -602,9 +602,39 @@ File Output Plugin=  ok
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/file/README.md
 
 
+```log
+
+2024-09-23T20:24:39Z D! [agent] Initializing plugins
+2024-09-23T20:24:39Z D! [agent] Connecting outputs
+2024-09-23T20:24:39Z D! [agent] Attempting connection to [outputs.file]
+2024-09-23T20:24:39Z D! [agent] Successfully connected to outputs.file
+2024-09-23T20:24:39Z D! [agent] Starting service inputs
+2024-09-23T20:25:11Z D! [outputs.file] Wrote batch of 1 metrics in 0s
+2024-09-23T20:25:11Z D! [outputs.file] Buffer fullness: 0 / 10000 metrics
+2024-09-23T20:25:45Z D! [outputs.file] Wrote batch of 1 metrics in 160.3µs
+2024-09-23T20:25:45Z D! [outputs.file] Buffer fullness: 0 / 10000 metrics
+```
+
+
 RabbitMQ Output Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
+
+```log
+2024-09-23T20:36:40Z D! [agent] Initializing plugins
+2024-09-23T20:36:40Z D! [agent] Connecting outputs
+2024-09-23T20:36:40Z D! [agent] Attempting connection to [outputs.amqp]
+2024-09-23T20:36:40Z D! [outputs.amqp] Connecting to "amqp://localhost:5672/"
+2024-09-23T20:36:40Z D! [outputs.amqp] Connected to "amqp://localhost:5672/"
+2024-09-23T20:36:40Z D! [agent] Successfully connected to outputs.amqp
+2024-09-23T20:36:40Z D! [agent] Starting service inputs
+2024-09-23T20:37:14Z D! [outputs.amqp] Wrote batch of 1 metrics in 11.0807ms
+2024-09-23T20:37:14Z D! [outputs.amqp] Buffer fullness: 0 / 10000 metrics
+2024-09-23T20:37:47Z D! [outputs.amqp] Wrote batch of 1 metrics in 0s
+2024-09-23T20:37:47Z D! [outputs.amqp] Buffer fullness: 0 / 10000 metrics
+
+```
+
 
 Zabbix Output Plugin =
 
