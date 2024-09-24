@@ -610,6 +610,20 @@ Zabbix Output Plugin =
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
 
+It is sending, but on what format, read above github
+
+```log
+2024-09-24T19:45:21Z D! [agent] Initializing plugins
+2024-09-24T19:45:21Z D! [agent] Connecting outputs
+2024-09-24T19:45:21Z D! [agent] Attempting connection to [outputs.zabbix]
+2024-09-24T19:45:21Z D! [agent] Successfully connected to outputs.zabbix
+2024-09-24T19:45:21Z D! [agent] Starting service inputs
+2024-09-24T19:45:54Z D! [outputs.zabbix] Wrote batch of 2 metrics in 74.0251ms
+2024-09-24T19:45:54Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
+2024-09-24T19:46:29Z D! [outputs.zabbix] Wrote batch of 2 metrics in 73.8509ms
+
+```
+
 
 
 InfluxDB Output Plugin = 
