@@ -585,12 +585,46 @@ https://www.influxdata.com/blog/telegraf-best-practices/
 
 In many use cases, Telegraf is being deployed to ingest data from multiple input sources and deliver that data to either InfluxDB or other enterprise platforms (as shown in the below example).
 
+
+### Test telegraf.conf
+
+```ps1
+
+cd 'C:\Program Files\Telegraf\telegraf-1.32.0\'
+.\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
+
+# only inputs can be tested
+file,host=BER-0803 tag1_value=100 1727211303000000000
+
+
+```
 ### Plugins input
 
 File Input Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
 
+```json
+
+{
+    "tag1": {
+        "value": 100,
+        "active": 1,
+		"state": 0
+    }
+}
+
+```
+or 
+
+```json
+{
+    "tag1": {
+        "value": 100
+    }
+}
+
+```
 WMI Input Plugin = 
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_wmi/README.md
@@ -652,6 +686,21 @@ It is sending, but on what format, read above github
 2024-09-24T19:45:54Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
 2024-09-24T19:46:29Z D! [outputs.zabbix] Wrote batch of 2 metrics in 73.8509ms
 
+```
+
+Ref github
+Given this Telegraf metric:
+
+```log
+measurement,host=hostname valueA=0,valueB=1
+
+```
+It will generate this Zabbix metrics:
+
+```log
+
+{"host": "hostname", "key": "telegraf.measurement.valueA", "value": "0"}
+{"host": "hostname", "key": "telegraf.measurement.valueB", "value": "1"}
 ```
 
 
