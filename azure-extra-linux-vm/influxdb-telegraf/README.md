@@ -402,7 +402,7 @@ ls
 telegraf.conf
 telegraf.exe
 
-# Then create a conf subdirectory and copy the telegraf.conf to conf ()
+# Then create a conf subdirectory and copy the telegraf.conf to the new cond folder
 
 mkdir conf
 
@@ -413,7 +413,7 @@ copy ..\telegraf.conf telegraf.conf
 
 ```
 
-Cleean the file to empty
+in conf\telegraf.conf, remove all and paste below config (section TOML for our Agent) in the file and save it.
 
 
 Make the json file
@@ -485,7 +485,9 @@ https://github.com/toml-lang/toml
 
 ```
 
-Or splitt it in two, one input.conf and one output.conf for information used in output, db, user etc
+Or splitt it in two, one input.conf and one output.conf for information used in output, db, user etc, this is for security when using token and keys, you cna then secure only the output.conf.
+
+The you have two files, input.conf and output.conf in conf\, we do not have that now.
 
 ```toml
 ###############################################################################
