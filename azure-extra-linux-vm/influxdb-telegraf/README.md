@@ -528,8 +528,6 @@ At this point it is a good idea to test that Telegraf works correctly
 icacls outputs.conf /reset
 icacls outputs.conf /inheritance:r /grant system:r
 
-
-
 # We skip security for now, install it as a service
 
 .\telegraf --service install --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\'
@@ -543,6 +541,27 @@ The Telegraf Data Collector Service service is starting.
 The Telegraf Data Collector Service service was started successfully.
 
 
+
+```
+
+Yoy can now view the log file
+```log
+2024-09-22T15:41:27Z I! Loading config: C:\Program Files\Telegraf\telegraf-1.32.0\conf\telegraf.conf
+2024-09-22T15:41:27Z I! Starting Telegraf 1.32.0 brought to you by InfluxData the makers of InfluxDB
+2024-09-22T15:41:27Z I! Available plugins: 235 inputs, 9 aggregators, 32 processors, 26 parsers, 62 outputs, 5 secret-stores
+2024-09-22T15:41:27Z I! Loaded inputs: file
+2024-09-22T15:41:27Z I! Loaded aggregators:
+2024-09-22T15:41:27Z I! Loaded processors:
+2024-09-22T15:41:27Z I! Loaded secretstores:
+2024-09-22T15:41:27Z I! Loaded outputs: file
+2024-09-22T15:41:27Z I! Tags enabled: host=BER-0803
+2024-09-22T15:41:27Z I! [agent] Config: Interval:30s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-09-22T15:41:27Z D! [agent] Initializing plugins
+2024-09-22T15:41:27Z D! [agent] Connecting outputs
+2024-09-22T15:41:27Z D! [agent] Attempting connection to [outputs.file]
+2024-09-22T15:41:27Z D! [agent] Successfully connected to outputs.file
+2024-09-22T15:41:27Z D! [agent] Starting service inputs
+2024-09-22T15:42:01Z D! [outputs.file] Wrote batch of 2 metrics in 0s
 
 ```
 
