@@ -402,7 +402,7 @@ ls
 telegraf.conf
 telegraf.exe
 
-# Then create a conf subdirectory and copy the telegraf.conf as conf\inputs.conf:
+# Then create a conf subdirectory and copy the telegraf.conf to conf ()
 
 mkdir conf
 
