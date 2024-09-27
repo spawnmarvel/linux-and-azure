@@ -693,21 +693,88 @@ https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.m
 
 Zabbix Output Plugin =
 
+If we assume a file input on format:
+
+````json
+{
+        "host":"test-vm01"
+        "rmp": 32
+}
+
+and zabbix_sender.exe example would then be:
+
+```bash
+
+sudo apt install zabbix-sender
+
+cd ./bin
+
+./zabbix_sender -z localhost -s "test-vm01" -k telegraf.rpm -o 25 -vv
+```
+Log from shell
+
+```log
+
+zabbix_sender [12335]: DEBUG: answer [{"response":"success","info":"processed: 1; failed: 0; total: 1; seconds spent: 0.000092"}]
+Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000092"
+sent: 1; skipped: 0; total: 1
+
+```
+And we get have the value 25 in zabbix.
+
+
+Lets check the output in a file to file telegraf given above json and data_format = "json":
+
+metrics.out.json
+
+```log 
+{"fields":{"rpm":25},"name":"file","tags":{"host":"BER-0803"},"timestamp":1727474460}
+
+```
+
+Lets start Telegraf and check what we are sending to zabbix.
+
+```log
+2024-09-27T22:30:22Z I! Loaded inputs: file
+2024-09-27T22:30:22Z I! Loaded aggregators:
+2024-09-27T22:30:22Z I! Loaded processors:
+2024-09-27T22:30:22Z I! Loaded secretstores:
+2024-09-27T22:30:22Z I! Loaded outputs: zabbix
+2024-09-27T22:30:22Z I! Tags enabled: host=BER-0803
+2024-09-27T22:30:22Z I! [agent] Config: Interval:15s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-09-27T22:30:22Z D! [agent] Initializing plugins
+2024-09-27T22:30:22Z D! [agent] Connecting outputs
+2024-09-27T22:30:22Z D! [agent] Attempting connection to [outputs.zabbix]
+2024-09-27T22:30:22Z D! [agent] Successfully connected to outputs.zabbix
+2024-09-27T22:30:22Z D! [agent] Starting service inputs
+2024-09-27T22:30:56Z D! [outputs.zabbix] Wrote batch of 2 metrics in 77.8245ms
+2024-09-27T22:30:56Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
+
+```
+
+It is sent, but not shwoing in zabbix
+
+
+Lets make two outputs in the same file
+
+Telegraf log
+
+```log
+2024-09-27T22:37:19Z I! Loaded outputs: file zabbix
+2024-09-27T22:37:19Z I! Tags enabled: host=BER-0803
+2024-09-27T22:37:19Z I! [agent] Config: Interval:15s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-09-27T22:37:19Z D! [agent] Initializing plugins
+2024-09-27T22:37:19Z D! [agent] Connecting outputs
+2024-09-27T22:37:19Z D! [agent] Attempting connection to [outputs.zabbix]
+2024-09-27T22:37:19Z D! [agent] Successfully connected to outputs.zabbix
+2024-09-27T22:37:19Z D! [agent] Attempting connection to [outputs.file]
+2024-09-27T22:37:19Z D! [agent] Successfully connected to outputs.file
+2024-09-27T22:37:19Z D! [agent] Starting service inputs
+```
+
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
 
 It is sending, but on what format, read above github
-
-```log
-2024-09-24T19:45:21Z D! [agent] Initializing plugins
-2024-09-24T19:45:21Z D! [agent] Connecting outputs
-2024-09-24T19:45:21Z D! [agent] Attempting connection to [outputs.zabbix]
-2024-09-24T19:45:21Z D! [agent] Successfully connected to outputs.zabbix
-2024-09-24T19:45:21Z D! [agent] Starting service inputs
-2024-09-24T19:45:54Z D! [outputs.zabbix] Wrote batch of 2 metrics in 74.0251ms
-2024-09-24T19:45:54Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
-2024-09-24T19:46:29Z D! [outputs.zabbix] Wrote batch of 2 metrics in 73.8509ms
-
-```
 
 Ref github
 Given this Telegraf metric:
