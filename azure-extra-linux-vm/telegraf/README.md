@@ -65,13 +65,13 @@ cd ~\Downloads
 
 # replace wget with Invoke
 
-Invoke-WebRequest https://dl.influxdata.com/telegraf/releases/telegraf-1.32.0_windows_amd64.zip -OutFile telegraf.zip
+Invoke-WebRequest https://dl.influxdata.com/telegraf/releases/telegraf-1.32.0_windows_amd64.zip -OutFile telegraf-1.32.0.zip
 
 # Next, let’s extract the archive into Program Files folder, which will create C:\Program Files\telegraf folder:
 
 mkdir 'C:\Program Files\Telegraf'
 
-Expand-Archive .\telegraf.zip 'C:\Program Files\Telegraf\'
+Expand-Archive .\telegraf-1.32.0.zip 'C:\Program Files\Telegraf\'
 
 
 cd 'C:\Program Files\Telegraf\telegraf-1.32.0\'
@@ -194,6 +194,38 @@ https://www.influxdata.com/downloads/
 
 ## Get started TODO
 
+After you’ve downloaded and installed Telegraf, you’re ready to begin collecting and sending data. To collect and send data, do the following:
+
+1. Configure Telegraf
+2. Start Telegraf
+3. Use plugins available in Telegraf to gather, transform, and output data.
+
+### Logging and troubleshooting
+
+Windows service commands
+
+```ps1
+.\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test # test
+
+telegraf.exe --service install	# Install telegraf as a service
+telegraf.exe --service uninstall # 	Remove the telegraf service
+telegraf.exe --service start # 	Start the telegraf service
+telegraf.exe --service stop	# Stop the telegraf service
+
+
+# Create a configuration file with default input and output plugins
+.\telegraf.exe config > telegraf.conf
+
+# Create a configuration file with specific input and output plugins
+.\telegraf.exe `
+--input-filter cpu:http `
+--output-filter influxdb_v2:file `
+config > telegraf.conf
+
+```
+
+
+
 ## Configure plugins TODO
 
 ## Input plugins TODO
@@ -216,7 +248,7 @@ https://www.influxdata.com/blog/telegraf-best-practices/
 In many use cases, Telegraf is being deployed to ingest data from multiple input sources and deliver that data to either InfluxDB or other enterprise platforms (as shown in the below example).
 
 
-### Test telegraf.conf
+### Test telegraf.conf with a given config
 
 ```ps1
 
