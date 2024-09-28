@@ -49,20 +49,10 @@ https://docs.influxdata.com/telegraf/v1/install/
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-telegraf-to-a-secured-influxdb-instance
 
 
-# Telegraf remote Digital Ocean tbd
 
+# Documentation and tutoorial
 
-```bash
-#
-
-```
-
-https://www.digitalocean.com/community/tutorials/how-to-monitor-system-metrics-with-the-tick-stack-on-ubuntu-16-04
-
-
-# Telegraf 101
-
-## Telegraf on windows
+## Install (in this example windows)
 
 
 Download binaries
@@ -202,20 +192,22 @@ https://www.influxdata.com/downloads/
 
 
 
-### Configuration
+## Get started TODO
 
-Agent
+## Configure plugins TODO
 
-Input
+## Input plugins TODO
 
-Aggregator
+## Output plugins TODO
 
-Processor
+## Aggregator and processor plugins TODO
 
-Output
+## External plugins TODO
 
-https://docs.influxdata.com/telegraf/v1/configuration/
+## Troubleshoot TODO
 
+
+https://docs.influxdata.com/telegraf/v1/get-started/
 
 ### Telegraf Best Practices: Config Recommendations and Performance Monitoring
 
