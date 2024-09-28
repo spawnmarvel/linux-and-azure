@@ -228,7 +228,7 @@ file,host=BER-0803 tag1_value=100 1727211303000000000
 
 
 ```
-### Plugins input
+# Plugins input
 
 File Input Plugin = ok
 
@@ -259,7 +259,7 @@ WMI Input Plugin =
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_wmi/README.md
 
-### Plugins output
+# Plugins output
 
 File Output Plugin=  ok
 
