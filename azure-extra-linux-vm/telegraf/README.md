@@ -27,6 +27,10 @@ https://docs.influxdata.com/telegraf/v1/install/
 
 https://www.youtube.com/watch?v=ESub4SAKouI
 
+## Github and visuals elo
+
+https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
+
 ## Telegraf docs
 
 https://docs.influxdata.com/telegraf/v1/
@@ -185,12 +189,6 @@ Yoy can now view the log file
 2024-09-22T15:42:01Z D! [outputs.file] Wrote batch of 2 metrics in 0s
 
 ```
-
-
-View example elo
-
-https://follow-e-lo.com/2024/08/29/influxdb-and-telegraf-agent/
-
 
 
 How to:
