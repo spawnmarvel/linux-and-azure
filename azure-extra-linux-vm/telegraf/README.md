@@ -50,7 +50,7 @@ https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-teleg
 
 
 
-# Documentation and tutoorial
+# Documentation and tutorial
 
 ## Install (in this example windows)
 
