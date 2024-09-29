@@ -224,7 +224,64 @@ config > telegraf.conf
 
 ```
 
+Let's teste the above ps1 and createa config
 
+```ps1
+PS C:\Program Files\Telegraf\telegraf-1.32.0> .\telegraf.exe --input-filter cpu --output-filter file config > telegraf.conf
+```
+
+Change the path from linux to windows:
+
+* files = ["stdout", "/tmp/metrics.out"]
+* files = ["C://Program Files//Telegraf//telegraf-1.32.0//file//file.out"]
+
+Copy the telegraf.conf to the conf folder and test it.
+
+```ps1
+
+ .\telegraf.exe --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
+2024-09-29T09:21:18Z I! Loading config: C:\Program Files\Telegraf\telegraf-1.32.0\conf\telegraf.conf
+2024-09-29T09:21:18Z I! Starting Telegraf 1.32.0 brought to you by InfluxData the makers of InfluxDB
+2024-09-29T09:21:18Z I! Available plugins: 235 inputs, 9 aggregators, 32 processors, 26 parsers, 62 outputs, 5 secret-stores
+2024-09-29T09:21:18Z I! Loaded inputs: cpu
+2024-09-29T09:21:18Z I! Loaded aggregators:
+2024-09-29T09:21:18Z I! Loaded processors:
+2024-09-29T09:21:18Z I! Loaded secretstores:
+2024-09-29T09:21:18Z W! Outputs are not used in testing mode!
+2024-09-29T09:21:18Z I! Tags enabled: host=BER-0803
+> cpu,cpu=cpu0,host=BER-0803 usage_guest=0,usage_guest_nice=0,usage_idle=96.875,usage_iowait=0,usage_irq=0,usage_nice=0,usage_softirq=0,usage_steal=0,usage_system=3.125,usage_user=0 1727601679000000000
+
+```
+Now strip the conf so you only have ageent, input and output section for now.
+
+(The default config had a big section on processor, but smaller on aggregator )
+
+Result
+
+```log
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.24943849484066,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":1.0611633735880994,"usage_user":1.6893981315712379},"name":"cpu","tags":{"cpu":"cpu-total","host":"BER-0803"},"timestamp":1727602830}
+
+```
+CPU Input Plugin
+
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md
+
+Lets add disk also
+
+Disk Input Plugin
+
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md
+
+Update the telegraf.conf with configuration and start it
+
+
+```logs
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.30521382542472,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.8526980407472499,"usage_user":1.8420881338280284},"name":"cpu","tags":{"cpu":"cpu-total","host":"BER-0803"},"timestamp":1727603010}
+{"fields":{"free":267422818304,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":510770802688,"used":243347984384,"used_percent":47.643284052915426},"name":"disk","tags":{"device":"C:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\C:"},"timestamp":1727603070}
+{"fields":{"free":416910110720,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":500105248768,"used":83195138048,"used_percent":16.635525872393796},"name":"disk","tags":{"device":"D:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\D:"},"timestamp":1727603070}
+{"fields":{"free":989560467456,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":1099511627776,"used":109951160320,"used_percent":9.999999776482582},"name":"disk","tags":{"device":"Z:","fstype":"MFilesFS","host":"BER-0803","mode":"rw","path":"\\Z:"},"timestamp":1727603070}
+
+```
 
 ## Configure plugins TODO
 
