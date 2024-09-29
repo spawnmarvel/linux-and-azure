@@ -283,7 +283,11 @@ Update the telegraf.conf with configuration and start it
 
 ```
 
-## Configure plugins TODO
+So now we generated a conf from ps1 and we added a configuration from github also.
+
+## Configure plugins Collect data with input plugins TODO
+
+https://docs.influxdata.com/telegraf/v1/configure_plugins/input_plugins/
 
 ## Input plugins TODO
 
