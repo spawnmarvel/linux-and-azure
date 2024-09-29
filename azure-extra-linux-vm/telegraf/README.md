@@ -259,7 +259,24 @@ Now strip the conf so you only have ageent, input and output section for now.
 Result
 
 ```log
-{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.24943849484066,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":1.0611633735880994,"usage_user":1.6893981315712379},"name":"cpu","tags":{"cpu":"cpu-total","host":"BER-0803"},"timestamp":1727602830}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":94.95841995841995,"usage_iowait":0,"usage_irq":0.2079002079002079,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":2.130977130977131,"usage_user":2.7027027027027026},"name":"cpu","tags":{"cpu":"cpu0","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":98.33420093701197,"usage_iowait":0,"usage_irq":0.052056220718375845,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.7287870900572618,"usage_user":0.8849557522123894},"name":"cpu","tags":{"cpu":"cpu1","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":93.7077483099324,"usage_iowait":0,"usage_irq":0.10400416016640665,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":2.3920956838273533,"usage_user":3.796151846073843},"name":"cpu","tags":{"cpu":"cpu2","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":96.9807391983342,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.8328995314940135,"usage_user":2.1863612701717856},"name":"cpu","tags":{"cpu":"cpu3","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":96.92868297761582,"usage_iowait":0,"usage_irq":0.052056220718375845,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":1.2493492972410203,"usage_user":1.7699115044247788},"name":"cpu","tags":{"cpu":"cpu4","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":98.33679833679834,"usage_iowait":0,"usage_irq":0.10395010395010396,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.4677754677754678,"usage_user":1.0914760914760915},"name":"cpu","tags":{"cpu":"cpu5","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.91666666666667,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.5729166666666666,"usage_user":1.5104166666666667},"name":"cpu","tags":{"cpu":"cpu6","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":99.06347554630594,"usage_iowait":0,"usage_irq":0.05202913631633715,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.36420395421436,"usage_user":0.5202913631633714},"name":"cpu","tags":{"cpu":"cpu7","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":98.22916666666667,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.2604166666666667,"usage_user":1.5104166666666667},"name":"cpu","tags":{"cpu":"cpu8","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":98.43912591050989,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.2081165452653486,"usage_user":1.352757544224766},"name":"cpu","tags":{"cpu":"cpu9","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":96.30208333333333,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":1.25,"usage_user":2.4479166666666665},"name":"cpu","tags":{"cpu":"cpu10","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.91449426485923,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.31282586027111575,"usage_user":1.772679874869656},"name":"cpu","tags":{"cpu":"cpu11","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.8125,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.2604166666666667,"usage_user":1.9270833333333333},"name":"cpu","tags":{"cpu":"cpu12","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":99.53149401353461,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.20822488287350338,"usage_user":0.2602811035918792},"name":"cpu","tags":{"cpu":"cpu13","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":95.525494276795,"usage_iowait":0,"usage_irq":0.05202913631633715,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":1.1966701352757545,"usage_user":3.225806451612903},"name":"cpu","tags":{"cpu":"cpu14","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":99.58333333333333,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.3645833333333333,"usage_user":0.052083333333333336},"name":"cpu","tags":{"cpu":"cpu15","host":"BER-0803"},"timestamp":1727604270}
+{"fields":{"usage_guest":0,"usage_guest_nice":0,"usage_idle":97.5103329319491,"usage_iowait":0,"usage_irq":0,"usage_nice":0,"usage_softirq":0,"usage_steal":0,"usage_system":0.8005988218830344,"usage_user":1.6890682461678654},"name":"cpu","tags":{"cpu":"cpu-total","host":"BER-0803"},"timestamp":1727604270}
+
 
 ```
 CPU Input Plugin
@@ -300,6 +317,8 @@ Update the telegraf.conf with configuration and start it
 ```
 
 So now we generated a conf from ps1 and we added a configuration from github also.
+
+For the simplicity lest remove cpu and use disk for the tutorial
 
 ## Configure plugins Collect data with input plugins TODO
 
