@@ -427,6 +427,25 @@ https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.m
 
 ```
 
+Influxdb v2 output plugin = ok
+
+```log
+
+2024-09-29T19:22:03Z I! Tags enabled: host=BER-0803
+2024-09-29T19:22:03Z I! [agent] Config: Interval:30s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-09-29T19:22:03Z D! [agent] Initializing plugins
+2024-09-29T19:22:03Z D! [agent] Connecting outputs
+2024-09-29T19:22:03Z D! [agent] Attempting connection to [outputs.influxdb_v2]
+2024-09-29T19:22:03Z D! [agent] Successfully connected to outputs.influxdb_v2
+2024-09-29T19:22:03Z D! [agent] Starting service inputs
+2024-09-29T19:22:37Z D! [outputs.influxdb_v2] Wrote batch of 3 metrics in 88.0961ms
+2024-09-29T19:22:37Z D! [outputs.influxdb_v2] Buffer fullness: 0 / 10000 metrics
+2024-09-29T19:23:10Z D! [outputs.influxdb_v2] Wrote batch of 3 metrics in 51.4511ms
+2024-09-29T19:23:10Z D! [outputs.influxdb_v2] Buffer fullness: 0 / 10000 metrics
+2024-09-29T19:23:41Z D! [outputs.influxdb_v2] Wrote batch of 3 metrics in 48.6497ms
+2024-09-29T19:23:41Z D! [outputs.influxdb_v2] Buffer fullness: 0 / 10000 metrics
+
+```
 
 Zabbix Output Plugin =
 

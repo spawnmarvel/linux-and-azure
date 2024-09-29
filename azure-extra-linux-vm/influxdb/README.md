@@ -249,6 +249,29 @@ curl --verbose --insecure https://localhost:8086/api/v2/ping
 ```
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#Copyright
 
+
+Forgot password to user?
+
+```bash
+
+# list users
+
+influxd recovery user list
+
+# get token
+
+sudo cat /var/lib/influxdb/influxd.bolt | strings | grep "username's Token"
+
+
+influx user password -n username -t the-token
+? Please type new password for "username" *********************
+? Please type new password for "username" again *********************
+Successfully updated password for user "username"
+
+# remove cache in browser
+
+```
+
 ### Config files
 
 ***InfluxDB file structure***:
