@@ -318,7 +318,7 @@ Update the telegraf.conf with configuration and start it
 
 So now we generated a conf from ps1 and we added a configuration from github also.
 
-For the simplicity lest remove cpu and use disk for the tutorial
+For the simplicity lest remove cpu and use only disk for the tutorial
 
 ## Configure plugins Collect data with input plugins TODO
 
