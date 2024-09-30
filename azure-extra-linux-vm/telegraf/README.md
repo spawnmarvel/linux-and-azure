@@ -365,8 +365,25 @@ https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 
 ## External plugins TODO
 
+
+https://docs.influxdata.com/telegraf/v1/get-started/
+
+
+### Test telegraf.conf with a given config
+
+```ps1
+
+cd 'C:\Program Files\Telegraf\telegraf-1.32.0\'
+.\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
+
+# only inputs can be tested
+file,host=BER-0803 tag1_value=100 1727211303000000000
+
+
+```
 ## Troubleshoot TODO
 
+Best tip, add a good agent section after running --test (view above)
 
 ```toml
 [agent]
@@ -385,22 +402,6 @@ https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 
 ```
 
-
-https://docs.influxdata.com/telegraf/v1/get-started/
-
-
-### Test telegraf.conf with a given config
-
-```ps1
-
-cd 'C:\Program Files\Telegraf\telegraf-1.32.0\'
-.\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
-
-# only inputs can be tested
-file,host=BER-0803 tag1_value=100 1727211303000000000
-
-
-```
 
 ### Telegraf Best Practices: Config Recommendations and Performance Monitoring
 
