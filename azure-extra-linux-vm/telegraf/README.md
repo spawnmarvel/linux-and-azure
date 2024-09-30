@@ -324,11 +324,44 @@ For the simplicity lest remove cpu and use disk for the tutorial
 
 https://docs.influxdata.com/telegraf/v1/configure_plugins/input_plugins/
 
-## Input plugins TODO
+## Input plugins 
 
-## Output plugins TODO
+View below tested
 
-## Aggregator and processor plugins TODO
+## Output plugins
+
+View below tested
+
+## Processor plugins TODO
+
+* Transform
+* Decorate
+* Filter
+
+Processor plugins process metrics as they pass through and immediately emit results based on the values they process. For example, this could be printing all metrics or adding a tag to all metrics that pass through. For a list of processor plugins and links to their detailed configuration options, see
+
+https://docs.influxdata.com/telegraf/v1/plugins/#processor-plugins
+
+Example with disk input and file output
+
+
+## Aggregator plugins TODO
+
+* Transform
+* Decorate
+* Filter
+
+Aggregators are typically for emitting new aggregate metrics, such as a running mean, minimum, maximum, quantiles, or standard deviation. For this reason, all aggregator plugins are configured with a period. The period is the size of the window of metrics that each aggregate represents. 
+
+Since many users will only care about their aggregates and not every single metric gathered, there is also a drop_original argument, which tells Telegraf to only emit the aggregates and not the original metrics.
+
+For a list of aggregator plugins and links to their detailed configuration options, see
+
+
+
+https://docs.influxdata.com/telegraf/v1/plugins/#aggregator-plugins
+
+https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 
 ## External plugins TODO
 
@@ -386,6 +419,52 @@ or
 WMI Input Plugin = 
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_wmi/README.md
+
+HTTP Input Plugin
+
+Json from url
+
+```json
+{
+    "data": {
+        "stations": [
+            {
+                "num_ebikes_available": 0,
+                "num_docks_disabled": 0,
+                "is_renting": 0,
+                "last_reported": 1725888418,
+                "num_docks_available": 3,
+                "legacy_id": "3896",
+                "station_id": "26cae473-0e59-4af7-bad5-bb6fec85c8bc",
+                "is_installed": 0,
+                "eightd_has_available_keys": false,
+                "is_returning": 0,
+                "num_bikes_available": 0,
+                "num_bikes_disabled": 0
+            },
+            [...]
+```
+
+Telegraf log
+
+```log
+024-09-30T20:43:12Z I! [agent] Config: Interval:30s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-09-30T20:43:12Z D! [agent] Initializing plugins
+2024-09-30T20:43:12Z D! [agent] Connecting outputs
+2024-09-30T20:43:12Z D! [agent] Attempting connection to [outputs.file]
+2024-09-30T20:43:12Z D! [agent] Successfully connected to outputs.file
+2024-09-30T20:43:12Z D! [agent] Starting service inputs
+2024-09-30T20:43:31Z D! [outputs.file] Wrote batch of 1000 metrics in 14.9989ms
+2024-09-30T20:43:31Z D! [outputs.file] Buffer fullness: 1226 / 10000 metrics
+
+```
+
+File out
+
+```log
+{"fields":{"eightd_has_available_keys":false,"is_installed":1,"is_renting":1,"is_returning":1,"legacy_id":"5036","num_bikes_available":19,"num_bikes_disabled":1,"num_docks_available":4,"num_docks_disabled":0,"num_ebikes_available":1,"num_scooters_available":0,"num_scooters_unavailable":0},"name":"citibike","tags":{"station_id":"0cb63737-64c9-42a9-9479-280d49ed015a"},"timestamp":1727728988}
+{"fields":{"eightd_has_available_keys":false,"is_installed":1,"is_renting":1,"is_returning":1,"legacy_id":"3704","num_bikes_available":17,"num_bikes_disabled":0,"num_docks_available":2,"num_docks_disabled":0,"num_ebikes_available":13,"num_scooters_available":0,"num_scooters_unavailable":0},"name":"citibike","tags":{"station_id":"c72970e7-7f1a-4671-bf55-fc34be7c9413"},"timestamp":1727728984}
+```
 
 # Plugins output
 
