@@ -368,13 +368,25 @@ https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 ## Troubleshoot TODO
 
 
+```toml
+[agent]
+ interval = "30s" 
+ round_interval = true
+ metric_batch_size = 1000 
+ metric_buffer_limit = 10000 
+ collection_jitter = "0s" 
+ flush_interval = "30s"
+ flush_jitter = "5s" precision = ""
+ debug = true
+ quiet = false # quiet: Log only error level messages.
+ logfile = "C://Program Files//Telegraf//telegraf-1.32.0//telegraf.logs"
+ logfile_rotation_max_size = "200KB"
+ logfile_rotation_max_archives = 10
+
+```
+
+
 https://docs.influxdata.com/telegraf/v1/get-started/
-
-### Telegraf Best Practices: Config Recommendations and Performance Monitoring
-
-https://www.influxdata.com/blog/telegraf-best-practices/
-
-In many use cases, Telegraf is being deployed to ingest data from multiple input sources and deliver that data to either InfluxDB or other enterprise platforms (as shown in the below example).
 
 
 ### Test telegraf.conf with a given config
@@ -389,6 +401,12 @@ file,host=BER-0803 tag1_value=100 1727211303000000000
 
 
 ```
+
+### Telegraf Best Practices: Config Recommendations and Performance Monitoring
+
+https://www.influxdata.com/blog/telegraf-best-practices/
+
+
 # Plugins input
 
 File Input Plugin = ok
