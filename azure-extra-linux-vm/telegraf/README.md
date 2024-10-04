@@ -633,7 +633,7 @@ It will generate this Zabbix metrics:
 Ok, lets configure that in zabbix
 
 * Host: BER-0803
-* Items: file.telegraf.rmp and speed (since we added a key prefix (telegraf.))
+* Items: file.telegraf.rpm and speed (since we added a key prefix (telegraf.))
 
 
 ![Telegraf to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/telegraf_zabbix.jpg)
