@@ -548,36 +548,16 @@ Influxdb v2 output plugin = ok
 
 ```
 
-Zabbix Output Plugin =
+Zabbix Output Plugin = ok
 
 If we assume a file input on format:
 
 ````json
 {
-        "host":"test-vm01"
-        "rmp": 32
+        
+        "rpm": 33,
+		"speed": 200
 }
-
-and zabbix_sender.exe example would then be:
-
-```bash
-
-sudo apt install zabbix-sender
-
-cd ./bin
-
-./zabbix_sender -z localhost -s "test-vm01" -k telegraf.rpm -o 25 -vv
-```
-Log from shell
-
-```log
-
-zabbix_sender [12335]: DEBUG: answer [{"response":"success","info":"processed: 1; failed: 0; total: 1; seconds spent: 0.000092"}]
-Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000092"
-sent: 1; skipped: 0; total: 1
-
-```
-And we get have the value 25 in zabbix.
 
 
 Lets check the output in a file to file telegraf given above json and data_format = "json":
@@ -585,53 +565,55 @@ Lets check the output in a file to file telegraf given above json and data_forma
 metrics.out.json
 
 ```log 
-{"fields":{"rpm":25},"name":"file","tags":{"host":"BER-0803"},"timestamp":1727474460}
+{"fields":{"rpm":33,"speed":200},"name":"file","tags":{"host":"BER-0803"},"timestamp":1728081750}
+{"fields":{"rpm":33,"speed":200},"name":"file","tags":{"host":"BER-0803"},"timestamp":1728081765}
+{"fields":{"rpm":33,"speed":200},"name":"file","tags":{"host":"BER-0803"},"timestamp":1728081780}
 
 ```
 
 Lets start Telegraf and check what we are sending to zabbix.
 
 ```log
-2024-09-27T22:30:22Z I! Loaded inputs: file
-2024-09-27T22:30:22Z I! Loaded aggregators:
-2024-09-27T22:30:22Z I! Loaded processors:
-2024-09-27T22:30:22Z I! Loaded secretstores:
-2024-09-27T22:30:22Z I! Loaded outputs: zabbix
-2024-09-27T22:30:22Z I! Tags enabled: host=BER-0803
-2024-09-27T22:30:22Z I! [agent] Config: Interval:15s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
-2024-09-27T22:30:22Z D! [agent] Initializing plugins
-2024-09-27T22:30:22Z D! [agent] Connecting outputs
-2024-09-27T22:30:22Z D! [agent] Attempting connection to [outputs.zabbix]
-2024-09-27T22:30:22Z D! [agent] Successfully connected to outputs.zabbix
-2024-09-27T22:30:22Z D! [agent] Starting service inputs
-2024-09-27T22:30:56Z D! [outputs.zabbix] Wrote batch of 2 metrics in 77.8245ms
-2024-09-27T22:30:56Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
+2024-10-04T22:44:38Z I! Loading config: C:\Program Files\Telegraf\telegraf-1.32.0\conf\telegraf.conf
+2024-10-04T22:44:38Z I! Starting Telegraf 1.32.0 brought to you by InfluxData the makers of InfluxDB
+2024-10-04T22:44:38Z I! Available plugins: 235 inputs, 9 aggregators, 32 processors, 26 parsers, 62 outputs, 5 secret-stores
+2024-10-04T22:44:38Z I! Loaded inputs: file
+2024-10-04T22:44:38Z I! Loaded aggregators:
+2024-10-04T22:44:38Z I! Loaded processors:
+2024-10-04T22:44:38Z I! Loaded secretstores:
+2024-10-04T22:44:38Z I! Loaded outputs: file zabbix
+2024-10-04T22:44:38Z I! Tags enabled: host=BER-0803
+2024-10-04T22:44:38Z I! [agent] Config: Interval:15s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
+2024-10-04T22:44:38Z D! [agent] Initializing plugins
+2024-10-04T22:44:38Z D! [agent] Connecting outputs
+2024-10-04T22:44:38Z D! [agent] Attempting connection to [outputs.zabbix]
+2024-10-04T22:44:38Z D! [agent] Successfully connected to outputs.zabbix
+2024-10-04T22:44:38Z D! [agent] Attempting connection to [outputs.file]
+2024-10-04T22:44:38Z D! [agent] Successfully connected to outputs.file
+2024-10-04T22:44:38Z D! [agent] Starting service inputs
+2024-10-04T22:45:09Z D! [outputs.zabbix] Wrote batch of 2 metrics in 84.2378ms
+2024-10-04T22:45:09Z D! [outputs.zabbix] Buffer fullness: 0 / 10000 metrics
+2024-10-04T22:45:11Z D! [outputs.file] Wrote batch of 2 metrics in 0s
+2024-10-04T22:45:11Z D! [outputs.file] Buffer fullness: 0 / 10000 metrics
 
 ```
 
-It is sent, but not shwoing in zabbix
+It is sent, but not showing in zabbix
 
 
-Lets make two outputs in the same file
+Lets test the telegraf config
 
-Telegraf log
 
-```log
-2024-09-27T22:37:19Z I! Loaded outputs: file zabbix
-2024-09-27T22:37:19Z I! Tags enabled: host=BER-0803
-2024-09-27T22:37:19Z I! [agent] Config: Interval:15s, Quiet:false, Hostname:"BER-0803", Flush Interval:30s
-2024-09-27T22:37:19Z D! [agent] Initializing plugins
-2024-09-27T22:37:19Z D! [agent] Connecting outputs
-2024-09-27T22:37:19Z D! [agent] Attempting connection to [outputs.zabbix]
-2024-09-27T22:37:19Z D! [agent] Successfully connected to outputs.zabbix
-2024-09-27T22:37:19Z D! [agent] Attempting connection to [outputs.file]
-2024-09-27T22:37:19Z D! [agent] Successfully connected to outputs.file
-2024-09-27T22:37:19Z D! [agent] Starting service inputs
+```ps1
+PS C:\Program Files\Telegraf\telegraf-1.32.0> .\telegraf --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\' --test
+
+2024-10-04T22:45:52Z I! Loading config: C:\Program Files\Telegraf\telegraf-1.32.0\conf\telegraf.conf
+> file,host=BER-0803 rpm=33,speed=200 1728081953000000000
+
 ```
+So now we know the format
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/zabbix/README.md
-
-It is sending, but on what format, read above github
 
 Ref github
 Given this Telegraf metric:
@@ -647,9 +629,11 @@ It will generate this Zabbix metrics:
 {"host": "hostname", "key": "telegraf.measurement.valueA", "value": "0"}
 {"host": "hostname", "key": "telegraf.measurement.valueB", "value": "1"}
 ```
+Ok, lets configure that in zabbix
+
+* Host: BER-0803
+* Items: file.telegraf.rmp and speed (since we added a key prefix (telegraf.))
 
 
+![Telegraf to zabbix](https://github.com/username/repository/blob/master/img/octocat.png)
 
-InfluxDB Output Plugin = 
-
-https://github.com/influxdata/telegraf/blob/master/plugins/outputs/influxdb_v2/README.md
