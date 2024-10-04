@@ -552,12 +552,13 @@ Zabbix Output Plugin = ok
 
 If we assume a file input on format:
 
-````json
+```json
 {
         
         "rpm": 33,
 		"speed": 200
 }
+```
 
 
 Lets check the output in a file to file telegraf given above json and data_format = "json":
