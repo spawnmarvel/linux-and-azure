@@ -332,45 +332,6 @@ View below tested
 
 View below tested
 
-## Processor plugins TODO
-
-* Transform
-* Decorate
-* Filter
-
-* A tag to all metrics
-
-Processor plugins process metrics as they pass through and immediately emit results based on the values they process. For example, this could be printing all metrics or adding a tag to all metrics that pass through. For a list of processor plugins and links to their detailed configuration options, see
-
-https://docs.influxdata.com/telegraf/v1/plugins/#processor-plugins
-
-Example with disk input and file output
-
-
-## Aggregator plugins TODO
-
-* Transform
-* Decorate
-* Filter
-
-* All aggrs have a ., . = size of window
-* drop_original = emit only aggr
-
-Aggregators are typically for emitting new aggregate metrics, such as a running mean, minimum, maximum, quantiles, or standard deviation. For this reason, all aggregator plugins are configured with a period. The period is the size of the window of metrics that each aggregate represents. 
-
-Since many users will only care about their aggregates and not every single metric gathered, there is also a drop_original argument, which tells Telegraf to only emit the aggregates and not the original metrics.
-
-For a list of aggregator plugins and links to their detailed configuration options, see
-
-https://docs.influxdata.com/telegraf/v1/plugins/#aggregator-plugins
-
-https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
-
-## External plugins TODO
-
-
-https://docs.influxdata.com/telegraf/v1/get-started/
-
 
 ### Test telegraf.conf with a given config
 
@@ -438,9 +399,6 @@ or
 }
 
 ```
-WMI Input Plugin = 
-
-https://github.com/influxdata/telegraf/blob/master/plugins/inputs/win_wmi/README.md
 
 HTTP Input Plugin
 
@@ -638,3 +596,42 @@ Ok, lets configure that in zabbix
 
 ![Telegraf to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/telegraf_zabbix.jpg)
 
+
+## Processor plugins TODO
+
+* Transform
+* Decorate
+* Filter
+
+* A tag to all metrics
+
+Processor plugins process metrics as they pass through and immediately emit results based on the values they process. For example, this could be printing all metrics or adding a tag to all metrics that pass through. For a list of processor plugins and links to their detailed configuration options, see
+
+https://docs.influxdata.com/telegraf/v1/plugins/#processor-plugins
+
+Example with disk input and file output
+
+
+## Aggregator plugins TODO
+
+* Transform
+* Decorate
+* Filter
+
+* All aggrs have a ., . = size of window
+* drop_original = emit only aggr
+
+Aggregators are typically for emitting new aggregate metrics, such as a running mean, minimum, maximum, quantiles, or standard deviation. For this reason, all aggregator plugins are configured with a period. The period is the size of the window of metrics that each aggregate represents. 
+
+Since many users will only care about their aggregates and not every single metric gathered, there is also a drop_original argument, which tells Telegraf to only emit the aggregates and not the original metrics.
+
+For a list of aggregator plugins and links to their detailed configuration options, see
+
+https://docs.influxdata.com/telegraf/v1/plugins/#aggregator-plugins
+
+https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
+
+## External plugins TODO
+
+
+https://docs.influxdata.com/telegraf/v1/get-started/
