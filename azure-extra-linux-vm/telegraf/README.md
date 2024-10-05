@@ -1,5 +1,53 @@
 # Telegraf
 
+## Lightweight ETL (Extract, Transform, Load) tool
+
+Telegraf is primarily designed as a server agent for collecting, processing, aggregating, and writing metrics and events, but it can be adapted to serve as a lightweight ETL (Extract, Transform, Load) tool in certain use cases. Here’s how Telegraf can fit into the ETL framework:
+
+
+1. **Extract**:
+   - Telegraf can extract data from a wide variety of sources using its input plugins. These include databases (e.g., MySQL, PostgreSQL), message queues (e.g., Kafka, MQTT), APIs, system metrics, and other services.
+   - It can also extract time-series metrics, logs, and events from various systems.
+
+2. **Transform**:
+   - Telegraf has basic data transformation capabilities. Using its processor plugins, you can:
+     - Modify fields and tags
+     - Perform mathematical operations
+     - Filter and aggregate data
+   - It’s not as feature-rich as dedicated ETL tools in terms of complex transformations like joins or extensive data reshaping, but it can handle simpler transformations and filtering tasks.
+
+3. **Load**:
+   - Telegraf can write processed data to a variety of destinations, such as databases (e.g., InfluxDB, PostgreSQL), cloud-based services (e.g., AWS, Google Cloud), message queues (e.g., Kafka), and others.
+   - It supports a wide range of output plugins, making it flexible for loading data into different storage systems.
+
+### When Telegraf Can Be Used as an ETL Tool:
+- **Low to Moderate Complexity**: Telegraf works well for simple to moderately complex ETL tasks, particularly in environments focused on time-series or metric-based data.
+- **Real-Time Data Pipelines**: If you're dealing with real-time data (e.g., metrics from servers or applications), Telegraf excels at streaming this data from various sources, performing lightweight processing, and sending it to multiple destinations.
+- **Event-Driven Workflows**: Telegraf can also be used in event-driven workflows where the data needs to be processed and moved with low latency.
+
+### When Telegraf May Not Be the Best Fit:
+- **Complex Transformations**: If you need complex data transformations (e.g., joins between datasets, complex aggregations, or restructuring of data), Telegraf’s capabilities are limited compared to full-featured ETL tools like Apache NiFi, Talend, or AWS Glue.
+- **Batch Processing**: While Telegraf can handle real-time and streaming data well, it is not designed for large-scale batch processing or scheduled jobs common in traditional ETL pipelines.
+
+### Comparison with Traditional ETL Tools:
+- **Pros**:
+  - Lightweight and efficient for real-time data collection and processing.
+  - Easy to configure and deploy.
+  - Supports a wide range of input and output plugins for seamless integration with many services.
+  
+- **Cons**:
+  - Limited transformation capabilities.
+  - Not suited for heavy-duty data cleaning, enrichment, or complex transformations.
+  - Primarily optimized for metrics and event-based data rather than relational or structured data from traditional business systems.
+
+### Example Scenario:
+Let’s say you want to collect server metrics (CPU, memory, disk usage) from multiple servers, transform the data to only keep specific fields, and then load the output into an InfluxDB database for monitoring. Telegraf can easily handle this ETL pipeline by:
+- Extracting the metrics using the appropriate input plugin.
+- Transforming the data by filtering out unnecessary fields.
+- Loading the results into InfluxDB for monitoring and alerting.
+
+### Conclusion:
+Telegraf can be used as a lightweight ETL tool for simple to moderately complex use cases, especially when dealing with real-time metric or event-based data. However, for more complex ETL pipelines requiring sophisticated data transformations, you may need to use a more robust ETL platform.
 ## Community
 
 You need to install telegraf on each server where it can collect an absolute myriad of performance data (any perfmon data). 
