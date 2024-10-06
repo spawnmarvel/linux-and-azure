@@ -422,7 +422,7 @@ https://www.influxdata.com/blog/telegraf-best-practices/
 
 # Plugins input
 
-File Input Plugin = ok
+## File Input Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
 
@@ -448,7 +448,7 @@ or
 
 ```
 
-HTTP Input Plugin
+## HTTP Input Plugin = ok
 
 Json from url
 
@@ -494,6 +494,14 @@ File out
 {"fields":{"eightd_has_available_keys":false,"is_installed":1,"is_renting":1,"is_returning":1,"legacy_id":"3704","num_bikes_available":17,"num_bikes_disabled":0,"num_docks_available":2,"num_docks_disabled":0,"num_ebikes_available":13,"num_scooters_available":0,"num_scooters_unavailable":0},"name":"citibike","tags":{"station_id":"c72970e7-7f1a-4671-bf55-fc34be7c9413"},"timestamp":1727728984}
 ```
 
+## CPU Input Plugin = ok
+
+Use telegraf github input template
+
+## Disk Input Plugin = ok
+
+Use telegraf github input template
+
 # Plugins output
 
 File Output Plugin=  ok
@@ -515,7 +523,7 @@ https://github.com/influxdata/telegraf/blob/master/plugins/outputs/file/README.m
 ```
 
 
-RabbitMQ Output Plugin = ok
+## RabbitMQ Output Plugin = ok
 
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
 
@@ -554,7 +562,7 @@ Influxdb v2 output plugin = ok
 
 ```
 
-Zabbix Output Plugin = ok
+## Zabbix Output Plugin = ok
 
 If we assume a file input on format:
 
@@ -643,6 +651,7 @@ Ok, lets configure that in zabbix
 
 
 ![Telegraf to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/telegraf_zabbix.jpg)
+
 
 
 ## Processor plugins TODO
