@@ -650,6 +650,61 @@ Ok, lets configure that in zabbix
 * Items: file.telegraf.rpm and speed (since we added a key prefix (telegraf.))
 
 
+
+```json
+{
+    "zabbix_export": {
+        "version": "6.0",
+        "date": "2024-10-06T18:15:04Z",
+        "groups": [
+            {
+                "uuid": "137f19e6e2dc4219b33553b812627bc2",
+                "name": "Virtual machines"
+            }
+        ],
+        "hosts": [
+            {
+                "host": "BER-0803",
+                "name": "BER-0803",
+                "groups": [
+                    {
+                        "name": "Virtual machines"
+                    }
+                ],
+                "interfaces": [
+                    {
+                        "port": "10051",
+                        "interface_ref": "if1"
+                    }
+                ],
+                "items": [
+                    {
+                        "name": "telegraf.file.rpm",
+                        "type": "TRAP",
+                        "key": "telegraf.file.rpm",
+                        "delay": "0"
+                    },
+                    {
+                        "name": "telegraf.file.speed",
+                        "type": "TRAP",
+                        "key": "telegraf.file.speed",
+                        "delay": "0"
+                    },
+                    {
+                        "name": "telegraf.file.tourq",
+                        "type": "TRAP",
+                        "key": "telegraf.file.tourq",
+                        "delay": "0"
+                    }
+                ],
+                "inventory_mode": "DISABLED"
+            }
+        ]
+    }
+}
+
+
+```
 ![Telegraf to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/telegraf_zabbix.jpg)
 
 
