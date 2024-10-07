@@ -122,6 +122,20 @@ https://docs.influxdata.com/influxdb/cloud/api-guide/client-libraries/python/
 
 https://www.influxdata.com/blog/writing-data-to-influxdb-with-python/
 
+## Resolve high series cardinality
+
+If reads and writes to InfluxDB have started to slow down, high series cardinality (too many series) may be causing memory issues.
+
+InfluxDB indexes the following data elements to speed up reads:
+
+* measurement
+* tags
+* not fields
+
+
+
+https://docs.influxdata.com/influxdb/v2/write-data/best-practices/resolve-high-cardinality/
+
 ## Influxdb Key concepts before you get started
 
 
