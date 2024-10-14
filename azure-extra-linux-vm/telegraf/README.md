@@ -647,7 +647,7 @@ It will generate this Zabbix metrics:
 Ok, lets configure that in zabbix
 
 * Host: BER-0803
-* Items: file.telegraf.rpm and speed (since we added a key prefix (telegraf.))
+* Items: telegraf.file.rpm and speed (since we added a key prefix (telegraf.))
 
 
 
