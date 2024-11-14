@@ -1,6 +1,6 @@
 # AI
 
-Gave it both ULR to both plugins and asked how to
+Gave it both ULR to both plugins (disk input, zabbix output) is nested json and asked how to
 
 ## To integrate the Telegraf Disk Input Plugin with the Zabbix Output Plugin
 
