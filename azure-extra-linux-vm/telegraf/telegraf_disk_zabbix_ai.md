@@ -34,12 +34,12 @@ Add or modify the Zabbix output plugin configuration in the same `telegraf.conf`
 ```toml
 [[outputs.zabbix]]
   ## Zabbix server address
-  host = "your_zabbix_server_ip"
-  ## Zabbix server port
-  port = 10051
+  
+  ## Address and (optional) port of the Zabbix server
+  address = "your_zabbix_server_ip:10051"
 
-  ## Prefix for metrics keys
-  # metric_prefix = "telegraf."
+  ## Add prefix to all keys sent to Zabbix.
+  key_prefix = "telegraf."
 
   ## If true, the agent will send all data in one packet per interval
   # use_batch_format = true
@@ -56,6 +56,11 @@ disk,device=C:,fstype=NTFS,host=vmname02,mode=rw,path=\C: total=135839870976i,fr
 disk,device=F:,fstype=NTFS,host=vmname02,mode=rw,path=\F: inodes_used_percent=0,total=68701646848i,free=63981617152i,used=4720029696i,used_percent=6.870329770176982,inodes_total=0i,inodes_free=0i,inodes_used=0i 1731677940000000000
 file,host=vmnamae02 rpm=33,speed=200 1731677940000000000
 ```
+
+Zabbix items
+
+* telegraf.file.rpm = 33 and updated
+
 
 
 Replace `your_zabbix_server_ip` with the IP address or hostname of your Zabbix server.
