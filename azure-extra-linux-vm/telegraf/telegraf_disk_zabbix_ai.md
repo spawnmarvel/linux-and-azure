@@ -26,6 +26,7 @@ Edit the Telegraf configuration file, typically located at `/etc/telegraf/telegr
   # ignore_mount_opts = []
 ```
 
+
 ### Step 3: Configure Zabbix Output Plugin
 
 Add or modify the Zabbix output plugin configuration in the same `telegraf.conf` file:
@@ -43,6 +44,19 @@ Add or modify the Zabbix output plugin configuration in the same `telegraf.conf`
   ## If true, the agent will send all data in one packet per interval
   # use_batch_format = true
 ```
+
+If we do not specify data_format for  ## data_format = "json" for [[inputs.disk]], [[outputs.file]] and [[outputs.zabbix]], we get:
+
+
+```log
+
+#  [[outputs.file]]
+
+disk,device=C:,fstype=NTFS,host=vmname02,mode=rw,path=\C: total=135839870976i,free=98685165568i,used=37154705408i,used_percent=27.35184091463429,inodes_total=0i,inodes_free=0i,inodes_used=0i,inodes_used_percent=0 1731677940000000000
+disk,device=F:,fstype=NTFS,host=vmname02,mode=rw,path=\F: inodes_used_percent=0,total=68701646848i,free=63981617152i,used=4720029696i,used_percent=6.870329770176982,inodes_total=0i,inodes_free=0i,inodes_used=0i 1731677940000000000
+file,host=vmnamae02 rpm=33,speed=200 1731677940000000000
+```
+
 
 Replace `your_zabbix_server_ip` with the IP address or hostname of your Zabbix server.
 
