@@ -57,9 +57,10 @@ disk,device=F:,fstype=NTFS,host=vmname02,mode=rw,path=\F: inodes_used_percent=0,
 file,host=vmnamae02 rpm=33,speed=200 1731677940000000000
 ```
 
-Zabbix items
+Data on Zabbix items
 
-* telegraf.file.rpm = 33 and updated
+As configured in zabbix
+* telegraf.file.rpm = 33 and updated with new values
 
 
 
