@@ -31,6 +31,8 @@ Edit the Telegraf configuration file, typically located at `/etc/telegraf/telegr
 
 Add or modify the Zabbix output plugin configuration in the same `telegraf.conf` file:
 
+Replace `your_zabbix_server_ip` with the IP address or hostname of your Zabbix server.
+
 ```toml
 [[outputs.zabbix]]
   ## Zabbix server address
@@ -80,10 +82,8 @@ As configured in zabbix
 
 Example:
 
+![Disk to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/disk_2_zabbix.jpg)
 
-
-
-Replace `your_zabbix_server_ip` with the IP address or hostname of your Zabbix server.
 
 ### Step 4: Zabbix Server Configuration
 
