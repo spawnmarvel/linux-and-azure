@@ -65,12 +65,20 @@ As configured in zabbix
 ### AI ask
 
 Question:
-" After configured telegraf Disk Input Plugin and Zabbix Output Plugin.  I have the following metrics: disk,device=C:,fstype=NTFS,host=vmname02,mode=rw,path=\C: total=135839870976i,free=98685165568i,used=37154705408i,used_percent=27.35184091463429,inodes_total=0i,inodes_free=0i,inodes_used=0i,inodes_used_percent=0 1731677940000000000
+" After configured telegraf Disk Input Plugin and Zabbix Output Plugin.  I have the following metrics: 
+disk,device=C:,fstype=NTFS,host=vmname02,mode=rw,path=\C: total=135839870976i,free=98685165568i,used=37154705408i,used_percent=27.35184091463429,inodes_total=0i,inodes_free=0i,inodes_used=0i,inodes_used_percent=0 1731677940000000000
 disk,device=F:,fstype=NTFS,host=vmname02,mode=rw,path=\F: inodes_used_percent=0,total=68701646848i,free=63981617152i,used=4720029696i,used_percent=6.870329770176982,inodes_total=0i,inodes_free=0i,inodes_used=0i 1731677940000000000
 file,host=vmname02 rpm=33,speed=200 1731677940000000000. What should the item name for the trappers be in zabbix to recieve data?"
 
 Answer:
+bla, bla bla... and voila:
 
+As configured in zabbix
+* telegraf.disk.free[C:,NTFS,rw,\C:]
+* telegraf.disk.used_percent[C:,NTFS,rw,\C:]
+* telegraf.disk.free[F:,NTFS,rw,\F:]
+
+Example:
 
 
 
