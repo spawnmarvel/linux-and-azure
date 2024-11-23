@@ -7,10 +7,13 @@ https://www.zabbix.com/integrations/influxdb
 Start both vms
 
 * VNET, vnet-uks-central/vms03
-* Zabbix vm, 192.168.3.5
-* Docker and InfluxDB vm, 192.168.3.4
+* Zabbix vm (vmzabbix02), 192.168.3.5
+* Docker and InfluxDB vm (vmdocker01), 192.168.3.4
 
-## New host
+
+![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
+
+## New host vmdocker
 
 ![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
 
