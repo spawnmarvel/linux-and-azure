@@ -1,4 +1,4 @@
-# 2 vms and fun with monitoring
+# 2 vms and fun with monitoring in zabbix
 
 https://www.zabbix.com/integrations/influxdb
 
