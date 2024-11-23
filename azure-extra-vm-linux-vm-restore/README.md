@@ -1,4 +1,4 @@
-# Restore VM from snapshot
+# Restore VM from snapshot linux
 
 ## Create a snapshot of a virtual hard disk
 
