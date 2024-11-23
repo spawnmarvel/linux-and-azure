@@ -97,6 +97,9 @@ ServerActive=192.168.3.5
 ```
 View collected metrics
 
+![Collected metrics](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
+
+
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
