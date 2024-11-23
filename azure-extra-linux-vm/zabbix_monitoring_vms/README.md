@@ -104,6 +104,10 @@ View collected metrics
 
 ![stop vm](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/stop_vm.jpg)
 
+zbx down
+
+![zabbix host down](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/xbz_host_down.jpg)
+
 
 
 ### Set up problem alerts
