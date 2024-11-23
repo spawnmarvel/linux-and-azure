@@ -33,7 +33,7 @@ imsdal@vmdocker01:~$ sudo service zabbix-agent status
 cd /etc/zabbix/
 
 
-# edit
+# edit and add
 cat zabbix_agentd.conf | grep "Hostname*"
 
 Hostname=vmdocker01
@@ -89,7 +89,7 @@ Green and healthy linux host
 
 
 ```bash
-# edit
+# # edit and add
 cat zabbix_agentd.conf | grep "ServerActive*"
 
 ServerActive=192.168.3.5
