@@ -12,7 +12,7 @@ Start both vms
 
 ## New host
 
-![Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
+![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
 
 
 ## Templates / Linux by Zabbix agent
@@ -72,9 +72,9 @@ sudo ufw allow 10051
 Rule added
 Rule added (v6)
 
-
-
 ```
+
+![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host.jpg)
 
 
 
