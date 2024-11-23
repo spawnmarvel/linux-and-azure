@@ -1,4 +1,4 @@
-# zabbix Linux by Zabbix agent and fun with monitoring (2 vms) and more
+# zabbix Linux by Zabbix agent (templates) and fun with monitoring (2 vms) and more
 
 
 ## Zabbix 6 is installed
