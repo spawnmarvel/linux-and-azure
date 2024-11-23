@@ -15,18 +15,15 @@ Start both vms
 
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
 
-## New host vmdocker
 
-![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
-
-
-## Templates / Linux by Zabbix agent
-
-Lets first add this one to the host sine it is a linux vm
+### Install Zabbix agent
 
 ```bash
 
-# the agen tis running must have installed it before
+# https://www.zabbix.com/documentation/3.0/en/manual/installation/install_from_packages/agent_installation
+
+# the agent is running must have installed it before
+
 imsdal@vmdocker01:~$ sudo service zabbix-agent status
 ● zabbix-agent.service - Zabbix Agent
      Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
@@ -61,8 +58,12 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 
 
 ```
+### Configure Zabbix for monitoring /Templates / Linux by Zabbix agent
 
-## Edit ufw since it is enabled
+![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
+
+
+Edit ufw since it is enabled
 
 ```bash
 imsdal@vmdocker01:/etc/zabbix$ hostname
@@ -83,6 +84,8 @@ Green and healthy linux host
 
 ![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host.jpg)
 
+
+https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
 
 
