@@ -1,8 +1,10 @@
 # 2 vms and fun with monitoring in zabbix
 
-https://www.zabbix.com/integrations/influxdb
 
 ## Zabbix 6
+
+
+![Zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix6.jpg)
 
 Start both vms
 
