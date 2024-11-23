@@ -4,9 +4,11 @@ https://www.zabbix.com/integrations/influxdb
 
 ## Zabbix 6
 
-* VNET, vnet-uks-central/Vms03
-* Zabbix VM, 192.168.3.5
-* Docker and InfluxDB VM, 192.168.3.4
+Start both vms
+
+* VNET, vnet-uks-central/vms03
+* Zabbix vm, 192.168.3.5
+* Docker and InfluxDB vm, 192.168.3.4
 
 ## New host
 
@@ -15,7 +17,7 @@ https://www.zabbix.com/integrations/influxdb
 
 ## Templates / Linux by Zabbix agent
 
-Lets first add this one to the influxdb host
+Lets first add this one to the host sine it is a linux vm
 
 ```bash
 
