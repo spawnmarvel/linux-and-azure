@@ -74,6 +74,8 @@ Rule added (v6)
 
 ```
 
+Green and healthy linux host
+
 ![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host.jpg)
 
 
