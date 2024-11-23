@@ -1,4 +1,4 @@
-# 2 vms linux and fun with monitoring in zabbix
+# zabbix Linux by Zabbix agent and fun with monitoring (2 vms) and more
 
 
 ## Zabbix 6 is installed
@@ -99,6 +99,20 @@ View collected metrics
 
 ![Collected metrics](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
 
+
+
+### Set up problem alerts
+
+
+### Test your configuration
+
+
+On Linux, you can simulate high CPU load and as a result receive a problem alert by running:
+
+```bash
+
+cat /dev/urandom | md5sum
+```
 
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
