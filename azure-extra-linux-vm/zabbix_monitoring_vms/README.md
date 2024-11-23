@@ -127,6 +127,9 @@ cat /dev/urandom | md5sum
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
 
+## Test more templates and stuff
+
+
 
 
 
