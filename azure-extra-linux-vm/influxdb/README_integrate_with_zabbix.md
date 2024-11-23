@@ -28,7 +28,7 @@ http://ip-address/zabbix/zabbix.php?action=dashboard.view
 
 # New host
 
-[!Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/images/influxdb_host.jpg)
+![Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/images/influxdb_host.jpg)
 
 
 # Setup
