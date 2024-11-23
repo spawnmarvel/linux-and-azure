@@ -38,10 +38,6 @@ cat zabbix_agentd.conf | grep "Hostname*"
 
 Hostname=vmdocker01
 
-cat zabbix_agentd.conf | grep "ServerActive*"
-
-ServerActive=192.168.3.5
-
 cat zabbix_agentd.conf | grep "Server="
 
 Server=192.168.3.5
@@ -89,7 +85,18 @@ Green and healthy linux host
 
 
 
-### 
+### Active checks
+
+
+```bash
+# edit
+cat zabbix_agentd.conf | grep "ServerActive*"
+
+ServerActive=192.168.3.5
+
+```
+View collected metrics
+
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
