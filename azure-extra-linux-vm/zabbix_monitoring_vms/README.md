@@ -1,7 +1,7 @@
-# 2 vms and fun with monitoring in zabbix
+# 2 vms linux and fun with monitoring in zabbix
 
 
-## Zabbix 6
+## Zabbix 6 is installed
 
 
 ![Zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix6.jpg)
@@ -58,7 +58,10 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 
 
 ```
-### Configure Zabbix for monitoring /Templates / Linux by Zabbix agent
+### Configure Zabbix for monitoring Passive checks
+
+* In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
+* In the Templates parameter, type or select Linux by Zabbix agent.
 
 ![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
 
@@ -84,6 +87,9 @@ Green and healthy linux host
 
 ![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host.jpg)
 
+
+
+### 
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
