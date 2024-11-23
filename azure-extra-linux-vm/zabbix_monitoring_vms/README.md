@@ -106,7 +106,7 @@ View collected metrics
 
 zbx down
 
-![zabbix host down](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/xbz_host_down.jpg)
+![zabbix host down](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zbx_host_down.jpg)
 
 
 
