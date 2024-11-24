@@ -331,6 +331,8 @@ In the Templates parameter, type or select Linux by Zabbix agent active and add 
 
 ![template_active ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_active.jpg)
 
+Configure the host to use active server
+
 ```bash
 # edit and add
 
@@ -342,10 +344,19 @@ cat zabbix_agentd.conf | grep "ServerActive*"
 
 ServerActive=192.168.3.5
 
+imsdal@vmdocker01:/etc/zabbix$ sudo nano zabbix_agentd.conf
+imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent restart
+imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
+
 ```
+
+Lets make a deny rule for 10051
+
+![deny rule](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule.jpg)
+
 View collected metrics
 
-![Collected metrics](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
+![Collected metrics no data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
 
 
 ## Stop vm
