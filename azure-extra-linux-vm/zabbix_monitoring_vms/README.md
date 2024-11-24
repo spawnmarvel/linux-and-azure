@@ -227,6 +227,8 @@ sudo ufw deny 10051
 Rule added
 Rule added (v6)
 
+sudo ufw reload
+
 sudo ufw status
 
 10050                      ALLOW       Anywhere
