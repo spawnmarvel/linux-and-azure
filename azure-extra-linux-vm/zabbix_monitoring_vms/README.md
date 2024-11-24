@@ -296,7 +296,7 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 On zabbix host add item ping and host will be healthy after the request.
 
 
-![passive check](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive check.jpg)
+![passive check](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive_check.jpg)
 
 
 
