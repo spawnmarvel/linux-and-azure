@@ -1,4 +1,4 @@
-# zabbix Linux by Zabbix agent (templates) and fun with monitoring (2 vms) and more
+# Zabbix Linux by Zabbix agent (templates) and fun with monitoring (2 vms) and more
 
 
 ## Zabbix 6 is installed
@@ -29,11 +29,11 @@ zabbix_sender -z <server IP address> -p 10051 -s "New host" -k trap -o "test val
 
 To send the "test value", the following command options are used:
 
--z to specify Zabbix server IP address
--p to specify Zabbix server port number (10051 by default)
--s to specify the host (make sure to use the technical instead of the visible host name)
--k to specify the key of the item configured in the trapper item
--o to specify the value to send
+* -z to specify Zabbix server IP address
+* -p to specify Zabbix server port number (10051 by default)
+* -s to specify the host (make sure to use the technical instead of the visible host name)
+* -k to specify the key of the item configured in the trapper item
+* -o to specify the value to send
 
 https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/trapper
 
