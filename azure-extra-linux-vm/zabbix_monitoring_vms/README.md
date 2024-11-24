@@ -79,8 +79,15 @@ When it comes to Zabbix agent modes, there is a choice between the active and th
 
 Item type dropdown, For the Zabbix agent, there is a choice between:
 
-* Zabbix agent (passive)
+* Zabbix agent
+
+If you use the Zabbix agent in the passive mode, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
+
 * Zabbix agent (active)
+
+n the active mode, all data processing is performed on the agent, without the interference of pollers. However, the agent must know what metrics should be monitored, and that is why the agent connects to the trapper port 10051/TCP of the server once every two minutes (by default).
+
+
 
 ![active passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_passive.jpg)
 
@@ -93,6 +100,25 @@ https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
 
 
 ### Install Zabbix agent
+
+Note!!
+
+```bash
+# Check your Zabbix server version:
+zabbix_server -V
+
+# Install Zabbix agent of the same version (recommended) on the Linux machine that you want to monitor. 
+
+```
+
+
+We will use zabbix agent and not zabbix agent2
+
+But In order to install the Zabbix-agent2 via the package repository of your Linux distribution, you have to add Zabbix to your known repositories.
+
+https://medium.com/geekculture/how-to-install-zabbix-agent2-on-linux-c603023207d2
+
+Zabbix agent is the process responsible for gathering data.
 
 ```bash
 
