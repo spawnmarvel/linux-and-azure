@@ -370,13 +370,13 @@ sudo tail -f zabbix_agentd.log
  10419:20241124:151403.255 active check data upload to [192.168.3.5:10051] started to fail ([connect] cannot connect to [[192.168.3.5]:10051]: [4] Interrupted system call)
 ```
 
-View collected metrics with deny 10051
+View collected metrics with deny 10051, template uses 10051, user paramter in passive uses 10050 and is updated
 
 ![deny rule data ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule_data.jpg)
 
-View collected metrics with allow 10051
+View collected metrics with allow 10051, remove NSG
 
-![Collected metrics no data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
+![allow rule data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/allow_rule_data.jpg)
 
 
 ## Stop vm
