@@ -64,9 +64,9 @@ sent: 1; skipped: 0; total: 1
 
 ```
 
-We must add the items on host and it doens not need an interface.
+We must add the items on host and it does not need an interface but port 10051 must be open.
 
-Sendd some data and view it
+Send some data and view it
 
 ![trapping](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/trapping.jpg)
 
