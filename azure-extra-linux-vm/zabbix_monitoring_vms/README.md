@@ -16,7 +16,7 @@ Start both vms
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
 
 
-## Zabbix Trapper items
+## Zabbix Trapper items (10051 inbound)
 
 Trapper items accept incoming data instead of querying for it. This is useful for any data you want to send to Zabbix.
 
@@ -36,6 +36,12 @@ To send the "test value", the following command options are used:
 -o to specify the value to send
 
 https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/trapper
+
+Telegraf is trapping
+
+This plugin writes metrics to Zabbix via traps. It has been tested with versions v3.0, v4.0 and v6.0 but should work with newer versions of Zabbix as long as the protocol doesn't change.
+
+https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 
 ## Zabbix Agent: Active vs Passive (is not trapper)
 
