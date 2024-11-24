@@ -72,7 +72,7 @@ Send some data and view it
 
 
 
-## Zabbix Agent: Active 10051 vs Passive 10050 (is not trapper)
+## Zabbix Agent: Active 10051 (is not trapper) vs Passive 10050
 
 
 When it comes to Zabbix agent modes, there is a choice between the active and the passive modes. Each time new items or hosts are added in the front end, you need to choose the item type.
