@@ -177,7 +177,7 @@ zabbix_agentd --version
 zabbix_agentd (daemon) (Zabbix) 5.0.17
 
 ```
-### Configure Zabbix for monitoring Passive checks 10050
+### Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
 
 A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
 
@@ -308,7 +308,14 @@ The host is green and healthy but with not template
 
 ![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
 
-### Active checks 10051 (agent ask for parameters)
+Lets add the passive template
+
+In the Templates parameter, type or select Linux by Zabbix agent template.
+
+![template passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive.jpg)
+
+
+### Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
 
 We will do this on the same host
 
