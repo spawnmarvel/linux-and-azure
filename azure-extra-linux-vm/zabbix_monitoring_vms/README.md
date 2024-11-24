@@ -323,7 +323,11 @@ And we have data after server has been asking for parameters.
 
 We will do this on the same host
 
-In the Templates parameter, type or select Linux by Zabbix agent active.
+In the Templates parameter, remove Linux by Zabbix agent
+
+![unlink ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_unlink.jpg)
+
+In the Templates parameter, type or select Linux by Zabbix agent active
 
 ```bash
 # edit and add
