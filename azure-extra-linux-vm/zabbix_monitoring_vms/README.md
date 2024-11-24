@@ -182,7 +182,6 @@ zabbix_agentd (daemon) (Zabbix) 5.0.17
 A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
 
 
-
 * In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
 
 
@@ -235,9 +234,22 @@ sudo ufw status
 
 ```
 
-Green and healthy linux host
+Green and healthy linux host, but without data.
 
 ![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host2.jpg)
+
+
+### AI
+
+Lets add some passive data
+
+Question:
+```log
+A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server. how to configure that?
+```
+
+Answer:
+
 
 
 
