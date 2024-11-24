@@ -314,6 +314,10 @@ In the Templates parameter, type or select Linux by Zabbix agent template.
 
 ![template passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive.jpg)
 
+And we have data after server has been asking for parameters.
+
+
+![template passive data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive_data.jpg)
 
 ### Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
 
