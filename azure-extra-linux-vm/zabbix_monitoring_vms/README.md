@@ -177,7 +177,7 @@ zabbix_agentd --version
 zabbix_agentd (daemon) (Zabbix) 5.0.17
 
 ```
-### Configure Zabbix for monitoring Passive checks
+### Configure Zabbix for monitoring Passive checks 10050
 
 A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
 
@@ -308,7 +308,7 @@ The host is green and healthy but with not template
 
 ![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
 
-### Active checks
+### Active checks 10051 (agent ask for parameters)
 
 We will do this on the same host
 
