@@ -184,7 +184,7 @@ zabbix_agentd (daemon) (Zabbix) 5.0.17
 ### Configure Zabbix for monitoring Passive checks
 
 * In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
-* In the Templates parameter, type or select Linux by Zabbix agent.
+
 
 ![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
 
@@ -221,6 +221,8 @@ sudo ufw status
 Status: active
 
 sudo ufw allow 10050
+
+# lets deny this since it is for active
 sudo ufw deny 10051
 
 Rule added
@@ -235,7 +237,7 @@ sudo ufw status
 
 Green and healthy linux host
 
-![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host.jpg)
+![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host2.jpg)
 
 
 
