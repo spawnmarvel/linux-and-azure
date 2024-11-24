@@ -16,7 +16,7 @@ Start both vms
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
 
 
-## Zabbix Trapper items (10051 inbound to zabbox server)
+## Zabbix Trapper items (10051 inbound to zabbix server)
 
 Trapper items accept incoming data instead of querying for it. This is useful for any data you want to send to Zabbix.
 
@@ -53,7 +53,7 @@ Item type dropdown, For the Zabbix agent, there is a choice between:
 * Zabbix agent (passive)
 * Zabbix agent (active)
 
-
+![active passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_passive.jpg)
 
 
 https://follow-e-lo.com/2022/09/30/zabbix-agent-active-vs-passive/
