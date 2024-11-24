@@ -105,11 +105,60 @@ imsdal@vmdocker01:~$ sudo service zabbix-agent status
      Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
      Active: active (running) since Sat 2024-11-23 15:11:52 UTC; 21min ago
 
+
+# lets uninstall it and install it again since it is a low version
+
+zabbix_agentd --version
+zabbix_agentd (daemon) (Zabbix) 5.0.17
+Revision 0a4ac3dabc 18 October 2021, compilation time: Nov 19 2021 00:15:32
+
+# name
+sudo service zabbix-agent status
+
+# remove it
+sudo apt-get --purge autoremove zabbix-agent
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages will be REMOVED:
+  zabbix-agent*
+0 upgraded, 0 newly installed, 1 to remove and 36 not upgraded.
+After this operation, 945 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+(Reading database ... 163439 files and directories currently installed.)
+Removing zabbix-agent (1:5.0.17+dfsg-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+(Reading database ... 163423 files and directories currently installed.)
+Purging configuration files for zabbix-agent (1:5.0.17+dfsg-1) ...
+dpkg: warning: while removing zabbix-agent, directory '/etc/zabbix' not empty so not removed
+
+# just update pack
+sudo apt update -y
+
+# install it
+sudo apt install zabbix-agent
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  zabbix-agent
+
+# check running or start it
+
+sudo service zabbix-agent status
+● zabbix-agent.service - Zabbix Agent
+     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2024-11-24 13:33:26 UTC; 3min 41s ago
+
+# check version
+zabbix_agentd --version
+zabbix_agentd (daemon) (Zabbix) 5.0.17
+
 ## lets configure it correct to get the linux data
 cd /etc/zabbix/
 
 
-# edit and add
+# edit and add 
 cat zabbix_agentd.conf | grep "Hostname*"
 
 Hostname=vmdocker01
