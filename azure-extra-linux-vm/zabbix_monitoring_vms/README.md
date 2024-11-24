@@ -354,7 +354,27 @@ Lets make a deny rule for 10051
 
 ![deny rule](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule.jpg)
 
-View collected metrics
+and log at the logs
+
+```bash
+sudo tail -f zabbix_agentd.log
+ 10413:20241124:150500.676 **************************
+ 10413:20241124:150500.676 using configuration file: /etc/zabbix/zabbix_agentd.conf
+ 10413:20241124:150500.676 agent #0 started [main process]
+ 10415:20241124:150500.677 agent #1 started [collector]
+ 10417:20241124:150500.677 agent #3 started [listener #2]
+ 10419:20241124:150500.677 agent #5 started [active checks #1]
+ 10418:20241124:150500.677 agent #4 started [listener #3]
+ 10416:20241124:150500.678 agent #2 started [listener #1]
+ 10419:20241124:150500.722 active check "vfs.file.cksum[/etc/passwd,sha256]" is not supported: Too many parameters.
+ 10419:20241124:151403.255 active check data upload to [192.168.3.5:10051] started to fail ([connect] cannot connect to [[192.168.3.5]:10051]: [4] Interrupted system call)
+```
+
+View collected metrics with deny 10051
+
+![deny rule data ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule_data.jpg)
+
+View collected metrics with allow 10051
 
 ![Collected metrics no data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/collected_metrics.jpg)
 
