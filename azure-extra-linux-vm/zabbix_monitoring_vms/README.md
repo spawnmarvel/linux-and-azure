@@ -72,7 +72,7 @@ Send some data and view it
 
 
 
-## Zabbix Agent: Active vs Passive (is not trapper)
+## Zabbix Agent: Active 10051 vs Passive 10050 (is not trapper)
 
 
 When it comes to Zabbix agent modes, there is a choice between the active and the passive modes. Each time new items or hosts are added in the front end, you need to choose the item type.
@@ -85,7 +85,7 @@ If you use the Zabbix agent in the passive mode, it means that the poller (inter
 
 * Zabbix agent (active)
 
-n the active mode, all data processing is performed on the agent, without the interference of pollers. However, the agent must know what metrics should be monitored, and that is why the agent connects to the trapper port 10051/TCP of the server once every two minutes (by default).
+In the active mode, all data processing is performed on the agent, without the interference of pollers. However, the agent must know what metrics should be monitored, and that is why the agent connects to the trapper port 10051/TCP of the server once every two minutes (by default).
 
 
 
