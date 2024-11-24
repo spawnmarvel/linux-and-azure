@@ -300,6 +300,11 @@ On zabbix host add item ping and host will be healthy after the request.
 
 ![varname user paramter](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname.jpg)
 
+And we have the custom data
+
+![varname data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname_data.jpg)
+
+
 
 ### Active checks
 
