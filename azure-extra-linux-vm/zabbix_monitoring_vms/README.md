@@ -114,11 +114,7 @@ zabbix_server -V
 
 We will use zabbix agent and not zabbix agent2
 
-But In order to install the Zabbix-agent2 via the package repository of your Linux distribution, you have to add Zabbix to your known repositories.
-
-https://medium.com/geekculture/how-to-install-zabbix-agent2-on-linux-c603023207d2
-
-Zabbix agent is the process responsible for gathering data.
+https://www.zabbix.com/documentation/current/en/manual/appendix/items/activepassive
 
 ```bash
 
@@ -183,6 +179,10 @@ zabbix_agentd (daemon) (Zabbix) 5.0.17
 ```
 ### Configure Zabbix for monitoring Passive checks
 
+A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
+
+
+
 * In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
 
 
@@ -238,6 +238,8 @@ sudo ufw status
 Green and healthy linux host
 
 ![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host2.jpg)
+
+
 
 
 
