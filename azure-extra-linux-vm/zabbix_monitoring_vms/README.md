@@ -37,7 +37,7 @@ To send the "test value", the following command options are used:
 
 https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/trapper
 
-### Zabbix Agent: Active vs Passive
+## Zabbix Agent: Active vs Passive (is not trapper)
 
 
 When it comes to Zabbix agent modes, there is a choice between the active and the passive modes. Each time new items or hosts are added in the front end, you need to choose the item type.
