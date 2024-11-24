@@ -250,6 +250,58 @@ A passive check is a simple data request. Zabbix server or proxy asks for some d
 
 Answer:
 
+User Parameters (Optional but Recommended): For better organization and security, you can define user parameters within the zabbix_agentd.conf file. These parameters allow you to specify custom metrics that the agent will report
+
+* Add Host: In the Zabbix web interface, navigate to "Configuration" -> "Hosts". Click "Create host."
+* Items: This is where you define the passive checks. Navigate to the "Items" tab of the newly added host. Click "Create item."
+* Key: This is the crucial part. For built-in metrics, you'll find keys in the Zabbix documentation. Examples:
+
+```log
+system.cpu.load[all,avg1] (Average CPU load over 1 minute)
+vm.memory.size[available] (Available memory)
+```
+
+* Update interval: How often the data should be collected (e.g., 60 seconds).
+* UserParameter: If you defined user parameters in the agent configuration, you would specify them here. For example, my.custom.metric[argument1]
+
+
+Let's say you want to monitor the number of files in a specific directory. You'd add this to your zabbix_agentd.conf:
+
+```log
+UserParameter=files.count[/tmp],ls -l /tmp | wc -l
+```
+
+Then, in the Zabbix server, you'd create an item with the key files.count[/tmp]. The agent will execute the ls -l /tmp | wc -l command and return the number of files.
+
+Lets do that
+
+```bash
+ cat zabbix_agentd.conf | grep "UserPa*"
+#       Does not support UserParameters or aliases.
+### Option: UnsafeUserParameters
+# UnsafeUserParameters=0
+### Option: UserParameter
+#       Format: UserParameter=<key>,<shell command>
+# UserParameter=
+UserParameter=ping, echo 1
+
+imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent stop
+imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent start
+imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
+● zabbix-agent.service - Zabbix Agent
+     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2024-11-24 14:23:39 UTC; 2s ago
+
+```
+On zabbix host add item ping and host will be healthy after the request.
+
+
+![passive check](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive check.jpg)
+
+
+
+
+
 
 
 
