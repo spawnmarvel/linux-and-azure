@@ -285,7 +285,7 @@ Lets do that
 ### Option: UserParameter
 #       Format: UserParameter=<key>,<shell command>
 # UserParameter=
-UserParameter=ping, echo 1
+UserParameter=varname, echo 1
 
 imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent stop
 imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent start
@@ -298,19 +298,14 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 On zabbix host add item ping and host will be healthy after the request.
 
 
-![passive check](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive_check.jpg)
-
-
-
-
-
-
-
-
+![varname user paramter](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname.jpg)
 
 
 ### Active checks
 
+We will do this on the same host
+
+In the Templates parameter, type or select Linux by Zabbix agent active.
 
 ```bash
 # edit and add
