@@ -304,7 +304,9 @@ And we have the custom data
 
 ![varname data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname_data.jpg)
 
+The host is green and healthy but with not template
 
+![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
 
 ### Active checks
 
