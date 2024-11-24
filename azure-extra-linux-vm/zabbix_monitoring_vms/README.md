@@ -16,6 +16,47 @@ Start both vms
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
 
 
+## Zabbix Trapper items
+
+Trapper items accept incoming data instead of querying for it. This is useful for any data you want to send to Zabbix.
+
+```bash
+# Zabbix sender
+
+zabbix_sender -z <server IP address> -p 10051 -s "New host" -k trap -o "test value"
+
+```
+
+To send the "test value", the following command options are used:
+
+-z to specify Zabbix server IP address
+-p to specify Zabbix server port number (10051 by default)
+-s to specify the host (make sure to use the technical instead of the visible host name)
+-k to specify the key of the item configured in the trapper item
+-o to specify the value to send
+
+https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/trapper
+
+### Zabbix Agent: Active vs Passive
+
+
+When it comes to Zabbix agent modes, there is a choice between the active and the passive modes. Each time new items or hosts are added in the front end, you need to choose the item type.
+
+Item type dropdown, For the Zabbix agent, there is a choice between:
+
+* Zabbix agent (passive)
+* Zabbix agent (active)
+
+
+
+
+https://follow-e-lo.com/2022/09/30/zabbix-agent-active-vs-passive/
+
+https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
+
+
+
+
 ### Install Zabbix agent
 
 ```bash
