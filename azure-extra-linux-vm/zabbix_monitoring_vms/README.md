@@ -379,11 +379,15 @@ View collected metrics with allow 10051, remove NSG
 ![allow rule data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/allow_rule_data.jpg)
 
 
+## Conclusion: It all comes down to how is responsible for the processing and use of power
+
 ## Stop vm
 
 ![stop vm](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/stop_vm.jpg)
 
 zbx down
+
+![zbx down](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zbx_down.jpg)
 
 
 
