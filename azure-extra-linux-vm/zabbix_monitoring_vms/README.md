@@ -43,6 +43,35 @@ This plugin writes metrics to Zabbix via traps. It has been tested with versions
 
 https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 
+### Make a trapper item
+
+
+```bash
+cat send_2_zabbix_data.sh
+
+#!/bin/bash
+zabbix_sender -z 192.168.3.5 -s "VM28" -k interface1 -o 2
+# sleep 5 sec
+sleep 5
+zabbix_sender -z 192.168.3.5 -s "VM28" -k interface2 -o 2
+
+# send
+bash send_2_zabbix_data.sh
+Response from "192.168.3.5:10051": "processed: 0; failed: 1; total: 1; seconds spent: 0.000481"
+sent: 1; skipped: 0; total: 1
+Response from "192.168.3.5:10051": "processed: 0; failed: 1; total: 1; seconds spent: 0.000021"
+sent: 1; skipped: 0; total: 1
+
+```
+
+We must add the items on host and it doens not need an interface.
+
+Sendd some data and view it
+
+![trapping](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/trapping.jpg)
+
+
+
 ## Zabbix Agent: Active vs Passive (is not trapper)
 
 
