@@ -273,6 +273,8 @@ UserParameter=files.count[/tmp],ls -l /tmp | wc -l
 
 Then, in the Zabbix server, you'd create an item with the key files.count[/tmp]. The agent will execute the ls -l /tmp | wc -l command and return the number of files.
 
+https://www.zabbix.com/documentation/current/en/manual/config/items/userparameters
+
 Lets do that
 
 ```bash
