@@ -327,7 +327,9 @@ In the Templates parameter, remove Linux by Zabbix agent
 
 ![unlink ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_unlink.jpg)
 
-In the Templates parameter, type or select Linux by Zabbix agent active
+In the Templates parameter, type or select Linux by Zabbix agent active and add it
+
+![template_active ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_active.jpg)
 
 ```bash
 # edit and add
@@ -351,8 +353,6 @@ View collected metrics
 ![stop vm](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/stop_vm.jpg)
 
 zbx down
-
-![zabbix host down](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zbx_host_down.jpg)
 
 
 
