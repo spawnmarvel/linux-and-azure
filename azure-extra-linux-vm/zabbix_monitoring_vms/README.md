@@ -180,15 +180,22 @@ sudo service zabbix-agent status
 zabbix_agentd --version
 zabbix_agentd (daemon) (Zabbix) 5.0.17
 
+```
+### Configure Zabbix for monitoring Passive checks
+
+* In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
+* In the Templates parameter, type or select Linux by Zabbix agent.
+
+![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
+
+
+
+```bash
 ## lets configure it correct to get the linux data
 cd /etc/zabbix/
 
 
 # edit and add 
-cat zabbix_agentd.conf | grep "Hostname*"
-
-Hostname=vmdocker01
-
 cat zabbix_agentd.conf | grep "Server="
 
 Server=192.168.3.5
@@ -202,16 +209,7 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 ● zabbix-agent.service - Zabbix Agent
      Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
      Active: active (running) since Sat 2024-11-23 15:39:12 UTC; 6s ago
-
-
 ```
-### Configure Zabbix for monitoring Passive checks
-
-* In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
-* In the Templates parameter, type or select Linux by Zabbix agent.
-
-![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
-
 
 Edit ufw since it is enabled
 
@@ -223,10 +221,15 @@ sudo ufw status
 Status: active
 
 sudo ufw allow 10050
-sudo ufw allow 10051
+sudo ufw deny 10051
 
 Rule added
 Rule added (v6)
+
+sudo ufw status
+
+10050                      ALLOW       Anywhere
+10051                      DENY        Anywhere
 
 ```
 
@@ -240,7 +243,12 @@ Green and healthy linux host
 
 
 ```bash
-# # edit and add
+# edit and add
+
+cat zabbix_agentd.conf | grep "Hostname*"
+
+Hostname=vmdocker01
+
 cat zabbix_agentd.conf | grep "ServerActive*"
 
 ServerActive=192.168.3.5
