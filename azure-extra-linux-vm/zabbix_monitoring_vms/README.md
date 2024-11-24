@@ -16,7 +16,7 @@ Start both vms
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
 
 
-## Zabbix Trapper items (10051 inbound)
+## Zabbix Trapper items (10051 inbound to zabbox server)
 
 Trapper items accept incoming data instead of querying for it. This is useful for any data you want to send to Zabbix.
 
