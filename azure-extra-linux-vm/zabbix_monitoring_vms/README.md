@@ -88,6 +88,12 @@ If you use the Zabbix agent in the passive mode, it means that the poller (inter
 In the active mode, all data processing is performed on the agent, without the interference of pollers. However, the agent must know what metrics should be monitored, and that is why the agent connects to the trapper port 10051/TCP of the server once every two minutes (by default).
 
 
+Direction
+
+![active_vs_passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_vs_passive.jpg)
+
+Template
+
 
 ![active passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_passive.jpg)
 
