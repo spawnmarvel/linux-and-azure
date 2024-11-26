@@ -91,6 +91,7 @@ Rule added (v6)
 
 
 ```
+So now we have the linux template to monitor the server.
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
@@ -100,6 +101,10 @@ https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 This template works with self-hosted InfluxDB instances. Internal service metrics are collected from InfluxDB /metrics endpoint. For organization discovery template need to use Authorization via API token. See docs: https://docs.influxdata.com/influxdb/v2.0/security/tokens/
 
 Don't forget to change the macros {$INFLUXDB.URL}, {$INFLUXDB.API.TOKEN}. Also, see the Macros section for a list of macros used to set trigger values. NOTE. Some metrics may not be collected depending on your InfluxDB instance version and configuration.
+
+
+lets add the influxdb template....
+
 
 
 
