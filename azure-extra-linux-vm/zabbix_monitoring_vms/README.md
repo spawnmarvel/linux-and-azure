@@ -416,7 +416,13 @@ cat /dev/urandom | md5sum
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
 
-## Test more templates and stuff
+# Test more templates and stuff
+
+## InfluxDB template for zabbix
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/README_integrate_with_zabbix.md
+
+##
 
 
 

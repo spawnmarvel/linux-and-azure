@@ -26,12 +26,12 @@ login zabbix
 
 http://ip-address/zabbix/zabbix.php?action=dashboard.view
 
-## New host
+## New host (pre already added)
 
 ![Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/images/influxdb_host.jpg)
 
 
-## Templates / Linux by Zabbix agent
+## Templates / Linux by Zabbix agent (pre already added)
 
 Lets first add this one to the influxdb host
 
@@ -73,7 +73,7 @@ imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
 
 ```
 
-## Edit ufw since it is enabled
+## Edit ufw since it is enabled (pre already added)
 
 ```bash
 imsdal@vmdocker01:/etc/zabbix$ hostname
