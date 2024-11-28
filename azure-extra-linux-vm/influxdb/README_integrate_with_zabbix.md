@@ -110,8 +110,3 @@ lets add the influxdb template....
 
 
 
-
-
-
-
-
