@@ -17,6 +17,7 @@ Git for Windows provides a BASH emulation used to run Git from the command line.
 https://gitforwindows.org/
 
 ```bash
+# comment
 
 mdkdir testfolder
 
