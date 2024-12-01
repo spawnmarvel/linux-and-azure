@@ -1,4 +1,4 @@
-# AI
+# AI Input for parsing
 
 Gave it both ULR to both plugins (disk input, zabbix output) is nested json and asked how to
 
