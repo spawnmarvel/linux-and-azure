@@ -85,3 +85,5 @@ Example:
 ![Disk to zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/disk_2_zabbix.jpg)
 
 
+## Lets keep the output plugin but add more input plugins
+
