@@ -78,7 +78,7 @@ bla, bla bla... and voila:
 As configured in zabbix
 * telegraf.disk.free[C:,NTFS,rw,\C:]
 * telegraf.disk.used_percent[C:,NTFS,rw,\C:]
-* telegraf.disk.free[F:,NTFS,rw,\F:]
+* telegraf.disk.used[C:,NTFS,rw,\C:]
 
 Example:
 
