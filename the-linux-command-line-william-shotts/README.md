@@ -253,6 +253,15 @@ rm
 
 ```
 
+Be careful with rm!
+
+Before you use rm with wildcards, try this helpful trick: construct your command using ls instead. 
+
+By doing this, you can see the effect of your wildcards before you delete files. 
+
+After you have tested your command with ls, recall the command with the up-arrow key and then substitute rm for ls in the command.
+
+
 https://linuxcommand.org/lc3_lts0050.php
 
 ### 6 Working with Commands
