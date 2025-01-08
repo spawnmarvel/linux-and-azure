@@ -253,7 +253,7 @@ rm
 
 ```
 
-Be careful with rm!
+***Be careful with rm!***
 
 Before you use rm with wildcards, try this helpful trick: construct your command using ls instead. 
 
