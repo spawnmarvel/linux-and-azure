@@ -256,6 +256,9 @@ rm
 https://linuxcommand.org/lc3_lts0050.php
 
 ### 6 Working with Commands
+
+```bash
+```
 ### 7 I/O Redirection
 ### 8 Expansion
 ### 9 Permissions
