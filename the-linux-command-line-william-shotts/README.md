@@ -303,7 +303,7 @@ file_20  file_22  file_24  file_3   file_5  file_7  file_9
 
 #### Using Commands with Wildcards
 
-````bash
+```bash
 
 # Copy all files from directory with names "*file*" to a existing directory 
 cp testfolder/*file* testfolder1
@@ -319,6 +319,8 @@ https://linuxcommand.org/lc3_lts0050.php
 
 ```bash
 ```
+https://linuxcommand.org/lc3_lts0060.php
+
 ### 7 I/O Redirection
 ### 8 Expansion
 ### 9 Permissions
