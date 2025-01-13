@@ -331,10 +331,49 @@ Up until now, we have seen a number of commands and their mysterious options and
 
 type ls
 
-ls is aliased to `ls --color=auto'
+# ls is aliased to `ls --color=auto'
 
 # Notice that the one for ls and how the ls command is actually an alias for the ls command with the “-- color=auto” option added. 
 # Now we know why the output from ls is displayed in color!
+
+# Sometimes there is more than one version of an executable program installed on a system.
+which ls
+/usr/bin/ls
+
+# Getting Command Documentation
+
+help -m cd
+# NAME
+#    cd - Change the shell working directory.
+
+# man, Most executable programs intended for command line use provide a formal piece of documentation called a manual or man page.
+man ls
+
+
+
+```
+
+#### README and Other Documentation Files
+
+Many software packages installed on your system have documentation files residing in the /usr/share/doc directory. 
+
+Most of these are stored in plain text format and can be viewed with less. Some of the files are in HTML format and can be viewed with a web browser. 
+
+We may encounter some files ending with a “.gz” extension. 
+
+This indicates that they have been compressed with the gzip compression program. 
+
+The gzip package includes a special version of less called zless that will display the contents of gzip-compressed text files.
+
+```bash
+usr/share/doc/zabbix-agent$ ls
+README.Debian  changelog.Debian.gz  copyright  examples
+
+usr/share/doc/zabbix-agent/examples$ ls
+userparameter_examples.conf  userparameter_mysql.conf
+
+/usr/share/doc$ ls docker*
+
 
 
 ```
@@ -342,6 +381,14 @@ ls is aliased to `ls --color=auto'
 https://linuxcommand.org/lc3_lts0060.php
 
 ### 7 I/O Redirection
+
+```bash
+# Standard Output
+
+```
+https://linuxcommand.org/lc3_lts0070.php
+
+
 ### 8 Expansion
 ### 9 Permissions
 ### 10 Job Control
