@@ -317,8 +317,17 @@ https://linuxcommand.org/lc3_lts0050.php
 
 ### 6 Working with Commands
 
+Up until now, we have seen a number of commands and their mysterious options and arguments. In this lesson, we will try to remove some of that mystery. We will introduce the following commands.
+
+* type - Display information about command type
+* which - Locate a command
+* help - Display reference page for shell builtin
+* man - Display an on-line command reference
+
+
 ```bash
 ```
+
 https://linuxcommand.org/lc3_lts0060.php
 
 ### 7 I/O Redirection
