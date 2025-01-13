@@ -250,6 +250,27 @@ move
 rm
 #etc
 
+# The mkdir command is used to create directories. To use it, you simply type:
+mkdir testfolder
+
+# lets make a loop and create some files
+
+sudo nano mk_files
+
+~/testfolder$ cat mk_files.sh
+#!/bin/bash
+for i in {1..25}
+do
+    touch "file_$i"
+done
+
+# run it
+bash mk_files.sh
+
+ls
+
+file_1   file_11  file_13  file_15  file_17  file_19  file_20  file_22  file_24  file_3  file_5  file_7  file_9
+file_10  file_12  file_14  file_16  file_18  file_2   file_21  file_23  file_25  file_4  file_6  file_8  mk_files.sh
 
 ```
 
@@ -261,6 +282,36 @@ By doing this, you can see the effect of your wildcards before you delete files.
 
 After you have tested your command with ls, recall the command with the up-arrow key and then substitute rm for ls in the command.
 
+
+```bash
+
+ls *_1
+
+# file_1
+
+ls *_1*
+
+# file_1  file_10  file_11  file_12  file_13  file_14  file_15  file_16  file_17  file_18  file_19
+
+rm *_1*
+
+# ls
+file_2   file_21  file_23  file_25  file_4  file_6  file_8  mk_files.sh
+file_20  file_22  file_24  file_3   file_5  file_7  file_9
+
+```
+
+#### Using Commands with Wildcards
+
+````bash
+
+# Copy all files from directory with names "*file*" to a existing directory 
+cp testfolder/*file* testfolder1
+
+# Copy all files in the current working directory with names "*file_2*" to a existing directory one folder up
+cp *file_2* . ./testfolder2
+
+```
 
 https://linuxcommand.org/lc3_lts0050.php
 
