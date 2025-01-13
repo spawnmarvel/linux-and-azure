@@ -326,6 +326,17 @@ Up until now, we have seen a number of commands and their mysterious options and
 
 
 ```bash
+
+# Identifying Commands
+
+type ls
+
+ls is aliased to `ls --color=auto'
+
+# Notice that the one for ls and how the ls command is actually an alias for the ls command with the “-- color=auto” option added. 
+# Now we know why the output from ls is displayed in color!
+
+
 ```
 
 https://linuxcommand.org/lc3_lts0060.php
