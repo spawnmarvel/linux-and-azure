@@ -392,7 +392,63 @@ By using some special notations we can redirect the output of many commands to f
 ```bash
 # Standard Output
 
+# In this example, the ls command is executed and the results are written in a file
+# Each time the command above is repeated the files.txt is overwritten
+ls > files.txt
+
+cat files.txt
+
+# To have the new results appended to the file instead, we use ">>" like this:
+ls >> files.txt
+
+
 ```
+
+***Standard Input***
+
+```bash
+# Standard Input
+
+# Many commands can accept input from a facility called standard input.
+# To redirect standard input from a file instead of the keyboard, the "<" character is used like this:
+sort < files.txt
+#LICENSE
+#README.md
+#add_repository_to_apt.sh
+
+# The results are output on the display since the standard output was not redirected.
+
+# We could redirect standard output to another file like this:
+sort < files.txt > files_sorted.txt
+
+cat files_sorted.txt
+
+```
+
+***Pipelines***
+
+```bash
+
+# Pipelines
+
+# The most useful and powerful thing we can do with I/O redirection is to connect multiple commands together to form what are called pipelines. With pipelines, the standard output of one command is fed into the standard input of another. Here is a very useful example:
+ls -l | less
+
+# In this example, the output of the ls command is fed into less. By using this "| less" trick, we can make any command have scrolling output.
+
+# By connecting commands together, we can accomplish amazing feats. Here are some examples to try:
+# Displays the 10 newest files in the current directory.
+ls -lt | head
+
+# Displays the total number of files in the current working directory and all of its subdirectories.
+find . -type f -print | wc -l
+# 2892
+
+
+```
+
+***Filters***
+
 https://linuxcommand.org/lc3_lts0070.php
 
 
