@@ -382,6 +382,13 @@ https://linuxcommand.org/lc3_lts0060.php
 
 ### 7 I/O Redirection
 
+In this lesson, we will explore a powerful feature used by command line programs called input/output redirection. 
+
+By using some special notations we can redirect the output of many commands to files, devices, and even to the input of other commands.
+
+
+***Standard Output***
+
 ```bash
 # Standard Output
 
