@@ -97,20 +97,126 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
 
-## Install Telegraf Ubuntu
+## Telegraf test database
 
+Lets create a test database for telegraf
+
+Lets assume the json file
+
+```json
+{
+    "tag1": {
+        "value": 100,
+        "active": 1,
+		"state": 0
+    }
+}
+
+```
 
 ```bash
 
 ```
+## Install Telegraf Ubuntu and make ETL file 2 file
 
-## Telegraf ETL
 
-Run a file with some data from Kaggle for example.
+```bash
+sudo nano install_telegraf.sh
+
+# add the script from telegrtaf site as-is
+
+curl --silent --location -O \
+https://repos.influxdata.com/influxdata-archive.key \
+&& echo "943666881a1b8d9b849b74caebf02d3465d6beb716510d86a39f6c8e8dac7515  influxdata-archive.key" \
+| sha256sum -c - && cat influxdata-archive.key \
+| gpg --dearmor \
+| sudo tee /etc/apt/trusted.gpg.d/influxdata-archive.gpg > /dev/null \
+&& echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
+| sudo tee /etc/apt/sources.list.d/influxdata.list
+sudo apt-get update && sudo apt-get install telegraf
+
+# run it
+bash install_telegraf.sh
+
+
+# make in file
+/var/telegraf_data
+
+# make the inputfile
+sudo nano metrics.in.json
+
+# make out file
+# Telegraf typically runs as the telegraf user. Set the ownership of the directory and file to the telegraf user and group:
+sudo chown -R telegraf:telegraf /var/telegraf_data
+sudo chmod 755 /var/telegraf_data
+sudo touch /var/telegraf_data/metrics.out.json
+sudo chown telegraf:telegraf /var/telegraf_data/metrics.out.json
+sudo chmod 644 /var/telegraf_data/metrics.out.json
+
+# conf it
+cd /etc/telegraf/
+
+# bck
+sudo cp telegraf.conf telegraf.conf_bck
+
+# edit conf
+sudo nano telegraf.conf
+# paste telegraf_file_file.conf content, ctrl x and yes
+
+sudo service start telegraf
+sudo systemctl enable telegraf
+sudo service telegraf status
+#  sudo service telegraf status
+● telegraf.service - Telegraf
+     Loaded: loaded (/lib/systemd/system/telegraf.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2025-02-04 22:10:04 UTC; 2s ago
+
+# If you encounter any issues, you can check the Telegraf logs for more information
+sudo journalctl -u telegraf
+ 
+sudo chown -R telegraf:telegraf /var/telegraf_data
+sudo chmod 755 /var/telegraf_data
+sudo touch /var/telegraf_data/metrics.out.json
+sudo chown telegraf:telegraf /var/telegraf_data/metrics.out.json
+sudo chmod 644 /var/telegraf_data/metrics.out.json
+
+sudo service telegraf stop
+sudo service telegraf start
+sudo service telegraf status
+```
+
+Now it should read input and append to output
+
+```bash
+pwd
+# /var/telegraf_data
+
+tail -f metrics.out.json
+# 
+
+```
+
+Output
+
+```json
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707825}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707850}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707875}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707900}
+
+```
+
+
+https://docs.influxdata.com/telegraf/v1/install/
+
+## Telegraf ETL MySQL tbd
+
 
 Input file:
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
+
+We have the input file and also output file, lets make a new output to MySql
 
 Output MySql:
 
