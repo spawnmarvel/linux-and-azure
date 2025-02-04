@@ -96,11 +96,6 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
-## phpMyAdmin
-
-How To Install and Secure phpMyAdmin on Ubuntu
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu
 
 ## Install Telegraf Ubuntu
 
@@ -122,16 +117,36 @@ Output MySql:
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
 
 
-## Basic MySql
+## Basic MySql tbd
 
-## Normalization
+## Normalization tbd
 
-## Advanced MySql
+## Advanced MySql tbd
 
-## Backup and restore MySql
+## Backup and restore MySql tbd
 
-## Tuning and performance MySql
+## Tuning and performance MySql tbd
+
+Database engines
+
+InnoDB
+
+As of MySQL 5.5, InnoDB is the default engine, and is highly recommended over MyISAM unless you have specific needs for features unique to that engine.
+
+
+Advanced configuration
+
+There are a number of parameters that can be adjusted within MySQL’s configuration files. This will allow you to improve the server’s performance over time.
+
+
+https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
 
 ## Azure Database for MySQL documentation
 
+
+## Extra phpMyAdmin
+
+How To Install and Secure phpMyAdmin on Ubuntu
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu
 
