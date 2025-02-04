@@ -13,19 +13,6 @@ https://learn.microsoft.com/en-us/azure/mysql/
 
 
 
-## Telegraf ETL
-
-Run a file with some data from Kaggle for example.
-
-Input file:
-
-https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
-
-Output MySql:
-
-https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
-
-
 ## Step 1 — Installing MySQL Ubuntu
 
 ```bash
@@ -98,13 +85,31 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
-## Install Telegraf
-
 ## phpMyAdmin
 
 How To Install and Secure phpMyAdmin on Ubuntu
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu
+
+## Install Telegraf Ubuntu
+
+
+```bash
+
+```
+
+## Telegraf ETL
+
+Run a file with some data from Kaggle for example.
+
+Input file:
+
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
+
+Output MySql:
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
+
 
 ## Basic MySql
 
