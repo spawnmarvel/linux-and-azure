@@ -52,7 +52,18 @@ y
 y
 EOF
 
+# The above is not a secure installation, do not do this in production
+
 ```
+
+This program enables you to improve the security of your MySQL installation in the following ways:
+
+* You can set a password for root accounts.
+* You can remove root accounts that are accessible from outside the local host.
+* You can remove anonymous-user accounts.
+* You can remove the test database (which by default can be accessed by all users, even anonymous users), and privileges that permit anyone to access databases with names that start with test_.
+
+https://dev.mysql.com/doc/refman/8.4/en/mysql-secure-installation.html
 
 ### Step 3 — Creating a Dedicated MySQL User and Granting Privileges
 
