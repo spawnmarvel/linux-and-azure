@@ -109,6 +109,11 @@ Lets assume the json file
         "value": 100,
         "active": 1,
 		"state": 0
+    },
+    "tag2": {
+        "value": 50,
+        "active": 1,
+		"state": 0
     }
 }
 
@@ -199,10 +204,9 @@ tail -f metrics.out.json
 Output
 
 ```json
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707825}
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707850}
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707875}
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738707900}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756450}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756475}
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756500}
 
 ```
 
