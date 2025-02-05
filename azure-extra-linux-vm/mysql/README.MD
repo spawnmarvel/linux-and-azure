@@ -178,8 +178,13 @@ sudo service telegraf status
 
 # If you encounter any issues, you can check the Telegraf logs for more information
 sudo journalctl -u telegraf
- 
+
+# chown changes the file or directory owner and group
+# while chmod adjusts the permissions granted (read, write, execute) to users, groups, and others.
+
+# chown, The chown command in Unix and Unix-like systems (like Linux) is used to change the ownership of files and directories.
 sudo chown -R telegraf:telegraf /var/telegraf_data
+# chmod, The chmod command in Unix and Unix-like operating systems (such as Linux) is used to change the file mode bits (permissions) of files and directories. 
 sudo chmod 755 /var/telegraf_data
 sudo touch /var/telegraf_data/metrics.out.json
 sudo chown telegraf:telegraf /var/telegraf_data/metrics.out.json
