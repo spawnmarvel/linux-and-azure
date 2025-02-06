@@ -218,7 +218,7 @@ Output
 
 https://docs.influxdata.com/telegraf/v1/install/
 
-## Telegraf ETL MySQL tbd
+## Telegraf ETL MySQL test table tbd
 
 
 Input file:
