@@ -97,7 +97,7 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
 
-## Telegraf test database
+## Telegraf test file 2 file
 
 Lets create a test database for telegraf
 
