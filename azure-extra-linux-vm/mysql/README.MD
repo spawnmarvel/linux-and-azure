@@ -218,6 +218,10 @@ Output
 
 https://docs.influxdata.com/telegraf/v1/install/
 
+## Basic MySql tbd
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
+
 ## Telegraf ETL MySQL test table tbd
 
 
@@ -232,9 +236,9 @@ Output MySql:
 https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
 
 
-## Basic MySql tbd
-
 ## Normalization tbd
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
 
 ## Advanced MySql tbd
 
