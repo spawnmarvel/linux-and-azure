@@ -124,6 +124,15 @@ Lets assume the json file
 ```
 ## Install Telegraf Ubuntu and make ETL file 2 file
 
+Input file:
+
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
+
+Output file
+
+* https://github.com/influxdata/telegraf/blob/master/plugins/outputs/file/README.md
+
+Install and configuration
 
 ```bash
 sudo nano install_telegraf.sh
@@ -225,15 +234,9 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/my
 ## Telegraf ETL MySQL test table tbd
 
 
-Input file:
-
-https://github.com/influxdata/telegraf/blob/master/plugins/inputs/file/README.md
-
-We have the input file and also output file, lets make a new output to MySql
-
 Output MySql:
 
-https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
+* https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
 
 
 ## Normalization tbd
