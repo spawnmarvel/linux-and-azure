@@ -316,6 +316,8 @@ The host is green and healthy but with not template
 
 ![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
 
+### Template Linux by Zabbix agent
+
 Lets add the passive template
 
 In the Templates parameter, type or select Linux by Zabbix agent template.
