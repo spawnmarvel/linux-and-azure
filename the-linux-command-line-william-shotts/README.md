@@ -456,3 +456,28 @@ https://linuxcommand.org/lc3_lts0070.php
 ### 9 Permissions
 ### 10 Job Control
 
+
+## Writing Shell Scripts
+
+Here is Where the Fun Begins
+
+With the thousands of commands available to the command line user, how can we remember them all? The answer is, we don't. 
+The real power of the computer is its ability to do the work for us. 
+To get it to do that, we use the power of the shell to automate things. We write shell scripts.
+
+
+### 1 Writing Our First Script and Getting It to Work
+### 2 Editing the Scripts We Already Have
+### 3 Here Scripts
+### 4 Variables
+### 5 Command Substitution and Constants
+### 6 Shell Functions
+### 7 Some Real Work
+### 8 Flow Control - Part 1
+### 9 Stay Out of Trouble
+### 10 Keyboard Input and Arithmetic
+### 11 Flow Control - Part 2
+### 12 Positional Parameters
+### 13 Flow Control - Part 3
+### 14 Errors and Signals and Traps (Oh My!) - Part 1
+### 15 Errors and Signals and Traps (Oh My!) - Part 2
