@@ -2,7 +2,7 @@
 
 https://linuxcommand.org/index.php
 
-## Learning the Shell
+## 1 Learning the Shell
 
 One of our software engineers spent a couple of hours writing a C++ program that would look through all the user's directories and add up the space they were using and make a listing of the results.
 
@@ -457,7 +457,7 @@ https://linuxcommand.org/lc3_lts0070.php
 ### 10 Job Control
 
 
-## Writing Shell Scripts
+## 2 Writing Shell Scripts
 
 Here is Where the Fun Begins
 
