@@ -106,22 +106,47 @@ Lets assume the json file
 ```json
 {
     "tag1": {
-        "value": 100,
+        "value": 101,
         "active": 1,
-		"state": 0
+        "state": 0,
+        "quality":"good"
     },
     "tag2": {
-        "value": 50,
+        "value": 55,
         "active": 1,
-		"state": 0
+        "state": 0,
+        "quality": "good"
     }
 }
 
 ```
 
-```bash
+Note! When using Telegraf’s default JSON parser (with data_format = "json"), it automatically extracts numeric, boolean, and time values but ignores string values unless you explicitly tell it to keep them.
+
+How to Include String Fields:
+
+You can modify your input configuration to tell Telegraf to retain specific string fields by using the json_string_fields option. 
+
+I did this
+
+```conf
+[[inputs.file]]
+  files = ["/var/telegraf_data/metrics.in.json"]
+  data_format = "json"
+  json_string_fields = ["tag1_quality", "tag2_quality"]
 
 ```
+
+
+Alternative Approach:
+
+```json
+
+{"measurement": "sensor", "tags": {"tag": "tag1"}, "fields": {"value": 101, "active": 1, "state": 0, "quality": "good"}}
+{"measurement": "sensor", "tags": {"tag": "tag2"}, "fields": {"value": 55, "active": 1, "state": 0, "quality": "good"}}
+
+```
+
 ## Install Telegraf Ubuntu and make ETL file 2 file
 
 Input file:
