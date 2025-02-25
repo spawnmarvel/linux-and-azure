@@ -243,9 +243,8 @@ tail -f metrics.out.json
 Output
 
 ```json
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756450}
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756475}
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100,"tag2_active":1,"tag2_state":0,"tag2_value":50},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1738756500}
+{"fields":{"tag1_active":1,"tag1_quality":"good","tag1_state":0,"tag1_value":101,"tag2_active":1,"tag2_quality":"good","tag2_state":0,"tag2_value":55},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1740516350}
+{"fields":{"tag1_active":1,"tag1_quality":"good","tag1_state":0,"tag1_value":101,"tag2_active":1,"tag2_quality":"good","tag2_state":0,"tag2_value":55},"name":"file","tags":{"host":"vmdocker01"},"timestamp":1740516375}
 
 ```
 
