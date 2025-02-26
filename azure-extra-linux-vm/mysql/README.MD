@@ -147,7 +147,7 @@ Alternative Approach:
 
 ```
 
-## Install Telegraf Ubuntu and make ETL file 2 file
+## Install Telegraf Ubuntu and make ETL  input file 2 output file
 
 Input file:
 
@@ -251,16 +251,16 @@ Output
 
 https://docs.influxdata.com/telegraf/v1/install/
 
-## Basic MySql tbd
 
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
-
-## Telegraf ETL MySQL test table tbd
-
+## Use Telegraf and keep the same input file and output MySql 
 
 Output MySql:
 
 * https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
+
+## Basic MySql tbd
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
 
 
 ## Normalization tbd
