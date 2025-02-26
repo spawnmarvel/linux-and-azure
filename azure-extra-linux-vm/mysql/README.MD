@@ -254,11 +254,97 @@ https://docs.influxdata.com/telegraf/v1/install/
 
 ## Use Telegraf and keep the same input file and output MySql 
 
-Output MySql:
+We need the output mysql plugin, check what we already have:
+
+```bash
+# Check what plugins we have
+
+telegraf --input-list
+
+telegraf --output-list
+
+# signalfx
+# socket_writer
+  sql # ms sql, mysql, pgx, snowflake etc
+# stackdriver
+# stomp
+
+
+
+```
+
+Output MySql: This was pain.......must read more. The plugin was hard, always "you have an error"
 
 * https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
 
+
+Lets create a telegraf database and the user
+
+```bash
+
+sudo mysql
+
+create database telegraf_db;
+
+create user 'telegraf_user'@'localhost' identified by 'etlaccount1';
+
+grant all privileges on telegraf_db.* to 'telegraf_user'@'localhost';
+
+flush privileges;
+
+exit
+
+# login is as user and give pass
+
+mysql -u telegraf_user -p
+
+# login with params
+
+mysql --user=telegraf_user --password=etlaccount1
+
+
+```
+
+Test the config
+
+```bash
+
+# 1. Save the configuration file as `telegraf.conf`.
+# 2. Test the configuration to ensure it's valid:
+
+sudo telegraf --config telegraf.conf --test
+
+Loading config: telegraf.conf
+> file,host=vmdocker01 tag1_active=1,tag1_quality="good",tag1_state=0,tag1_value=101,tag2_active=1,tag2_quality="good",tag2_state=0,tag2_value=55 1740602614000000000
+
+```
+
+Run telegraf with the configiration
+
+```bash
+sudo telegraf --config telegraf.conf
+
+# or just start it since config test is ok
+
+sudo service telegraf start
+
+```
+
+Check telegraf logs
+
+```bash
+
+# /var/log/telegraf
+tail -f telegraf.logs
+
+```
+
+```logs
+
+```
+
 ## Basic MySql tbd
+
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
 
