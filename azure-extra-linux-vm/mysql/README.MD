@@ -99,15 +99,19 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 
 
 
-## Basic MySql tbd
+## Basic MySql and Normalization tbd
 
-
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
-
-
-## Normalization tbd
+Basic
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
+
+Next AI after basic, an you make me a tutorial in mysql with lab task for the most common scenarios with Data Normalization and Transactions (ACID Properties) ?
+
+
+## Create the tag and history table tbd
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_timseries_db.md
+
 
 ## Advanced MySql tbd
 
