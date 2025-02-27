@@ -1,8 +1,8 @@
-# Learning MySql
+# Learning MySql with Telegraf on Linux
 
 * Basic
 * * Run on Linux vmdocker01
-* * Insert use Python, Use example as tag table and history table
+* * Insert use telegraf and file, possible other inputs also
 * Advanced
 * Backup and restore
 * Tuning and performance
@@ -96,6 +96,249 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
+
+## Telegraf install and configure file in, file out and mysql out
+
+make install_telegraf.sh from
+
+https://docs.influxdata.com/telegraf/v1/install/
+
+```bash
+curl --silent --location -O \
+https://repos.influxdata.com/influxdata-archive.key \
+&& echo "943666881a1b8d9b849b74caebf02d3465d6beb716510d86a39f6c8e8dac7515  influxdata-archive.key" \
+| sha256sum -c - && cat influxdata-archive.key \
+| gpg --dearmor \
+| sudo tee /etc/apt/trusted.gpg.d/influxdata-archive.gpg > /dev/null \
+&& echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
+| sudo tee /etc/apt/sources.list.d/influxdata.list
+sudo apt-get update && sudo apt-get install telegraf
+
+```
+
+1. **Create the MySQL Database and User**
+Before running Telegraf, ensure the MySQL database and user are set up. For example:
+
+   ```sql
+   CREATE DATABASE telegraf_db;
+   CREATE USER 'telegraf_user'@'%' IDENTIFIED BY 'etlaccount1';
+   GRANT ALL PRIVILEGES ON telegraf_db.* TO 'telegraf_user'@'%';
+   FLUSH
+
+   ```
+
+2. **Install MySQL Driver for Telegraf or list plugins**
+
+Use generic sql with mysql driver
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
+
+```bash
+# commands
+telegraf -h
+
+# --input-list
+# --output-list
+telegraf -input-list
+
+# [...]
+sql
+
+```
+
+
+make telegraf file directory
+
+```bash
+/var/telegraf_data
+ls
+metrics.in.json  metrics.out.json
+
+```
+
+metric.in.json
+
+
+```json
+[
+  {
+    "measurement": "tag1",
+    "value": 102,
+    "active": 1,
+    "state": 0,
+    "quality": "good"
+  },
+  {
+    "measurement": "tag2",
+    "value": 55,
+    "active": 1,
+    "state": 0,
+    "quality": "good"
+  }
+]
+
+```
+
+**telegraf conf**
+
+Use generic sql with mysql driver
+
+https://github.com/influxdata/telegraf/blob/master/plugins/outputs/sql/README.md
+
+
+
+
+```bash
+/etc/telegraf
+ls
+telegraf.conf
+
+
+```
+
+telegraf logs
+
+```bash
+/var/log/telegraf
+ls
+telegraf.logs
+
+```
+
+Test telegraf
+
+1. Save the configuration file as `telegraf.conf`.
+2. Test the configuration to ensure it's valid:
+
+   ```bash
+   sudo telegraf --config telegraf.conf --test
+
+2025-02-27T22:35:22Z I! Loading config: telegraf.conf
+> tag1 active=1,quality="good",state=0,value=102 1740695723000000000
+> tag2 active=1,quality="good",state=0,value=55 1740695723000000000
+   ```
+
+
+Start telegraf
+
+```bash
+sudo service telegraf start
+
+```
+
+Use an Auto-Increment Primary Key
+
+
+```sql
+
+sudo mysql
+
+use telegraf_db;
+
+CREATE TABLE IF NOT EXISTS `tag1` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  time DATETIME(6) NOT NULL,
+  `value` DOUBLE,
+  `active` BIGINT,
+  `state` BIGINT,
+  `quality` TEXT
+);
+
+
+CREATE TABLE IF NOT EXISTS `tag2` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  time DATETIME(6) NOT NULL,
+  `value` DOUBLE,
+  `active` BIGINT,
+  `state` BIGINT,
+  `quality` TEXT
+);
+
+
+view logs
+
+```logs
+
+2025-02-27T22:38:19Z I! Loaded inputs: file
+2025-02-27T22:38:19Z I! Loaded aggregators:
+2025-02-27T22:38:19Z I! Loaded processors:
+2025-02-27T22:38:19Z I! Loaded secretstores:
+2025-02-27T22:38:19Z I! Loaded outputs: file sql
+2025-02-27T22:38:19Z I! Tags enabled: host=vmdocker01
+2025-02-27T22:38:19Z I! [agent] Config: Interval:25s, Quiet:false, Hostname:"vmdocker01", Flush Interval:30s
+2025-02-27T22:38:19Z W! [agent] The default value of 'skip_processors_after_aggregators' will change to 'true' with Telegraf v1.40.0! If you need the current default behavior, please explicitly set the option to 'false'!
+2025-02-27T22:38:19Z D! [agent] Initializing plugins
+2025-02-27T22:38:19Z D! [agent] Connecting outputs
+2025-02-27T22:38:19Z D! [agent] Attempting connection to [outputs.file]
+2025-02-27T22:38:19Z D! [agent] Successfully connected to outputs.file
+2025-02-27T22:38:19Z D! [agent] Attempting connection to [outputs.sql]
+2025-02-27T22:38:19Z D! [agent] Successfully connected to outputs.sql
+2025-02-27T22:38:19Z D! [agent] Starting service inputs
+2025-02-27T22:38:33Z D! [outputs.sql] Buffer fullness: 0 / 10000 metrics
+2025-02-27T22:38:43Z D! [outputs.sql] Buffer fullness: 0 / 10000 metrics
+
+```
+
+view sql
+
+```sql
+sudo mysql
+
+use telegraf_db;
+
+show tables;
+
++-----------------------+
+| Tables_in_telegraf_db |
++-----------------------+
+| tag1                  |
+| tag2                  |
++-----------------------+
+
+select * from tag1;
++----+----------------------------+-------+--------+-------+---------+
+| id | time                       | value | active | state | quality |
++----+----------------------------+-------+--------+-------+---------+
+|  1 | 2025-02-27 22:16:40.000000 |   102 |      1 |     0 | good    |
+|  2 | 2025-02-27 22:16:40.000000 |   102 |      1 |     0 | good    |
+|  3 | 2025-02-27 22:17:05.000000 |   102 |      1 |     0 | good    |
+|  4 | 2025-02-27 22:17:30.000000 |   102 |      1 |     0 | good    |
+|  5 | 2025-02-27 22:17:55.000000 |   102 |      1 |     0 | good    |
+|  6 | 2025-02-27 22:18:20.000000 |   102 |      1 |     0 | good    |
+|  7 | 2025-02-27 22:18:45.000000 |   102 |      1 |     0 | good    |
+|  8 | 2025-02-27 22:19:10.000000 |   102 |      1 |     0 | good    |
+|  9 | 2025-02-27 22:19:35.000000 |   102 |      1 |     0 | good    |
+| 10 | 2025-02-27 22:20:00.000000 |   102 |      1 |     0 | good    |
+| 11 | 2025-02-27 22:20:25.000000 |   102 |      1 |     0 | good    |
+| 12 | 2025-02-27 22:20:50.000000 |   102 |      1 |     0 | good    |
+| 13 | 2025-02-27 22:21:15.000000 |   102 |      1 |     0 | good    |
+
+select * from tag2;
++----+----------------------------+-------+--------+-------+---------+
+| id | time                       | value | active | state | quality |
++----+----------------------------+-------+--------+-------+---------+
+|  1 | 2025-02-27 22:16:40.000000 |    55 |      1 |     0 | good    |
+|  2 | 2025-02-27 22:17:05.000000 |    55 |      1 |     0 | good    |
+|  3 | 2025-02-27 22:17:30.000000 |    55 |      1 |     0 | good    |
+|  4 | 2025-02-27 22:17:55.000000 |    55 |      1 |     0 | good    |
+|  5 | 2025-02-27 22:18:20.000000 |    55 |      1 |     0 | good    |
+|  6 | 2025-02-27 22:18:45.000000 |    55 |      1 |     0 | good    |
+|  7 | 2025-02-27 22:19:10.000000 |    55 |      1 |     0 | good    |
+|  8 | 2025-02-27 22:19:35.000000 |    55 |      1 |     0 | good    |
+|  9 | 2025-02-27 22:20:00.000000 |    55 |      1 |     0 | good    |
+| 10 | 2025-02-27 22:20:25.000000 |    55 |      1 |     0 | good    |
+| 11 | 2025-02-27 22:20:50.000000 |    55 |      1 |     0 | good    |
+| 12 | 2025-02-27 22:21:15.000000 |    55 |      1 |     0 | good    |
+| 13 | 2025-02-27 22:21:40.000000 |    55 |      1 |     0 | good    |
+
+```
+
+
+
+### View README_file_mysql_telegraf_findings.md (but fixed for now)
+
+Fix was mainly in telegraf.conf, metrics.in.json and after that it should have created the tables
+automatically, but it did not, so I did:
 
 
 
