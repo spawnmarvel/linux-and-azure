@@ -350,7 +350,9 @@ select * from tag2;
 
 ```
 
+## Make a python cron job to update the values in the files
 
+metrics.in.json
 
 
 ## Basic MySql and Normalization tbd
