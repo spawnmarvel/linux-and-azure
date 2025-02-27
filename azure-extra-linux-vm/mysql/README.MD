@@ -99,10 +99,6 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 
 ## Telegraf install and configure file in, file out and mysql out
 
-### View README_file_mysql_telegraf_findings.md (but fixed for now)
-
-Fix was mainly in telegraf.conf, metrics.in.json and after that it should have created the tables
-automatically, but it did not, so I did:
 
 make install_telegraf.sh from
 
@@ -231,8 +227,24 @@ sudo service telegraf start
 
 ```
 
-Use an Auto-Increment Primary Key
+### View README_file_mysql_telegraf_findings.md (but fixed for now)
 
+Fix was mainly in telegraf.conf, metrics.in.json and after that it should have created the tables
+automatically, but it did not, so I did:
+
+Use an Auto-Increment Primary Key and not time, and create the tables.
+
+Ref telegraf.conf something here is wrong....could be mysql rights?
+
+```conf
+## Table creation behavior
+  ## If true, Telegraf will automatically create tables for measurements
+  table_template = "CREATE TABLE IF NOT EXISTS `%s` (time DATETIME NOT NULL, %s, PRIMARY KEY (time))"
+  # the above did not work and a new table was created look below, primary key should not be time either, but id
+
+
+```
+But the fix was:
 
 ```sql
 
