@@ -1,33 +1,66 @@
 import json
 import random
 
+import time
+from datetime import datetime as dt
+import logging
+import os
+import signal
+import sys
+
+logging.basicConfig(
+    filename="rmg_app.log", 
+    filemode="a", 
+    format="%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s", 
+    datefmt="%Y-%m-%d %H:%M:%S",
+    level=logging.INFO)
+
+logging.info("#### Starting script ####") # all logging will be logged to app.log
+CUR = dt.now()
+
+print(str(CUR), " Starting Cron job") # this will be logged to cron log
+MAIN_PID = None
+
+# get full path
+def get_full_file_path(file_path):
+    try:
+        absolute_path = os.path.realpath(file_path)
+        logging.info("File path: " + str(absolute_path))
+        pass
+    except FileNotFoundError:
+        logging.error("File not found")
+    except Exception as ex:
+        logging.error(ex)
+
 # Basic JSON file reading
 def read_json_basic(file_path):
+    logging.info("Try read json file " + str(file_path))
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             data = json.load(file)
         return data
     except FileNotFoundError:
-        print(f"Error: File {file_path} not found")
+        logging.error("File not found")
         return None
     except json.JSONDecodeError:
-        print("Error: Invalid JSON format")
+        logging.error(" Invalid JSON format")
         return None
-    except Exception as e:
-        print(f"Error: {str(e)}")
+    except Exception as ex:
+        logging.error(ex)
         return None
 
 
 # Update specific values by measurement name
 def update_tags_by_measurement(file_path, tag_updates):
     try:
+        logging.info("Try read json file " + str(file_path))
         # Read the JSON file
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             data = json.load(file)
         
         # Update values for matching measurements
         for item in data:
-            measurement = item.get('measurement')
+            measurement = item.get("measurement")
             if measurement in tag_updates:
                 # Update all specified fields for this measurement
                 for key, value in tag_updates[measurement].items():
@@ -35,20 +68,20 @@ def update_tags_by_measurement(file_path, tag_updates):
                         item[key] = value
         
         # Write updated data back to file
-        with open(file_path, 'w') as file:
+        with open(file_path, "w") as file:
             json.dump(data, file, indent=4)
             
         print("JSON file updated successfully!")
         return True
         
     except FileNotFoundError:
-        print(f"Error: File {file_path} not found")
-        return False
+        logging.error("File not found")
+        return None
     except json.JSONDecodeError:
-        print("Error: Invalid JSON format")
-        return False
-    except Exception as e:
-        print(f"Error: {str(e)}")
+        logging.error(" Invalid JSON format")
+        return None
+    except Exception as ex:
+        logging.error(ex)
         return False
 
 # Update json values by with random values
@@ -72,7 +105,8 @@ def update_tags_random_value(file_path, val):
 
 if __name__ == "__main__":
     fp= "metric.in.json"
-    rv = read_json_basic(fp)
-    print(rv)
+    get_full_file_path(fp)
     ran =random.randint(23,150)
     update_tags_random_value(fp, ran)
+    rv = read_json_basic(fp)
+    print(rv)
