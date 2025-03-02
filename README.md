@@ -790,7 +790,6 @@ if __name__ == "__main__":
     logging.info("Stopping....")
     cur_tmp = dt.now()
     print(str(cur_tmp), " Ending Cron job") # this will be logged to cron log
-    # exit(main())
     exit()
 ```
 

@@ -388,6 +388,101 @@ sudo crontab -e
 # add
 * * * * * python3 /var/telegraf_data/run_metric_generator.py >> /var/telegraf_data/cronoutput.log
 # save it and it has created the job, to delet it, just remove the line
+crontab: installing new crontab
+```
+
+Wait 1 min
+
+```bash
+
+tail -f cronoutput.log
+
+2025-03-02 17:05:01.614454  Starting Cron job
+JSON file updated successfully!
+[{'measurement': 'tag1', 'value': 70, 'active': 1, 'state': 0, 'quality': 'good'}, {'measurement': 'tag2', 'value': 82, 'active': 1, 'state': 1, 'quality': 'good'}]
+2025-03-02 17:05:01.615158  Ending Cron job
+
+tail -f rmg_app_log
+
+cat metrics.in.json
+
+```
+
+View json updates
+
+```json
+
+[
+    {
+        "measurement": "tag1",
+        "value": 124,
+        "active": 1,
+        "state": 0,
+        "quality": "good"
+    },
+    {
+        "measurement": "tag2",
+        "value": 136,
+        "active": 1,
+        "state": 1,
+        "quality": "good"
+    }
+
+[
+    {
+        "measurement": "tag1",
+        "value": 58,
+        "active": 1,
+        "state": 0,
+        "quality": "good"
+    },
+    {
+        "measurement": "tag2",
+        "value": 70,
+        "active": 1,
+        "state": 1,
+        "quality": "good"
+    }
+]
+
+```
+
+Drop table mysql and do new select query
+
+```sql
+
+sudo mysql
+
+use telegraf_db;
+
+truncate table tag1
+truncate table tag2;
+
+ select * from tag1;
++----+----------------------------+-------+--------+-------+---------+
+| id | time                       | value | active | state | quality |
++----+----------------------------+-------+--------+-------+---------+
+|  1 | 2025-03-02 17:08:45.000000 |    50 |      1 |     0 | good    |
+|  2 | 2025-03-02 17:09:10.000000 |    85 |      1 |     0 | good    |
+|  3 | 2025-03-02 17:09:35.000000 |    85 |      1 |     0 | good    |
+|  4 | 2025-03-02 17:10:00.000000 |    85 |      1 |     0 | good    |
+|  5 | 2025-03-02 17:10:25.000000 |    29 |      1 |     0 | good    |
++----+----------------------------+-------+--------+-------+---------+
+5 rows in set (0.00 sec)
+
+
+select * from tag2;
+
+ select * from tag2;
++----+----------------------------+-------+--------+-------+---------+
+| id | time                       | value | active | state | quality |
++----+----------------------------+-------+--------+-------+---------+
+|  1 | 2025-03-02 17:10:25.000000 |    41 |      1 |     1 | good    |
+|  2 | 2025-03-02 17:10:50.000000 |    41 |      1 |     1 | good    |
+|  3 | 2025-03-02 17:11:15.000000 |   123 |      1 |     1 | good    |
++----+----------------------------+-------+--------+-------+---------+
+3 rows in set (0.00 sec)
+
 
 ```
 
