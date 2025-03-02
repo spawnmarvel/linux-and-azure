@@ -350,10 +350,49 @@ select * from tag2;
 
 ```
 
-## Make a python cron job to update the values in the files tbd
+## Make a python cron job to update the values in the files (view py_cron)
 
-metrics.in.json
 
+
+
+
+* Pyscript for updating values in metrics.in.json
+* Make cron, log to file and output
+
+```bash
+
+sudo apt install cron
+sudo systemctl enable cron
+
+Synchronizing state of cron.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable cron
+
+# for custom scripts
+/var/telegraf_data
+
+# cp content from py_cron\run_metric_generator.py
+sudo nano run_metric_generator.py
+
+# Test it
+sudo python3 run_metric_generator.py
+
+2025-03-02 15:58:44.287365  Starting Cron job
+JSON file updated successfully!
+[{'measurement': 'tag1', 'value': 107, 'active': 1, 'state': 0, 'quality': 'good'}, {'measurement': 'tag2', 'value': 119, 'active': 1, 'state': 1, 'quality': 'good'}]
+
+# make cron job, every minute (indicated by the five asterisks)
+
+sudo crontab -e
+
+# choose nano = 1
+# add
+* * * * * python3 /var/telegraf_data/run_metric_generator.py >> /var/telegraf_data/cronoutput.log
+# save it and it has created the job, to delet it, just remove the line
+
+```
+
+
+ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-with-cron
 
 ## Basic MySql and Normalization tbd
 

@@ -21,6 +21,14 @@ CUR = dt.now()
 print(str(CUR), " Starting Cron job") # this will be logged to cron log
 MAIN_PID = None
 
+# stop handler
+def handler(signum, frame):
+    msg = "signal "+ str(signum)
+    logging.info(msg)
+    exit(1)
+
+signal.signal(signal.SIGINT, handler)
+
 # get full path
 def get_full_file_path(file_path):
     try:
@@ -70,10 +78,8 @@ def update_tags_by_measurement(file_path, tag_updates):
         # Write updated data back to file
         with open(file_path, "w") as file:
             json.dump(data, file, indent=4)
-            
         print("JSON file updated successfully!")
         return True
-        
     except FileNotFoundError:
         logging.error("File not found")
         return None
@@ -104,9 +110,16 @@ def update_tags_random_value(file_path, val):
 
 
 if __name__ == "__main__":
-    fp= "metric.in.json"
+    MAIN_PID = os.getpid()
+    logging.info(str(MAIN_PID))
+    # cron need full path
+    fp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "metrics.in.json")
     get_full_file_path(fp)
     ran =random.randint(23,150)
     update_tags_random_value(fp, ran)
     rv = read_json_basic(fp)
     print(rv)
+    logging.info("Stopping....")
+    cur_tmp = dt.now()
+    print(str(cur_tmp), " Ending Cron job") # this will be logged to cron log
+    exit()

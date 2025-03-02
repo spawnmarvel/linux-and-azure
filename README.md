@@ -752,7 +752,13 @@ import os
 import signal
 import sys
 
-logging.basicConfig(filename='app.log', filemode='a', format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(
+    filename="app.log", 
+    filemode="a", 
+    format="%(asctime)s - %(name)s - %(levelname)s - %(funcName)s - %(message)s", 
+    datefmt="%Y-%m-%d %H:%M:%S",
+    level=logging.INFO)
+
 logging.info('Starting...') # all logging will be logged to app.log
 CUR = dt.now()
 print(str(CUR), " Starting Cron job") # this will be logged to cron log
@@ -784,7 +790,8 @@ if __name__ == "__main__":
     logging.info("Stopping....")
     cur_tmp = dt.now()
     print(str(cur_tmp), " Ending Cron job") # this will be logged to cron log
-    exit(main())
+    # exit(main())
+    exit()
 ```
 
 Script
@@ -803,6 +810,7 @@ crontab -e
 crontab: installing new crontab
 # So the first 5 stars you can mention the minute, hour, day and month etc. with command to be executed. 
 # Let’s create a cronjob that run every minute with out python script.
+# every minute is (indicated by the five asterisks)
 ```
 
 Let's view the outpu of each log file
