@@ -493,6 +493,11 @@ View Readme ai
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
 
+MySQL data source
+
+
+https://grafana.com/docs/grafana/latest/datasources/mysql/
+
 
 ## Basic MySql and Normalization tbd
 
