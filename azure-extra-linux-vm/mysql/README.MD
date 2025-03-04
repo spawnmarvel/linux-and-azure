@@ -1,4 +1,4 @@
-# Learning MySql with Telegraf on Linux
+# Learning MySql with Telegraf on Linux with Grafana
 
 * Basic
 * * Run on Linux vmdocker01
@@ -490,7 +490,7 @@ ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-wit
 
 ## Grafana dashboard
 
-
+View Readme ai
 
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
