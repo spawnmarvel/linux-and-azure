@@ -486,8 +486,16 @@ select * from tag2;
 
 ```
 
-
 ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-with-cron
+
+## Grafana dashboard
+
+
+
+
+https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
+
+
 
 ## Basic MySql and Normalization tbd
 
@@ -496,7 +504,6 @@ Basic
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_most_common.md
 
 Next AI after basic, an you make me a tutorial in mysql with lab task for the most common scenarios with Data Normalization and Transactions (ACID Properties) ?
-
 
 ## Create the tag and history table tbd
 
