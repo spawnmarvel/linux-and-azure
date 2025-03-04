@@ -485,7 +485,7 @@ select * from tag2;
 
 ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-with-cron
 
-## Grafana dashboard add tag1 and tag2
+## Grafana dashboard Mysql connect
 
 View Readme ai
 
