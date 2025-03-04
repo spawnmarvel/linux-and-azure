@@ -353,9 +353,6 @@ select * from tag2;
 ## Make a python cron job to update the values in the files (view py_cron)
 
 
-
-
-
 * Pyscript for updating values in metrics.in.json
 * Make cron, log to file and output
 
@@ -488,7 +485,7 @@ select * from tag2;
 
 ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-with-cron
 
-## Grafana dashboard
+## Grafana dashboard add tag1 and tag2
 
 View Readme ai
 
