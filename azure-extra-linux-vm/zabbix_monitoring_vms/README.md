@@ -401,10 +401,8 @@ zbx down
 
 
 
-### Set up problem alerts
 
-
-### Test your configuration
+### Test your configuration and troubleshoot value cache
 
 
 On Linux, you can simulate high CPU load and as a result receive a problem alert by running:
@@ -424,7 +422,7 @@ https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/README_integrate_with_zabbix.md
 
-##
+### Set up problem alerts
 
 
 
