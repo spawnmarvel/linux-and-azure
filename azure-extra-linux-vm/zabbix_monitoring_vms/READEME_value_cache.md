@@ -178,6 +178,3 @@ Based on your diagnosis, take the appropriate steps to address the low value cac
    - If you are running an older version of Zabbix, consider upgrading to the latest stable release. Newer versions often include performance improvements and better cache management.
 
 ---
-
-### Example Scenario
-Suppose your Zabbix server is monitoring 15,000 items, with data collected every 30 seconds, and you have many triggers referencing the last 5 values of each item. You notice that `zabbix[vcache,cache,mode]` is 1 (low memory mode) and `zabbix[vcache,buffer,free]` is consistently near zero. The current `ValueCacheSize` is set to
