@@ -2,6 +2,8 @@ In Zabbix, the **Value Cache** is an internal mechanism used to improve the perf
 
 
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
+
+
 ### Key Details About Zabbix Value Cache
 
 1. **Purpose**:
