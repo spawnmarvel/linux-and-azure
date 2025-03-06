@@ -1,4 +1,4 @@
-# Templates
+# Test more templates and stuff
 
 ## Template Linux by Zabbix agent
 
