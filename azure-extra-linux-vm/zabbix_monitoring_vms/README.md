@@ -402,7 +402,7 @@ zbx down
 
 
 
-# Test your configuration and troubleshoot value cache
+# Test your configuration simulation and troubleshoot value cache
 
 
 On Linux, you can simulate high CPU load and as a result receive a problem alert by running:
