@@ -34,9 +34,9 @@ https://learn.microsoft.com/en-us/azure/virtual-network/virtual-machine-network-
 
 Exhausting port 8080 on an Ubuntu system means consuming all available resources associated with that specific port, typically by opening as many connections as possible to it. This is often done for stress testing, security research, or debugging purposes.
 
-Step 2: Open Many Connections to Port 8080
+Step 2: Open Many Connections to Port 10051
 
-Use a Bash script to open a large number of connections to port 8080 on localhost, consuming resources on both the client (ephemeral ports, file descriptors) and the server (connection slots, file descriptors).
+Use a Bash script to open a large number of connections to port 10051 on localhost, consuming resources on both the client (ephemeral ports, file descriptors) and the server (connection slots, file descriptors).
 
 
 
@@ -88,6 +88,22 @@ ps aux | grep [n]c | wc -l
 ```
 
 ![Port exhaust ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/port_exhaust.jpg)
+
+
+Run it 4 more times, it is now
+
+```bash
+ps aux | grep [n]c | wc -l
+4372
+```
+
+Zabbix is down, jepp we got it.
+
+![zabbix_dead ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_dead.jpg)
+
+
+
+
 ### Stop simulate flow and nc
 
 
