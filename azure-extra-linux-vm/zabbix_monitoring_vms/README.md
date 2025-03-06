@@ -1,6 +1,6 @@
 # Zabbix and Linux by Zabbix agent (templates) learn monitoring (2 vms)
 
-Example with Zabbix server and a Linux VM with Linix template as test bases for passiv or active agent.
+Example with Zabbix server and a Linux VM with Linux template as test bases for passiv or active agent.
 
 ## Zabbix 6 is installed
 
