@@ -50,7 +50,7 @@ TARGET="127.0.0.1"
 PORT=10051 # 10050
 
 # Number of connections to attempt (adjust based on your system's limits)
-CONNECTIONS=300
+CONNECTIONS=800
 
 echo "Attempting to exhaust port $PORT on $TARGET by opening $CONNECTIONS connections..."
 
@@ -66,7 +66,27 @@ echo "Done. Check system state (e.g., 'ss -tunap | grep :10051' or 'netstat -tun
 
 ```
 
-How to stop it
+To count all connections (both established and listening) on a specific port (e.g., port 10051):
+
+```bash
+
+ss -tuln | grep :10051 | wc -l
+```
+
+The simplest way to count nc instances is to check how many nc processes are running.
+
+```bash
+
+# ps aux: Lists all running processes.
+# grep [n]c: Filters for nc processes (the square brackets prevent grep from matching itself).
+# wc -l: Counts the number of matching lines (i.e., nc processes).
+ps aux | grep [n]c | wc -l
+797
+# run the script again
+1572
+
+```
+### Stop simulate flow and nc
 
 
 Use ps to locate the script’s process
@@ -91,6 +111,7 @@ ps aux | grep nc
 
 # Instead of killing each nc process individually, you can use pkill to terminate all nc processes at once
 pkill nc
+7
 
 # If some processes do not stop, you can force termination with
 pkill -9 nc
