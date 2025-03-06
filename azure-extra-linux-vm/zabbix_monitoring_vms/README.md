@@ -422,12 +422,11 @@ The command cat /dev/urandom | md5sum is a pipeline in Unix-like systems that ge
 
 Infinite Stream Issue: Because /dev/urandom never "ends," md5sum will never finish computing the hash unless you manually stop the command (e.g., by pressing Ctrl+C)
 
+![Test CPU](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/test_cpu.jpg)
 
-
-
-https://www.zabbix.com/documentation/current/en/manual/guides/monitor_linux
 
 ### Value cache how does it work 
+
 
 read more https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/READEME_value_cache.md
 
