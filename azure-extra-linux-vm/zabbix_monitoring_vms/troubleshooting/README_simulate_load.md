@@ -87,7 +87,7 @@ ps aux | grep [n]c | wc -l
 
 ```
 
-![Port exhaust ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/port_exhaust.png)
+![Port exhaust ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/port_exhaust.jpg)
 ### Stop simulate flow and nc
 
 
