@@ -283,7 +283,7 @@ Then, in the Zabbix server, you'd create an item with the key files.count[/tmp].
 
 https://www.zabbix.com/documentation/current/en/manual/config/items/userparameters
 
-Lets do that
+Lets do that+
 
 ```bash
  cat zabbix_agentd.conf | grep "UserPa*"
@@ -402,7 +402,7 @@ zbx down
 
 
 
-# Test your configuration simulation and troubleshoot value cache
+# Test your configuration simulation and troubleshooting
 
 
 On Linux, you can simulate high CPU load and as a result receive a problem alert by running:
@@ -425,16 +425,9 @@ Infinite Stream Issue: Because /dev/urandom never "ends," md5sum will never fini
 ![Test CPU](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/test_cpu.jpg)
 
 
-### Value cache how does it work 
+### Troubleshooting
 
-
-read more https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/READEME_value_cache.md
-
-
-
-
-
-
+View folder troubleshooting 
 
 
 # Test more templates and stuff
