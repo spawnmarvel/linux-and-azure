@@ -1,7 +1,16 @@
 In Zabbix, the **Value Cache** is an internal mechanism used to improve the performance of the Zabbix server by caching item values in memory. This feature is particularly useful in large-scale Zabbix deployments where frequent access to historical data or trend data is required, as it reduces the load on the database and speeds up data retrieval.
 
 
+
+### Issue
+
+Every night at around 01:00, inbound flows are high also, like flodding port 100051 or 10050.
+* It could be an zabbix agent on a server
+* It could be something with zabbix server tuning
+* Since cache hits are low, zabbox need to get more data from the database to calculate
+
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
+
 
 
 
