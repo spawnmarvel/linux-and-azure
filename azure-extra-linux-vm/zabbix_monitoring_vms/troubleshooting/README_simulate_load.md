@@ -22,7 +22,7 @@ Infinite Stream Issue: Because /dev/urandom never "ends," md5sum will never fini
 
 ![Test CPU](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/test_cpu.jpg)
 
-## Simulate inbound flows Azure (many connections)
+## Simulate inbound flows Azure (many connections, trapper 10051)
 
 In addition to bandwidth, the number of network connections present on a VM at any given time can affect its network performance. 
 The Azure networking stack maintains state for each direction of a TCP/UDP connection in data structures called ‘flows’. 
@@ -32,7 +32,9 @@ A typical TCP/UDP connection has two flows created, one for the inbound and anot
 https://learn.microsoft.com/en-us/azure/virtual-network/virtual-machine-network-throughput
 
 
-Exhausting port 8080 on an Ubuntu system means consuming all available resources associated with that specific port, typically by opening as many connections as possible to it. This is often done for stress testing, security research, or debugging purposes.
+Exhausting port 8080 on an Ubuntu system means consuming all available resources associated with that specific port, typically by opening as many connections as possible to it.
+
+This is often done for stress testing, security research, or debugging purposes.
 
 Step 2: Open Many Connections to Port 10051
 
@@ -141,3 +143,21 @@ ps aux | grep nc
 
 
 
+## Simulate much data for zabbix to calculate in value cache (trapper 10051) TODO
+
+docker server (just a remote host)
+Use zabbix_sender and make a bash script that has:
+
+* Add and array for hosts, start with 5 hosts
+* 30 items, tag-1 to tag-25, tag-1-str-status to tag-5-str-status
+* 30 values each sec, use random 0-100
+* 20 Numbers, 10 strings
+* Loop until ctrl c
+
+Total 5 x 30 = 90 each sec
+
+Zabbix server
+
+* Make a template with 30 items
+* Add 30 triggers
+* Use avg, last timespan 5 min, string contains etc
