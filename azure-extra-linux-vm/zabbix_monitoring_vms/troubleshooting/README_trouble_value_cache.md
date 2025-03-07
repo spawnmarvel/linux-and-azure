@@ -7,9 +7,10 @@ In Zabbix, the **Value Cache** is an internal mechanism used to improve the perf
 ### Issue
 
 Every night at around 01:00, inbound flows are high also, like flodding port 100051 or 10050.
+
 * It could be an zabbix agent on a server
 * It could be something with zabbix server tuning
-* Since cache hits are low, zabbox need to get more data from the database to calculate
+* Since cache hits are low, zabbix need to get more data from the database to calculate
 
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
 
