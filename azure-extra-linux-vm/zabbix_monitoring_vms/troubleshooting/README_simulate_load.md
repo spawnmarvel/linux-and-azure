@@ -212,9 +212,6 @@ ZABBIX_PORT="10051"          # Default Zabbix trapper port
 # Array of hostnames
 HOSTS=("simhost01" "simhost02" "simhost03" "simhost04" "simhost05") 
 
-# Log file
-LOG_FILE="/var/log/zabbix_sender.log"
-
 # Number of iterations
 ITERATIONS=120
 
@@ -277,9 +274,7 @@ send_iteration_data() {
     # Summary for this iteration
     summary="Iteration $iteration: Total items attempted: $total_items, Failed items: $failed_items, Successful items: $((total_items - failed_items))"
     echo -e "\n  $summary"
-    
-    # Log the summary
-    echo "$(date): $summary" >> "$LOG_FILE"
+
     
     # Return success if no items failed
     [ "$failed_items" -eq 0 ]
@@ -331,4 +326,9 @@ sudo sudo nano 10051_simulate_data_load.sh
 
 chmod +x 10051_simulate_data_load.sh
 ```
+
+
+We now have the possbility to stress zabbix and trapper port 10051
+
+![data load ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/data_load.jpg)
 
