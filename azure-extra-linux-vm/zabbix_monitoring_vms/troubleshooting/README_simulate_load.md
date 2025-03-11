@@ -192,6 +192,75 @@ Response from "192.168.3.5:10051": "processed: 1; failed: 0; total: 1; seconds s
 sent: 1; skipped: 0; total: 1
 ```
 
+Great, lets go to work.
+
 ![zabbix sender ok ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_sender.jpg)
 
-Great, lets go to work.
+### bash script with x host and x items flood port 10051
+
+```bash
+
+#!/bin/bash
+
+# Zabbix server details
+ZABBIX_SERVER="192.168.3.5"  # Replace with your Zabbix server IP/hostname
+ZABBIX_PORT="10051"                 # Default Zabbix trapper port
+
+# Array of hostnames
+HOSTS=("tag1" "tag2" "tag3" "tag4" "tag5")
+
+# Temporary file to store sender data
+TEMP_FILE="/tmp/zabbix_data.txt"
+
+# Check if zabbix_sender is installed
+if ! command -v zabbix_sender &> /dev/null; then
+    echo "Error: zabbix_sender is not installed"
+    exit 1
+fi
+
+# Function to generate random value between 1 and 100
+generate_random_value() {
+    echo $(( RANDOM % 100 + 1 ))
+}
+
+# Clear temp file if it exists
+> "$TEMP_FILE"
+
+# Process each host
+for host in "${HOSTS[@]}"; do
+    echo "Processing host: $host"
+    
+    # Process each item (item1 to item5)
+    for item_num in {1..5}; do
+        item_key="item${item_num}"
+        value=$(generate_random_value)
+        
+        # Add data to temporary file in zabbix_sender format
+        # Format: <host> <key> <value>
+        echo "$host $item_key $value" >> "$TEMP_FILE"
+        
+        echo "  Sending $item_key: $value"
+    done
+done
+
+# Send all data to Zabbix server
+echo -e "\nSending data to Zabbix server..."
+if zabbix_sender -z "$ZABBIX_SERVER" -p "$ZABBIX_PORT" -i "$TEMP_FILE" -vv; then
+    echo "Data sent successfully!"
+else
+    echo "Error sending data to Zabbix server"
+    exit 1
+fi
+
+# Clean up temporary file
+rm -f "$TEMP_FILE"
+
+exit 0
+
+
+```
+
+We created a template for test
+
+
+![simulated_flood_template ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/simulated_flood_template.jpg)
