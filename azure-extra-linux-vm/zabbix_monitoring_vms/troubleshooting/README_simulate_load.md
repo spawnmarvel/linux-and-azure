@@ -145,7 +145,7 @@ ps aux | grep nc
 
 ## Simulate much data for zabbix to calculate in value cache (trapper 10051) TODO
 
-docker server (just a remote host)
+docker server (just a remote host), vmdocker01
 Use zabbix_sender and make a bash script that has:
 
 * Add and array for hosts, start with 5 hosts
@@ -156,8 +156,42 @@ Use zabbix_sender and make a bash script that has:
 
 Total 5 x 30 = 90 each sec
 
-Zabbix server
+Zabbix server,vmzabbix02
 
 * Make a template with 30 items
 * Add 30 triggers
 * Use avg, last timespan 5 min, string contains etc
+
+
+Check if w ehave zabbix sender vmdocker01
+
+```bash
+
+zabbix_sender -z 192.168.3.5 -s "simulatedhost01" -k tag1 -o 15
+Response from "192.168.3.5:10051": "processed: 0; failed: 1; total: 1; seconds spent: 0.000017"
+sent: 1; skipped: 0; total: 1
+
+```
+
+hm, is ufw open for 10051
+
+```bash
+ufw status
+ERROR: You need to be root to run this script
+
+sudo su
+10051                      DENY        Anywhere
+
+sudo ufw allow 10051
+Rule updated
+Rule updated (v6)
+
+
+zabbix_sender -z 192.168.3.5 -s "simulatedhost01" -k tag1 -o 15
+Response from "192.168.3.5:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000109"
+sent: 1; skipped: 0; total: 1
+```
+
+![zabbix sender ok ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_sender.jpg)
+
+Great, lets go to work.
