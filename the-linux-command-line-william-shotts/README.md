@@ -434,9 +434,11 @@ cat files_sorted.txt
 # The most useful and powerful thing we can do with I/O redirection is to connect multiple commands together to form what are called pipelines. With pipelines, the standard output of one command is fed into the standard input of another. Here is a very useful example:
 ls -l | less
 
-# In this example, the output of the ls command is fed into less. By using this "| less" trick, we can make any command have scrolling output.
+# In this example, the output of the ls command is fed into less. 
+# By using this "| less" trick, we can make any command have scrolling output.
 
-# By connecting commands together, we can accomplish amazing feats. Here are some examples to try:
+# By connecting commands together, we can accomplish amazing feats. 
+# Here are some examples to try:
 # Displays the 10 newest files in the current directory.
 ls -lt | head
 
