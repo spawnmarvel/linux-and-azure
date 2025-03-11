@@ -149,19 +149,15 @@ docker server (just a remote host), vmdocker01
 Use zabbix_sender and make a bash script that has:
 
 * Add and array for hosts, start with 5 hosts
-* 30 items, tag-1 to tag-25, tag-1-str-status to tag-5-str-status
-* 30 values each sec, use random 0-100
-* 20 Numbers, 10 strings
-* Loop until ctrl c
+* 5 items, tag1 to tag5
+* 25 values each sec, use random 0-100
+* Loop for 2 min
 
-Total 5 x 30 = 90 each sec
+Total 5 x 5 = 25 each sec
 
 Zabbix server,vmzabbix02
 
-* Make a template with 30 items
-* Add 30 triggers
-* Use avg, last timespan 5 min, string contains etc
-
+* Make a template with 5 items
 
 Check if w ehave zabbix sender vmdocker01
 
@@ -331,4 +327,23 @@ chmod +x 10051_simulate_data_load.sh
 We now have the possbility to stress zabbix and trapper port 10051
 
 ![data load ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/data_load.jpg)
+
+
+## Use simulate_data_load_10051.sh (30 hosts x much more items)
+
+
+* Add a array for hosts 30 hosts
+
+Templat update
+
+* 25 items, tag1 to tag25
+* 25 values each sec, use random 0-100
+* 25 triggers, Use avg, last timespan 5 min
+* 5 items text values, use running, stopped
+* 5 triggers, string contains
+* Loop for 2 min
+
+Total 5 x 5 = 25 each sec
+
+
 
