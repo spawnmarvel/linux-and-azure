@@ -431,7 +431,8 @@ cat files_sorted.txt
 
 # Pipelines
 
-# The most useful and powerful thing we can do with I/O redirection is to connect multiple commands together to form what are called pipelines. With pipelines, the standard output of one command is fed into the standard input of another. Here is a very useful example:
+# The most useful and powerful thing we can do with I/O redirection is to connect multiple commands together to form 
+# what are called pipelines. With pipelines, the standard output of one command is fed into the standard input of another. Here is a very useful example:
 ls -l | less
 
 # In this example, the output of the ls command is fed into less. 
