@@ -329,7 +329,7 @@ We now have the possbility to stress zabbix and trapper port 10051
 ![data load ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/data_load.jpg)
 
 
-## Use simulate_data_load_10051.sh (30 hosts x much more items)
+## Use simulate_data_load_10051.sh (30 hosts x much more items) get a peak inbound flows
 
 
 * Add a array for hosts 30 hosts
