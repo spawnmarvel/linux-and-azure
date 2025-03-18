@@ -487,7 +487,7 @@ ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-wit
 
 ## Grafana dashboard Mysql connect
 
-View Readme ai
+View Readme ai for how to install
 
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
