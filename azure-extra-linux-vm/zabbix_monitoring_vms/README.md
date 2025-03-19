@@ -406,12 +406,8 @@ View folder templates
 ### Enable ssl tbd
 
 
-
-
-
-
-
-
+* Openssl
+* and AI
 
 
 
