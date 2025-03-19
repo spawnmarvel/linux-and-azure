@@ -8,3 +8,7 @@ Lightweight directory access protocol (LDAP) is a protocol that helps users find
 
 https://www.redhat.com/en/topics/security/what-is-ldap-authentication#:~:text=Hat%20Enterprise%20Linux-,Overview,users%20to%20access%20the%20directory.
 
+
+## LDAP v.s. Active Directory
+
+https://www.redhat.com/en/topics/security/what-is-ldap-authentication#:~:text=Hat%20Enterprise%20Linux-,Overview,users%20to%20access%20the%20directory.
