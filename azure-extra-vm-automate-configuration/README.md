@@ -65,3 +65,12 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/linux/no-agent
 ## Disable or remove the Linux Agent from VMs and images
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disable-provisioning
 
+
+# Make cloud-init
+
+## Apache
+
+## Zabbix
+
+## Wordpress
+
