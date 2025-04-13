@@ -36,3 +36,7 @@ ssh user@ip-address
 ## Bicep resource definition; Microsoft.Compute virtualMachines
 
 https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
+
+## Virtual machine extensions and features for Linux
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?source=recommendations&tabs=azure-cli
