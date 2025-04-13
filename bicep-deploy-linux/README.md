@@ -32,6 +32,8 @@ Portal reset password. Help->
 
 az-ps1 and cli reference https://follow-e-lo.com/azure-tips-for-test-vms/
 
+SSH to Linux VM
+
 ```bash
 ssh user@ip-address
 
