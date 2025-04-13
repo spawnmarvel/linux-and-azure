@@ -9,22 +9,12 @@ https://learn.microsoft.com/en-us/training/browse/?terms=bicep&source=learn
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bicep?tabs=CLI
 
-## Use scripts bash
+## Use ps1 scripts
 
-There are som bash deploys scripts
-
-* deploy.sh
-* deploy_reset.sh
-* deploy_helper.sh
-* deploy_autoshutdown
-
-
-```bash
-
-az login
-# or
-az login --tenant The-tenant-id-we-copied-from-azure-ad
+```ps1
+Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 ```
-https://follow-e-lo.com/azure-tips-for-test-vms/
+
+az-ps1 and cli reference https://follow-e-lo.com/azure-tips-for-test-vms/
 

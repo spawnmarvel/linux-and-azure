@@ -44,7 +44,7 @@ az group create --location $location --name $resourceGroup --tags $tags
 
 # Deploy to existing vnet but in a self contained resource group
 az deployment group create --name mainDep --resource-group $resourceGroup --template-file main_deploy_vm_no_extra_disk_to_outside_vnet.bicep \
- --parameters vmName="$simpleVmName" adminUsername="$adminU" resourceGroupVnetName="$rgVnetName" virtualNetworkName="$vnet" subnetName="$subnet" #--what-if
+ --parameters vmName="$simpleVmName" adminUsername="$adminU" resourceGroupVnetName="$rgVnetName" virtualNetworkName="$vnet" subnetName="$subnet" --what-if
 
 
 
