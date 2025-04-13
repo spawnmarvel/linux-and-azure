@@ -1,4 +1,4 @@
-# Bicep Linux VM
+# Bicep Linux VM suing Powershell
 
 ## 32 results for "bicep"
 
