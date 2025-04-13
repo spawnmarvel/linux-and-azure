@@ -22,7 +22,7 @@ Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 * verify.ps1
 * TODO the others
 
-[Reset password](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/reset_password.jpg)
+![Reset password](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/reset_password.jpg)
 
 az-ps1 and cli reference https://follow-e-lo.com/azure-tips-for-test-vms/
 
