@@ -27,11 +27,11 @@ param dnsLabelPrefix string = toLower('${vmName}-${uniqueString(resourceGroup().
 
 @description('The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version.')
 @allowed([
-  'Ubuntu-1804'
   'Ubuntu-2004'
   'Ubuntu-2204'
 ])
 param ubuntuOSVersion string = 'Ubuntu-2204'
+
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
