@@ -1,3 +1,3 @@
-rgName = "Rg-iac-linux-fu-0991"
-Get-AzResourceGroup -Name $rgName
+$rgName = "Rg-iac-deploy-linux-fun-12"
+Get-AzResource -ResourceGroupName $rgName
 

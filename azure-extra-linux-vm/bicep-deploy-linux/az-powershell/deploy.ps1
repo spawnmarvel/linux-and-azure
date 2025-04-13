@@ -3,7 +3,7 @@ function Log-Information {
     param (
         [string]$Message
     )
-    $logFile = "deploylog.txt"
+    $logFile = "log.txt"
     Add-Content -Path $logFile -Value $Message
 }
 
@@ -14,7 +14,7 @@ Log-Information -Message $now
 
 # Generate a simple VM name with a random number
 $simpleVmName = "Vm-test123it" # "Vm-$(Get-Random)"
-$resourceGroup = "Rg-iac-linux-fu-0991"
+$resourceGroup = "Rg-iac-deploy-linux-fun-12"
 $location = "uksouth"
 $tags = @{Environment = "Qa" }
 

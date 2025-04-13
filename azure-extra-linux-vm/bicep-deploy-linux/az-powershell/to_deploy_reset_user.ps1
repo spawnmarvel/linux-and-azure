@@ -1,4 +1,4 @@
-$ResourceGroup = "Rg-iac-linux-fu-0991"
+$ResourceGroup = "Rg-iac-deploy-linux-fun-12"
 $VMName = Get-AzVM -ResourceGroupName $ResourceGroup
 $ExtensionName = "VMAccessForLinux"
 $Publisher = "Microsoft.OSTCExtensions"
