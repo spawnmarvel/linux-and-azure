@@ -5,9 +5,9 @@
 https://learn.microsoft.com/en-us/training/browse/?terms=bicep&source=learn
 
 
-## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file
+## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
-https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bicep?tabs=CLI
+https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bicep?tabs=PowerShell
 
 ## Use ps1 scripts
 
