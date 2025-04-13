@@ -13,7 +13,7 @@ Write-Output $now
 Log-Information -Message $now
 
 # Generate a simple VM name with a random number
-$simpleVmName = "Vm-$(Get-Random)"
+$simpleVmName = "Vm-test123it" # "Vm-$(Get-Random)"
 $resourceGroup = "Rg-iac-linux-fu-0991"
 $location = "uksouth"
 $tags = @{Environment = "Qa" }
@@ -46,7 +46,7 @@ New-AzResourceGroup -Name $resourceGroup -Location $location -Tag $tags -Force
 
 # Deploy all resources in the resource group with no data disk to an existing VNet
 
-New-AzResourceGroupDeployment -ResourceGroupName $resourceGroup -TemplateFile main_deploy_vm_no_extra_disk_to_outside_vnet.bicep `
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroup -TemplateFile ../main_deploy_vm_no_extra_disk_to_outside_vnet.bicep `
     -vmName $simpleVmName `
     -adminUsername $adminU `
     -resourceGroupVnetName $rgVnetName `

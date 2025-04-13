@@ -16,5 +16,9 @@ Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 ```
 
+* deploy.ps1
+* remove.ps1
+* TODO the others
+
 az-ps1 and cli reference https://follow-e-lo.com/azure-tips-for-test-vms/
 
