@@ -18,6 +18,7 @@ Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 * deploy.ps1
 * remove.ps1
+* manual_reset_user.ps1
 * verify.ps1
 * TODO the others
 
