@@ -1,4 +1,4 @@
-# Bicep Linux VM suing Powershell
+# Bicep Linux VM using Powershell
 
 ## 32 results for "bicep"
 
@@ -41,3 +41,6 @@ ssh user@ip-address
 
 ![Ssh example](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/ssh_example.jpg)
 
+## Bicep resource definition; Microsoft.Compute virtualMachines
+
+https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
