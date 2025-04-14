@@ -104,13 +104,13 @@ https://learn.microsoft.com/en-us/training/modules/extend-resource-manager-templ
 Custom script extension 1, inline
 
 ```json
-//
+// install something easy inline
 ```
 
 Custom script extension 2, https on github
 
 ```json
-//
+// install something easy remote script
 ```
 
 ## Use deployment stacks tbd
