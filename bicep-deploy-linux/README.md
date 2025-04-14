@@ -61,6 +61,8 @@ ssh user@ip-address
 
 #### Extend Bicep and ARM templates using deployment scripts
 
+Add custom steps to your Bicep or JSON Azure Resource Manager templates (ARM templates). Integrate deployment scripts with your deployment by using parameters and outputs.
+
 https://learn.microsoft.com/en-us/training/modules/extend-resource-manager-template-deployment-scripts/
 
 All Learn modules for Bicep
