@@ -1,9 +1,15 @@
 # Bicep Linux VM using Powershell
 
-## 32 results for "bicep"
+## Best practices for Bicep
 
-https://learn.microsoft.com/en-us/training/browse/?terms=bicep&source=learn
+* Parameters
+* Good naming
+* Think carefully about the parameters your template uses.
+* Be mindful of the default values you use.
 
+Read more:
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices
 
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
@@ -16,18 +22,6 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bice
 Read more:
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli
-
-## Best practices for Bicep
-
-* Parameters
-* Good naming
-* Think carefully about the parameters your template uses.
-* Be mindful of the default values you use.
-
-Read more:
-
-https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices
-
 
 ## Use ps1 scripts
 
@@ -107,3 +101,7 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-lin
 Read more:
 
 https://github.com/Azure/azure-linux-extensions
+
+## 32 results for "bicep"
+
+https://learn.microsoft.com/en-us/training/browse/?terms=bicep&source=learn
