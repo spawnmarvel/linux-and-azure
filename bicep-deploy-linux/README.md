@@ -95,6 +95,12 @@ https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
 
 ### Extend Bicep and ARM templates using deployment scripts TODO
 
+
+To test the script
+
+* Either run it on the vm 
+* or, run it outside the vm first, use Run command on vm.
+
 Focus on this one, see if you can use ps1 with bicep and the custom script extension for Linux and call a bash script.
 
 Add custom steps to your Bicep or JSON Azure Resource Manager templates (ARM templates). Integrate deployment scripts with your deployment by using parameters and outputs.
