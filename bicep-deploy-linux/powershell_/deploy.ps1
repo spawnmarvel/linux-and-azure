@@ -6,7 +6,7 @@ function Write-Log {
     )
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logEntry = "$timestamp - $Message"
-    $logFile = "../log.txt"
+    $logFile = "./log/log.txt"
     Add-Content -Path $logFile -Value $logEntry
 }
 
@@ -22,7 +22,7 @@ $location = "uksouth"
 $tags = @{Environment = "Qa" }
 
 # Read credentials from key vault file
-$fileName = "keyvault.txt"
+$fileName = "./config/keyvault.txt"
 $myArray = Get-Content -Path $fileName
 $adminU = $myArray[0]
 $adminP = $myArray[1]
