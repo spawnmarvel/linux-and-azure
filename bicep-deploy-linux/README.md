@@ -112,6 +112,9 @@ Custom script extension 2, https on github
 ```json
 // install something easy remote script
 ```
+Use the Azure Custom Script Extension Version 2 with Linux virtual machines
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux
 
 ## Use deployment stacks tbd
 
