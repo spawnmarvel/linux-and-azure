@@ -67,6 +67,7 @@ param tags object = {
   Environment: 'Test'
 }
 
+
 var imageReference = {
   'Ubuntu-1804': {
     publisher: 'Canonical'

@@ -56,3 +56,5 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroup -TemplateFile ".
     -virtualNetworkName $vnet `
     -subnetName $subnet `
     -WhatIf
+
+

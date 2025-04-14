@@ -1,5 +1,16 @@
 # Bicep Linux VM using Powershell
 
+When picking the right tool, consider your past experience and current work environment.
+
+* Azure CLI syntax is similar to that of Bash scripting. If you work primarily with Linux systems, Azure CLI feels more natural.
+* Azure PowerShell is a PowerShell module. If you work primarily with Windows systems, Azure PowerShell is a natural fit. 
+* * Commands follow a verb-noun naming scheme and data is returned as objects.
+
+With that said, being open-minded will only improve your abilities. Use a different tool when it makes sense.
+
+https://learn.microsoft.com/en-us/cli/azure/choose-the-right-azure-command-line-tool
+
+
 ## Best practices for Bicep
 
 * Parameters
@@ -36,19 +47,23 @@ Read more:
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli
 
-## Use ps1 scripts
+## Use ps1 scripts (but example in both)
+
+ps1
 
 ```ps1
 Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 ```
-
 * deploy.ps1
 * remove.ps1
 * manual_reset_user.ps1, Go to Portal->VM->Help->Reset password
 * verify.ps1
 * TODO the others
 
+```bash
+az login --tenant The-tenant-id-we-copied-from-azure-ad
+```
 
 az-ps1 and cli reference https://follow-e-lo.com/azure-tips-for-test-vms/
 
