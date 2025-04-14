@@ -48,8 +48,8 @@ ssh user@ip-address
 
 ## Learn modules for Bicep
 
-* You have done many, log in and do them again and do the rest also.
-* Skip th CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
+* You have done many, log in and do them again or just read to make notes.
+* Skip the CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
 
 ### Build your first Bicep template TBD
 
