@@ -89,7 +89,9 @@ Skip the CI/CD is much cost, focus on fundamentals and deployments script for co
 * Part 2: Intermediate Bicep TBD
 * Part 3: Advanced Bicep TBD
 
-#### Extend Bicep and ARM templates using deployment scripts TODO
+### Extend Bicep and ARM templates using deployment scripts TODO
+
+Focus on this one, se if you can use ps1 with bicep and the custom script extension for Linux and call a bash script.
 
 Add custom steps to your Bicep or JSON Azure Resource Manager templates (ARM templates). Integrate deployment scripts with your deployment by using parameters and outputs.
 
