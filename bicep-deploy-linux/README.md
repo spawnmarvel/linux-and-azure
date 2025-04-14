@@ -32,11 +32,6 @@ ssh user@ip-address
 
 ```
 
-
-## Bicep resource definition; Microsoft.Compute virtualMachines
-
-https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
-
 ## Learn modules for Bicep
 
 ### Build your first Bicep template
@@ -54,6 +49,11 @@ https://learn.microsoft.com/en-us/training/modules/extend-resource-manager-templ
 All Learn modules for Bicep
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
+
+
+## Bicep resource definition; Microsoft.Compute virtualMachines
+
+https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
 
 # Misc
 
