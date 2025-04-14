@@ -40,3 +40,8 @@ https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachi
 ## Virtual machine extensions and features for Linux
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?source=recommendations&tabs=azure-cli
+
+
+## Linux extensions for Microsoft Azure IaaS
+
+https://github.com/Azure/azure-linux-extensions
