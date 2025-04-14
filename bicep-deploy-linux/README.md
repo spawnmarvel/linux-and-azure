@@ -7,7 +7,27 @@ https://learn.microsoft.com/en-us/training/browse/?terms=bicep&source=learn
 
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
+Read more:
+
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-bicep?tabs=PowerShell
+
+## Quickstart: Create Bicep files with Visual Studio Code
+
+Read more:
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli
+
+## Best practices for Bicep
+
+* Parameters
+* Good naming
+* Think carefully about the parameters your template uses.
+* Be mindful of the default values you use.
+
+Read more:
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices
+
 
 ## Use ps1 scripts
 
@@ -34,13 +54,16 @@ ssh user@ip-address
 
 ## Learn modules for Bicep
 
-### Build your first Bicep template
+* You have done many, log in and do them again and do the rest also.
+* Skip th CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
 
-### Part 1: Fundamentals of Bicep
+### Build your first Bicep template TBD
 
-### Part 2: Intermediate Bicep
+### Part 1: Fundamentals of Bicep TBD
 
-### Part 3: Advanced Bicep 
+### Part 2: Intermediate Bicep TBD
+
+### Part 3: Advanced Bicep TBD
 
 #### Extend Bicep and ARM templates using deployment scripts
 
@@ -51,6 +74,14 @@ All Learn modules for Bicep
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
 
 
+## Use deployment stacks tbd
+
+### Introduction to deployment stacks
+
+### Build your first deployment stack
+
+### Manage resource lifecycles with deployment stacks
+
 ## Bicep resource definition; Microsoft.Compute virtualMachines
 
 https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
@@ -58,6 +89,8 @@ https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachi
 # Misc
 
 ## Virtual machine extensions and features for Linux
+
+Read more:
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?source=recommendations&tabs=azure-cli
 
@@ -70,4 +103,7 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-lin
 * OMS Agent
 * Diagnostic
 * Backup
+
+Read more:
+
 https://github.com/Azure/azure-linux-extensions
