@@ -20,6 +20,10 @@ Understanding and Using Project BICEP - The NEW Azure Deployment Technology
 
 https://www.youtube.com/watch?v=_yvb6NVx61Y
 
+## Install Bicep tools
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install#install-manually
+
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
 Read more:
