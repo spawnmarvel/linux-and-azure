@@ -11,6 +11,11 @@ Read more:
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/best-practices
 
+
+You can also look or export templates.
+
+VM | Automation -> Export template -> Bicep 
+
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
 Read more:
