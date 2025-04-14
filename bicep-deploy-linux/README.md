@@ -59,6 +59,12 @@ ssh user@ip-address
 
 ### Part 3: Advanced Bicep TBD
 
+#### Deploy resources to subscriptions, management groups, and tenants by using Bicep
+
+Deploy Azure resources at the subscription, management group, and tenant scope. Understand how Azure resources are deployed at different scopes, why this is important, and how to create Bicep code to deploy them. Create a single set of Bicep files that you can deploy across multiple scopes in one operation.
+
+https://learn.microsoft.com/en-us/training/paths/advanced-bicep/
+
 #### Extend Bicep and ARM templates using deployment scripts
 
 Add custom steps to your Bicep or JSON Azure Resource Manager templates (ARM templates). Integrate deployment scripts with your deployment by using parameters and outputs.
