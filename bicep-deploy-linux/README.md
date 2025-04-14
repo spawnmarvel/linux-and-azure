@@ -16,6 +16,10 @@ You can also look or export templates.
 
 VM | Automation -> Export template -> Bicep 
 
+Understanding and Using Project BICEP - The NEW Azure Deployment Technology
+
+https://www.youtube.com/watch?v=_yvb6NVx61Y
+
 ## Quickstart: Create an Ubuntu Linux virtual machine using a Bicep file and Powershell
 
 Read more:
