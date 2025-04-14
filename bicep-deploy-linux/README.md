@@ -55,15 +55,19 @@ All Learn modules for Bicep
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
 
+# Misc
+
 ## Virtual machine extensions and features for Linux
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?source=recommendations&tabs=azure-cli
 
-
 ## Linux extensions for Microsoft Azure IaaS
 
-### Custom Script
-
-### TBD
-
+* Custom Script
+* DSC
+* OS Patching
+* VM Access
+* OMS Agent
+* Diagnostic
+* Backup
 https://github.com/Azure/azure-linux-extensions
