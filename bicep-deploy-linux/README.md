@@ -37,6 +37,24 @@ ssh user@ip-address
 
 https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines?pivots=deployment-language-bicep
 
+## Learn modules for Bicep
+
+### Build your first Bicep template
+
+### Part 1: Fundamentals of Bicep
+
+### Part 2: Intermediate Bicep
+
+### Part 3: Advanced Bicep 
+
+#### Extend Bicep and ARM templates using deployment scripts
+
+https://learn.microsoft.com/en-us/training/modules/extend-resource-manager-template-deployment-scripts/
+
+All Learn modules for Bicep
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
+
 ## Virtual machine extensions and features for Linux
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?source=recommendations&tabs=azure-cli
