@@ -49,7 +49,7 @@ https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-
 
 ## Use ps1 scripts (but example in both)
 
-ps1
+Powershell
 
 ```ps1
 Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
@@ -60,6 +60,9 @@ Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 * manual_reset_user.ps1, Go to Portal->VM->Help->Reset password
 * verify.ps1
 * TODO the others
+
+
+Bash
 
 ```bash
 az login --tenant The-tenant-id-we-copied-from-azure-ad
@@ -74,7 +77,7 @@ ssh user@ip-address
 
 ```
 
-## Learn modules for Bicep
+## Learn modules for Bicep do them
 
 * You have done many, log in and do them again or just read to make notes.
 * Skip the CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
