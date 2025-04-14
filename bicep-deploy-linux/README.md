@@ -44,4 +44,8 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-lin
 
 ## Linux extensions for Microsoft Azure IaaS
 
+### Custom Script
+
+### TBD
+
 https://github.com/Azure/azure-linux-extensions
