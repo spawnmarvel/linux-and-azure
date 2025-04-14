@@ -55,10 +55,11 @@ Powershell
 Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 ```
-* deploy.ps1
-* remove.ps1
-* manual_reset_user.ps1, Go to Portal->VM->Help->Reset password
-* verify.ps1
+* deploy.ps1, does it work, else fix it = Y/N
+* remove.ps1, does it work, else fix it = Y/N
+* manual_reset_user.ps1, Go to Portal->VM->Help->Reset password, or make az cli for this
+
+* verify.ps1, does it work, else fix it = Y/N
 * TODO the others
 
 
