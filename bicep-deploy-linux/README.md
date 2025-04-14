@@ -47,7 +47,7 @@ Read more:
 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code?tabs=azure-cli
 
-## Use ps1 scripts (but example in both)
+## Use ps1 scripts (but example in both for connect)
 
 Powershell
 
@@ -56,12 +56,10 @@ Connect-AzAccount -TenantId The-tenant-id-we-copied-from-azure-ad
 
 ```
 * deploy.ps1, does it work, else fix it = Y/N
-* remove.ps1, does it work, else fix it = Y/N
-* manual_reset_user.ps1, Go to Portal->VM->Help->Reset password, or make az cli for this
-
-* verify.ps1, does it work, else fix it = Y/N
-* TODO the others
-
+* deploy_remove.ps1, does it work, else fix it = Y/N
+* deploy_manual_reset_user.ps1, Go to Portal->VM->Help->Reset password, or make az cli for this
+* deploy_verify.ps1, does it work, else fix it = Y/N
+* deploy_autoshutdown.ps1, does it work, else fix it = Y/N
 
 Bash
 
@@ -94,7 +92,6 @@ All Learn modules for Bicep
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
 
 ### Extend Bicep and ARM templates using deployment scripts TODO
-
 
 To test the script
 
