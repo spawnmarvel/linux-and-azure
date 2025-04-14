@@ -78,22 +78,18 @@ ssh user@ip-address
 
 ```
 
-## Learn modules for Bicep do them
+## Learn modules for Bicep
 
-* You have done many, log in and do them again or just read to make notes.
-* Skip the CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
+You have done many, log in and do them again or just read to make notes.
 
-### Build your first Bicep template TBD
+Skip the CI/CD is much cost, focus on fundamentals and deployments script for configuration of apps.
 
-### Part 1: Fundamentals of Bicep TBD
+* Build your first Bicep template TBD
+* Part 1: Fundamentals of Bicep TBD
+* Part 2: Intermediate Bicep TBD
+* Part 3: Advanced Bicep TBD
 
-### Part 2: Intermediate Bicep TBD
-
-### Part 3: Advanced Bicep TBD
-
-#### Deploy resources to subscriptions, management groups, and tenants by using Bicep
-
-#### Extend Bicep and ARM templates using deployment scripts
+#### Extend Bicep and ARM templates using deployment scripts TODO
 
 Add custom steps to your Bicep or JSON Azure Resource Manager templates (ARM templates). Integrate deployment scripts with your deployment by using parameters and outputs.
 
