@@ -99,7 +99,7 @@ https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/learn-bicep
 To test the script
 
 * Either run it on the vm 
-* or, run it outside the vm first, use Run command on vm.
+* or, run it outside the vm first, use vm | Operations -> Run command -> RunShellScript
 
 Focus on this one, see if you can use ps1 with bicep and the custom script extension for Linux and call a bash script.
 
