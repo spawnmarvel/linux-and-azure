@@ -519,7 +519,6 @@ The go to the webpage and add mysql connection.
 
 ![Mysql ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_ok_1.jpg)
 
-Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 Now lets get the data from tag1 and tag2 tables.
 
@@ -537,7 +536,8 @@ SELECT value, time FROM telegraf_db.tag1 ORDER BY time desc
 ```
 
 ![Mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_data.jpg)
-https://grafana.com/docs/grafana/latest/datasources/mysql/
+
+Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 
 ## Basic MySql and Normalization tbd
