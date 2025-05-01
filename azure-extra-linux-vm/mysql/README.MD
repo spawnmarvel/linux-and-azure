@@ -513,6 +513,7 @@ select * from tag1;
 
 ```
 
+[Mysql ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_ok.jpg)
 https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 
