@@ -513,7 +513,17 @@ select * from tag1;
 
 ```
 
+The go to the webpage and add mysql connection.
+
 ![Mysql ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_ok.jpg)
+https://grafana.com/docs/grafana/latest/datasources/mysql/
+
+Now lets get the data from tag1 and tag2 tables.
+
+The code editor was better.
+
+
+![Mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_data.jpg)
 https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 
