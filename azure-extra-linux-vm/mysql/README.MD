@@ -523,6 +523,15 @@ Now lets get the data from tag1 and tag2 tables.
 The code editor was better.
 
 
+
+```sql
+-- a
+SELECT value, time FROM telegraf_db.tag2 ORDER BY time desc
+
+--b 
+SELECT value, time FROM telegraf_db.tag1 ORDER BY time desc
+
+```
 ![Mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_data.jpg)
 https://grafana.com/docs/grafana/latest/datasources/mysql/
 
