@@ -1,4 +1,4 @@
-# MySQL query editor Grafana
+# MySQL query editor Grafana advanced
 
 ##  Grafana ships with the MySQL plugin, so no additional installation is required.
 
