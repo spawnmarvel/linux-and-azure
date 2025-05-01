@@ -496,8 +496,22 @@ Or docs for oss open source grafana version.
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
 
-MySQL data source
+## MySQL data source
 
+Lets add our mysql database and trend the tags.
+
+```sql
+CREATE USER 'grafanaReader'@'%' IDENTIFIED BY 'Noshareing789';
+GRANT SELECT ON telegraf_db.*  TO 'grafanaReader'@'%';
+
+mysql -u grafanaReader -p 
+-- privde pass
+use telegraf_db;
+
+select * from tag1;
+-- 2226 rows in set (0.00 sec)
+
+```
 
 https://grafana.com/docs/grafana/latest/datasources/mysql/
 
