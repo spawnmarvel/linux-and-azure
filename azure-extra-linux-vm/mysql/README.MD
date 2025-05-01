@@ -496,7 +496,7 @@ We must edit the admin password first time.
 ![Welcome grafana ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/welcome_grafana.jpg)
 
 
-
+Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 ## MySQL data source
 
