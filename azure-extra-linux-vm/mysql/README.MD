@@ -493,6 +493,9 @@ View Readme ai for how to install on this vmdocker01 https://github.com/spawnmar
 
 We must edit the admin password first time.
 
+![Welcome grafana ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/welcome_grafana.jpg)
+
+
 
 
 ## MySQL data source
@@ -515,7 +518,8 @@ select * from tag1;
 The go to the webpage and add mysql connection.
 
 ![Mysql ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_ok_1.jpg)
-https://grafana.com/docs/grafana/latest/datasources/mysql/
+
+Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
 
 Now lets get the data from tag1 and tag2 tables.
 
