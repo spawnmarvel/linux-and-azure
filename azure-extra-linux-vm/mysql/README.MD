@@ -501,7 +501,7 @@ We must edit the admin password first time.
 
 Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
 
-## MySQL data source
+## MySQL data source basic
 
 Lets add our mysql database and trend the tags since we now can login.
 
@@ -541,6 +541,10 @@ SELECT value, time FROM telegraf_db.tag1 ORDER BY time desc
 ![Mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_data.jpg)
 
 Docs https://grafana.com/docs/grafana/latest/datasources/mysql/
+
+## MySQL data source advanced (tbd)
+
+Read more and view tips and tricks https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_mysql_grafana_editor.md
 
 
 ## Basic MySql and Normalization tbd
