@@ -487,18 +487,17 @@ ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-wit
 
 ## Grafana dashboard Mysql connect
 
-View Readme ai for how to install
+View Readme ai for how to install on this vmdocker01 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_grafana.md
 
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_grafana.md
+(docs for oss open source grafana version https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/)
 
-Or docs for oss open source grafana version.
+We must edit the admin password first time.
 
-https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
 
 ## MySQL data source
 
-Lets add our mysql database and trend the tags.
+Lets add our mysql database and trend the tags since we now can login.
 
 ```sql
 CREATE USER 'grafanaReader'@'%' IDENTIFIED BY 'Noshareing789';
@@ -532,6 +531,7 @@ SELECT value, time FROM telegraf_db.tag2 ORDER BY time desc
 SELECT value, time FROM telegraf_db.tag1 ORDER BY time desc
 
 ```
+
 ![Mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/mysql_data.jpg)
 https://grafana.com/docs/grafana/latest/datasources/mysql/
 
