@@ -489,6 +489,9 @@ ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-wit
 
 View Readme ai for how to install
 
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_grafana.md
+
+Or docs for oss open source grafana version.
 
 https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 

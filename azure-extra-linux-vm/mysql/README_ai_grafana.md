@@ -90,6 +90,10 @@ To verify that Grafana is running, check its status:
 
 ```bash
 sudo systemctl status grafana-server
+
+ grafana-server.service - Grafana instance
+     Loaded: loaded (/lib/systemd/system/grafana-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2025-05-01 14:53:28 UTC; 20s ago
 ```
 
 You should see output indicating that the service is `active (running)`.
