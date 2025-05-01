@@ -487,7 +487,10 @@ ref https://github.com/spawnmarvel/linux-and-azure?tab=readme-ov-file#python-wit
 
 ## Grafana dashboard Mysql connect
 
-View Readme ai for how to install on this vmdocker01 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_grafana.md
+Grafana ships with the MySQL plugin, so no additional installation is required.
+
+
+View Readme for installtion on vmdocker01 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/README_ai_install_grafana.md
 
 (docs for oss open source grafana version https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/)
 
