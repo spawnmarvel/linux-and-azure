@@ -109,6 +109,18 @@ http://<your-server-ip>:3000
 
 Replace `<your-server-ip>` with your server's IP address. If you're installing Grafana on your local machine, use:
 
+NSG is in place for inbound 3000
+
+Make sure ufw is allowed for 3000
+
+```bash
+sudo ufw show added
+
+sudo ufw allow 3000
+```
+
+Then
+
 ```
 http://localhost:3000
 ```
