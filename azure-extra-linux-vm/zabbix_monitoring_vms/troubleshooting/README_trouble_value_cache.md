@@ -15,8 +15,6 @@ Every night at around 01:00, inbound flows are high also, like flodding port 100
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
 
 
-### Fix in progress
-
 Configuration tuning
 
 - [Go to fix in progress](#fix-in-progress)
