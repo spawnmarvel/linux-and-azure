@@ -233,7 +233,7 @@ Properly configuring CacheSize is crucial for optimising the performance of your
 Here is a comprehensive example configuration for zabbix_server.conf that optimises the cache settings for a setup with 6500 items and 3000 triggers:
 
 ```
-CacheSize=512M #
+CacheSize=512M
 ValueCacheSize=256M
 HistoryCacheSize=128M
 TrendCacheSize=64M
