@@ -15,7 +15,7 @@ Every night at around 01:00, inbound flows are high also, like flodding port 100
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
 
 
-- [Fix in progress](#fix-in-progress)
+- [Go to fix in progress](#fix-in-progress)
 
 
 ### Key Details About Zabbix Value Cache
@@ -197,6 +197,50 @@ Based on your diagnosis, take the appropriate steps to address the low value cac
 
 ---
 
-## Features
 
 ## Fix in progress
+
+Question:
+
+In zabbix 6.0.40. In Zabbix, the Value Cache is an internal mechanism used to improve the performance of the Zabbix server by caching item values in memory. This feature is particularly useful in large-scale Zabbix deployments where frequent access to historical data or trend data is required, as it reduces the load on the database and speeds up data retrieval. We are seeing many low hits for value cache? Why is that?
+
+We have 6500 items and 3000 trigger, and ValueCacheSize=128M
+
+CacheUpdateFrequency=60 is this ok?
+
+ValueCacheTTL not found
+
+answer:
+
+f you cannot find the ValueCacheTTL parameter in your zabbix_server.conf file, it's possible that this parameter was introduced or renamed in a later version of Zabbix, or it might not exist at all. As of Zabbix 6.0, there isn't a parameter explicitly named ValueCacheTTL in the official documentation.
+
+in Zabbix 6.0.40, there is no ValueCacheTTL parameter. So how long does the cache live?
+
+In Zabbix 6.0.40, the Value Cache does not have an explicit ValueCacheTTL parameter to define how long an item value lives in the cache. Instead, the lifetime of cached values is managed internally by the Zabbix server based on several factors, including cache size, update frequency, and data access patterns. Here's how the Value Cache lifetime is determined:
+
+Conclusion
+In Zabbix 6.0.40, the lifetime of cached values in the Value Cache is managed internally based on cache size, update frequency, and data access patterns. By adjusting parameters such as ValueCacheSize, CacheUpdateFrequency, and monitoring cache performance, you can optimise the Value Cache to improve the performance of your Zabbix server.
+
+Question:
+How about cachesize?
+
+Answer:
+
+The CacheSize parameter in Zabbix controls the total amount of memory (in bytes) allocated for all in-memory caches, 
+including the Value Cache, History Cache, and Trend Cache. 
+Properly configuring CacheSize is crucial for optimising the performance of your Zabbix server, especially in large-scale deployments.
+
+Here is a comprehensive example configuration for zabbix_server.conf that optimises the cache settings for a setup with 6500 items and 3000 triggers:
+
+```
+CacheSize=512M #
+ValueCacheSize=256M
+HistoryCacheSize=128M
+TrendCacheSize=64M
+CacheUpdateFrequency=60
+
+ValueCacheSize=256M
+StartValueCacheSize=128M
+
+LogLevel=4 / or 3 depends what you want to see
+```
