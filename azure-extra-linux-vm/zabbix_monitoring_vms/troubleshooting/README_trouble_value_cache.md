@@ -210,9 +210,9 @@ CacheUpdateFrequency=60 is this ok?
 
 ValueCacheTTL not found
 
-answer:
+Answer:
 
-f you cannot find the ValueCacheTTL parameter in your zabbix_server.conf file, it's possible that this parameter was introduced or renamed in a later version of Zabbix, or it might not exist at all. As of Zabbix 6.0, there isn't a parameter explicitly named ValueCacheTTL in the official documentation.
+If you cannot find the ValueCacheTTL parameter in your zabbix_server.conf file, it's possible that this parameter was introduced or renamed in a later version of Zabbix, or it might not exist at all. As of Zabbix 6.0, there isn't a parameter explicitly named ValueCacheTTL in the official documentation.
 
 in Zabbix 6.0.40, there is no ValueCacheTTL parameter. So how long does the cache live?
 
