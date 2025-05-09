@@ -15,7 +15,7 @@ Every night at around 01:00, inbound flows are high also, like flodding port 100
 ![Value cache ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/value_cache_hits.png)
 
 
-- [Features](#features)
+- [Fix in progress](#fix-in-progress)
 
 
 ### Key Details About Zabbix Value Cache
@@ -198,3 +198,5 @@ Based on your diagnosis, take the appropriate steps to address the low value cac
 ---
 
 ## Features
+
+## Fix in progress
