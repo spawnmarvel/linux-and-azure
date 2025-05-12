@@ -291,6 +291,30 @@ Trigger name a name max(item.insidentcount, 336h)>=1
 ### Fix 2 Check MySql and network
 
 
+Mysql ?
+
+Network and port flooding?
+
+
+### Fix 3 Docs Value cache
+
+Note:
+
+Value cache status can be observed by using the server runtime control option diaginfo (or diaginfo=valuecache) and inspecting the section for value cache diagnostic information. This can be useful for determining misconfigured triggers or calculated items.
+
+
+```ini
+zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,used]"
+zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,hits]"
+zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,misses]"
+
+# or just view them in gui
+
+```
+
+
+https://www.zabbix.com/documentation/current/en/manual/config/items/value_cache
+
 
 
 
