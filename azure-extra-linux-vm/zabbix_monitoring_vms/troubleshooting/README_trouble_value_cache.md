@@ -475,7 +475,14 @@ Why?
 * SSDs can handle much higher I/O rates (200 is for spinning disks).
 * Zabbix benefits from faster flushing (reduces latency).
 
-– innodb_io_capacity – set this to as many write iops as your disk subsystem can handle. For SSDs this should be at least a few thousand (2000 could be a good start) while for rotating disks somewhat lower values – 500-800, depending on the number of bearing disks, will do. Best to benchmark disks or do the math for actual numbers, but default of 200 is definitely too low for most systems nowadays.
+innodb_io_capacity – set this to as many write iops as your disk subsystem can handle. For SSDs this should be at least a few thousand (2000 could be a good start) while for rotating disks somewhat lower values – 500-800, depending on the number of bearing disks, will do. Best to benchmark disks or do the math for actual numbers, but default of 200 is definitely too low for most systems nowadays.
+
+
+We change to:
+```ini
+innodb_io_capacity=2000
+innodb_io_capacity_max=4000
+```
 
 
 ---
