@@ -391,6 +391,8 @@ This ok, no slow querys
 ---
 
 
+![Innodb read and reads](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_mysql.jpg)
+
 ### **4. Check for External Factors** TBD
 - **Network latency** (if using Zabbix proxies or remote agents).
 - **High CPU load** (`top`, `htop`).
