@@ -284,6 +284,12 @@ Test our old config, it is good:
 
 * 3h avg: (364.77 / (365.77 + 0.0014)) = 0.99999 * 100 = 99.9
 
+Disable this:
+
+Trigger name a name max(item.insidentcount, 336h)>=1
+
+### Fix 2 Check MySql and network
+
 
 
 
