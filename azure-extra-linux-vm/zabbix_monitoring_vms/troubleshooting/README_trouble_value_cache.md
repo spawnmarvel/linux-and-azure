@@ -234,14 +234,12 @@ Properly configuring CacheSize is crucial for optimising the performance of your
 
 Here is a comprehensive example configuration for zabbix_server.conf that optimises the cache settings for a setup with 6500 items and 3000 triggers:
 
-```
+```ini
 CacheSize=512M
 ValueCacheSize=256M
 HistoryCacheSize=128M
 TrendCacheSize=64M
 CacheUpdateFrequency=60
-
-ValueCacheSize=256M
 StartValueCacheSize=128M
 
 LogLevel=4 / or 3 depends what you want to see
@@ -263,101 +261,57 @@ The value cache is designed to store the most recent item values in memory so Za
 * Zabbix is querying the database too often → increased load
 * Performance drops, especially during evaluation of triggers
 
-2. Monitor Cache Usage Metrics
 
-Run the following command on the Zabbix server to check cache usage:
+### Refined Configuration for Zabbix 6.0.40
 
-```bash
-zabbix_server -R config_cache_reload
-zabbix_get -s 127.0.0.1 -k zabbix[cache,values]
+Here’s an updated and optimized configuration based on your setup (**6500 items, 3000 triggers**) and the symptoms you described:
+
+```ini
+# General caching
+CacheSize=768M              # Total memory for all caches (default: 8MB — way too low!)
+
+# Value Cache (most important for your issue)
+ValueCacheSize=512M         # Increased from 256M
+StartValueCacheSize=256M    # Initial allocation at startup
+
+# History & Trend Cache
+HistoryCacheSize=256M       # Was 128M — increase due to higher write pressure
+TrendCacheSize=128M         # Can stay or go to 256M if trend data is large/volatile
+
+CacheUpdateFrequency=60     # Default and usually fine
+
+# Poller processes (adjust based on CPU/RAM)
+StartPollers=10             # Increase if CPU allows (default: 5)
+StartPollersUnreachable=5   # Keep default or increase if many hosts are unreachable
+StartPollersPerDB=10        # Helps distribute DB writes (tune carefully)
+
+# Optional but useful
+Timeout=4                   # Increase if agents are slow to respond
+LogSlowQueries=3000         # Log DB queries taking longer than 3 seconds (helpful for tuning DB)
 ```
 
-Or look at the Zabbix frontend:
+Use these internal checks (available since Zabbix 5.0+) to evaluate real-world cache behavior:
 
-Administration → Queue
-Administration → Monitoring → Performance
-
-Also check logs:
-
-```bash
-grep "Value cache" /var/log/zabbix/zabbix_server.log
-
-```
-You might see lines like:
-
-Value cache size is too small to store history for all the items. Used 95.45% of configured size.
-
-If you're constantly above 80-90% usage, you’ll need to increase the cache further.
-
-Increase ValueCacheSize further. With 6500 items and 3000 triggers, 256M might still be too little if many items change frequently.
-
-3. Revisit Your Cache Settings
-
-Increase ValueCacheSize further. With 6500 items and 3000 triggers, 256M might still be too little if many items change frequently.
-
-```log
-ValueCacheSize=512M
-StartValueCacheSize=256M
-```
-
-4. Tune CacheUpdateFrequency
-
-Try lowering it to 30 seconds, especially if you frequently change item/triggers configuration:
-
-```log
-CacheUpdateFrequency=60
-```
-
-5. Disable or Optimize Unused Items and Triggers
-
-* Clean up unused items or triggers.
-* Disable rarely used items or move them to low-frequency intervals.
-* Use trapper or external check for data that doesn’t need frequent polling.
-
-6. Zabbix Housekeeping and Database Optimization
-
-Is ok
-
-7. Proxy vs Server Load
-
-na
-
-8. Zabbix Server Threads
-
-Zabbix Server Threads, Make sure you’ve tuned:
-
-```log
-StartPollers=10
-StartPollersUnreachable=5
-StartTrappers=10
-StartDBSyncers=4
-StartHistoryPollers=10
-StartHistorySyncers=10
-StartPreprocessors=10
-StartEscalators=2
-StartTimers=2
-```
-These affect how fast values are processed and stored, which relates to cache behavior.
+| Metric                             | Description                                 |
+|-----------------------------------|---------------------------------------------|
+| `zabbix[cache,value]`             | Current size of Value Cache                 |
+| `zabbix[cache,value,hits]`        | Number of cache hits per second             |
+| `zabbix[cache,value,misses]`      | Number of cache misses per second           |
+| `zabbix[cache,value,size]`        | Max allowed size (should match ValueCacheSize) |
+| `zabbix[cache,value,utilization]` | Percentage used                             |
 
 
-9. Other Settings to Consider
+Hit ratio = (hits / (hits + misses)) * 100
 
-```log
-HistoryStorageDateIndex=1 — speeds up queries
-```
 
-* HistoryStorageDateIndex=1 — speeds up queries
+Test our old config, it is good:
 
-## 📌 Summary: Next Steps todo
+* 3h avg: (364.77 / (365.77 + 0.0014)) = 0.99999 * 100 = 99.9
 
-| Area | Action |
-|------|--------|
-| ValueCacheSize | Increase to 512M or more |
-| StartValueCacheSize | 50% of ValueCacheSize |
-| CacheUpdateFrequency | Lower to 30 |
-| Items/Triggers | Audit and reduce unnecessary checks |
-| DB Performance | Optimize queries, housekeeping, or use TimescaleDB |
-| Threads | Adjust Zabbix processing threads |
-| Monitoring | Enable internal checks on cache performance |
+Target: Keep hit ratio above 90%. If below 70–80%, increase ValueCacheSize or investigate frequent short-polling items.
 
----
+
+
+
+
+
