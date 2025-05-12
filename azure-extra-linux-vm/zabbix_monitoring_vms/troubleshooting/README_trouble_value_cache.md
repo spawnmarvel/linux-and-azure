@@ -253,3 +253,111 @@ Check after the weekend, hm still low.
 
 Next step, is it db backup on microsoft?
 Search microsoft for azure mysql backup information.
+
+### Fix 1 after initial fix
+
+1. Understand What Low Value Cache Hit Rate Means
+
+The value cache is designed to store the most recent item values in memory so Zabbix doesn’t have to query the database repeatedly. A low hit rate means:
+
+* Zabbix is querying the database too often → increased load
+* Performance drops, especially during evaluation of triggers
+
+2. Monitor Cache Usage Metrics
+
+Run the following command on the Zabbix server to check cache usage:
+
+```bash
+zabbix_server -R config_cache_reload
+zabbix_get -s 127.0.0.1 -k zabbix[cache,values]
+```
+
+Or look at the Zabbix frontend:
+
+Administration → Queue
+Administration → Monitoring → Performance
+
+Also check logs:
+
+```bash
+grep "Value cache" /var/log/zabbix/zabbix_server.log
+
+```
+You might see lines like:
+
+Value cache size is too small to store history for all the items. Used 95.45% of configured size.
+
+If you're constantly above 80-90% usage, you’ll need to increase the cache further.
+
+Increase ValueCacheSize further. With 6500 items and 3000 triggers, 256M might still be too little if many items change frequently.
+
+3. Revisit Your Cache Settings
+
+Increase ValueCacheSize further. With 6500 items and 3000 triggers, 256M might still be too little if many items change frequently.
+
+```log
+ValueCacheSize=512M
+StartValueCacheSize=256M
+```
+
+4. Tune CacheUpdateFrequency
+
+Try lowering it to 30 seconds, especially if you frequently change item/triggers configuration:
+
+```log
+CacheUpdateFrequency=60
+```
+
+5. Disable or Optimize Unused Items and Triggers
+
+* Clean up unused items or triggers.
+* Disable rarely used items or move them to low-frequency intervals.
+* Use trapper or external check for data that doesn’t need frequent polling.
+
+6. Zabbix Housekeeping and Database Optimization
+
+Is ok
+
+7. Proxy vs Server Load
+
+na
+
+8. Zabbix Server Threads
+
+Zabbix Server Threads, Make sure you’ve tuned:
+
+```log
+StartPollers=10
+StartPollersUnreachable=5
+StartTrappers=10
+StartDBSyncers=4
+StartHistoryPollers=10
+StartHistorySyncers=10
+StartPreprocessors=10
+StartEscalators=2
+StartTimers=2
+```
+These affect how fast values are processed and stored, which relates to cache behavior.
+
+
+9. Other Settings to Consider
+
+```log
+HistoryStorageDateIndex=1 — speeds up queries
+```
+
+* HistoryStorageDateIndex=1 — speeds up queries
+
+## 📌 Summary: Next Steps todo
+
+| Area | Action |
+|------|--------|
+| ValueCacheSize | Increase to 512M or more |
+| StartValueCacheSize | 50% of ValueCacheSize |
+| CacheUpdateFrequency | Lower to 30 |
+| Items/Triggers | Audit and reduce unnecessary checks |
+| DB Performance | Optimize queries, housekeeping, or use TimescaleDB |
+| Threads | Adjust Zabbix processing threads |
+| Monitoring | Enable internal checks on cache performance |
+
+---
