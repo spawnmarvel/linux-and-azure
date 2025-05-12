@@ -288,7 +288,7 @@ Disable this:
 
 Trigger name a name max(item.insidentcount, 336h)>=1
 
-### Fix 2 Check MySql and network
+### Fix 2 Check MySql and network TBD
 
 
 Mysql ?
@@ -296,28 +296,105 @@ Mysql ?
 Network and port flooding?
 
 
-### Fix 3 Docs Value cache
+### Fix 3 Cache is 99.99
 
-Note:
+Q: 
+zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have check and we get 99.99, but still hits chnage from 400 vps to 200 vps from time to time, what more to check?
 
-Value cache status can be observed by using the server runtime control option diaginfo (or diaginfo=valuecache) and inspecting the section for value cache diagnostic information. This can be useful for determining misconfigured triggers or calculated items.
+A:
+If your **Zabbix Value Cache hit ratio is 99.99%** but the **hits per second (VPS) fluctuate between 200 and 400**, this suggests that while the cache is highly efficient, there may still be underlying performance issues. Here’s what to investigate further:
 
+---
+
+### **1. Check Cache Size vs. Usage**
+Run:
+```bash
+zabbix_server -c /etc/zabbix/zabbix_server.conf -R diaginfo=valuecache
+
+# zabbix_server: This is the Zabbix server daemon.
+# -c /etc/zabbix/zabbix_server.conf: Specifies the configuration file to use.
+# -R diaginfo=valuecache: This is a runtime control command that tells the Zabbix server to return diagnostic information about the value cache.
+
+```
+- **If `used` is close to `ValueCacheSize` (e.g., 95%+):**
+  - The cache is **nearly full**, causing occasional evictions.
+  - **Solution:** Increase `ValueCacheSize` (e.g., from `512M` to `768M`).
+
+- **If `used` is low (e.g., <50%):**
+  - The cache is **underutilized**, but something else is causing fluctuations.
+  - **Check:** Database bottlenecks or poller delays.
+
+---
+
+We have: or view zabbix_diagnostics.txt in this folder
 
 ```ini
-zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,used]"
-zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,hits]"
-zabbix_get -s 127.0.0.1 -k "zabbix[valuecache,misses]"
 
-# or just view them in gui
+Items:3295 values:57279 mode:0 time:0.000965
+Memory:
+  size: free:266518696 used:1689944
+  chunks: free:456 used:13697 min:24 max:266385648
+  buckets:
+      24:26
+      32:91
+      48:53
+      56:3
+      64:1
+      96:1
+      112:9
+      128:3
+      176:2
+      192:4
+      256+:263
+Top.values:
+  itemid:60581 values:1734 request.values:1682
+
+[...]
+
 
 ```
 
+From your diaginfo=valuecache output, here's the analysis and recommended actions:
 
-https://www.zabbix.com/documentation/current/en/manual/config/items/value_cache
+1. Cache Usage
+
+Total Size: 266,518,696 bytes (~254MB)
+Used: 1,689,944 bytes (~1.6MB)
+Free: 266,518,696 bytes (~254MB)
+Utilization: ~0.63% (extremely low)
+
+2. Items vs. Values
+Items: 3,295
+Values: 57,279
+Ratio: ~17 values per item (normal for active monitoring)
+3. Performance
+Time: 0.000965s (very fast response)
+
+### **2. Monitor Database Performance** TBD
+#### **A. Check Slow Queries**
+- **MySQL:**
+  ```sql
+  SHOW GLOBAL STATUS LIKE 'Slow_queries';
+  SET GLOBAL slow_query_log = 'ON';
+  SET GLOBAL long_query_time = 1;  # Log queries slower than 1s
+  ```
+
+This ok, no slow querys
+
+#### **B. Check Database Cache Hit Ratio**
+- **MySQL:**
+  ```sql
+  SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_read%';
+  ```
+  - **Buffer pool hit ratio** should be **>99%**.
+
+---
 
 
+### **4. Check for External Factors** TBD
+- **Network latency** (if using Zabbix proxies or remote agents).
+- **High CPU load** (`top`, `htop`).
+- **Disk I/O bottlenecks** (`iostat -x 1`).
 
-
-
-
+---
 
