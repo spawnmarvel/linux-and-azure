@@ -449,14 +449,14 @@ innodb_buffer_pool_instances=8  # 1 instance per 1.5GB (12.5GB/8)
 *This reduces contention in multi-core systems.*
 
 #### **C. Optimize InnoDB Settings**
-Add to `my.cnf`:
+Add to `my.cnf` or edit in azure:
 ```ini
 innodb_flush_log_at_trx_commit=2  # Slightly less durable, but faster
 innodb_io_capacity=2000           # For SSD storage
 innodb_io_capacity_max=4000
 ```
 
-Settings now
+Settings current:
 
 ```ini
 innodb_io_capacity=200           
