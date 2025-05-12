@@ -457,7 +457,24 @@ innodb_io_capacity_max=4000
 ```
 
 Settings now
+
+```ini
+innodb_io_capacity=200           
+innodb_io_capacity_max=2000
+```
+
 ![Innodb settings ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/innodb.jpg)
+
+Current Issue:
+
+* innodb_io_capacity=200 is too low for modern SSDs (default is 200 for HDDs).
+* innodb_io_capacity_max=2000 is reasonable but could be higher for burst handling.
+
+Why?
+SSDs can handle much higher I/O rates (200 is for spinning disks).
+Zabbix benefits from faster flushing (reduces latency).
+
+
 ---
 
 ### **2. Zabbix-Specific Tuning**
