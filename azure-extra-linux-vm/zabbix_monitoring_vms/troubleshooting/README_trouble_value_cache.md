@@ -264,31 +264,6 @@ The value cache is designed to store the most recent item values in memory so Za
 
 ### Refined Configuration for Zabbix 6.0.40
 
-Here’s an updated and optimized configuration based on your setup (**6500 items, 3000 triggers**) and the symptoms you described:
-
-```ini
-# General caching
-CacheSize=768M              # Total memory for all caches (default: 8MB — way too low!)
-
-# Value Cache (most important for your issue)
-ValueCacheSize=512M         # Increased from 256M
-StartValueCacheSize=256M    # Initial allocation at startup
-
-# History & Trend Cache
-HistoryCacheSize=256M       # Was 128M — increase due to higher write pressure
-TrendCacheSize=128M         # Can stay or go to 256M if trend data is large/volatile
-
-CacheUpdateFrequency=60     # Default and usually fine
-
-# Poller processes (adjust based on CPU/RAM)
-StartPollers=10             # Increase if CPU allows (default: 5)
-StartPollersUnreachable=5   # Keep default or increase if many hosts are unreachable
-StartPollersPerDB=10        # Helps distribute DB writes (tune carefully)
-
-# Optional but useful
-Timeout=4                   # Increase if agents are slow to respond
-LogSlowQueries=3000         # Log DB queries taking longer than 3 seconds (helpful for tuning DB)
-```
 
 Use these internal checks (available since Zabbix 5.0+) to evaluate real-world cache behavior:
 
@@ -303,12 +278,13 @@ Use these internal checks (available since Zabbix 5.0+) to evaluate real-world c
 
 Hit ratio = (hits / (hits + misses)) * 100
 
+Target: Keep hit ratio above 90%. If below 70–80%, increase ValueCacheSize or investigate frequent short-polling items.
 
 Test our old config, it is good:
 
 * 3h avg: (364.77 / (365.77 + 0.0014)) = 0.99999 * 100 = 99.9
 
-Target: Keep hit ratio above 90%. If below 70–80%, increase ValueCacheSize or investigate frequent short-polling items.
+
 
 
 
