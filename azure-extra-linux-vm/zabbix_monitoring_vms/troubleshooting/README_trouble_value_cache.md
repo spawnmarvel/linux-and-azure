@@ -247,5 +247,9 @@ StartValueCacheSize=128M
 LogLevel=4 / or 3 depends what you want to see
 ```
 
-Check after the weekend
+Check after the weekend, hm still low.
 
+![VCH low](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/zabbix_01.jpg)
+
+Next step, is it db backup?
+Search microsoft for azure mysql backup information.
