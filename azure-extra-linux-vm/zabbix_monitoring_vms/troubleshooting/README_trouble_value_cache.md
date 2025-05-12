@@ -393,6 +393,77 @@ This ok, no slow querys
 
 ![Innodb read and reads](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_mysql.jpg)
 
+Based on your **InnoDB buffer pool metrics**, here's the analysis and action plan to optimize Zabbix performance:
+
+### **Key Metrics Analysis**
+| Metric | Value | Interpretation |
+|--------|-------|----------------|
+| **Innodb_buffer_pool_reads** | 60 (avg) | **Physical disk reads per second** (should be as low as possible) |
+| **Innodb_buffer_pool_read_requests** | 1.5M | **Logical read requests** (high, but expected for Zabbix) |
+
+#### **Buffer Pool Hit Ratio Calculation**
+```
+Hit Ratio = (1 - (Innodb_buffer_pool_reads / Innodb_buffer_pool_read_requests)) * 100
+          = (1 - (60 / 1,500,000)) * 100
+          = ~99.996% (excellent)
+```
+- **Your buffer pool is highly efficient** (99.996% hit ratio).
+- **But 60 disk reads/sec is still too high** for optimal Zabbix performance.
+
+---
+
+### **Root Cause & Solutions**
+#### **1. Database Bottleneck (Most Likely)**
+- **Issue:** Even with a 99.99% hit ratio, **60 disk reads/sec** can cause latency.
+- **Solutions:**
+  - **Increase `innodb_buffer_pool_size`** (if <70% of RAM):
+    ```ini
+    innodb_buffer_pool_size = 8G  # Set to 70-80% of available RAM
+    ```
+   We have innodb_buffer_pool_size= 12884901888, Ram on DBAS is General Purpose, D4ds_v4, 4 vCores, 16 GiB RAM, 100 storage, 600 IOPS
+
+  - **Optimize slow queries** (check `slow_query_log`):
+    ```sql
+    SET GLOBAL slow_query_log = ON;
+    SET GLOBAL long_query_time = 0.5;  # Log queries >0.5s
+    ```
+  - **Add indexes** for frequently queried tables:
+    ```sql
+    ALTER TABLE history ADD INDEX (itemid, clock);
+    ALTER TABLE trends ADD INDEX (itemid, clock);
+    ```
+
+#### **2. Zabbix Cache Tuning**
+- **Reduce `CacheUpdateFrequency`** to minimize DB queries:
+  ```ini
+  CacheUpdateFrequency=15  # Default is 60, lower = more frequent updates
+  ```
+- **Increase `ValueCacheSize`** (if cache hits drop):
+  ```ini
+  ValueCacheSize=512M  # Start with 512MB, monitor usage
+  ```
+
+#### **3. Check for External Factors**
+- **Disk I/O bottlenecks** (`iostat -x 1`):
+  - If `%util` is near 100%, consider **SSD storage** or **RAID 10**.
+- **Network latency** (if using proxies):
+  - Check `ping` and `traceroute` to remote agents.
+
+---
+
+### **Immediate Actions**
+1. **Increase `innodb_buffer_pool_size`** (most critical).
+2. **Enable slow query logging** to identify problematic queries.
+3. **Monitor disk I/O** (`iostat -x 1`).
+4. **Adjust Zabbix cache settings** as above.
+
+---
+
+### **Expected Outcome**
+- **Disk reads (`Innodb_buffer_pool_reads`)** should drop below **10/sec**.
+- **Zabbix performance** will improve (faster frontend, fewer timeouts).
+
+
 ### **4. Check for External Factors** TBD
 - **Network latency** (if using Zabbix proxies or remote agents).
 - **High CPU load** (`top`, `htop`).
