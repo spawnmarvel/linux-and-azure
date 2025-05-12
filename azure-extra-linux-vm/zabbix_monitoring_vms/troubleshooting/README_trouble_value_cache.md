@@ -420,14 +420,105 @@ Hit Ratio = (1 - (Innodb_buffer_pool_reads / Innodb_buffer_pool_read_requests)) 
     ```ini
     innodb_buffer_pool_size = 8G  # Set to 70-80% of available RAM
     ```
-   We have innodb_buffer_pool_size= 12884901888 (12.5GB), Ram on DBAS is General Purpose, D4ds_v4, 4 vCores, 16 GiB RAM, 100 storage, 600 IOPS
+We have innodb_buffer_pool_size= 12884901888 (12.5GB), Ram on DBAS is General Purpose, D4ds_v4, 4 vCores, 16 GiB RAM, 100 storage, 600 IOPS
 
-  
+### **1. Database Optimization (Critical)**
 
-### **Expected Outcome**
-- **Disk reads (`Innodb_buffer_pool_reads`)** should drop below **10/sec**.
-- **Zabbix performance** will improve (faster frontend, fewer timeouts).
+Given your **`innodb_buffer_pool_size=12884901888`** (≈12.5GB), here’s the optimized action plan for your Zabbix 6.0.40 setup:
 
+
+#### **A. Verify Buffer Pool Efficiency**
+Run these MySQL queries to confirm performance:
+```sql
+-- Check current buffer pool usage
+SHOW ENGINE INNODB STATUS\G
+-- Look for "BUFFER POOL AND MEMORY" section.
+
+-- Check hit ratio (should be >99.9%)
+SELECT (1 - (SELECT variable_value FROM performance_schema.global_status
+            WHERE variable_name = 'Innodb_buffer_pool_reads') /
+            (SELECT variable_value FROM performance_schema.global_status
+            WHERE variable_name = 'Innodb_buffer_pool_read_requests')) * 100 AS hit_ratio;
+```
+
+#### **B. Adjust `innodb_buffer_pool_instances`**
+For 12.5GB buffer pool, set:
+```ini
+innodb_buffer_pool_instances=8  # 1 instance per 1.5GB (12.5GB/8)
+```
+*This reduces contention in multi-core systems.*
+
+#### **C. Optimize InnoDB Settings**
+Add to `my.cnf`:
+```ini
+innodb_flush_log_at_trx_commit=2  # Slightly less durable, but faster
+innodb_io_capacity=2000           # For SSD storage
+innodb_io_capacity_max=4000
+```
+
+---
+
+### **2. Zabbix-Specific Tuning**
+#### **A. Adjust Cache Sizes**
+In `zabbix_server.conf`:
+```ini
+CacheSize=2G                     # Total cache
+ValueCacheSize=1G                # 50% of total
+HistoryCacheSize=512M            # 25% of total
+TrendCacheSize=256M              # 12.5% of total
+HistoryIndexCacheSize=128M       # For faster history queries
+TrendIndexCacheSize=64M          # For faster trend queries
+```
+
+#### **B. Optimize Poller Performance**
+```ini
+StartPollers=30                  # Increase if CPU allows
+StartPollersUnreachable=10
+StartTrappers=15
+CacheUpdateFrequency=15          # More frequent updates
+```
+
+---
+
+### **3. Monitor Key Metrics**
+#### **A. Database Performance**
+```bash
+# Check InnoDB metrics
+mysql -e "SHOW ENGINE INNODB STATUS\G" | grep -A 20 "BUFFER POOL"
+
+# Check slow queries
+mysql -e "SELECT * FROM sys.statements_with_runtimes_in_95th_percentile\G"
+```
+
+#### **B. Zabbix Cache Efficiency**
+```bash
+zabbix_server -c /etc/zabbix/zabbix_server.conf -R diaginfo=valuecache
+```
+- **Target:** `hits > 99%`, `used < 80% of ValueCacheSize`.
+
+---
+
+### **4. Expected Improvements**
+| Change | Impact |
+|--------|--------|
+| `innodb_buffer_pool_instances=8` | Reduces CPU contention |
+| `ValueCacheSize=1G` | Fewer database queries |
+| `CacheUpdateFrequency=15` | Fresher cache data |
+| `HistoryIndexCacheSize=128M` | Faster history queries |
+
+---
+
+### **5. Final Checks**
+1. **Restart MySQL and Zabbix** after changes.
+2. **Monitor for 24 hours**:
+   ```bash
+   watch -n 5 "mysql -e 'SHOW GLOBAL STATUS LIKE \"Innodb_buffer_pool_read%\"'"
+   ```
+3. **If disk reads persist**, consider:
+   - **SSD storage** for database files.
+   - **Partitioning large tables** (`history`, `trends`).
+
+Would you like help analyzing specific slow queries or disk I/O patterns?
 
 ### **4. Check for External Factors** TBD
 - **Network latency** (if using Zabbix proxies or remote agents).
