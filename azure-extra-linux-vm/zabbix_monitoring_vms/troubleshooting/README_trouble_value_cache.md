@@ -480,10 +480,11 @@ innodb_io_capacity – set this to as many write iops as your disk subsystem can
 
 We change to:
 ```ini
-innodb_io_capacity=2000
+innodb_io_capacity=400
 innodb_io_capacity_max=4000
 ```
 
+Check after that.
 
 ---
 
