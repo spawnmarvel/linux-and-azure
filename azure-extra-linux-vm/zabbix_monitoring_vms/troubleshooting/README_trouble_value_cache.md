@@ -456,6 +456,8 @@ innodb_io_capacity=2000           # For SSD storage
 innodb_io_capacity_max=4000
 ```
 
+Settings now
+![Innodb settings ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/innodb.jpg)
 ---
 
 ### **2. Zabbix-Specific Tuning**
