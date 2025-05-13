@@ -1,4 +1,4 @@
-# Zabbix and Linux by Zabbix agent (templates) learn monitoring (2 vms)
+# Stack for int, real, short text monitoring Zabbix and Linux by Zabbix agent (2 vms)
 
 Example with Zabbix server and a Linux VM with Linux template as test bases for passiv or active agent.
 
