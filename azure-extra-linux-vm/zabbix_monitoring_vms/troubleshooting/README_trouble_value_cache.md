@@ -486,6 +486,10 @@ innodb_io_capacity_max=4000
 
 13.05.2025 09:10
 
+Trigger :
+
+last(/Zabbix server/zabbix[vcache,cache,hits])<200
+
 Check after that?????
 
 ---
