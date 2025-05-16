@@ -511,6 +511,9 @@ We see value cache hits low on
 
 Check Mysql for same pattern.
 
+
+View 1 Low cache hits and Low network out mysql.png
+
 Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/README_innodb.md
 
 ### **2. Zabbix-Specific Tuning** tbd
