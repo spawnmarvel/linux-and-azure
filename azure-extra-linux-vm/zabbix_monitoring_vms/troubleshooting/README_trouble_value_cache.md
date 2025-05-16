@@ -506,8 +506,12 @@ We see value cache hits low on
 * 04:00 to 04:10, small dips
 * 06:00 to 06:10, small dips
 
+
+### Go to monitor innodb
+
 Check Mysql for same pattern.
 
+Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/README_innodb.md
 
 ### **2. Zabbix-Specific Tuning** tbd
 #### **A. Adjust Cache Sizes**
