@@ -484,6 +484,8 @@ innodb_io_capacity=400
 innodb_io_capacity_max=4000
 ```
 
+Bck assumed time Azure Database for MySQL Flexible server backup is managed by Azure itself (PAAS) hence duration we can't see. Start time is  '2025-05-13 04:30 UTC'. Retention  :- 24 hours. 
+
 13.05.2025 09:10
 
 Trigger added:
@@ -496,7 +498,16 @@ Trigger name a name max(item.insidentcount, 336h)>=1
 
 Check after that?????
 
----
+Now it is stabile, 16.05.2025 10:55.
+
+We see value cache hits low on
+
+* 01:00 to 03:00 each night, one big dip
+* 04:00 to 04:10, small dips
+* 06:00 to 06:10, small dips
+
+Check Mysql for same pattern.
+
 
 ### **2. Zabbix-Specific Tuning** tbd
 #### **A. Adjust Cache Sizes**
