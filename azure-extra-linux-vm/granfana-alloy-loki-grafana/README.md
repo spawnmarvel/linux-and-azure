@@ -13,6 +13,8 @@ https://grafana.com/docs/loki/latest/send-data/alloy/
 
 grafana_alloy
 
+![grafana_alloy] (https://github.com/spawnmarvel/linux-and-azure/blob/main/images/grafana_alloy.jpg)
+
 ## Loki
 
 Grafana Loki is a set of open source components that can be composed into a fully featured logging stack. A small index and highly compressed chunks simplifies the operation and significantly lowers the cost of Loki.
