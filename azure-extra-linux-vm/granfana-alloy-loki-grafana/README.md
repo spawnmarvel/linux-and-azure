@@ -1,11 +1,15 @@
-# Stack for log monitoring, Telegraf, Loki and Grafana
+# Stack for log monitoring, Grafana Alloy, Loki and Grafana
 
 Telegraf as your log collector instead of Logstash, you'll still need a backend storage and indexing solution, as well as a visualization tool.
 If you are already using Grafana and are looking for a cost-effective and relatively simple setup, Telegraf + Grafana Loki is a great option.
 
 
 
-## Telegraf
+## Grafana Alloy
+
+Grafana Alloy is a versatile observability collector that can ingest logs in various formats and send them to Loki. We recommend Alloy as the primary method for sending logs to Loki, as it provides a more robust and feature-rich solution for building a highly scalable and reliable observability pipeline.
+
+https://grafana.com/docs/loki/latest/send-data/alloy/
 
 ## Loki
 
