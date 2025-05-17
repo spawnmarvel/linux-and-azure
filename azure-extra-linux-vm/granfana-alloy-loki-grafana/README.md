@@ -11,6 +11,8 @@ Grafana Alloy is a versatile observability collector that can ingest logs in var
 
 https://grafana.com/docs/loki/latest/send-data/alloy/
 
+grafana_alloy
+
 ## Loki
 
 Grafana Loki is a set of open source components that can be composed into a fully featured logging stack. A small index and highly compressed chunks simplifies the operation and significantly lowers the cost of Loki.
