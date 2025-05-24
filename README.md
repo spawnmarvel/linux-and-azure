@@ -26,9 +26,60 @@ https://gitforwindows.org/
 ## ssh ps1
 
 ```ps1
+# First, verify if the OpenSSH client is installed:
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+
+# If you see output like this, it's installed:
+# Name  : OpenSSH.Client~~~~0.0.1.0
+# State : Installed
+
+# If it's not installed, proceed to the next step.
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+
+# The simplest way to connect is using the ssh command:
 ssh user@10.10.10.11
 
 ```
+SSH with Key-Based Authentication (Recommended)
+
+```ps1
+
+# Generate a Key Pair (on your PowerShell machine):
+ssh-keygen
+
+# This will ask you where to save the key (the default is usually fine:
+# C:\Users\your_username\.ssh\id_rsa, and for a passphrase (optional, but recommended for extra security)
+
+```
+It creates two files
+
+* id_rsa (private key - keep this secret!)
+* id_rsa.pub (public key - this is what you'll copy to the Ubuntu machine)
+
+There are several ways to do this. The easiest (if you have password access initially) is ssh-copy-id:
+
+```ps1
+ssh-copy-id username@ubuntu_ip_address
+```
+If ssh-copy-id isn't available, you can manually copy the public key:
+1. Display the public key: type C:\Users\your_username\.ssh\id_rsa.pub
+2. Copy the entire output.
+3. SSH to the Ubuntu machine using a password.
+4. Create the .ssh directory if it doesn't exist: mkdir -p ~/.ssh
+5. Edit the ~/.ssh/authorized_keys file (create it if it doesn't exist): nano ~/.ssh/authorized_keys
+6. Paste the public key into the file. Save and close the file.
+7. Set the correct permissions: chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
+
+Connect without a Password
+
+```ps1
+
+# Now, when you run
+ssh username@ubuntu_ip_address
+# it should connect without asking for a password (if you used a passphrase, it will ask for that).
+```
+
+
 
 ## Bash quick reference
 
