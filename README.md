@@ -190,19 +190,38 @@ az upgrade --yes
 
 ```
 
-## Logs
+## Log all things in one tail
 
 ```bash
 # if no logs here
 cd /var/logs
 
-# Check the Journal for all app logs in one tail
-journalctl -u logstash.service -f --no-pager
-
 # Check syslog (Older systems or if journal isn't used) for all app logs in one tail
-sudo tail -f /var/log/syslog or tail -f /var/log/messages
+# This is a common log file on Debian-based systems (like Ubuntu). It contains a wide variety of system messages, including
+# Kernel, applications, system events, errors and warning
+sudo tail -f /var/log/syslog
 
+# This is another log file, often found on older or different Linux distributions (like Red Hat/CentOS). 
+# It's similar to syslog in that it contains general system messages. 
+# On many modern Ubuntu systems, /var/log/messages is often a symbolic link to /var/log/syslog.
+sudo tail -f /var/log/messages
 
+# /var/log/grafana
+sudo tail -f grafana.log
+
+# /var/log/telegraf
+sudo tail -f telegraf.logs
+
+# This command is used on systems that use systemd (which is most modern Linux distributions, including Ubuntu) to view logs from a specific service.
+# This is the command-line tool for querying and displaying logs from the systemd journal.
+# Check the Journal for all app logs in one tail
+# This option tells journalctl to filter the logs and only show entries related to the logstash.service unit. 
+# A "unit" in systemd represents a service, socket, device, mount point, etc. logstash.service is the systemd unit file that manages the Logstash service.
+# The --no-pager option disables the pager and displays the logs directly to the terminal, scrolling as new entries are added.
+sudo journalctl -u logstash.service -f --no-pager
+
+# The Direct Equivalent (Closest Match) to sudo tail -f /var/log/syslog
+sudo journalctl -f -p err..emerg
 ```
 
 ## List of Basic SSH Commands Linux (ubuntu 20.04)
