@@ -190,6 +190,20 @@ az upgrade --yes
 
 ```
 
+## Grep it
+
+```bash
+
+# /etc/telegraf
+cat telegraf.conf
+
+# Get data source name for example
+cat telegraf.conf | grep "data_source_name"
+
+# Get Hostname info
+cat zabbix_agentd.conf | grep "Hostname*"
+
+```
 ## Log all things in one tail
 
 ```bash
