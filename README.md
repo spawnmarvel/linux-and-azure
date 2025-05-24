@@ -1,4 +1,4 @@
-# linux-and-azure
+# linux-and-azure all things guide
 
 # Set Up a Firewall with UFW on Ubuntu
 
@@ -9,37 +9,6 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-se
 ## Install Azure CLI on Windows
 
 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
-
-## Run Linux on Windows
-
-Git for Windows provides a BASH emulation used to run Git from the command line. *NIX users should feel right at home, as the BASH emulation behaves just like the "git" command in LINUX and UNIX environments.
-
-https://gitforwindows.org/
-
-```bash
-# comment
-
-mdkdir testfolder
-
-cd testfolder
-
-pwd
-# /c/Users/username/testfolder
-
-nano file
-
-$ cat file
-#!/bin/bash
-echo "we are on windows"
-v="my var"
-echo "$v"
-
-$ bash file
-# we are on windows
-# my var
-
-```
-
 
 
 ## VSC Terminal Shell Integration
@@ -53,6 +22,13 @@ https://code.visualstudio.com/docs/terminal/shell-integration
 Git for Windows provides a BASH emulation used to run Git from the command line. *NIX users should feel right at home, as the BASH emulation behaves just like the "git" command in LINUX and UNIX environments.
 
 https://gitforwindows.org/
+
+## ssh ps1
+
+```ps1
+ssh user@10.10.10.11
+
+```
 
 ## Bash quick reference
 
@@ -163,6 +139,20 @@ az upgrade --yes
 
 ```
 
+## Logs
+
+```bash
+# if no logs here
+cd /var/logs
+
+# Check the Journal for all app logs in one tail
+journalctl -u logstash.service -f --no-pager
+
+# Check syslog (Older systems or if journal isn't used) for all app logs in one tail
+sudo tail -f /var/log/syslog or tail -f /var/log/messages
+
+
+```
 
 ## List of Basic SSH Commands Linux (ubuntu 20.04)
 
