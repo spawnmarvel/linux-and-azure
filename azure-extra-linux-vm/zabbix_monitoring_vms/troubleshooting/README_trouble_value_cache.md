@@ -559,12 +559,50 @@ Do you have triggers that look back a significant amount of time? Examples:
 
 Action: Identify which triggers are being evaluated around the times you see the misses. Check their functions and the time periods they cover.
 
-Time for misses
+Time for misses last 7 days
 
-*
+* 21 05 2025, 07:08
+* 22 05 2025, 06:44
+* 22 05 2025, 17.26
+* 25 05 2025, 18:26
+* 26 05 2025, 15:30 - 16:00 self fixed
+* 27 05 2025, 01:00 - 01:45 and 06:10 - 07:00 and 18:00 - 19:30
+* 28 05 2025, 01:00 - 02:30 
+Added trigger Value cache misses high > 200
+
+When do it fire again? Check triggers from above.
 
 
+trendavg(/Goodtech Log Agent Alarms And Events/SafetyOverview.json.InsidentCount,5h:now/h)>0.1
 
+* trendavg uses TRENDS, not HISTORY.
+* This specific trigger (trendavg) DOES NOT use the Zabbix Value Cache.
+* Therefore, this trigger cannot be the cause of your Value Cache misses.
+* While this trigger doesn't cause Value Cache misses, it does cause database queries against your trends tables. Because trends are hourly, these queries are usually much "cheaper" (fewer rows to process) than history queries. 
+* However, if you have many such triggers, they still contribute to the overall database load. 
+* Your innodb_io_capacity settings will help your database handle these trends table queries efficiently.
+
+
+Since this trendavg trigger isn't the culprit for Value Cache misses, you need to go back to looking at triggers that use HISTORY-based functions. These are the functions that rely on the Value Cache to avoid hitting the database.
+
+Look for triggers using functions like:
+
+* last() (especially with #N where N > 1)
+
+* last()
+* avg()
+* min()
+* max()
+* sum(), etc.: 
+
+These functions operate on the historical data collected for an item. Zabbix maintains a value cache (history cache) for recently collected values to speed up the evaluation of these functions. They directly use these cached numerical or textual values.
+
+Pay close attention to the time periods used. A trigger checking avg(..., 1h)
+
+* nodata(): 
+
+This function checks if Zabbix has received any new data for an item within a specified period.
+While Zabbix needs to know when the last value arrived (which is metadata about the item), nodata() isn't processing a series of cached values in the way avg() or sum() would. It's checking for the absence of an update.
 
 
 ### **2. Zabbix-Specific Tuning** tbd
