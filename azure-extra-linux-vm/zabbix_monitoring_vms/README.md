@@ -394,6 +394,58 @@ View collected metrics with allow 10051, remove NSG
 
 
 
+## Zabbix Agent Configuration Guide
+
+In Zabbix, the agent mode determines how the agent communicates with the Zabbix server or proxy. There are two main modes:
+
+This guide explains how to configure the Zabbix Agent in both passive and active modes, including port usage, configuration file settings, and restart instructions for both Linux and Windows.
+
+Passive Mode (default)
+In passive mode, the Zabbix server or proxy connects to the agent to request data.
+
+* Port used: 10050 (TCP)
+* Direction: Server/Proxy → Agent
+
+Configuration
+Edit the Zabbix agent config file:
+
+Linux: /etc/zabbix/zabbix_agentd.conf
+Windows: C:\Program Files\Zabbix Agent\zabbix_agentd.conf
+Set the following parameter:
+
+```bash
+Server=your.zabbix.server.ip
+
+sudo systemctl restart zabbix-agent
+```
+Windows: Restart the "Zabbix Agent" service from the Services panel.
+
+Active Mode
+In active mode, the Zabbix agent connects to the server or proxy and pushes data.
+
+* Port used: 10051 (TCP)
+* Direction: Agent → Server/Proxy
+
+Configuration
+Edit the Zabbix agent config file:
+
+Linux: /etc/zabbix/zabbix_agentd.conf
+Windows: C:\Program Files\Zabbix Agent\zabbix_agentd.conf
+Set the following parameters:
+
+```bash
+ServerActive=your.zabbix.server.ip
+Hostname=your-agent-hostname
+
+sudo systemctl restart zabbix-agent
+```
+Windows: Restart the "Zabbix Agent" service from the Services panel.
+
+Dual Mode (Optional)
+
+You can enable both modes by setting both Server and ServerActive in the config file.
+
+
 ### Troubleshooting
 
 View folder troubleshooting 
