@@ -396,6 +396,12 @@ View collected metrics with allow 10051, remove NSG
 
 ## Zabbix Agent Configuration Guide
 
+* Trapping is not agent, but port is 10051 and no interface is needed
+* Agent passive, 10050 and interface needed, template name, can use userparamter also
+* Agent active, 10050 and 10051 and interface needed, template name active, can use userparamter also
+
+https://follow-e-lo.com/2022/09/30/zabbix-agent-active-vs-passive/
+
 In Zabbix, the agent mode determines how the agent communicates with the Zabbix server or proxy. There are two main modes:
 
 This guide explains how to configure the Zabbix Agent in both passive and active modes, including port usage, configuration file settings, and restart instructions for both Linux and Windows.
