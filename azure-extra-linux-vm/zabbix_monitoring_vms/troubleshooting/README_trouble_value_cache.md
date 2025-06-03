@@ -793,6 +793,10 @@ The confirmed observations are:
 This strongly suggests that the **surge in inbound network traffic is directly causing the trapper processes to become unresponsive or stop.**
 
 
+TOP IP ADDRESSS
+
+Stop zabbix agent or upgrade it.
+
 ![Trapper down, network up](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/4%20Trapper%20util%20down%2018%20and%20network%20up.jpg)
 ---
 
