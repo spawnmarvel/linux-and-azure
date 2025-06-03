@@ -613,46 +613,92 @@ Value cache hits are low at:
 * 01:00 to 02:30
 
 
-# Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck TODO
+Thanks for providing your Zabbix version: **6.0.40 LTS**. This is an important detail!
 
-Problem: Low Value cache, hits (and associated false alarms) during 12:00-13:30, 18:00-19:30, and 01:00-02:30.
+Knowing it's an LTS version means it's generally stable, but performance issues can always arise from scale, configuration, or underlying hardware. Zabbix 6.0 introduced some significant changes, particularly around the audit log and internal process management, but 6.0.40 has had many bug fixes since the initial 6.0 release.
 
-Key Diagnostic: Zabbix server: Zabbix data gathering process busy % peaks during these times, but the Value cache, % free metric remains stable, and Value cache, misses does not spike.
+Your specific observation that "Zabbix data gathering process busy %" peaks (but doesn't last as long as the value cache hit drops) is still the key. This strongly points to the initial data collection and processing as the primary bottleneck, with downstream effects lingering.
 
-Interpretation:
+Here's the refined plan, keeping Zabbix 6.0.40 in mind:
 
-This indicates that data collection processes are overloaded, leading to a backlog. Data isn't even making it to the point where the value cache would be effectively utilized, or internal processes are too busy to request/populate the cache efficiently. The cache itself isn't the direct bottleneck; it's being starved.
+---
 
-1. Immediate Action: Identify & Scale Overloaded Polling Processes
-Since "Zabbix data gathering process busy %" is peaking, the very first thing is to identify which specific types of pollers are contributing to this.
+## **Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck** TODO
 
-During your next peak time window:
+**Problem:** Low `Value cache, hits` (and associated false alarms) during 12:00-13:30, 18:00-19:30, and 01:00-02:30.
+**Key Diagnostic:** `Zabbix server: Zabbix data gathering process busy %` peaks during these times, but the `Value cache, % free` metric remains stable, and `Value cache, misses` does not spike.
+**Interpretation:** This indicates that data collection processes are overloaded, leading to a backlog. Data isn't even making it to the point where the value cache would be effectively utilized, or internal processes are too busy to request/populate the cache efficiently. The cache itself isn't the direct bottleneck; it's being starved.
 
-1. Go to Monitoring -> Hosts -> Your Zabbix Server Host -> Latest Data.
+---
 
-2. Graph these specific Zabbix internal items for avg,pused (average busy percentage) for individual poller types:
+### **1. Immediate Action: Identify & Scale Overloaded Polling Processes**
 
-```bash
-Zabbix server | Internal process busy % for poller (key: zabbix[process,poller,avg,pused]) - Most common agent-based checks.
-Zabbix server | Internal process busy % for unreachable poller (key: zabbix[process,unreachable poller,avg,pused]) - Hosts that are down/unreachable.
-Zabbix server | Internal process busy % for http poller (key: zabbix[process,http poller,avg,pused]) - Web scenarios/HTTP agent items.
-Zabbix server | Internal process busy % for java poller (key: zabbix[process,java poller,avg,pused]) - JMX monitoring.
-Zabbix server | Internal process busy % for snmp poller (key: zabbix[process,snmp poller,avg,pused]) - SNMP monitoring.
-Zabbix server | Internal process busy % for pinger (key: zabbix[process,pinger,avg,pused]) - icmpping and other simple checks.
-Zabbix server | Internal process busy % for trapper (key: zabbix[process,trapper,avg,pused]) - Active agent checks, Zabbix sender, Zabbix proxies sending data.
+Since "Zabbix data gathering process busy %" is peaking, the very first thing is to identify *which specific types of pollers* are contributing to this.
 
-```
+**During your next peak time window:**
 
-3. Identify the Culprits: Note down which of these process types are consistently hitting high busy percentages (>80-90%) during the peak.
+1.  Go to **Monitoring -> Hosts -> Your Zabbix Server Host -> Latest Data**.
+2.  **Graph these specific Zabbix internal items for `avg,pused` (average busy percentage) for *individual* poller types:**
+    * `Zabbix server | Internal process busy %` for `poller` (key: `zabbix[process,poller,avg,pused]`) - *Most common agent-based checks.*
+    * `Zabbix server | Internal process busy %` for `unreachable poller` (key: `zabbix[process,unreachable poller,avg,pused]`) - *Hosts that are down/unreachable.*
+    * `Zabbix server | Internal process busy %` for `http poller` (key: `zabbix[process,http poller,avg,pused]`) - *Web scenarios/HTTP agent items.*
+    * `Zabbix server | Internal process busy %` for `java poller` (key: `zabbix[process,java poller,avg,pused]`) - *JMX monitoring.*
+    * `Zabbix server | Internal process busy %` for `snmp poller` (key: `zabbix[process,snmp poller,avg,pused]`) - *SNMP monitoring.*
+    * `Zabbix server | Internal process busy %` for `pinger` (key: `zabbix[process,pinger,avg,pused]`) - *`icmpping` and other simple checks.*
+    * `Zabbix server | Internal process busy %` for `trapper` (key: `zabbix[process,trapper,avg,pused]`) - *Active agent checks, Zabbix sender, Zabbix proxies sending data.*
 
-Increase Workers in zabbix_server.conf:
+3.  **Identify the Culprits:** Note down which of these process types are consistently hitting high busy percentages (>80-90%) during the peak.
 
-* For each identified overloaded poller type, increase its corresponding Start... parameter in /etc/zabbix/zabbix_server.conf.
-* Recommendation for 6.0.x: Zabbix 6.0 is efficient, but if a poller type is consistently maxed out, it needs more workers. Start by doubling the default/current value for the specific processes. For example:
-* If poller is maxed: StartPollers=XX (increase XX)
-* If http poller is maxed: StartHTTPPollers=YY (increase YY)
-* If trapper is maxed: StartTrappers=ZZ (increase ZZ)
+4.  **Increase Workers in `zabbix_server.conf`:**
+    * For *each* identified overloaded poller type, increase its corresponding `Start...` parameter in `/etc/zabbix/zabbix_server.conf`.
+    * **Recommendation for 6.0.x:** Zabbix 6.0 is efficient, but if a poller type is consistently maxed out, it needs more workers. Start by doubling the default/current value for the specific processes. For example:
+        * If `poller` is maxed: `StartPollers=XX` (increase `XX`)
+        * If `http poller` is maxed: `StartHTTPPollers=YY` (increase `YY`)
+        * If `trapper` is maxed: `StartTrappers=ZZ` (increase `ZZ`)
+    * **Save changes and restart Zabbix server:** `sudo systemctl restart zabbix-server`
+    * **Monitor Again:** Observe the graphs during the next peak to see if the busy percentages have dropped and if the value cache hits improve.
 
-Save changes and restart Zabbix server: sudo systemctl restart zabbix-server
+### **2. Check for Downstream Bottlenecks (Lingering Effects)**
 
-Monitor Again: Observe the graphs during the next peak to see if the busy percentages have dropped and if the value cache hits improve.
+Even if polling recovers, if the internal queue or other processing stages are bogged down, the value cache issue will persist.
+
+* **`Zabbix server | Zabbix queue (total)` (`zabbix[queue]`)**:
+    * **Crucial:** Graph this. Does the queue **spike *and then remain elevated* for an extended period** even after the "Zabbix data gathering process busy %" has subsided?
+    * **Why:** A lingering queue indicates a bottleneck *after* data collection. Data is collected, but it's stuck waiting to be written to the database or processed for triggers.
+
+* **`Zabbix server | Internal process busy %` for `history syncer`**:
+    * **Look for:** Does this process stay at **high busy percentages** even after the initial data gathering peak subsides, or does it stay high *throughout* the problem period?
+    * **Why:** Overloaded history syncers prevent collected data from being written to the database quickly. This means the latest data isn't available for trigger evaluation or for the value cache.
+    * **Action:** If `history syncer` is high, **increase `StartHistorySyncers`** in `zabbix_server.conf`.
+
+* **`Zabbix server | Internal process busy %` for `trigger checker`**:
+    * **Look for:** Does this process also stay at **high busy percentages** during and after the data gathering peak?
+    * **Why:** Even if data is eventually collected, if trigger checkers are overloaded, they can't evaluate expressions in time, leading to delayed alerts and false positives.
+    * **Action:** If `trigger checker` is high, **increase `StartTriggerCheckers`** in `zabbix_server.conf`.
+
+### **3. Database Write Performance (If `history syncer` remains busy)**
+
+If increasing `StartHistorySyncers` doesn't fully resolve their busy percentage, the bottleneck is very likely the database's ability to handle the write load.
+
+* **Disk I/O (`iostat -x 1` or `atop -d 1` on DB server)**:
+    * **Focus:** Pay close attention to **write IOPS (`w/s`) and disk utilization (`%util`)** on the database server.
+    * **Why:** Zabbix writes a massive amount of data to `history*` and `trends*` tables. If your storage can't keep up, it starves `history syncer` processes.
+    * **Action:**
+        * Re-verify your storage's actual random write IOPS capacity (e.g., using `fio`).
+        * **Increase `innodb_io_capacity` further** in MySQL configuration if your storage can handle more than 600 IOPS. Increase `innodb_io_capacity_max` proportionally.
+        * Investigate MySQL write-tuning parameters: `innodb_flush_log_at_trx_commit` (adjust with extreme caution for durability trade-offs), `innodb_log_file_size`, and `innodb_buffer_pool_size`.
+
+* **MySQL Slow Query Log**:
+    * **Focus:** Look for **slow `INSERT` queries** to `history` and `trends` tables within the problem time windows.
+
+### **4. Systemic Workload Causes**
+
+* **Housekeeping:** Confirm when Zabbix housekeeping runs. If it overlaps with your peak times and the `housekeeper` process is busy, this is a major conflict. **Action:** Disable internal housekeeping (`DisableHousekeeping=1`) and implement external database partitioning (e.g., using TimescaleDB for PostgreSQL, or custom scripts for MySQL).
+* **Low-Level Discovery (LLD) Rules:** Check if any LLD rules are scheduled to run at precisely 12:00, 18:00, or 01:00. A sudden influx of newly discovered items, triggers, and graphs can create a significant, albeit short-lived, spike in data collection and processing load.
+* **Number of Values per Second (NVPS):** Look at your Zabbix server's `zabbix[vps]` metric. Does it spike significantly at these times? If your NVPS is consistently high or spikes beyond your server's capacity, you may need to:
+    * Reduce polling intervals for less critical items.
+    * Filter out unnecessary data at the agent level.
+    * Deploy Zabbix proxies to offload polling from the main server.
+    * Upgrade Zabbix server CPU/RAM.
+
+By systematically addressing these points, starting with the overloaded Zabbix internal processes responsible for data gathering and flow, you should be able to resolve the root cause of your value cache hit drops and subsequent false alarms in Zabbix 6.0.40.
