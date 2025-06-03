@@ -771,7 +771,11 @@ Even though you've identified the issue as inactivity rather than overload, it's
 
 * Ensure `StartTrappers` is uncommented and set to a reasonable non-zero value (e.g., `StartTrappers=5` or `10`). If it were set to 0, that would explain the inactivity.
 
-### **4. System-Level Monitoring During Problem Windows**
+```bash
+StartTrappers=20
+```
+
+### **4. System-Level Monitoring During Problem Windows** TODO
 
 Use general system monitoring tools to see if the server itself is experiencing issues that could indirectly cause Zabbix processes to halt.
 
@@ -780,25 +784,90 @@ Use general system monitoring tools to see if the server itself is experiencing 
     * Are there other processes that consume excessive resources during these times?
 * **Network Activity:** Is there any unusual network activity that could be overwhelming the server or causing connections to drop?
 
-### **5. Database Activity (If applicable)**
+Okay, this is another **critical piece of information that ties everything together!**
 
-If your database is on the same server, or if Zabbix trappers somehow lose connection to the database.
+The confirmed observations are:
+1.  `Zabbix server: Utilization of trapper data collector processes, in %` goes to **zero** during **18:00-19:30 and 01:00-02:30**. This means trappers are **inactive**.
+2.  **Inbound network flows to the Linux Zabbix server are *doubled* during these same periods.**
 
-* Are there any heavy database operations (e.g., large queries, backups, index rebuilds) scheduled for 18:00-19:30 or 01:00-02:30 that could make the database unresponsive for Zabbix?
-
-### **6. Zabbix Proxy Logs (If you use proxies)**
-
-If you have Zabbix proxies configured to send data via trapping to the Zabbix server, check their logs during these times.
-
-* Are they reporting issues connecting to the Zabbix server or sending data? Look for error messages like "cannot connect to Zabbix server" or "failed to send data."
+This strongly suggests that the **surge in inbound network traffic is directly causing the trapper processes to become unresponsive or stop.**
 
 ---
 
-**Prioritized Steps:**
+## **Diagnosis: Network Saturation & Trapper Inactivity**
 
-1.  **Increase `DebugLevel` for `zabbix_server.log` to 4 or 5.**
-2.  **Wait for the next 18:00-19:30 or 01:00-02:30 window.**
-3.  **Immediately after, analyze the `zabbix_server.log` for clues.** This will likely tell you *why* the trapper processes are going to zero.
-4.  **Concurrently, investigate all scheduled tasks/cron jobs** on your Zabbix server. This often explains timed behavior.
+The Zabbix trapper processes are designed to listen for incoming connections and data. If the server's network interface or underlying network infrastructure is overwhelmed by a sudden doubling of inbound flows, it can lead to:
 
-Finding out *why* the trappers become inactive is paramount. Once that's identified, the solution will likely be to stop whatever is interfering with them.
+1.  **Connection Drops/Timeouts:** Zabbix agents/proxies/senders cannot establish or maintain connections to the trapper port (default 10051) because the server is too busy processing the overwhelming inbound traffic.
+2.  **Resource Exhaustion:** Even if the network card isn't fully saturated, the Linux kernel's network stack (socket buffers, connection tracking) or Zabbix's processes (limited file descriptors, memory for connections) might be overwhelmed by the sheer volume of connections or data.
+3.  **Process Starvation:** Other system processes (including Zabbix trappers) might get starved of CPU cycles or memory due to the intense network processing, leading them to become unresponsive or even crash/stop (though "zero busy %" is more indicative of a lack of work/connections).
+
+Since trappers are going to **zero percent busy**, it means they are effectively receiving no new connections or data, not that they are merely overloaded. The doubled inbound flow is preventing data from reaching them.
+
+---
+
+## **Action Plan: Identify and Mitigate the Network Surge**
+
+This is now a network and system capacity problem, not purely a Zabbix configuration one.
+
+### **1. Identify the Source and Nature of the Inbound Network Flow**
+
+This is paramount. What is this doubled traffic?
+
+* **NetFlow/sFlow/IPFIX Data (if available):** If you have network monitoring tools that collect flow data from your switches/routers, this is the best way to identify:
+    * **Source IPs:** Where is this doubled traffic coming from? (Is it Zabbix agents/proxies, or something else entirely?)
+    * **Destination Ports:** What port is this traffic hitting on the Zabbix server? (Is it just Zabbix port 10051, or other ports like 80/443 for web, SSH, database port?)
+    * **Traffic Volume:** How much data (MB/s or Gb/s) is it?
+* **Packet Capture (e.g., `tcpdump`):**
+    * If flow data isn't available, perform a packet capture *during* the problematic windows.
+    * **Command (run just before 18:00 or 01:00):**
+        ```bash
+        sudo tcpdump -i <your_network_interface> -nn -s0 -w /tmp/network_spike.pcap port 10051 or port 80 or port 443 or port <your_db_port> -vvv &
+        # Replace <your_network_interface> (e.g., eth0, ens192) and <your_db_port>
+        # Run for 15-30 minutes during the spike. Stop with `kill %1` (if run in background) or Ctrl+C
+        ```
+    * **Analysis:** Use Wireshark to open `network_spike.pcap`. Look at conversations, top talkers, and protocol distribution during the spike.
+* **Linux Network Monitoring (`netstat`, `ss`, `iftop`, `nload`):**
+    * **`ss -tuna | grep ESTAB | wc -l`**: Number of established TCP connections. Does this spike?
+    * **`ss -tuna '( dport = :10051 )'`**: See established connections to Zabbix trapper port. Does this number fluctuate wildly or drop to zero?
+    * **`iftop -i <interface>` or `nload -i <interface>`**: Real-time bandwidth usage. Confirms the doubling.
+    * **`netstat -s`**: Look at TCP segment retransmissions, dropped packets, etc. (system-wide network stats).
+
+### **2. Analyze the Nature of the Traffic Surge**
+
+* **Is it legitimate Zabbix traffic?**
+    * Are many Zabbix agents suddenly starting active checks at these times?
+    * Are Zabbix proxies suddenly flushing large amounts of accumulated data?
+    * Are you using Zabbix Sender from many sources or sending very large data sets?
+* **Is it *non*-Zabbix traffic?**
+    * Could it be a separate application sending a huge amount of logs, files, or performing large database synchronizations?
+    * Could it be a Denial of Service (DoS) attack or a misconfigured scanning tool?
+
+### **3. Address the Problematic Inbound Flow**
+
+* **If it's Legitimate Zabbix Traffic (Active Checks/Proxies/Sender):**
+    * **Scale Out with Proxies:** If not already using them, deploy Zabbix proxies to offload data collection from the main server. They buffer data and send it in larger batches, reducing per-item network chatter to the server.
+    * **Review Active Agent Configuration:** Check the `RefreshActiveChecks` interval on your Zabbix Agents. Is there a synchronization issue where many agents request active checks at the same time? Are many active checks collecting very verbose data?
+    * **Optimize Items:** Reduce the frequency or amount of data collected by active agent items (e.g., fewer logs, smaller strings).
+    * **Increase `StartTrappers`:** While they go to zero now, if the *cause* of the zero is external network pressure, increasing `StartTrappers` *might* help them handle more connections if the network saturation is just shy of full blockage. This should be tried *after* trying to mitigate the surge itself.
+    * **Increase Network Interface Capacity:** If your server's network card or link is truly saturated, you might need to upgrade to 10Gbps or bond multiple interfaces.
+    * **Tune Linux Network Stack:** Increase kernel parameters related to network buffers (`net.core.rmem_max`, `net.core.wmem_max`, `net.ipv4.tcp_rmem`, `net.ipv4.tcp_wmem`, `net.ipv4.tcp_max_syn_backlog`, `net.core.somaxconn`). **Consult experienced Linux network engineers for this.**
+
+* **If it's Non-Zabbix Traffic:**
+    * **Identify the Source:** Trace the source IPs and shut down/reconfigure the offending application/host.
+    * **Firewall Rules:** Implement firewall rules (`iptables` / `firewalld`) to block the problematic traffic source or destination port if it's unwanted.
+    * **QoS (Quality of Service):** If it's legitimate but less critical traffic, implement QoS rules on network devices to prioritize Zabbix traffic.
+
+---
+
+**Prioritized Action Plan:**
+
+1.  **Collect Network Flow Data/Packet Capture:** This is the most critical step to understand the nature and source of the doubled inbound traffic.
+2.  **Analyze Logs:** Continue monitoring Zabbix server logs with `DebugLevel=4` during these times for clues about connection issues or trapper process behavior.
+3.  **Identify the Source & Nature:** Determine *what* is causing the network surge and *why* it happens at those specific times (scheduled backups, mass deployments, external scans, application syncs, etc.).
+4.  **Mitigate:**
+    * If it's unwanted: Block it via firewall.
+    * If it's Zabbix-related: Scale out with proxies, optimize active checks, or increase server/network capacity.
+    * If it's other legitimate traffic: Prioritize Zabbix traffic (QoS) or upgrade network infrastructure.
+
+The "zero busy %" for trappers combined with doubled inbound flows is a clear sign that data isn't even making it *to* the trappers. Fixing the network saturation during these windows is the core solution.
