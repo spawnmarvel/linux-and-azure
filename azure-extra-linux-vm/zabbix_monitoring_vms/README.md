@@ -543,6 +543,8 @@ Yes, a single Zabbix agent **can send data to more than one Zabbix server (or Za
 
 **In summary, yes, a Zabbix agent can send to multiple Zabbix servers by listing them in the `Server` and/or `ServerActive` parameters, but be mindful of potential data duplication and manage your monitoring configurations on each server accordingly.**
 
+https://www.zabbix.com/forum/zabbix-help/379138-one-node-monitored-by-2-differents-zabbix-servers
+
 ### Troubleshooting
 
 View folder troubleshooting 
