@@ -419,8 +419,6 @@ View collected metrics with allow 10051, remove NSG
 
 ## Conclusion: It all comes down to who is responsible for the processing and use of power
 
-
-
 ## Zabbix Agent Configuration Guide
 
 * Trapping is not agent, but port is 10051 and no interface is needed
@@ -477,6 +475,11 @@ Windows: Restart the "Zabbix Agent" service from the Services panel.
 Dual Mode (Optional)
 
 You can enable both modes by setting both Server and ServerActive in the config file.
+
+## One agent send to multiple zabbix servers HA
+
+
+https://www.zabbix.com/documentation/current/en/manual/concepts/server/ha
 
 
 ### Troubleshooting
