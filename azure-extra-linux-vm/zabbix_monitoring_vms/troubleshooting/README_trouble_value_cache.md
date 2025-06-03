@@ -1,4 +1,4 @@
-# Value Cache
+# Value Cache Hits low
 
 In Zabbix, the **Value Cache** is an internal mechanism used to improve the performance of the Zabbix server by caching item values in memory. This feature is particularly useful in large-scale Zabbix deployments where frequent access to historical data or trend data is required, as it reduces the load on the database and speeds up data retrieval.
 
@@ -670,89 +670,86 @@ The value cache is used by trigger functions and calculated items that need to q
 
 Let's refine the troubleshooting priorities based on this.
 
+Okay, this is another very important piece of the puzzle!
+
+"**Zabbix server: Zabbix data gathering process busy %**" peaking at those times (12:00-13:30, 18:00-19:30, 01:00-02:30), but **not lasting as long** as the value cache hit drops, tells us a lot.
+
+This metric (`zabbix[process,all,avg,pused]`) is an aggregation of all data gathering processes (pollers, unreachable pollers, HTTP pollers, etc.). If it peaks, it means your *initial data collection* is overloaded during those periods.
+
+**The implication is:** 
+
+1.  **Data collection is indeed the first bottleneck.** Zabbix struggles to collect new data points at these times.
+2.  **The "recovery" of the data gathering processes is faster than the recovery of value cache hits.** This suggests that while the data collection overload might ease relatively quickly, the *consequences* for the value cache (and trigger evaluation) linger.
+    * This could be because the queue of data points accumulates.
+    * Or, triggers/calculated items might have functions that look back over longer periods, so even if new data is collected, the *historical window* they need is still incomplete or delayed in being processed/cached.
+    * A backlog in `history syncer` or `trigger checker` could also be causing the lingering effect.
+
 ---
 
-## **Revised Bottleneck Investigation: The "Data Starvation" Scenario** TODO
+## **Refined Action Plan: Focus on Data Collection & Downstream Impact** TODO
 
-**Core Interpretation:** Zabbix processes responsible for data collection or initial processing are overwhelmed, preventing data from reaching the value cache or blocking the processes that would use it. The cache itself has plenty of capacity, but it's not being used.
+Given that "Zabbix data gathering process busy %" peaks at your problem times, your primary focus shifts even more to the **polling processes** and ensuring data flows smoothly from collection to caching/trigger evaluation.
 
-### **1. Absolute Top Priority: Zabbix Server Process Utilization**
+### **1. Pinpoint Overloaded Data Gathering Processes (Most Critical)**
 
-This is where the bottleneck *must* be. You need to investigate the **busy percentages (`zabbix[process,<process_name>,avg,pused]`)** of Zabbix internal processes *during your problematic time windows* (12:00-13:30, 18:00-19:30, 01:00-02:30).
+The aggregated "data gathering process busy %" points to individual pollers. You need to identify *which specific pollers* are hitting their limits.
 
-**Critical Processes to Examine:**
+* **During the peak times (12:00-13:30, 18:00-19:30, 01:00-02:30):**
+    * Go to **Monitoring -> Hosts -> Your Zabbix Server Host -> Latest Data**.
+    * Graph these specific Zabbix internal items for process busy percentages:
+        * **`Zabbix server | Internal process busy %` for `poller`** (`zabbix[process,poller,avg,pused]`)
+        * **`Zabbix server | Internal process busy %` for `unreachable poller`** (`zabbix[process,unreachable poller,avg,pused]`)
+        * **`Zabbix server | Internal process busy %` for `http poller`** (`zabbix[process,http poller,avg,pused]`) - if you use web scenarios.
+        * **`Zabbix server | Internal process busy %` for `java poller`** (`zabbix[process,java poller,avg,pused]`) - if you monitor JMX.
+        * **`Zabbix server | Internal process busy %` for `snmp poller`** (`zabbix[process,snmp poller,avg,pused]`) - if you use SNMP.
+        * **`Zabbix server | Internal process busy %` for `pinger`** (`zabbix[process,pinger,avg,pused]`) - if you use simple checks like `icmpping`.
 
-* **`Zabbix server | Internal process busy %` for `poller`**:
-    * **Look for:** **Consistently high busy percentages (e.g., >80-90%)**.
-    * **Why:** If pollers are maxed out, Zabbix is simply not collecting data from agents, SNMP devices, etc., fast enough. This means:
-        1.  New data isn't arriving at the server.
-        2.  If data isn't arriving, it won't be written to history.
-        3.  If it's not in history, it can't be put into the cache.
-        4.  If it's not in the cache, trigger checkers won't find it there, and they also won't *miss* it (because they might not even get to the point of trying to evaluate a trigger for missing data).
-    * **Action:** If `poller` is high, **increase `StartPollers`** in `/etc/zabbix/zabbix_server.conf`. Double it, restart Zabbix server, and monitor. You may also need to increase `StartPingers`, `StartIPMIPollers`, `StartSNMPTrappers`, `StartHTTPPollers`, `StartJavaPollers` if you use those specific collection types.
+    * **Action:**
+        * **Identify which of these specific pollers consistently hit >80-90% busy.**
+        * **Increase the `Start<ProcessName>` parameter in `/etc/zabbix/zabbix_server.conf` for *only those* maxed-out processes.**
+            * Example: If `poller` is maxed, increase `StartPollers`. If `http poller` is maxed, increase `StartHTTPPollers`.
+            * Start by doubling the current value.
+            * **Restart Zabbix server:** `sudo systemctl restart zabbix-server`
+            * **Monitor:** Observe if the busy percentages for those processes drop during the next peak, and if `Value cache, hits` recovers more quickly/fully.
 
-* **`Zabbix server | Internal process busy %` for `unreachable poller`**:
-    * **Look for:** **High busy percentages**.
-    * **Why:** If many hosts become unreachable, these pollers might get bogged down. While primarily for availability checks, an overloaded unreachable poller can indirectly impact overall polling capacity.
-    * **Action:** If `unreachable poller` is high, **increase `StartUnreachablePollers`** in `/etc/zabbix/zabbix_server.conf`.
+### **2. Check for Lingering Backlogs Downstream**
 
-* **`Zabbix server | Internal process busy %` for `history syncer`**:
-    * **Look for:** **Consistently high busy percentages (e.g., >80-90%)**.
-    * **Why:** These processes are responsible for writing collected data from the internal data buffers to the database history and trends tables. If they are overloaded, data is *collected* but *not stored persistently* fast enough. This means:
-        1.  A backlog of data waiting to be written to the DB.
-        2.  Trigger checkers needing historical data might not find the *latest* data even if collected, leading to "stale" or "no data" conditions.
-    * **Action:** If `history syncer` is high, **increase `StartHistorySyncers`** in `/etc/zabbix/zabbix_server.conf`. This points towards a database write bottleneck (see next point).
-
-* **`Zabbix server | Internal process busy %` for `trigger checker`**:
-    * **Look for:** **Consistently high busy percentages (e.g., >80-90%)**.
-    * **Why:** These are the processes that evaluate trigger expressions. If they are maxed out, they simply cannot evaluate triggers fast enough. Even if data *is* technically available (or should be), the evaluation itself gets delayed, leading to false positives or missed events.
-    * **Action:** If `trigger checker` is high, **increase `StartTriggerCheckers`** in `/etc/zabbix/zabbix_server.conf`.
-
-### **2.2. Zabbix Queue Backlog**
+Even if polling recovers, if the queue and subsequent processes are still struggling, the problem will persist.
 
 * **`Zabbix server | Zabbix queue (total)` (`zabbix[queue]`)**:
-    * **Look for:** A **significant and sustained increase in delayed items** (especially "10-20 min" or ">20 min" categories) during the problematic time windows.
-    * **Why:** This is the overarching indicator that Zabbix is falling behind. If items are stuck in the queue, their data won't be processed, cached, or trigger-evaluated in a timely manner. This is the **consequence** of the process bottlenecks identified above.
+    * **Crucial:** Graph this metric. Does the queue **spike *and then linger* at a high level** even after the "data gathering process busy %" has subsided?
+    * **Action:** If the queue remains high, it points to bottlenecks *after* data collection. Proceed with increasing:
+        * **`StartHistorySyncers`**: If collected data isn't written to DB fast enough.
+        * **`StartTriggerCheckers`**: If trigger evaluation is still delayed.
 
-### **2.3. Database Write Performance (if `history syncer` is busy)**
+* **`Zabbix server | Internal process busy %` for `history syncer` and `trigger checker`**:
+    * **Look for:** Do these processes stay at high busy percentages *longer* than the "data gathering process busy %" peak? This confirms a lingering bottleneck.
+    * **Action:** Increase their respective `Start...` parameters as described in previous responses.
 
-If `history syncer` processes are highly utilized, the database is the next area to scrutinize for write performance. Your `innodb_io_capacity=600` is good, but might not be enough for your actual write workload.
+### **3. Database Write Performance (Relevant if `history syncer` is busy)**
 
-* **Disk I/O (`iostat -x 1` or `atop -d 1` on DB server)**:
-    * **Focus:** Look specifically at **write IOPS (`w/s`) and disk utilization (`%util`)** on the database server during your problem periods.
-    * **Why:** If `history syncer` is struggling, it's likely due to slow writes to the `history*` and `trends*` tables.
-    * **Action:** If write IOPS are maxed out or `%util` is near 100%, consider:
-        * **Increasing `innodb_io_capacity` further** if your storage can handle it (benchmark with `fio` for random writes).
-        * **Optimizing `innodb_flush_log_at_trx_commit`**: If set to `1` (most durable), try `2` or `0` for faster writes (with durability trade-offs). **Exercise extreme caution and understand the implications.**
-        * **Checking `innodb_log_file_size`**: Larger log files can reduce the frequency of flushing checkpoints.
-        * **Hardware upgrade:** Faster storage (e.g., NVMe SSDs for `history` and `trends` tables).
+If `history syncer` is often busy, even after increasing its count, it points to the database's write performance being the ultimate bottleneck for data storage.
 
-* **MySQL Slow Query Log**:
-    * **Focus:** Look for **slow `INSERT` queries** to `history` and `trends` tables within the problem time windows.
+* **Review `innodb_io_capacity` / `innodb_io_capacity_max`:** You have `600` and `4000`. If `history syncer` remains busy *and* your disk metrics (from `iostat`) show high write IOPS or disk utilization, then your current `innodb_io_capacity` might still be too low for your storage's actual capability to handle Zabbix's write load.
+* **Action:** Benchmark your disk's actual random write IOPS using `fio` and adjust `innodb_io_capacity` higher if your storage can handle it. Also, check other MySQL write tuning parameters like `innodb_flush_log_at_trx_commit` and `innodb_log_file_size` (with extreme caution).
 
-### **2.4. Zabbix Configuration & Workload Patterns**
+### **4. Root Cause of Peak Loads**
 
-These still apply, as they are the *cause* of the load spikes:
+Understanding *why* the data gathering load spikes at those specific times is key to long-term stability.
 
-* **Housekeeping:** Check `HousekeepingFrequency` in `zabbix_server.conf`. If it aligns with peak periods and `housekeeper` processes are busy, it's a conflict. **Disable internal housekeeping (`DisableHousekeeping=1`)** and use database partitioning.
-* **Discovery Rules (LLD):** Verify if any LLD rules are scheduled to run at 12:00, 18:00, or 01:00, suddenly adding massive amounts of items/triggers.
-* **Total Items per Second (New Values per Second):** This is the ultimate measure of your Zabbix server's incoming data load. Check the Zabbix server internal item `zabbix[items_unsupported]`. If the incoming data volume is simply too high for your current server resources (CPU, RAM, DB), you may need:
-    * Reduce polling intervals for non-critical items.
-    * Filter out unnecessary data at the agent level.
-    * Deploy Zabbix proxies to distribute the load.
-    * Upgrade Zabbix server CPU/RAM.
+* **Housekeeping:** Re-verify if the Zabbix housekeeper runs during these peak hours. If `housekeeper` processes are busy, it competes for resources. **Action:** Disable internal housekeeping (`DisableHousekeeping=1`) and use DB partitioning.
+* **Discovery Rules (LLD):** Check if any LLD rules are scheduled to run at 12:00, 18:00, or 01:00. A sudden influx of newly discovered items can overwhelm pollers.
+* **Mass Host/Item Changes:** Were there any configuration imports or API calls that suddenly add many new hosts/items/triggers at these times?
+* **External Factors:** Are the monitored systems themselves experiencing peak load that makes them slower to respond to Zabbix polls, effectively slowing down pollers? (e.g., end-of-day batch jobs, user login storms).
 
 ---
 
-**Summary Action Plan for Your Specific Scenario:**
+**Prioritized Steps for Your Specific Scenario:**
 
-1.  **HIGH PRIORITY:** During your peak times (12:00-13:30, 18:00-19:30, 01:00-02:30), open your Zabbix frontend and go to **Monitoring -> Hosts -> (Your Zabbix Server Host) -> Latest Data**. Graph the **`Zabbix server | Internal process busy %`** for `poller`, `unreachable poller`, `history syncer`, and `trigger checker`.
-2.  **Identify which of these processes are maxed out (consistently >80-90% busy).**
-3.  **Increase the `Start...` parameter in `zabbix_server.conf` for the identified maxed-out processes.**
-    * If `poller` is maxed, increase `StartPollers`.
-    * If `history syncer` is maxed, increase `StartHistorySyncers`.
-    * If `trigger checker` is maxed, increase `StartTriggerCheckers`.
-4.  **Restart Zabbix server (`sudo systemctl restart zabbix-server`)** after each change and monitor the impact during the next peak period.
-5.  If `history syncer` remains maxed out even after increasing its count, then focus on **database write performance** (disk I/O, slow `INSERT` queries, `innodb_flush_log_at_trx_commit` tuning).
+1.  **Monitor Individual Pollers:** During the *next* occurrence of the problem times, intensely watch `zabbix[process,poller,avg,pused]`, `zabbix[process,unreachable poller,avg,pused]`, etc., to identify the specific type of pollers maxing out.
+2.  **Increase Maxed-Out Pollers:** Adjust `StartPollers` (or `StartHTTPPollers`, etc.) in `zabbix_server.conf` accordingly. Restart Zabbix server.
+3.  **Monitor Queue and Downstream Processes:** See if the Zabbix queue clears faster, and if `history syncer` or `trigger checker` still show lingering high busy percentages. If so, increase their respective `Start...` parameters.
+4.  **Re-evaluate Database Writes:** Only if `history syncer` remains saturated after increasing its count, then dive deeper into MySQL write performance.
 
-This approach directly addresses the "data starvation" and processing bottlenecks implied by your observed Zabbix internal metrics.
+This approach targets the identified initial bottleneck in data collection, then ensures subsequent stages of data processing can handle the flow, which should ultimately resolve the value cache hit drops and false alarms.
+
