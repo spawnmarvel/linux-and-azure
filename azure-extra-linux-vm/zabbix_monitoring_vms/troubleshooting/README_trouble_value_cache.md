@@ -798,6 +798,8 @@ TOP IP ADDRESSS
 Stop zabbix agent or upgrade it.
 
 ![Trapper down, network up](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/4%20Trapper%20util%20down%2018%20and%20network%20up.jpg)
+
+Test it in test with 10051_simulate_data_load_.sh
 ---
 
 ## **Diagnosis: Network Saturation & Trapper Inactivity**
