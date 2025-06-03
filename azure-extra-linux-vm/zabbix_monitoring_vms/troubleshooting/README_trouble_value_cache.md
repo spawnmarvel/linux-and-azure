@@ -613,7 +613,7 @@ Value cache hits are low at:
 * 01:00 to 02:30
 
 
-# Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck
+# Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck TODO
 
 Problem: Low Value cache, hits (and associated false alarms) during 12:00-13:30, 18:00-19:30, and 01:00-02:30.
 
