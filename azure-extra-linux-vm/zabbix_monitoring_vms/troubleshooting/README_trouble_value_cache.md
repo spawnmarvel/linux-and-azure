@@ -702,3 +702,5 @@ If increasing `StartHistorySyncers` doesn't fully resolve their busy percentage,
     * Upgrade Zabbix server CPU/RAM.
 
 By systematically addressing these points, starting with the overloaded Zabbix internal processes responsible for data gathering and flow, you should be able to resolve the root cause of your value cache hit drops and subsequent false alarms in Zabbix 6.0.40.
+
+
