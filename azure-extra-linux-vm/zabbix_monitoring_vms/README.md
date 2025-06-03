@@ -476,7 +476,7 @@ Dual Mode (Optional)
 
 You can enable both modes by setting both Server and ServerActive in the config file.
 
-## One agent send to multiple zabbix servers HA or Multiple
+## HA or Multiple Zabbix server by same agent
 
 To enable passive checks, the node names must be listed in the Server parameter, separated by a comma.
 
