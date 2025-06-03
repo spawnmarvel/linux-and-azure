@@ -647,60 +647,158 @@ Since "Zabbix data gathering process busy %" is peaking, the very first thing is
     * `Zabbix server | Internal process busy %` for `pinger` (key: `zabbix[process,pinger,avg,pused]`) - *`icmpping` and other simple checks.*
     * `Zabbix server | Internal process busy %` for `trapper` (key: `zabbix[process,trapper,avg,pused]`) - *Active agent checks, Zabbix sender, Zabbix proxies sending data.*
 
-3.  **Identify the Culprits:** Note down which of these process types are consistently hitting high busy percentages (>80-90%) during the peak.
+
+```bash
+
+Zabbix server: Utilization of poller data collector processes, in %
+zabbix[process,poller,avg,busy] > 80
+
+```
+
+**Identify the Culprits:** Note down which of these process types are consistently hitting high busy percentages (>80-90%) during the peak.
 
 4.  **Increase Workers in `zabbix_server.conf`:**
     * For *each* identified overloaded poller type, increase its corresponding `Start...` parameter in `/etc/zabbix/zabbix_server.conf`.
-    * **Recommendation for 6.0.x:** Zabbix 6.0 is efficient, but if a poller type is consistently maxed out, it needs more workers. Start by doubling the default/current value for the specific processes. For example:
-        * If `poller` is maxed: `StartPollers=XX` (increase `XX`)
-        * If `http poller` is maxed: `StartHTTPPollers=YY` (increase `YY`)
-        * If `trapper` is maxed: `StartTrappers=ZZ` (increase `ZZ`)
-    * **Save changes and restart Zabbix server:** `sudo systemctl restart zabbix-server`
-    * **Monitor Again:** Observe the graphs during the next peak to see if the busy percentages have dropped and if the value cache hits improve.
-
-### **2. Check for Downstream Bottlenecks (Lingering Effects)**
-
-Even if polling recovers, if the internal queue or other processing stages are bogged down, the value cache issue will persist.
-
-* **`Zabbix server | Zabbix queue (total)` (`zabbix[queue]`)**:
-    * **Crucial:** Graph this. Does the queue **spike *and then remain elevated* for an extended period** even after the "Zabbix data gathering process busy %" has subsided?
-    * **Why:** A lingering queue indicates a bottleneck *after* data collection. Data is collected, but it's stuck waiting to be written to the database or processed for triggers.
-
-* **`Zabbix server | Internal process busy %` for `history syncer`**:
-    * **Look for:** Does this process stay at **high busy percentages** even after the initial data gathering peak subsides, or does it stay high *throughout* the problem period?
-    * **Why:** Overloaded history syncers prevent collected data from being written to the database quickly. This means the latest data isn't available for trigger evaluation or for the value cache.
-    * **Action:** If `history syncer` is high, **increase `StartHistorySyncers`** in `zabbix_server.conf`.
-
-* **`Zabbix server | Internal process busy %` for `trigger checker`**:
-    * **Look for:** Does this process also stay at **high busy percentages** during and after the data gathering peak?
-    * **Why:** Even if data is eventually collected, if trigger checkers are overloaded, they can't evaluate expressions in time, leading to delayed alerts and false positives.
-    * **Action:** If `trigger checker` is high, **increase `StartTriggerCheckers`** in `zabbix_server.conf`.
-
-### **3. Database Write Performance (If `history syncer` remains busy)**
-
-If increasing `StartHistorySyncers` doesn't fully resolve their busy percentage, the bottleneck is very likely the database's ability to handle the write load.
-
-* **Disk I/O (`iostat -x 1` or `atop -d 1` on DB server)**:
-    * **Focus:** Pay close attention to **write IOPS (`w/s`) and disk utilization (`%util`)** on the database server.
-    * **Why:** Zabbix writes a massive amount of data to `history*` and `trends*` tables. If your storage can't keep up, it starves `history syncer` processes.
-    * **Action:**
-        * Re-verify your storage's actual random write IOPS capacity (e.g., using `fio`).
-        * **Increase `innodb_io_capacity` further** in MySQL configuration if your storage can handle more than 600 IOPS. Increase `innodb_io_capacity_max` proportionally.
-        * Investigate MySQL write-tuning parameters: `innodb_flush_log_at_trx_commit` (adjust with extreme caution for durability trade-offs), `innodb_log_file_size`, and `innodb_buffer_pool_size`.
-
-* **MySQL Slow Query Log**:
-    * **Focus:** Look for **slow `INSERT` queries** to `history` and `trends` tables within the problem time windows.
-
-### **4. Systemic Workload Causes**
-
-* **Housekeeping:** Confirm when Zabbix housekeeping runs. If it overlaps with your peak times and the `housekeeper` process is busy, this is a major conflict. **Action:** Disable internal housekeeping (`DisableHousekeeping=1`) and implement external database partitioning (e.g., using TimescaleDB for PostgreSQL, or custom scripts for MySQL).
-* **Low-Level Discovery (LLD) Rules:** Check if any LLD rules are scheduled to run at precisely 12:00, 18:00, or 01:00. A sudden influx of newly discovered items, triggers, and graphs can create a significant, albeit short-lived, spike in data collection and processing load.
-* **Number of Values per Second (NVPS):** Look at your Zabbix server's `zabbix[vps]` metric. Does it spike significantly at these times? If your NVPS is consistently high or spikes beyond your server's capacity, you may need to:
-    * Reduce polling intervals for less critical items.
-    * Filter out unnecessary data at the agent level.
-    * Deploy Zabbix proxies to offload polling from the main server.
-    * Upgrade Zabbix server CPU/RAM.
-
-By systematically addressing these points, starting with the overloaded Zabbix internal processes responsible for data gathering and flow, you should be able to resolve the root cause of your value cache hit drops and subsequent false alarms in Zabbix 6.0.40.
 
 
+This confirms that your Zabbix server's poller processes (responsible for active/passive agent checks, SSH, Telnet, calculated items, and internal checks) are the primary bottleneck during that early morning period. When these processes are maxed out, they can't collect data fast enough, leading to a cascade of problems:
+
+1. Data collection slows down or stops.
+2. The Zabbix queue (zabbix[queue]) builds up.
+3. Data isn't available in time for history syncer to write to the DB.
+4. Data isn't available in time for trigger checker to evaluate triggers.
+5. The value cache is "starved" of fresh data, leading to low hit rates.
+6. False alarms fire.
+
+
+Phase 1: Address the Confirmed 01:00-02:30 Poller Bottleneck (Highest Priority)
+
+1. Increase StartPollers in zabbix_server.conf
+
+
+If CPU is already maxed out (near 100%) during that time, increasing pollers further might not help and could make things worse, as processes will just contend for CPU time.
+
+If CPU still has headroom, increasing pollers is the right move. Each poller consumes some RAM, so ensure you have free memory as well.
+
+
+***TODO***
+
+```bash
+
+# now
+StartPollers=30
+
+# Increase StartPollers: Given that it's over 80% busy with 30, a significant jump is warranted.
+# Try StartPollers=40 or StartPollers=50.
+# 
+
+# restart zabix server
+sudo systemctl restart zabbix-server
+sudo service zabbix-server stop
+sudo service zabbix-server start
+```
+
+It seems like the user is updating their problem description. They are now indicating that the `trapper` process utilization also drops to zero during the 01:00 to 02:30 timeframe, in addition to the 18:00 to 19:30 timeframe previously mentioned. This implies a recurring issue with trapper processes becoming inactive at specific times, which would directly cause data collection issues and false alarms.
+
+Given this new information, the focus needs to be on investigating why the `trapper` processes are becoming inactive during *both* these periods, rather than just being overloaded. The previous suggestions about scheduled tasks, configuration, and external interference are even more relevant now that the issue spans multiple timeframes.
+
+Here's an updated plan:
+
+**Clarified Problem:**
+
+`Zabbix server: Utilization of trapper data collector processes, in %` (`zabbix[process,trapper,avg,busy]`) goes to **zero** during *both* the **18:00 to 19:30** and **01:00 to 02:30** windows. This means no data is being received via active agents, Zabbix sender, or proxies during these periods, directly causing missing data, low value cache hits, and false alarms.
+
+---
+You've identified a critical, recurring issue: **`Zabbix server: Utilization of trapper data collector processes, in %` (`zabbix[process,trapper,avg,busy]`) goes to ZERO during *both* the 18:00 to 19:30 and 01:00 to 02:30 windows.**
+
+This is not a simple "overload" scenario for trappers, but an **inactivity** scenario. It means Zabbix is effectively blind to all data arriving via active agents, Zabbix sender, and Zabbix proxies during these critical periods. This directly explains the value cache hit drops and subsequent false alarms, as there's no incoming data to process or cache.
+
+---
+
+# **Urgent Action Plan: Investigate and Resolve Trapper Inactivity** TODO
+
+This is the most pressing issue. Focus on finding out *why* these processes are becoming completely inactive at these precise times.
+
+### **1. Deep Dive into Zabbix Server Logs (`zabbix_server.log`)**
+
+This is your most valuable source of information.
+
+* **Increase `DebugLevel` (Temporarily):**
+    * Edit `/etc/zabbix/zabbix_server.conf`.
+    * Set `DebugLevel=4` (or 5 for even more verbosity).
+    * Restart Zabbix server: `sudo systemctl restart zabbix-server`
+    * **IMPORTANT:** Remember to set `DebugLevel` back to a lower value (e.g., 3) after you've gathered enough logs, as high debug levels generate massive log files and consume resources.
+
+* **Examine Logs During Problem Windows:**
+    * Filter the `zabbix_server.log` for messages specifically around 18:00-19:30 and 01:00-02:30.
+    * **Look for messages related to:**
+        * `trapper` processes (e.g., "trapper #N started", "trapper #N stopped", "trapper #N idle", errors)
+        * Database connection issues (if trappers can't write to DB, they might halt)
+        * Any process failures, restarts, or unexpected shutdowns.
+        * Messages indicating a lack of incoming connections or unexpected disconnections.
+        * "Got signal" messages (e.g., SIGTERM, SIGKILL) which would indicate an external process is stopping Zabbix.
+
+    * **Example commands to help:**
+        ```bash
+        sudo grep "trapper" /var/log/zabbix/zabbix_server.log | grep "18:00" -A 30 -B 30 # Adjust time and context lines
+        sudo grep "trapper" /var/log/zabbix/zabbix_server.log | grep "01:00" -A 30 -B 30
+        sudo grep -E "error|fail|shutdown|signal" /var/log/zabbix/zabbix_server.log | grep "18:00" -A 30 -B 30
+        ```
+
+### **2. Check for Scheduled Tasks/Cron Jobs**
+
+This is a very strong candidate for processes starting/stopping or blocking Zabbix at specific times.
+
+* **System-wide Cron Jobs:**
+    ```bash
+    sudo crontab -l                  # For root's crontab
+    sudo grep -r "zabbix" /etc/cron.* /etc/crontab /var/spool/cron/crontabs/ # Check all cron directories
+    ```
+* **User-specific Cron Jobs:**
+    ```bash
+    sudo crontab -u zabbix -l       # If Zabbix runs as user 'zabbix'
+    # Check other potential users that could run system maintenance
+    ```
+* **Systemd Timers:** Look for `systemd` timers that might be activating scripts at these times.
+    ```bash
+    systemctl list-timers --all
+    ```
+* **Custom Scripts:** Are there any custom scripts that manage Zabbix or related services that might be scheduled to run at these times (e.g., backups, reindexing, service restarts)?
+
+### **3. Review `zabbix_server.conf` for `StartTrappers`**
+
+Even though you've identified the issue as inactivity rather than overload, it's good to re-confirm the basic setting.
+
+* Ensure `StartTrappers` is uncommented and set to a reasonable non-zero value (e.g., `StartTrappers=5` or `10`). If it were set to 0, that would explain the inactivity.
+
+### **4. System-Level Monitoring During Problem Windows**
+
+Use general system monitoring tools to see if the server itself is experiencing issues that could indirectly cause Zabbix processes to halt.
+
+* **CPU, Memory, Disk I/O:** Use `top`, `htop`, `vmstat`, `iostat -x 5` to monitor the server's resources.
+    * Is there a sudden, massive spike in CPU, RAM, or I/O that could crash or starve Zabbix processes?
+    * Are there other processes that consume excessive resources during these times?
+* **Network Activity:** Is there any unusual network activity that could be overwhelming the server or causing connections to drop?
+
+### **5. Database Activity (If applicable)**
+
+If your database is on the same server, or if Zabbix trappers somehow lose connection to the database.
+
+* Are there any heavy database operations (e.g., large queries, backups, index rebuilds) scheduled for 18:00-19:30 or 01:00-02:30 that could make the database unresponsive for Zabbix?
+
+### **6. Zabbix Proxy Logs (If you use proxies)**
+
+If you have Zabbix proxies configured to send data via trapping to the Zabbix server, check their logs during these times.
+
+* Are they reporting issues connecting to the Zabbix server or sending data? Look for error messages like "cannot connect to Zabbix server" or "failed to send data."
+
+---
+
+**Prioritized Steps:**
+
+1.  **Increase `DebugLevel` for `zabbix_server.log` to 4 or 5.**
+2.  **Wait for the next 18:00-19:30 or 01:00-02:30 window.**
+3.  **Immediately after, analyze the `zabbix_server.log` for clues.** This will likely tell you *why* the trapper processes are going to zero.
+4.  **Concurrently, investigate all scheduled tasks/cron jobs** on your Zabbix server. This often explains timed behavior.
+
+Finding out *why* the trappers become inactive is paramount. Once that's identified, the solution will likely be to stop whatever is interfering with them.
