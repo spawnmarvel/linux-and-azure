@@ -795,7 +795,11 @@ This strongly suggests that the **surge in inbound network traffic is directly c
 
 TOP IP ADDRESSS
 
-Stop zabbix agent or upgrade it.
+Stop zabbix agents for 48 h
+* Still issues, where?
+
+No issues?
+* Upgrade agent
 
 ![Trapper down, network up](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/4%20Trapper%20util%20down%2018%20and%20network%20up.jpg)
 
