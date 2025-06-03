@@ -41,3 +41,10 @@ In zabbix_server.conf, history functions primarily use the Value Cache (ValueCac
 
 By effectively managing your history and trend retention periods, and properly sizing your Zabbix caches, you can optimize both the performance of your Zabbix server and the longevity of your monitoring data. The general advice is to keep history for as short a period as needed for trigger evaluation and immediate troubleshooting, and then leverage trends for long-term analysis.
 
+In summary, your proposed 
+
+```bash
+History=90 days and Trends=365 days
+``` 
+is a sensible and widely used configuration that balances granular short-term data with efficient long-term aggregation. It's a great starting point for most Zabbix deployments.
+
