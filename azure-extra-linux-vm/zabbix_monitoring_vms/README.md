@@ -497,6 +497,52 @@ ServerActive=zabbix-node-01;zabbix-node-02
 https://www.zabbix.com/documentation/current/en/manual/concepts/server/ha
 
 
+Yes, a single Zabbix agent **can send data to more than one Zabbix server (or Zabbix proxy)**, but there are important distinctions between passive and active checks:
+
+### 1. Passive Checks (`Server` parameter)
+
+* **How it works:** In passive mode, the Zabbix Server (or Proxy) initiates the connection to the agent and requests data for specific items. The agent simply listens on its port (default 10050) and responds to these requests.
+* **Multiple Servers:** You **can** list multiple Zabbix server or proxy IP addresses/hostnames in the `Server` parameter of the `zabbix_agentd.conf` file, separated by commas.
+    ```
+    Server=192.168.1.100,192.168.1.101,zabbix-server-prod.example.com
+    ```
+* **Behavior:** Each server/proxy specified in this list can independently connect to the agent and query data. The agent will respond to requests from any of the allowed servers.
+* **Considerations:**
+    * **Duplicate Data:** If both servers are configured to monitor the same items on that agent, the agent will send the data to *both* servers when they request it. This means you'll have duplicate data in your Zabbix databases, which can increase storage and processing load unnecessarily.
+    * **Firewall:** The agent's port (10050 by default) must be open to inbound connections from all specified Zabbix servers/proxies.
+    * **Purpose:** This setup is typically used for:
+        * **Redundancy (limited):** If one Zabbix server goes down, the other can still collect data. However, it's not a true high-availability solution for the Zabbix server itself (that requires a Zabbix HA cluster).
+        * **Dev/Test Environments:** A development or test Zabbix server might pull a subset of data from production agents for testing without interfering with the main production server.
+        * **Centralized Monitoring with Specific Use Cases:** Sometimes different teams might have their own Zabbix instances but need a subset of data from common hosts.
+
+### 2. Active Checks (`ServerActive` parameter)
+
+* **How it works:** In active mode, the Zabbix agent initiates the connection to the Zabbix Server (or Proxy), requests a list of items to monitor, collects the data itself, and then pushes the collected data back to the server.
+* **Multiple Servers:** You **can** list multiple Zabbix server or proxy IP addresses/hostnames in the `ServerActive` parameter of the `zabbix_agentd.conf` file, separated by commas.
+    ```
+    ServerActive=192.168.1.100,zabbix-server-dr.example.com
+    ```
+* **Behavior:** The agent will try to fetch active checks configuration from each listed server/proxy. It then sends the collected data for active items to the server/proxy that originally provided the configuration for those items.
+    * **Important Note:** The agent typically only receives the configuration from **one** of the `ServerActive` addresses at a time. If a specific active item is defined on multiple servers, the agent will generally send the data to the server that *first* provided the configuration for that item. It's not designed for different items to go to different servers easily from one agent configuration.
+* **Considerations:**
+    * **Duplication (less common, but possible):** Similar to passive checks, if the *same active item* is configured on multiple servers the agent reports to, you might get duplicate data. However, active checks are usually configured so that each server monitors a unique set of items or only one server is the primary for active checks.
+    * **Hostname Matching:** The `Hostname` parameter in `zabbix_agentd.conf` must precisely match the hostname defined in the Zabbix Frontend for the host on *each* server it's reporting to.
+    * **Firewall:** The Zabbix server's trapper port (10051 by default) must be open to inbound connections from the agent.
+
+### **Typical Use Cases for Multi-Server Agent Monitoring:**
+
+* **Migration:** During a Zabbix server migration, you can have agents report to both the old and new servers simultaneously for a transition period.
+* **Disaster Recovery (DR) / Backup:** A secondary (DR) Zabbix server could be configured to passively monitor key systems, or agents could actively send data to both primary and DR servers.
+* **Testing/Development:** A dev/test Zabbix instance can monitor a subset of production systems for testing new templates, items, or Zabbix versions.
+* **Segregation of Duties:** Different departments or teams might have their own Zabbix servers, and some critical hosts might need to report to multiple of these.
+
+### **What a Zabbix Agent *Cannot* Do:**
+
+* **Item-level Routing:** A single Zabbix agent cannot be configured to send specific items to Server A and other items to Server B. All data collected by that agent instance will generally be available to (and sent to, if configured) all listed servers/proxies.
+* **True Server HA (without Zabbix HA cluster):** While multi-server agent configuration offers some redundancy, it doesn't provide a seamless Zabbix server high-availability solution. For true HA, Zabbix has its own HA cluster feature (since Zabbix 6.0), which involves multiple Zabbix server instances sharing a database and taking over if one fails.
+
+**In summary, yes, a Zabbix agent can send to multiple Zabbix servers by listing them in the `Server` and/or `ServerActive` parameters, but be mindful of potential data duplication and manage your monitoring configurations on each server accordingly.**
+
 ### Troubleshooting
 
 View folder troubleshooting 
