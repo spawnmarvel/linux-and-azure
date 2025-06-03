@@ -476,8 +476,23 @@ Dual Mode (Optional)
 
 You can enable both modes by setting both Server and ServerActive in the config file.
 
-## One agent send to multiple zabbix servers HA
+## One agent send to multiple zabbix servers HA or Multiple
 
+To enable passive checks, the node names must be listed in the Server parameter, separated by a comma.
+
+```bash
+
+Server=zabbix-node-01,zabbix-node-02
+```
+To enable active checks, the node names must be listed in the ServerActive parameter. Note that for active checks the nodes must be separated by a comma from any other servers, while the nodes themselves must be separated by a semicolon, e.g.:
+
+```bash
+ServerActive=zabbix-node-01;zabbix-node-02
+
+```
+
+
+![HA or mult](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/ha_mult.jpg)
 
 https://www.zabbix.com/documentation/current/en/manual/concepts/server/ha
 
