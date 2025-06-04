@@ -139,16 +139,6 @@ Page 2
 
 https://github.com/spawnmarvel/quickguides/blob/main/bash/bash.quickref.pdf
 
-References
-
-Linux Shell Scripting Tutorial - A Beginner's handbook
-http://www.cyberciti.biz/nixcraft/linux/docs/uniqlinuxfeat
-ures/lsst/
-BASH Programming Introduction, Mike G
-http://www.tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
-Advanced BASH Scripting Guide, Mendel Cooper
-http://tldp.org/LDP/abs/html/
-
 ## Filesystem Hierarchy
 
 1. Filesystem Hierarchy
