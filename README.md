@@ -10,6 +10,53 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-se
 
 https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
 
+## Azure Linux joined to domain login with account
+
+https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
+
+Powershell (using az cli)
+
+```bash
+az --version
+
+```
+
+Log in to a Linux virtual machine in Azure by using Azure AD and OpenSSH
+
+https://learn.microsoft.com/en-us/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux#configure-role-assignments-for-the-vm
+
+
+Add IAM on the VM
+* IAM->Virtual Machine Administrator Login, Reader, Desktop Virtualization Power On Off Contributor
+* For username@domain.com
+
+```bash
+
+az extension add --name ssh
+az extension show --name ssh
+
+# login as username@domain.com
+az login --tenant  TENANT-ID
+
+az account set --subscription "SUBSSCRIPTION-NAME-VIEW-VM"
+
+az ssh vm -n vmName -g resourceGroupName
+
+# You can now run sudo as username@domain.com
+
+sudo mysql -u root -p
+
+```
+
+Upgrade AZ CLI
+```bash
+
+az --version
+
+az upgrade --yes
+
+```
+
 
 ## VSC Terminal Shell Integration
 
@@ -102,7 +149,7 @@ http://www.tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
 Advanced BASH Scripting Guide, Mendel Cooper
 http://tldp.org/LDP/abs/html/
 
-## Learn the ways of Linux-fu, for free.
+## Filesystem Hierarchy
 
 1. Filesystem Hierarchy
 
@@ -138,57 +185,7 @@ Unix philosphy
 ![Unix ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/unix.jpg)
 ref https://bash.cyberciti.biz/guide/Unix_philosophy
 
-## Azure CLI
-How to install the Azure CLI
 
-https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
-
-## Azure Linux joined to domain login with account
-
-https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
-
-Powershell (using az cli)
-
-```bash
-az --version
-
-```
-
-Log in to a Linux virtual machine in Azure by using Azure AD and OpenSSH
-
-https://learn.microsoft.com/en-us/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux#configure-role-assignments-for-the-vm
-
-
-Add IAM on the VM
-* IAM->Virtual Machine Administrator Login, Reader, Desktop Virtualization Power On Off Contributor
-* For username@domain.com
-
-```bash
-
-az extension add --name ssh
-az extension show --name ssh
-
-# login as username@domain.com
-az login --tenant  TENANT-ID
-
-az account set --subscription "SUBSSCRIPTION-NAME-VIEW-VM"
-
-az ssh vm -n vmName -g resourceGroupName
-
-# You can now run sudo as username@domain.com
-
-sudo mysql -u root -p
-
-```
-
-Upgrade AZ CLI
-```bash
-
-az --version
-
-az upgrade --yes
-
-```
 
 ## Grep it
 
