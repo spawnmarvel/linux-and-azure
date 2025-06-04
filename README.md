@@ -182,9 +182,16 @@ https://linuxjourney.com/
 
 Unix philosphy
 
-![Unix ](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/unix.jpg)
-ref https://bash.cyberciti.biz/guide/Unix_philosophy
+* Do one thing and do it well - Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.
+* Everything is file - Ease of use and security is offered by treating hardware as a file.
+* Small is beautiful.
+* Store data and configuration in flat text files - Text file is a universal interface. Easy to create, backup and move to another system.
+* Use shell scripts to increase leverage and portability - Use shell script to automate common tasks across various UNIX / Linux installations.
+* Chain programs together to complete complex task - Use shell pipes and filters to chain small utilities that perform one task at time.
+* Choose portability over efficiency.
+* Keep it Simple, Stupid (KISS).
 
+https://bash.cyberciti.biz/guide/Unix_philosophy
 
 
 ## Grep it
