@@ -775,7 +775,7 @@ Even though you've identified the issue as inactivity rather than overload, it's
 StartTrappers=20
 ```
 
-### **4. System-Level Monitoring During Problem Windows** TODO
+### **4. System-Level Monitoring During Problem Windows**
 
 Use general system monitoring tools to see if the server itself is experiencing issues that could indirectly cause Zabbix processes to halt.
 
@@ -793,93 +793,91 @@ The confirmed observations are:
 This strongly suggests that the **surge in inbound network traffic is directly causing the trapper processes to become unresponsive or stop.**
 
 
-TOP IP ADDRESSS
+Top ip addresses is identified and top ports, args. Same as last time.
 
-Stop zabbix agents for 48 h
-* Still issues, where?
 
-No issues?
-* Upgrade agent
+Example log from 01:00 to 03:30
+```log
+2025/06/04 01:02:07.716157 [101] cannot receive data from [10.75.160.132:10051]: Cannot read message: 'read tcp 10.10.12.12:63648->10.75.160.132:10051: i/o timeout'
+2025/06/04 01:02:07.716157 [101] active check configuration update from host [SERVER-TRC123] started to fail
+2025/06/04 01:04:38.717094 [101] cannot receive data from [10.75.160.132:10051]: Cannot read message: 'read tcp 10.10.12.12:64028->10.75.160.132:10051: i/o timeout'
 
-![Trapper down, network up](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshooting/4%20Trapper%20util%20down%2018%20and%20network%20up.jpg)
+```
 
-Test it in test with 10051_simulate_data_load_.sh
----
+### Top talkers and errors with connection TODO
 
-## **Diagnosis: Network Saturation & Trapper Inactivity**
+Let's re-establish the roles based on your latest information:
 
-The Zabbix trapper processes are designed to listen for incoming connections and data. If the server's network interface or underlying network infrastructure is overwhelmed by a sudden doubling of inbound flows, it can lead to:
-
-1.  **Connection Drops/Timeouts:** Zabbix agents/proxies/senders cannot establish or maintain connections to the trapper port (default 10051) because the server is too busy processing the overwhelming inbound traffic.
-2.  **Resource Exhaustion:** Even if the network card isn't fully saturated, the Linux kernel's network stack (socket buffers, connection tracking) or Zabbix's processes (limited file descriptors, memory for connections) might be overwhelmed by the sheer volume of connections or data.
-3.  **Process Starvation:** Other system processes (including Zabbix trappers) might get starved of CPU cycles or memory due to the intense network processing, leading them to become unresponsive or even crash/stop (though "zero busy %" is more indicative of a lack of work/connections).
-
-Since trappers are going to **zero percent busy**, it means they are effectively receiving no new connections or data, not that they are merely overloaded. The doubled inbound flow is preventing data from reaching them.
+* **Zabbix Server IP:** `10.75.160.132`
+* **Zabbix Agent IP:** `10.10.12.12` (This is `SERVER-TRC123` in the logs, and is your "top talker")
 
 ---
 
-## **Action Plan: Identify and Mitigate the Network Surge**
+### Re-interpreting the Log with Correct IPs:
 
-This is now a network and system capacity problem, not purely a Zabbix configuration one.
+The log entry:
+`2025/06/04 01:02:07.716157 [101] cannot receive data from [10.75.160.132:10051]: Cannot read message: 'read tcp 10.10.12.12:63648->10.75.160.132:10051: i/o timeout'`
+`2025/06/04 01:02:07.716157 [101] active check configuration update from host [SERVER-TRC123] started to fail`
 
-### **1. Identify the Source and Nature of the Inbound Network Flow**
+This log message is coming from the **Zabbix Agent (10.10.12.12)**. It indicates:
 
-This is paramount. What is this doubled traffic?
+1.  **The Agent is trying to send Active Check data to the Server:** The connection `10.10.12.12:63648 -> 10.75.160.132:10051` shows the Agent initiating an outbound connection from an ephemeral port (63648) to the Zabbix Server's Active Check Trapper port (10051).
+2.  **The Agent is timing out while trying to `read` a response/acknowledgment from the Server.** After sending its data, the agent expects an acknowledgment from the server. It's not getting it in time.
+3.  **Active check configuration updates are also failing.** This is a secondary symptom. When the agent can't reliably communicate with the server for data submission, it also can't get updated lists of active checks.
 
-* **NetFlow/sFlow/IPFIX Data (if available):** If you have network monitoring tools that collect flow data from your switches/routers, this is the best way to identify:
-    * **Source IPs:** Where is this doubled traffic coming from? (Is it Zabbix agents/proxies, or something else entirely?)
-    * **Destination Ports:** What port is this traffic hitting on the Zabbix server? (Is it just Zabbix port 10051, or other ports like 80/443 for web, SSH, database port?)
-    * **Traffic Volume:** How much data (MB/s or Gb/s) is it?
-* **Packet Capture (e.g., `tcpdump`):**
-    * If flow data isn't available, perform a packet capture *during* the problematic windows.
-    * **Command (run just before 18:00 or 01:00):**
-        ```bash
-        sudo tcpdump -i <your_network_interface> -nn -s0 -w /tmp/network_spike.pcap port 10051 or port 80 or port 443 or port <your_db_port> -vvv &
-        # Replace <your_network_interface> (e.g., eth0, ens192) and <your_db_port>
-        # Run for 15-30 minutes during the spike. Stop with `kill %1` (if run in background) or Ctrl+C
-        ```
-    * **Analysis:** Use Wireshark to open `network_spike.pcap`. Look at conversations, top talkers, and protocol distribution during the spike.
-* **Linux Network Monitoring (`netstat`, `ss`, `iftop`, `nload`):**
-    * **`ss -tuna | grep ESTAB | wc -l`**: Number of established TCP connections. Does this spike?
-    * **`ss -tuna '( dport = :10051 )'`**: See established connections to Zabbix trapper port. Does this number fluctuate wildly or drop to zero?
-    * **`iftop -i <interface>` or `nload -i <interface>`**: Real-time bandwidth usage. Confirms the doubling.
-    * **`netstat -s`**: Look at TCP segment retransmissions, dropped packets, etc. (system-wide network stats).
+### The Problem Defined: The Agent is Overwhelming the Server
 
-### **2. Analyze the Nature of the Traffic Surge**
+This new information is a **perfect fit** for your previous observations:
 
-* **Is it legitimate Zabbix traffic?**
-    * Are many Zabbix agents suddenly starting active checks at these times?
-    * Are Zabbix proxies suddenly flushing large amounts of accumulated data?
-    * Are you using Zabbix Sender from many sources or sending very large data sets?
-* **Is it *non*-Zabbix traffic?**
-    * Could it be a separate application sending a huge amount of logs, files, or performing large database synchronizations?
-    * Could it be a Denial of Service (DoS) attack or a misconfigured scanning tool?
+* **"Top talker is 10.10.12.12 (the Zabbix agent)"**: This means the agent itself is sending a massive amount of data to your Zabbix Server (10.75.160.132) during 01:00-03:00.
+* **"Inbound network flows to your Linux Zabbix server are doubling"**: This is the result of `10.10.12.12` and potentially other similar agents flooding the server.
+* **"Zabbix server: Utilization of trapper data collector processes, in % goes to zero"**: The server's trapper processes are getting overwhelmed by the sheer volume of data, causing them to choke, stop processing efficiently, and effectively "go to zero" busy because they can't keep up.
 
-### **3. Address the Problematic Inbound Flow**
-
-* **If it's Legitimate Zabbix Traffic (Active Checks/Proxies/Sender):**
-    * **Scale Out with Proxies:** If not already using them, deploy Zabbix proxies to offload data collection from the main server. They buffer data and send it in larger batches, reducing per-item network chatter to the server.
-    * **Review Active Agent Configuration:** Check the `RefreshActiveChecks` interval on your Zabbix Agents. Is there a synchronization issue where many agents request active checks at the same time? Are many active checks collecting very verbose data?
-    * **Optimize Items:** Reduce the frequency or amount of data collected by active agent items (e.g., fewer logs, smaller strings).
-    * **Increase `StartTrappers`:** While they go to zero now, if the *cause* of the zero is external network pressure, increasing `StartTrappers` *might* help them handle more connections if the network saturation is just shy of full blockage. This should be tried *after* trying to mitigate the surge itself.
-    * **Increase Network Interface Capacity:** If your server's network card or link is truly saturated, you might need to upgrade to 10Gbps or bond multiple interfaces.
-    * **Tune Linux Network Stack:** Increase kernel parameters related to network buffers (`net.core.rmem_max`, `net.core.wmem_max`, `net.ipv4.tcp_rmem`, `net.ipv4.tcp_wmem`, `net.ipv4.tcp_max_syn_backlog`, `net.core.somaxconn`). **Consult experienced Linux network engineers for this.**
-
-* **If it's Non-Zabbix Traffic:**
-    * **Identify the Source:** Trace the source IPs and shut down/reconfigure the offending application/host.
-    * **Firewall Rules:** Implement firewall rules (`iptables` / `firewalld`) to block the problematic traffic source or destination port if it's unwanted.
-    * **QoS (Quality of Service):** If it's legitimate but less critical traffic, implement QoS rules on network devices to prioritize Zabbix traffic.
+**The core issue is that this specific Zabbix Agent (10.10.12.12) is sending so much active check data during this window that it's saturating your Zabbix Server's inbound processing capabilities.**
 
 ---
 
-**Prioritized Action Plan:**
+### Next Steps: Pinpoint *What* Data the Agent is Sending
 
-1.  **Collect Network Flow Data/Packet Capture:** This is the most critical step to understand the nature and source of the doubled inbound traffic.
-2.  **Analyze Logs:** Continue monitoring Zabbix server logs with `DebugLevel=4` during these times for clues about connection issues or trapper process behavior.
-3.  **Identify the Source & Nature:** Determine *what* is causing the network surge and *why* it happens at those specific times (scheduled backups, mass deployments, external scans, application syncs, etc.).
-4.  **Mitigate:**
-    * If it's unwanted: Block it via firewall.
-    * If it's Zabbix-related: Scale out with proxies, optimize active checks, or increase server/network capacity.
-    * If it's other legitimate traffic: Prioritize Zabbix traffic (QoS) or upgrade network infrastructure.
+Now that you've identified the specific problematic agent and the type of data (active checks), the next logical step is to find out *what specific active checks* are generating this massive data volume.
 
-The "zero busy %" for trappers combined with doubled inbound flows is a clear sign that data isn't even making it *to* the trappers. Fixing the network saturation during these windows is the core solution.
+**1. Investigate the Zabbix Agent (10.10.12.12) Directly during the Incident Window:**
+
+* **Agent Log File (`/var/log/zabbix/zabbix_agentd.log`):**
+    * Look for entries around 01:00-03:00 on the agent.
+    * Are there messages about specific items being collected (e.g., `active check "logrt[...]"`)?
+    * Are there "too many values" or "buffer full" type errors on the agent side?
+    * Are there any messages indicating the agent is restarting or refreshing its configuration frequently?
+* **Agent Network Traffic (`iftop`/`nethogs` on the Agent):**
+    * Run `sudo iftop -i <agent_interface>` or `sudo nethogs <agent_interface>` *on the agent server itself* during the 01:00-03:00 window.
+    * **Goal:** Confirm if the agent is indeed sending a massive outbound flow to `10.75.160.132:10051`. This will visually verify the "top talker" claim.
+    * `nethogs` is particularly useful here, as it might show *which process* (e.g., `zabbix_agentd`) is sending the data.
+* **Agent Resource Utilization (`top`/`htop`/`sar` on Agent):**
+    * Check CPU, Memory, Disk I/O on the agent during the incident. Sometimes a slow agent (due to high resource use or disk I/O when reading large files) can backlog data and then dump it.
+
+**2. Examine Zabbix UI for Host `SERVER-TRC123` (10.10.12.12):**
+
+* **Host Items:**
+    * Navigate to **Configuration > Hosts**, find `SERVER-TRC123`.
+    * Go to the **Items** tab.
+    * Filter by **Type: Zabbix agent (active)**.
+    * Look for items that might return a large amount of data (e.g., `log[...]`, `logrt[...]`, `perf_counter[...]`, custom user parameters executing scripts that produce large output, `vfs.file.contents[*]`).
+    * Pay attention to their **Update Interval**. Are any of them set to collect at 01:00, or have a very short interval that aggregates to a massive amount of data?
+* **Latest Data and History Graphs:**
+    * Go to **Monitoring > Latest Data** for `SERVER-TRC123`. See if any specific active items are showing massive spikes in value size or count during the 01:00-03:00 window.
+    * **Monitoring > Graphs:** Look at item graphs for this agent, particularly `Zabbix agent: Bytes sent to Zabbix server (active)` (if you have such an item) or individual items known to be large.
+
+**3. Consider Zabbix Agent Configuration (`/etc/zabbix/zabbix_agentd.conf` on 10.10.12.12):**
+
+* **`BufferSize`:** If the agent's buffer is too small, it might try to flush too frequently or get full, potentially leading to issues.
+* **`LogFileSize` / `LogFile`:** If you suspect `logrt` items, check the size of the log files being monitored.
+
+### Once you identify the problematic active check item(s):
+
+* **Adjust Update Interval:** Can the item be collected less frequently?
+* **Refine Filters:** For `logrt` items, can you add more specific regex filters to reduce the amount of data sent?
+* **Optimize Script Output:** If it's a `UserParameter` running a script, can the script's output be reduced?
+* **Reschedule:** If it's a batch process on the agent that logs heavily, can that process be rescheduled to a less critical time?
+* **Increase Server Resources:** If necessary, and after optimizing the agent, you might need to allocate more resources (CPU, RAM, network bandwidth) to your Zabbix Server to handle the legitimate load.
+
+The key is to follow the data: identify the agent, then identify the specific data points that agent is sending that are causing the overload.

@@ -491,6 +491,7 @@ ServerActive=zabbix-node-01;zabbix-node-02
 
 ```
 
+https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd#serveractive
 
 ![HA or mult](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/ha_mult.jpg)
 
@@ -506,6 +507,8 @@ Yes, a single Zabbix agent **can send data to more than one Zabbix server (or Za
     ```
     Server=192.168.1.100,192.168.1.101,zabbix-server-prod.example.com
     ```
+    https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd#server
+    
 * **Behavior:** Each server/proxy specified in this list can independently connect to the agent and query data. The agent will respond to requests from any of the allowed servers.
 * **Considerations:**
     * **Duplicate Data:** If both servers are configured to monitor the same items on that agent, the agent will send the data to *both* servers when they request it. This means you'll have duplicate data in your Zabbix databases, which can increase storage and processing load unnecessarily.
@@ -522,6 +525,8 @@ Yes, a single Zabbix agent **can send data to more than one Zabbix server (or Za
     ```
     ServerActive=192.168.1.100,zabbix-server-dr.example.com
     ```
+    https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd#serveractive
+
 * **Behavior:** The agent will try to fetch active checks configuration from each listed server/proxy. It then sends the collected data for active items to the server/proxy that originally provided the configuration for those items.
     * **Important Note:** The agent typically only receives the configuration from **one** of the `ServerActive` addresses at a time. If a specific active item is defined on multiple servers, the agent will generally send the data to the server that *first* provided the configuration for that item. It's not designed for different items to go to different servers easily from one agent configuration.
 * **Considerations:**
