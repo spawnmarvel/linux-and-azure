@@ -681,7 +681,7 @@ If CPU is already maxed out (near 100%) during that time, increasing pollers fur
 If CPU still has headroom, increasing pollers is the right move. Each poller consumes some RAM, so ensure you have free memory as well.
 
 
-***TODO***
+***Not done***
 
 ```bash
 
@@ -715,7 +715,7 @@ This is not a simple "overload" scenario for trappers, but an **inactivity** sce
 
 ---
 
-# **Urgent Action Plan: Investigate and Resolve Trapper Inactivity** TODO
+# **Urgent Action Plan: Investigate and Resolve Trapper Inactivity**
 
 This is the most pressing issue. Focus on finding out *why* these processes are becoming completely inactive at these precise times.
 
@@ -804,7 +804,7 @@ Example log from 01:00 to 03:30
 
 ```
 
-### Top talkers and errors with connection TODO
+## Top talkers and errors with connection TODO
 
 Let's re-establish the roles based on your latest information:
 
