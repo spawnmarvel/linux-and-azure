@@ -623,7 +623,7 @@ Here's the refined plan, keeping Zabbix 6.0.40 in mind:
 
 ---
 
-## **Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck** TODO
+## **Zabbix 6.0.40 Performance Troubleshooting: Data Gathering Bottleneck** 
 
 **Problem:** Low `Value cache, hits` (and associated false alarms) during 12:00-13:30, 18:00-19:30, and 01:00-02:30.
 **Key Diagnostic:** `Zabbix server: Zabbix data gathering process busy %` peaks during these times, but the `Value cache, % free` metric remains stable, and `Value cache, misses` does not spike.
