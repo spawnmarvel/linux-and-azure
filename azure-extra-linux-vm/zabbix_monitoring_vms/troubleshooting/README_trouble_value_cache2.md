@@ -109,3 +109,35 @@ By gathering this detailed information, you should be able to pinpoint the exact
 
 
 
+## TODO
+
+You're observing high utilization of the "Utilization of unreachable poller data collector process" from 01:00 to 03:00.
+
+
+Role: Unreachable pollers are specific Zabbix server processes whose job is to repeatedly check hosts that were previously deemed unavailable (e.g., agents stopped responding, network issues). They try to re-establish communication to determine if the host has come back online.
+
+Zabbix server: Utilization of trapper data collector process, in % = 0 for the same time.
+
+
+Okay, the fact that the **"Utilization of trapper data collector process, in %"** was at **0%** during the same time (01:00-03:00) as the high utilization of the unreachable pollers is a crucial observation.
+
+This strongly suggests that the **trapper processes on your Zabbix server are becoming stuck or unresponsive**, rather than simply being overloaded.
+
+Here's why this is so important:
+
+* **Trappers Should Never Be Idle:** Trappers are the workhorses of the Zabbix server, constantly receiving and processing incoming data from agents. A sustained 0% utilization means they are not doing their job. They are not just "idle"; they are likely in a state where they cannot accept new connections or process existing data.
+* **Restart "Fixes" It:** As you've confirmed, restarting the Zabbix server temporarily resolves the issue. This further reinforces the idea that the trapper processes are getting into a bad state that only a full restart can clear.
+* **Unreachable Pollers as a Symptom:** The busy unreachable pollers are likely a *consequence* of the trappers failing. When the trappers stop working, agents cannot send data, and the Zabbix server marks those agents as "unreachable". The unreachable pollers then kick into high gear, trying to re-establish contact with all these offline agents.
+
+**This shifts the focus from purely "overload" to a more specific problem: the trapper processes are becoming stuck or deadlocked.**
+
+The next steps should be:
+
+1.  **Investigate Zabbix Server Logs (Crucial):** As discussed previously, increase the debug level in `zabbix_server.conf` (e.g., `DebugLevel=4` or `DebugLevel=5`) and then examine the Zabbix server log file (`/var/log/zabbix/zabbix_server.log`) for any errors, warnings, or repeated messages that occur *right before* the trappers become stuck (around the 01:00-03:00 timeframe). Look for anything that might indicate why the trapper processes are failing.
+2.  **Check Operating System Logs:** Examine your system logs (e.g., `/var/log/syslog`, `/var/log/messages`, or `journalctl` on Linux) for any errors or warnings related to the Zabbix server process or its dependencies (e.g., database connectivity issues, resource exhaustion) that might correlate with the trapper failures.
+3.  **Review Zabbix Configuration:** Carefully review your Zabbix server configuration (`zabbix_server.conf`), especially parameters related to trappers, history syncers, the database connection (`DBHost`, `DBUser`, etc.), and any custom scripts or external checks that might be putting unusual load on the server.
+4.  **Database Performance:** Ensure your Zabbix database server is healthy and not experiencing performance issues (high CPU, I/O bottlenecks, slow queries, deadlocks). A slow or unresponsive database can cause Zabbix processes to hang.
+
+It's less about simply increasing `StartTrappers` and more about understanding *why* the existing trappers are failing. The logs are the key to this.
+
+
