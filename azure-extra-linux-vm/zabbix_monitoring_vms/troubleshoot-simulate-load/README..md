@@ -164,6 +164,13 @@ And you will see error
 
 ## Findings in Azure and Zabbix server
 
+It will slowly remove the connections, but it takes time.
+The quick fix is
+
+```bash
+sudo service zabbix-server stop/ start / status
+```
+
 What happend in Azure:
 
 
