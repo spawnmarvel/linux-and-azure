@@ -846,9 +846,64 @@ ss -ltn
 LISTEN       0             4096                       0.0.0.0:10050                    0.0.0.0:*
 LISTEN       0             4096                       0.0.0.0:10051                    0.0.0.0:*
 
-on zabbic server the ss -ltn = recv-q er is full for :10051
+on zabbix server the ss -ltn = recv-q is full for :10051
 
 ```
+
+## Bug??
+
+
+https://superuser.com/questions/1636379/tcp-packet-drops-on-application-server
+
+
+ListenBacklog is now a parameter and can be set in the configuration file.
+
+
+https://www.zabbix.com/forum/zabbix-for-large-environments/421171-proxy-connections-unstable-on-large-environments
+
+From time to time generates zabbix a TCP queue overflow.
+Then is no traffic from / to ZABBIX more possible, only zabbix restart help here.
+
+
+https://support.zabbix.com/browse/ZBX-7933?_gl=1%2A154hmsl%2A_gcl_au%2AMjA5MDQ3MjczNy4xNzQ5MTk3ODkw%2A_ga%2AMTIxOTk3NTk3My4xNzQ5MTk3ODkw%2A_ga_1F6WJN99ZG%2AczE3NDkyMjMwMTckbzIkZzEkdDE3NDkyMjMxNzUkajYwJGwwJGgw
+
+docs
+
+```bash
+The maximum number of pending connections in the TCP queue.
+The default value is a hard-coded constant, which depends on the system.
+The maximum supported value depends on the system, too high values may be silently truncated to the 'implementation-specified maximum'.
+
+Default: SOMAXCONN
+Range: 0 - INT_MAX
+
+```
+
+https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_server#listenbacklog
+
+
+Increasing ListenBacklog (e.g., to 2048 or 4096) on your Zabbix server can temporarily alleviate connection rejections by allowing more connections to queue up. However, it's crucial to understand:
+It's a buffer, not a solution: A larger ListenBacklog buys you more time, but it doesn't solve the underlying problem of the server being overwhelmed. 
+
+
+```bash
+sudo cat zabbix_server.conf | grep 'ListenBack*'
+## Option ListenBackLog
+# ListenBacklog=
+
+```
+
+SOMAXCONN is not a fixed number, but a system-defined constant that varies depending on the operating system and its version.
+
+It represents the default maximum length to which the queue of pending connections for a listening socket may grow.
+
+```bash
+sysctl net.core.somaxconn
+net.core.somaxconn= 4096
+
+```
+Therefore, while the ListenBacklog is configured robustly, the current symptoms point to the need to focus on the processing capacity of the Zabbix server's components, particularly its trappers, and the overall load they are experiencing from incoming data.
+
 
 Significance: If Recv-Q is consistently showing a high number, especially a number close to or equal to your configured net.core.somaxconn (the maximum queue length for accepted but unread sockets) or net.ipv4.tcp_max_syn_backlog (for pending SYN requests), it means your application (Zabbix server) is not processing incoming connections fast enough. When this queue becomes full, the kernel will start rejecting new connection attempts, leading to "connection rejected" errors and timeouts for clients.
 
@@ -914,3 +969,5 @@ Here's how to proceed with the investigation, focusing on Windows-specific aspec
 
 Once you identify the problematic item(s), you can then optimize them (e.g., adjust intervals, refine regex filters for logs, make scripts more concise) to alleviate the load on your Zabbix server.
 
+
+next readme .nr 2
