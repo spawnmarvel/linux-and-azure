@@ -835,7 +835,33 @@ This new information is a **perfect fit** for your previous observations:
 
 **The core issue is that this specific Zabbix Agent (10.10.12.12) is sending so much active check data during this window that it's saturating your Zabbix Server's inbound processing capabilities.**
 
----
+
+
+## ss -ltn
+
+```bash
+
+ss -ltn
+
+LISTEN       0             4096                       0.0.0.0:10050                    0.0.0.0:*
+LISTEN       0             4096                       0.0.0.0:10051                    0.0.0.0:*
+
+on zabbic server the ss -ltn = recv-q er is full for :10051
+
+```
+
+Significance: If Recv-Q is consistently showing a high number, especially a number close to or equal to your configured net.core.somaxconn (the maximum queue length for accepted but unread sockets) or net.ipv4.tcp_max_syn_backlog (for pending SYN requests), it means your application (Zabbix server) is not processing incoming connections fast enough. When this queue becomes full, the kernel will start rejecting new connection attempts, leading to "connection rejected" errors and timeouts for clients.
+
+When you saw a full Recv-Q for :10051 (your Zabbix trapper port), it was a clear indication that your Zabbix server was overwhelmed by the sheer volume of incoming active check connections and data, leading to the kernel dropping connection attempts before Zabbix could even process them.
+
+Active checks are data collection items where the Zabbix Agent (the software running on the monitored host) initiates the connection and pushes the collected data to the Zabbix Server.
+
+* Agent Requests Configuration: 
+* Server Responds: 
+* Agent Collects Data
+* Agent Sends Data: Once the data for an active check item is collected, the agent buffers it internally (using BufferSize that you just mentioned) and then pushes this collected data back to the Zabbix Server's trapper port (10051).
+* Server Processes: The Zabbix Server's trapper processes are responsible for receiving and processing this incoming data from agents.
+
 
 ### Next Steps: Pinpoint *What* Data the Agent is Sending TODO
 
@@ -887,3 +913,4 @@ Here's how to proceed with the investigation, focusing on Windows-specific aspec
 3.  **Cross-reference with Zabbix UI's Active Check items** for `SERVER-TRC123`, paying special attention to `logrt`, `eventlog`, `vfs.file.contents`, and `system.run` items, especially those related to **RoboCopy logs**.
 
 Once you identify the problematic item(s), you can then optimize them (e.g., adjust intervals, refine regex filters for logs, make scripts more concise) to alleviate the load on your Zabbix server.
+
