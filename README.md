@@ -232,6 +232,25 @@ sudo journalctl -u logstash.service -f --no-pager
 sudo journalctl -f -p err..emerg
 ```
 
+
+## Check if port is exhausted
+
+* ss: Stands for "Socket Statistics
+* -l (or --listening):
+* -t (or --tcp)
+* -n (or --numeric):
+
+So, ss -ltn means: "Show me all listening TCP sockets, using numeric addresses and port numbers.
+
+Recv-Q (Receive-Queue):
+
+Recv-Q shows the number of incoming connection requests that are currently queued by the kernel, waiting for the application
+
+
+```bash
+ss -ltn
+
+```
 ## List of Basic SSH Commands Linux (ubuntu 20.04)
 
 | SSH cmds  | Description | Example
