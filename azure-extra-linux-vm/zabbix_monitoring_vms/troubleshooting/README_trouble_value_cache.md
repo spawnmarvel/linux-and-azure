@@ -804,7 +804,7 @@ Example log from 01:00 to 03:30
 
 ```
 
-## Top talkers and errors with connection TODO
+## Top talkers and errors with connection
 
 Let's re-establish the roles based on your latest information:
 
@@ -837,7 +837,7 @@ This new information is a **perfect fit** for your previous observations:
 
 ---
 
-### Next Steps: Pinpoint *What* Data the Agent is Sending
+### Next Steps: Pinpoint *What* Data the Agent is Sending TODO
 
 Our goal remains to pinpoint **what specific active check item(s)** on this Windows agent are generating the massive amount of data during 01:00-03:00 and 18:00-19:30.
 
