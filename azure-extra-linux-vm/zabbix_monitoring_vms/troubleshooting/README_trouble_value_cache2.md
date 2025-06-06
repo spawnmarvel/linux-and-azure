@@ -117,3 +117,5 @@ Zabbix server: Utilization of http poller data collector process, in % = 42.3
 Zabbix server: Utilization of unreacable poller data collector process, in % = 56.1
 
 Zabbix server: Utilization of trapper data collector process, in % = 0
+
+!(Poller 3)[https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/poller_3.jpg]
