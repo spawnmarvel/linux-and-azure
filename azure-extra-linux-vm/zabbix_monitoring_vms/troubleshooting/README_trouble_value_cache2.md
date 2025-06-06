@@ -1,4 +1,4 @@
-## 18:00 TODO
+## 01:00
 
 ```bash
 404096:20250606:181549.689 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
@@ -119,3 +119,85 @@ Zabbix server: Utilization of unreacable poller data collector process, in % = 3
 Zabbix server: Utilization of trapper data collector process, in % = 0
 
 !(Poller 3)[https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/poller_3.jpg]
+
+Okay, the fact that the **"Utilization of poller data collector process"** is also high during the same period (01:00-03:00) as the stuck trappers and busy unreachable pollers paints a clearer picture of a widespread issue within the Zabbix server itself.
+
+Here's what this combination suggests:
+
+* **Systemic Problem:** The problem isn't isolated to just the trappers. If both trappers (handling active checks) and pollers (handling passive checks) are experiencing issues (either being stuck at 0% or highly utilized), it indicates a more fundamental problem within the Zabbix server process itself or its interaction with the database or operating system.
+* **Database Bottleneck:** A common cause for both pollers and trappers to struggle is a slow or unresponsive database. If the database cannot quickly accept incoming data or serve requests for passive checks, both pollers and trappers will get blocked waiting for database operations.
+* **Resource Exhaustion:** The Zabbix server process might be running into resource limits (CPU, memory, I/O, file descriptors). If the server is starved for resources, both pollers and trappers will be affected.
+* **Internal Deadlock or Bug:** There might be an internal deadlock or bug within the Zabbix server code that is triggered by the high load, causing various processes to become stuck or unresponsive.
+
+Given this new information, the next steps are even more critical:
+
+1.  **Prioritize Zabbix Server and System Logs:** The Zabbix server logs (`/var/log/zabbix/zabbix_server.log`) and the system logs (e.g., `/var/log/syslog`, `/var/log/messages`, `journalctl`) are your primary sources of information. Examine these logs very carefully for any errors, warnings, or unusual patterns that occur around the 01:00-03:00 timeframe. Look for anything that might explain why both pollers and trappers are failing.
+2.  **Database Performance Analysis:** Thoroughly investigate your Zabbix database server's performance during the problematic periods. Check its CPU, memory, I/O, and especially its slow query log. Look for any database-side issues (slow queries, deadlocks, connection problems) that might be impacting the Zabbix server.
+3.  **Resource Monitoring:** Closely monitor your Zabbix server's CPU, memory, disk I/O, and open file descriptors during the 01:00-03:00 window. Use tools like `top`, `htop`, `iostat`, `vmstat`, and `lsof`. Identify any resource bottlenecks.
+4.  **Review Zabbix Configuration:** Double-check your `zabbix_server.conf` for any misconfigurations or unusual settings, especially those related to database connections, cache sizes, and the number of processes (pollers, trappers, history syncers).
+5.  **Consider Upgrading Zabbix:** If you're running an older version of Zabbix, consider upgrading to the latest stable release. Newer versions often contain bug fixes and performance improvements.
+6.  **Check for Custom Scripts:** If you have any custom external checks or scripts that run on the Zabbix server, review them for potential performance issues or resource leaks.
+
+## This is an extremely important piece of information and provides a strong lead!
+
+The fact that your OS was upgraded from **Ubuntu 20.04 to 24.04** approximately three months ago, correlating with a noticeable drop in **Zabbix cache hits**, is highly significant.
+
+
+!(Cache hits)[https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cache_hits.jpg]
+
+You are running **Zabbix 6.0.40**, which is the latest patch version for the 6.0 LTS series. While this is good, a major OS upgrade can profoundly affect application performance, even if the application version remains the same.
+
+### Understanding "Lower Value Cache Hits"
+
+* **Zabbix Caching:** Zabbix heavily relies on various internal caches (e.g., configuration cache, history cache, value cache, index cache) to store frequently accessed data in RAM. This drastically reduces the number of expensive database queries, which is critical for performance.
+* **Impact of Low Cache Hits:** When cache hit rates drop, it means Zabbix processes (like trappers, pollers, history syncers) are spending much more time:
+    * **Querying the database directly:** This is slower and puts more load on the database server.
+    * **Waiting for database responses:** This increases the busy time of Zabbix processes, making them appear "stuck" or highly utilized, even if they aren't CPU-bound themselves.
+    * **Leading to Queue Growth:** The inability to quickly process data due to slower database interactions causes Zabbix's internal queues to grow, ultimately leading to the symptoms you're observing (connection rejections, agents going unreachable).
+
+### Possible Reasons for Lower Cache Hits After OS Upgrade:
+
+A major OS upgrade from 20.04 to 24.04 can change several underlying factors that impact Zabbix's database interaction and caching efficiency:
+
+1.  **Database Client Libraries:** Ubuntu 24.04 might come with newer versions of database client libraries (e.g., `libmysqlclient` for MySQL, `libpq` for PostgreSQL). These new libraries might have:
+    * Subtle incompatibilities.
+    * Different default settings for connection pooling, timeouts, or buffer sizes.
+    * Performance regressions (less common, but possible).
+2.  **Kernel/System Network Stack Tuning:** The Linux kernel in 24.04 might have different default TCP/IP stack parameters (e.g., buffer sizes, congestion control algorithms, timeouts). While you've set `ListenBacklog` high, other network-related kernel parameters could affect connection stability or throughput between Zabbix server and database.
+3.  **Memory Management/Swapping:** The new kernel might handle memory differently. If the server is swapping more or has less effective memory management for large applications, it could reduce the efficiency of Zabbix's RAM-based caches.
+4.  **I/O Scheduling/Filesystem Defaults:** Changes in disk I/O scheduling or default filesystem mount options on the new OS could impact the performance of your database server (if it's on the same machine) or the speed at which Zabbix writes its history cache to disk (which frees up cache space).
+5.  **Compiling/Linking:** The Zabbix server binaries (even if you installed from Ubuntu's repos or Zabbix's official repos for 24.04) might have been compiled against different system libraries on 24.04, leading to performance variations.
+
+### Immediate Next Steps and Focus Areas:
+
+Given this crucial new information, your troubleshooting should now focus on these areas:
+
+1.  **Identify *Which* Cache is Suffering:**
+    * Go to **Monitoring > Hosts** in Zabbix, select your **Zabbix server host**.
+    * Go to **"Latest data"** or **"Graphs"**.
+    * Look specifically at internal Zabbix items related to **cache hit ratios and cache utilization**. Common ones include:
+        * `zabbix[cache,hit,buffer]` (History cache hit ratio)
+        * `zabbix[cache,hit,index]` (Index cache hit ratio)
+        * `zabbix[cache,hit,text]` (Text cache hit ratio)
+        * `zabbix[cache,hit,value]` (Value cache hit ratio)
+        * `zabbix[wcache,history,pfree]` (Percentage free in history write cache) - if this drops low, it implies data isn't being written fast enough.
+    * Confirm which of these metrics dropped significantly after the OS upgrade.
+
+2.  **Thorough Database Performance Analysis (Re-emphasized):**
+    * Since cache hits are down, your database is now taking the brunt of the load. This is the **most critical area to investigate.**
+    * **DB Server Resources:** Monitor CPU, memory, and disk I/O on your database server (if separate) or the Zabbix server (if DB is local) during the problematic times.
+    * **DB Configuration:** Review your database configuration (e.g., `my.cnf` for MySQL, `postgresql.conf` for PostgreSQL). Pay close attention to:
+        * **`innodb_buffer_pool_size`** (MySQL) or **`shared_buffers`** (PostgreSQL): Ensure these are optimally sized for your available RAM.
+        * **`max_connections`**, **`wait_timeout`**, **`interactive_timeout`**.
+        * **`innodb_flush_log_at_trx_commit`** (MySQL) or `fsync` related settings (PostgreSQL) - these impact write performance vs. data safety.
+    * **Slow Query Logs:** Enable and check your database's slow query logs during the problematic times. This will show you exactly which queries are taking too long.
+    * **Database Client/Server Versions:** Confirm the exact versions of your database client libraries (on the Zabbix server) and the database server itself. Look for any known compatibility issues with Ubuntu 24.04.
+
+3.  **Kernel Parameters and File Descriptors:**
+    * **Compare `sysctl` settings:** If possible, compare `/etc/sysctl.conf` or the output of `sysctl -a` on your old Ubuntu 20.04 system versus 24.04. Look for differences, especially for `net.core.somaxconn`, `net.ipv4.tcp_*` parameters, and `fs.file-max`.
+    * **File Descriptors:** Ensure the Zabbix server process (`zabbix_server`) is not hitting its open file descriptor limits. You can check this by running `cat /proc/<zabbix_server_pid>/limits` when the server is misbehaving.
+
+4.  **Zabbix Server Cache Parameters:**
+    * While the root cause might be external, ensure your `zabbix_server.conf` `CacheSize` parameters are still appropriate for your workload and potentially adjusted upwards slightly to compensate for any new OS overhead. Check `CacheSize`, `HistoryCacheSize`, `ValueCacheSize`, `ConfigCacheSize`.
+
+This shift in focus to the OS upgrade and its impact on caching/database interaction is crucial. It explains *why* the server can't keep up, even if the actual data ingress method (trappers) remains the same.
