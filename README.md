@@ -197,8 +197,37 @@ cat telegraf.conf | grep "data_source_name"
 # Get Hostname info
 cat zabbix_agentd.conf | grep "Hostname*"
 
+
+# error
+sudo cat zabbix_server.log | grep 'error*'
+sudo cat zabbix_server.log | grep 'fail*'
+
+# fail
+
+
 ```
 ## Log all things in one tail
+
+
+To much tail with -f?
+
+```bash
+
+sudo tail -20 /var/log/syslog
+
+sudo tail -50 zabbix_server.log
+
+```
+Output to new file some data
+
+```bash
+
+sudo tail -f /var/log/zabbix/zabbix_server.log | grep -E "error|warning|Error|Warning|ERROR|WARNING" >> /home/imsdal/zabbix_errors_warnings.log
+
+```
+
+View logs standard
+
 
 ```bash
 # if no logs here

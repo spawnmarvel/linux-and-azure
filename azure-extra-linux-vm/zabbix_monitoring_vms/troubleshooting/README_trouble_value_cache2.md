@@ -9,7 +9,25 @@
 404096:20250606:181549.689 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
 ```
 
+```bash
+sudo cat zabbix_server.conf | grep 'StartTr*'
+### Option: StartTrappers
+StartTrappers=20
+```
 
+
+* In this case was terminated by the firewall.
+* I managed to fix this error in my zabbix proxy just enabling the parameter "StartTrappers=17" in zabbix_proxy.conf and restarting the service
+* DNS, and they have confirmed that our DNS was down.
+* We upgraded to the latest available version of zabbix
+* I had the same problem, turned out the firewall was doing content filtering on port 10051 and 10050
+* * An indication of this is that both the proxy and the agent report the connection terminated by the peer.
+* * In this case was terminated by the firewall.
+
+https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/426772-zabbix-proxy-getpeername-failed-107-transport-endpoint-is-not-connected
+
+
+## Answer
 
 These log entries are very clear and directly confirm the issues we've been discussing:
 
@@ -88,3 +106,6 @@ To understand *why* the Zabbix server gets into this state, you need to gather m
     * Check your database server's CPU, memory, I/O, and specifically its **log files** for slow queries, deadlocks, or connection issues occurring at the same time Zabbix hangs.
 
 By gathering this detailed information, you should be able to pinpoint the exact bottleneck or internal issue that necessitates the Zabbix server restart.
+
+
+
