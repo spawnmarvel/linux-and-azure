@@ -114,7 +114,7 @@ By gathering this detailed information, you should be able to pinpoint the exact
 
 Zabbix server: Utilization of http poller data collector process, in % = 42.3
 
-Zabbix server: Utilization of unreacable poller data collector process, in % = 56.1
+Zabbix server: Utilization of unreacable poller data collector process, in % = 300
 
 Zabbix server: Utilization of trapper data collector process, in % = 0
 
