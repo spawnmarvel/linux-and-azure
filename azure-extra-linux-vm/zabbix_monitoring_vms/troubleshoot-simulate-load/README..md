@@ -167,7 +167,14 @@ And you will see error
 What happend in Azure:
 
 
+![Flood](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshoot-simulate-load/Inbound_flows.jpg)
+
+
 What happend on Zabbix server:
+
+![Zabbix slow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshoot-simulate-load/zabbix_slow.jpg)
+
+
 
 
 
