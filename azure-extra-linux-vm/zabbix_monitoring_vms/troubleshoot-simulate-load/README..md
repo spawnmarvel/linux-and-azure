@@ -172,7 +172,7 @@ What happend in Azure:
 
 What happend on Zabbix server:
 
-![Zabbix slow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshoot-simulate-load/zabbix_slow.jpg)
+![Zabbix slow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/troubleshoot-simulate-load/Zabbix_slow.jpg)
 
 
 
