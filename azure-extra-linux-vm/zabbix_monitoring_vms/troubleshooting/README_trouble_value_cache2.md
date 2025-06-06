@@ -143,7 +143,7 @@ Given this new information, the next steps are even more critical:
 The fact that your OS was upgraded from **Ubuntu 20.04 to 24.04** approximately three months ago, correlating with a noticeable drop in **Zabbix cache hits**, is highly significant.
 
 
-!(Cache hits)[https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cache_hits.jpg]
+!(Cache hits)[https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cach_hits.jpg]
 
 You are running **Zabbix 6.0.40**, which is the latest patch version for the 6.0 LTS series. While this is good, a major OS upgrade can profoundly affect application performance, even if the application version remains the same.
 
