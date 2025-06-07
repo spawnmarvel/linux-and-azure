@@ -280,100 +280,103 @@ Recv-Q shows the number of incoming connection requests that are currently queue
 ss -ltn
 
 ```
-## List of Basic SSH Commands Linux (ubuntu 20.04)
-
-| SSH cmds  | Description | Example
-|---------- |------------ | ------------------------------
-| help      | help pwd    | help pwd
-| whatis    | Find what a command is used for  | whatis ls
-| sudo apt update| use the apt package management tools to update your local package index |
-| sudo apt update && sudo apt upgrade -y | Make sure all current packages are up to date <br/> apt is the command that is being recommended by the Linux distributions. | https://itsfoss.com/apt-vs-apt-get-difference/
-| apt list --installed| Get installed packages |
-| apt (pacman, yum, rpm) | Package managers depending on the distro |
-| sudo apt install, remove, purge zip | When using the “remove” option, Ubuntu can leave files behind while uninstalling a package. To work around this apt offers another option, the “purge” option. | sudo apt remove zip
-| sudo apt autoremove | If you want to clean up your Ubuntu system by uninstalling unused packages, then apt offers an option called “autoremove“.   | Use 'sudo apt autoremove' to remove it.
-| whereis   | Locate the binary, source, and manual pages for a command | whereis wget,  whereis traceroute
-| which     | Identify and report the location of the provided executable | which wget, which traceroute
-| reboot    |  | sudo shutdown -r now
-| ls        | Show directory contents (list the names of files) | -a (list all + hidden), -l (list all + size)
-| lsblk     | Show disks, The ones with the TYPE disk are the physically attached disks on your computer. | lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"
-| cd        | Change dir  | cd ./folder
-| cd /      | Get to root directory  | (bin  boot  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var)
-| mkdir     | Make dir    |  mkdir folder1
-| touch     | New file    | touch file.txt
-| rm        | Remove a file | rm file1
-| rmdir     | Remove a directory, if empty | rmdir folder1
-| rm -r     | To remove a directory and all its contents, including any subdirectories and files | rm -r folder
-| cat       | Show content of file (redirect to var, content=$(cat data.conf)) |  cat data.conf
-| pwd       | Show current dir: example - > | /home/user
-| cp        | Copy file use if for backup, source destination | cp data.conf data.conf_bck
-| cp -r     | Copy folder, In order to copy a directory on Linux, you have to execute the “cp” command with the “-R” option for recursive and specify the source and destination directories to be copied.  | cp -r folder1 folder2
-| mv        | Move file, the difference is that cp will keep the old file(s) while mv won't, source destination | mv myconf.conf myconf.conf_bck = myconf.conf_bck
-| grep      | Search for a string within an output | cat data.conf 'pipe-symbol' grep "uid"
-| grep      | Search for a string in a file | grep -l "espen" file
-| find      | Search files and dirs | find . -name data.conf
-| nano      | Text editor | nano data.conf
-| head      | return specified num of lines from top | head -n 2 data.conf
-| tail      | return specified num of lines from bottom, -f follow | tail -f data.conf
-| less      | Display the contents of a file one page at a time, exit with q | less data.conf
-| more      | Loads the entire file at once, enter for more | more data.conf
-| diff      | find diff between two files | diff data.conf data.conf_bck
-| cmp       | check if two files are identical | cmp data.conf data.conf_identical
-| comm      | combines diff and cmp | comm data.conf data.conf_bck
-| sort      | sort (lines) content of file while outputting  |  cat names.txt Xavier,Jim, Anna, Bob <br/> sort names.txt, Anna, Bob, Jim, Xavier
-| history   | Show last 50 cmds |
-| clear     | Clear terminal |
-| echo      | Print | var="Hodor", echo $var
-| man       | Access manual pages for all Linux commands | man ls
-| uname     | command to get basic information about the OS | uname -a
-| hostnamectl | find os name and version | Operating System: Ubuntu 22.04.2 LTS, Kernel: Linux 5.15.0-1040-azur
-| whoami    | Get the active username |
-| export    | The export command is specially used when exporting environment variables in runtime | export dbCon="MySql:1245", echo $dbCon
-| tar       | The tar command in Linux is used to create and extract archived files, -cvf compress, -xvf extract | tar -cvf compFolder.tar folder <br/> tar -xvf compFolder.ta
-| gzip      | man gzip | d = decompress k = keep comp files also. gzip -dk server.sql.gz, A file compressed with gzip ends with either .gz or .z.
-| zip       | sudo apt install zip | zip -r folder.zip folder1
-| unzip     | sudo apt install unzip | unzip folder.zip, unzip folder.zip -d destinationfolder
-| ssh       | Secure Shell command | ssh user@ipaddress
-| service   | start stop service | service ssh stop
-| ps        | display active proc |
-| ps -aux    | display all active proc | ps -aux 'pipe' less
-| top       | View active processes live with their system usage |
-| htop       | View active processes live with their system usage |
-| kill and killall | Kill active processes by process ID or name | 
-| df        | Display disk filesystem information,  -h parameter to make the data human-readable. | df -h
-| mount     | Mount file systems | https://github.com/spawnmarvel/azure-automation/blob/main/azure-extra-linux-vm/READMEQuickstartsLinuxMS.md
-| chmod     | Command to change file permissions, get permission ls - l, -rw-rw-r-- | chmod +x file, -rwxrwxr-x or chmod 0755 file
-| chown     | Command for granting ownership of files or folders, command allows you to change the user and/or group ownership of a given file, directory, or symbolic link. <br/> get permission and owner, ls -l| chown user-or-userid file1
-| ifconfig  | Display network interfaces and IP addresses  | sudo apt install net-tools, eth0:inet private ipaddress
-| traceroute | Trace all the network hops to reach the destination, sudo apt install traceroute | traceroute www.google.com
-| telnet    | Check connection | telnet ip-address port
-| nc        | The nc (or netcat) utility is used for just about anything under the sun involving TCP, UDP, or UNIX-domain sockets. | nc -zvw10 ip-address 3306
-| wget      | Download files from internet, GNU Wget is a command-line utility for downloading files from the web. With Wget, you can download files using HTTP, HTTPS, and FTP protocols. <br/> wget --version, sudo apt install wget | wget https://cdn.zabbix.com/zabbix/binaries/stable/6.0/6.0.3/zabbix_agent-6.0.3-linux-4.12-ppc64le-static.tar.gz
-| du        | Get file size, -h human readble | du -h zabbix_agent-6.0.3-linux-4.12-ppc64le-static.tar.gz
-| curl      | Download or upload data using protocols such as FTP, SFTP, HTTP and HTTPS. |  curl www.google.com
-| sudo | which is an acronym for superuser do or substitute user do, is a command that runs an elevated prompt without a need to change your identity. |
-| sudo -i     | A simple way to switch to an interactive session as a root user is the following | root$vmName
-| su     | on the other hand, is an acronym for switch user or substitute user. You are basically switching to a particular user and you need the password for the user you are switching to. |
-| su - bryant | switch to the bryant user account including bryant's path and environment variables, use the (-) switch |
-| sudo ufw enable | By default, when UFW is enabled, it blocks external access to all ports on the server |
-| sudo ufw | Use iptables or ufw to open ports | sudo ufw allow 1022/tcp<br/>sudo ufw allow 'Nginx HTTPS'
-| sudo ufw status | list ufw rules |
-| iptables | Base firewall for all other firewall utilities to interface with. List: | sudo iptables -L
-| useradd and usermod | Add new user or change existing users data <br/> When executed without any option, useradd creates a new user account using the default settings specified in the /etc/default/useradd file. -M, --no-create-home | sudo useradd -m soloman <br/> /home/soloman
-| passwd   | To be able to log in as the newly created user, you need to set the user password. The command adds an entry to the /etc/passwd, /etc/shadow, /etc/group and /etc/gshadow files. | sudo passwd soloman
-| passwd | Create or update passwords for existing users|
-| git --version | Git is likely already installed in your Ubuntu 22.04 server.| # else: sudo apt update, sudo apt install git, git --version
-| mariadb client| app server | sudo apt install mariadb-client
-| mariadb       | db server | sudo apt install mariadb-server mariadb-client<br/>sudo systemctl enable --now mariadb <br/>systemctl status mariadb <br/>sudo mysql_secure_installation
-| mysql/mariadb | https://linux.how2shout.com/how-to-install-wordpress-on-ubuntu-22-04-lts-server/ | mysql -u USERNAME -h localhost-IP -p db_mydatabase (enter password) <br> sudo mysql -u root -p
-| IPV6, IPV4    | allow remote, /etc/mysql/mariadb.cnf | [mysqld] bind-address = ::, [mysqld] bind-address = 0.0.0.0
-| crontab       | -e, edit, -l display, -v last time edited (must install it) | crontab -e
-| env           | see all system vaiables |
-| echo "$PATH"  | print path for a system variable | echo "$HOME"
-| printf "$PATH\n" | The printf command is just like echo command and is available under various versions of UNIX operating systems. It is a good idea to use printf if portability is a major concern for you. | printf "$HOME\n"
-| sed | SED command in UNIX stands for stream editor and it can perform lots of functions on file like searching, find and replace, insertion or deletion.  | sed -i 's/VAR1=TEST11/VAR1=TEST111/g' test_update.txt
+## List of Basic Commands Linux 
 
 
+You've provided a great start for a Linux command reference! I've gone through it and made some corrections, clarifications, and further organized the commands into logical categories.
+
+Here's the refined and corrected table:
+
+---
+
+### Linux Command Reference
+
+This table organizes common Linux commands into logical categories to help you quickly find what you need, with corrected descriptions and clearer examples.
+
+| Category | Command | Description | Example |
+| :------- | :------ | :---------- | :------ |
+| **Getting Help** | `man` | Display the manual page for a command | `man ls` |
+| | `help` | Display help for shell built-in commands | `help pwd` |
+| | `whatis` | Display a one-line description of a command | `whatis ls` |
+| | `whereis` | Locate the binary, source, and manual pages for a command | `whereis wget` |
+| | `which` | Show the full path of an executable command | `which wget` |
+| **File & Directory Management** | `ls` | List directory contents | `ls -a` (all files, including hidden), `ls -l` (long format with details), `ls -lt` (long format, sorted by modification time, newest first) |
+| | `cd` | Change the current directory | `cd /home/user/documents`, `cd ..` (go up one directory), `cd /` (go to root) |
+| | `pwd` | Print the current working directory's path | `/home/user` |
+| | `mkdir` | Create new directories | `mkdir new_folder` |
+| | `rmdir` | Remove an empty directory | `rmdir empty_folder` |
+| | `touch` | Create a new empty file or update the timestamp of an existing file | `touch new_file.txt` |
+| | `cp` | Copy files or directories | `cp source.txt destination.txt`, `cp -r folder1 folder2` (copy folder recursively) |
+| | `mv` | Move or rename files and directories | `mv old_name.txt new_name.txt`, `mv file.txt /path/to/new/location` |
+| | `rm` | Remove files or directories | `rm file.txt`, `rm -r folder_to_delete` (remove folder recursively) |
+| **File Content & Manipulation** | `cat` | Display the content of files | `cat my_file.txt`, `cat data.conf \| grep "uid"` |
+| | `head` | Output the first part (default 10 lines) of files | `head -n 5 data.conf` |
+| | `tail` | Output the last part (default 10 lines) of files; `-f` follows new content | `tail -f logs.txt` |
+| | `less` | View file contents page by page (navigate with arrow keys, exit with `q`) | `less large_log.txt` |
+| | `more` | View file contents page by page (loads entire file at once, press Enter for more) | `more another_log.txt` |
+| | `grep` | Search for patterns in text or files | `grep "error" /var/log/syslog`, `grep -l "pattern" file.txt` (list files containing pattern) |
+| | `find` | Search for files in a directory hierarchy | `find . -name "config.conf"` (find in current dir and subdirs) |
+| | `diff` | Show the differences between two files | `diff original.txt updated.txt` |
+| | `cmp` | Compare two files byte by byte | `cmp file1.txt file2.txt` |
+| | `comm` | Compare two sorted files line by line | `comm sorted_file1.txt sorted_file2.txt` |
+| | `sort` | Sort lines of text files | `cat names.txt \| sort` (e.g., outputs: `Anna`, `Bob`, `Jim`, `Xavier`) |
+| | `sed` | Stream editor for filtering and transforming text | `sed -i 's/old_value/new_value/g' config.txt` |
+| | `nano` | Simple command-line text editor | `nano my_document.txt` |
+| **Package Management (APT)** | `sudo apt update` | Update the local package index | `sudo apt update` |
+| | `sudo apt upgrade` | Upgrade all installed packages to their latest versions | `sudo apt upgrade -y` |
+| | `sudo apt install` | Install new packages | `sudo apt install zip` |
+| | `sudo apt remove` | Uninstall packages, keeping configuration files | `sudo apt remove zip` |
+| | `sudo apt purge` | Uninstall packages and remove all configuration files | `sudo apt purge zip` |
+| | `sudo apt autoremove` | Remove automatically installed packages that are no longer needed | `sudo apt autoremove` |
+| | `apt list --installed` | List all installed packages | `apt list --installed` |
+| **System Information & Resources** | `uname` | Display system information | `uname -a` (all information) |
+| | `hostnamectl` | Query and change system hostname, kernel, and OS distribution | `hostnamectl` |
+| | `lsblk` | List block devices (disks and partitions) | `lsblk -o NAME,SIZE,MOUNTPOINT` |
+| | `df` | Report disk space usage | `df -h` (human-readable sizes) |
+| | `du` | Estimate file space usage | `du -h my_folder/` |
+| | `mount` | Mount a filesystem or display mounted filesystems | `sudo mount /dev/sdb1 /mnt/data` |
+| **Process Management** | `ps` | Report a snapshot of current processes | `ps aux` (display all running processes for all users) |
+| | `top` | Display Linux processes dynamically (real-time system activity) | `top` |
+| | `htop` | Interactive process viewer (an enhanced version of `top`) | `htop` |
+| | `kill` | Send a signal (usually to terminate) to processes by Process ID (PID) | `kill 12345` |
+| | `killall` | Kill processes by name | `killall firefox` |
+| **User & Permissions** | `whoami` | Print the effective username of the current user | `whoami` |
+| | `useradd` | Create a new user account | `sudo useradd -m soloman` (creates user with home directory) |
+| | `usermod` | Modify a user account | `sudo usermod -aG sudo newuser` (add user to 'sudo' group) |
+| | `passwd` | Change a user's password | `sudo passwd soloman` |
+| | `chmod` | Change file permissions | `chmod +x script.sh` (make executable), `chmod 755 file.txt` |
+| | `chown` | Change file owner and/or group | `chown newuser:newgroup file.txt` |
+| **Networking** | `ifconfig` | Display and configure network interfaces (often replaced by `ip` command on newer systems) | `ifconfig eth0` |
+| | `traceroute` | Trace the route packets take to a network host | `traceroute www.google.com` |
+| | `telnet` | Interact with other hosts using the TELNET protocol (often used to test port connectivity) | `telnet example.com 80` |
+| | `nc` (netcat) | A versatile tool for reading from and writing to network connections | `nc -zvw10 192.168.1.1 3306` (check if port 3306 is open) |
+| | `wget` | Non-interactive network downloader for files from the web | `wget https://cdn.example.com/software.tar.gz` |
+| | `curl` | Transfer data with URLs (supports various protocols) | `curl -O https://example.com/data.json` (download with original filename) |
+| | `ssh` | OpenSSH remote login client (secure shell) | `ssh user@ipaddress` |
+| **Archiving & Compression** | `tar` | Archive files and directories (create `.tar` archives) | `tar -cvf archive.tar folder/` (create), `tar -xvf archive.tar` (extract) |
+| | `gzip` | Compress or expand files (creates `.gz` or `.z` files) | `gzip -dk server.sql.gz` (decompress and keep compressed file) |
+| | `zip` | Package and compress files into a `.zip` archive | `zip -r my_archive.zip folder_to_compress/` |
+| | `unzip` | Extract files from a `.zip` archive | `unzip my_archive.zip -d /target/directory` |
+| **Privilege & Environment** | `sudo` | Execute a command as another user (usually root) | `sudo apt update` |
+| | `sudo -i` | Start an interactive shell as the root user | `sudo -i` |
+| | `su` | Switch user identity | `su - username` (switch to user's environment) |
+| | `export` | Set an environment variable for the current shell session and its child processes | `export MY_VAR="some_value"` |
+| | `env` | Print all environment variables | `env` |
+| | `echo "$PATH"` | Print the value of a specific environment variable | `echo "$HOME"` |
+| | `printf` | Format and print data | `printf "Path: %s\n" "$PATH"` |
+| **System Services & Applications** | `service` | Run a System V init script (start, stop, restart services) | `sudo service ssh stop` |
+| | `git` | Distributed version control system commands | `git --version` (display Git version) |
+| | `mariadb` / `mysql` | Commands for MariaDB/MySQL database operations | `sudo mysql -u root -p` (log in as root to database) |
+| | `crontab` | Schedule commands to run periodically | `crontab -e` (edit user's crontab), `crontab -l` (list user's crontab) |
+| | `sudo ufw enable` | Enable the Uncomplicated Firewall (UFW) | `sudo ufw enable` |
+| | `sudo ufw allow` | Allow network traffic on specified ports or services via UFW | `sudo ufw allow 80/tcp`, `sudo ufw allow 'SSH'` |
+| | `sudo ufw status` | Display the status and rules of UFW | `sudo ufw status` |
+| | `iptables` | Administration tool for IP packet filter rules | `sudo iptables -L` (list rules) |
+| | `reboot` | Restart the system | `sudo reboot` (or `sudo shutdown -r now`) |
+
+---
+
+I hope this refined table is even more helpful for your Linux command reference! Let me know if there's anything else you'd like to refine or add.
 
 
 ### https://www.digitalocean.com/community/tutorials/linux-commands
