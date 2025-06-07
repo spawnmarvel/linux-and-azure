@@ -18,7 +18,7 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book
 
 ### 7 Seeing the world as the shell sees is
 
-### 8 Advanced keubaord tricks
+### 8 Advanced keybord tricks
 
 ### 10 Permissions
 
