@@ -188,22 +188,15 @@ https://bash.cyberciti.biz/guide/Unix_philosophy
 
 ```bash
 
-# /etc/telegraf
-cat telegraf.conf
-
 # Get data source name for example
 cat telegraf.conf | grep "data_source_name"
 
 # Get Hostname info
 cat zabbix_agentd.conf | grep "Hostname*"
 
-
-# error
+# error/ fail
 sudo cat zabbix_server.log | grep 'error*'
 sudo cat zabbix_server.log | grep 'fail*'
-
-# fail
-
 
 ```
 ## Log all things in one tail
@@ -213,52 +206,27 @@ To much tail with -f?
 
 ```bash
 
+sudo tail -f grafana.log
+
 sudo tail -20 /var/log/syslog
 
 sudo tail -50 zabbix_server.log
 
-```
-Output to new file some data
-
-```bash
-
+# Output to new file some data from main log
 sudo tail -f /var/log/zabbix/zabbix_server.log | grep -E "error|warning|Error|Warning|ERROR|WARNING" >> /home/imsdal/zabbix_errors_warnings.log
-
 ```
 
-View logs standard
-
+View logs all
 
 ```bash
 # if no logs here
 cd /var/logs
 
-# Check syslog (Older systems or if journal isn't used) for all app logs in one tail
-# This is a common log file on Debian-based systems (like Ubuntu). It contains a wide variety of system messages, including
 # Kernel, applications, system events, errors and warning
 sudo tail -f /var/log/syslog
 
-# This is another log file, often found on older or different Linux distributions (like Red Hat/CentOS). 
-# It's similar to syslog in that it contains general system messages. 
 # On many modern Ubuntu systems, /var/log/messages is often a symbolic link to /var/log/syslog.
 sudo tail -f /var/log/messages
-
-# /var/log/grafana
-sudo tail -f grafana.log
-
-# /var/log/telegraf
-sudo tail -f telegraf.logs
-
-# This command is used on systems that use systemd (which is most modern Linux distributions, including Ubuntu) to view logs from a specific service.
-# This is the command-line tool for querying and displaying logs from the systemd journal.
-# Check the Journal for all app logs in one tail
-# This option tells journalctl to filter the logs and only show entries related to the logstash.service unit. 
-# A "unit" in systemd represents a service, socket, device, mount point, etc. logstash.service is the systemd unit file that manages the Logstash service.
-# The --no-pager option disables the pager and displays the logs directly to the terminal, scrolling as new entries are added.
-sudo journalctl -u logstash.service -f --no-pager
-
-# The Direct Equivalent (Closest Match) to sudo tail -f /var/log/syslog
-sudo journalctl -f -p err..emerg
 ```
 
 
@@ -280,15 +248,6 @@ Recv-Q shows the number of incoming connection requests that are currently queue
 ss -ltn
 
 ```
-## List of Basic Commands Linux 
-
-
-Okay, I've added `ip a` and `systemctl` to the table, placing them in their respective categories.
-
-Here's the updated and corrected table:
-
----
-
 ### Linux Command Reference
 
 This table organizes common Linux commands into logical categories to help you quickly find what you need, with corrected descriptions and clearer examples.
