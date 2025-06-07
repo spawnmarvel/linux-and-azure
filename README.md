@@ -254,7 +254,6 @@ This table organizes common Linux commands into logical categories to help you q
 
 | Category | Command | Description | Example |
 | :------- | :------ | :---------- | :------ |
-
 | **Getting Help** | `man` | Display the manual page for a command | `man ls` |
 | | `help` | Display help for shell built-in commands | `help pwd` |
 | | `whatis` | Display a one-line description of a command | `whatis ls` |
