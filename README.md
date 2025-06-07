@@ -283,9 +283,9 @@ ss -ltn
 ## List of Basic Commands Linux 
 
 
-You've provided a great start for a Linux command reference! I've gone through it and made some corrections, clarifications, and further organized the commands into logical categories.
+Okay, I've added `ip a` and `systemctl` to the table, placing them in their respective categories.
 
-Here's the refined and corrected table:
+Here's the updated and corrected table:
 
 ---
 
@@ -346,7 +346,8 @@ This table organizes common Linux commands into logical categories to help you q
 | | `passwd` | Change a user's password | `sudo passwd soloman` |
 | | `chmod` | Change file permissions | `chmod +x script.sh` (make executable), `chmod 755 file.txt` |
 | | `chown` | Change file owner and/or group | `chown newuser:newgroup file.txt` |
-| **Networking** | `ifconfig` | Display and configure network interfaces (often replaced by `ip` command on newer systems) | `ifconfig eth0` |
+| **Networking** | `ifconfig` | Display and configure network interfaces (often replaced by `ip a` on newer systems) | `ifconfig eth0` |
+| | `ip a` | Display IP addresses and network interface information (modern alternative to `ifconfig`) | `ip a` (show all interfaces), `ip a show eth0` (show specific interface) |
 | | `traceroute` | Trace the route packets take to a network host | `traceroute www.google.com` |
 | | `telnet` | Interact with other hosts using the TELNET protocol (often used to test port connectivity) | `telnet example.com 80` |
 | | `nc` (netcat) | A versatile tool for reading from and writing to network connections | `nc -zvw10 192.168.1.1 3306` (check if port 3306 is open) |
@@ -364,7 +365,8 @@ This table organizes common Linux commands into logical categories to help you q
 | | `env` | Print all environment variables | `env` |
 | | `echo "$PATH"` | Print the value of a specific environment variable | `echo "$HOME"` |
 | | `printf` | Format and print data | `printf "Path: %s\n" "$PATH"` |
-| **System Services & Applications** | `service` | Run a System V init script (start, stop, restart services) | `sudo service ssh stop` |
+| **System Services & Applications** | `systemctl` | Control the systemd system and service manager | `systemctl start apache2`, `systemctl status nginx`, `systemctl enable firewall` |
+| | `service` | Run a System V init script (start, stop, restart services - often deprecated by `systemctl`) | `sudo service ssh stop` |
 | | `git` | Distributed version control system commands | `git --version` (display Git version) |
 | | `mariadb` / `mysql` | Commands for MariaDB/MySQL database operations | `sudo mysql -u root -p` (log in as root to database) |
 | | `crontab` | Schedule commands to run periodically | `crontab -e` (edit user's crontab), `crontab -l` (list user's crontab) |
@@ -373,10 +375,6 @@ This table organizes common Linux commands into logical categories to help you q
 | | `sudo ufw status` | Display the status and rules of UFW | `sudo ufw status` |
 | | `iptables` | Administration tool for IP packet filter rules | `sudo iptables -L` (list rules) |
 | | `reboot` | Restart the system | `sudo reboot` (or `sudo shutdown -r now`) |
-
----
-
-I hope this refined table is even more helpful for your Linux command reference! Let me know if there's anything else you'd like to refine or add.
 
 
 ### https://www.digitalocean.com/community/tutorials/linux-commands
