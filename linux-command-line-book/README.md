@@ -1,4 +1,7 @@
-# The Linux Command Lin
+# The Linux Command LinE 2024 6 edition
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/TLCL-24.11.pdf
+
 
 ## Part 1
 
