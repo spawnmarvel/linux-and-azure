@@ -338,6 +338,7 @@ ss -ltn
 | ps        | display active proc |
 | ps -aux    | display all active proc | ps -aux 'pipe' less
 | top       | View active processes live with their system usage |
+| htop       | View active processes live with their system usage |
 | kill and killall | Kill active processes by process ID or name | 
 | df        | Display disk filesystem information,  -h parameter to make the data human-readable. | df -h
 | mount     | Mount file systems | https://github.com/spawnmarvel/azure-automation/blob/main/azure-extra-linux-vm/READMEQuickstartsLinuxMS.md

@@ -1,5 +1,8 @@
 ## 01:00
 
+
+Zabbix server
+
 ```bash
 404096:20250606:181549.689 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
 404096:20250606:181549.689 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
@@ -14,6 +17,20 @@ sudo cat zabbix_server.conf | grep 'StartTr*'
 ### Option: StartTrappers
 StartTrappers=20
 ```
+ 
+Agent Example log from 01:00 to 03:30
+```log
+2025/06/04 01:02:07.716157 [101] cannot receive data from [10.75.160.132:10051]: Cannot read message: 'read tcp 10.10.12.12:63648->10.75.160.132:10051: i/o timeout'
+2025/06/04 01:02:07.716157 [101] active check configuration update from host [SERVER-TRC123] started to fail
+2025/06/04 01:04:38.717094 [101] cannot receive data from [10.75.160.132:10051]: Cannot read message: 'read tcp 10.10.12.12:64028->10.75.160.132:10051: i/o timeout'
+
+```
+
+```bash
+on zabbix server the ss -ltn = recv-q is full for :10051
+
+```
+
 
 
 * In this case was terminated by the firewall.
@@ -159,45 +176,103 @@ You are running **Zabbix 6.0.40**, which is the latest patch version for the 6.0
 
 A major OS upgrade from 20.04 to 24.04 can change several underlying factors that impact Zabbix's database interaction and caching efficiency:
 
-1.  **Database Client Libraries:** Ubuntu 24.04 might come with newer versions of database client libraries (e.g., `libmysqlclient` for MySQL, `libpq` for PostgreSQL). These new libraries might have:
-    * Subtle incompatibilities.
-    * Different default settings for connection pooling, timeouts, or buffer sizes.
-    * Performance regressions (less common, but possible).
-2.  **Kernel/System Network Stack Tuning:** The Linux kernel in 24.04 might have different default TCP/IP stack parameters (e.g., buffer sizes, congestion control algorithms, timeouts). While you've set `ListenBacklog` high, other network-related kernel parameters could affect connection stability or throughput between Zabbix server and database.
-3.  **Memory Management/Swapping:** The new kernel might handle memory differently. If the server is swapping more or has less effective memory management for large applications, it could reduce the efficiency of Zabbix's RAM-based caches.
-4.  **I/O Scheduling/Filesystem Defaults:** Changes in disk I/O scheduling or default filesystem mount options on the new OS could impact the performance of your database server (if it's on the same machine) or the speed at which Zabbix writes its history cache to disk (which frees up cache space).
-5.  **Compiling/Linking:** The Zabbix server binaries (even if you installed from Ubuntu's repos or Zabbix's official repos for 24.04) might have been compiled against different system libraries on 24.04, leading to performance variations.
+Okay, that's excellent news!
 
-### Immediate Next Steps and Focus Areas:
+Having the Zabbix server and the MySQL/MariaDB database on **separate machines** means that the **12 GiB `innodb_buffer_pool_size` is a very good allocation for your database server's dedicated memory cache.** This configuration typically provides optimal performance for database operations, as the buffer pool isn't competing with the Zabbix server's own RAM requirements.
 
-Given this crucial new information, your troubleshooting should now focus on these areas:
+This strongly reinforces that the **"lower value cache hits" you're observing in Zabbix are likely NOT due to your database's memory cache being undersized.** The bottleneck lies elsewhere, given that your database has a substantial amount of its own RAM dedicated to caching.
 
-1.  **Identify *Which* Cache is Suffering:**
-    * Go to **Monitoring > Hosts** in Zabbix, select your **Zabbix server host**.
-    * Go to **"Latest data"** or **"Graphs"**.
-    * Look specifically at internal Zabbix items related to **cache hit ratios and cache utilization**. Common ones include:
-        * `zabbix[cache,hit,buffer]` (History cache hit ratio)
-        * `zabbix[cache,hit,index]` (Index cache hit ratio)
-        * `zabbix[cache,hit,text]` (Text cache hit ratio)
-        * `zabbix[cache,hit,value]` (Value cache hit ratio)
-        * `zabbix[wcache,history,pfree]` (Percentage free in history write cache) - if this drops low, it implies data isn't being written fast enough.
-    * Confirm which of these metrics dropped significantly after the OS upgrade.
+### Where to Focus Your Troubleshooting Next:
 
-2.  **Thorough Database Performance Analysis (Re-emphasized):**
-    * Since cache hits are down, your database is now taking the brunt of the load. This is the **most critical area to investigate.**
-    * **DB Server Resources:** Monitor CPU, memory, and disk I/O on your database server (if separate) or the Zabbix server (if DB is local) during the problematic times.
-    * **DB Configuration:** Review your database configuration (e.g., `my.cnf` for MySQL, `postgresql.conf` for PostgreSQL). Pay close attention to:
-        * **`innodb_buffer_pool_size`** (MySQL) or **`shared_buffers`** (PostgreSQL): Ensure these are optimally sized for your available RAM.
-        * **`max_connections`**, **`wait_timeout`**, **`interactive_timeout`**.
-        * **`innodb_flush_log_at_trx_commit`** (MySQL) or `fsync` related settings (PostgreSQL) - these impact write performance vs. data safety.
-    * **Slow Query Logs:** Enable and check your database's slow query logs during the problematic times. This will show you exactly which queries are taking too long.
-    * **Database Client/Server Versions:** Confirm the exact versions of your database client libraries (on the Zabbix server) and the database server itself. Look for any known compatibility issues with Ubuntu 24.04.
+***Dont forget***
 
-3.  **Kernel Parameters and File Descriptors:**
-    * **Compare `sysctl` settings:** If possible, compare `/etc/sysctl.conf` or the output of `sysctl -a` on your old Ubuntu 20.04 system versus 24.04. Look for differences, especially for `net.core.somaxconn`, `net.ipv4.tcp_*` parameters, and `fs.file-max`.
-    * **File Descriptors:** Ensure the Zabbix server process (`zabbix_server`) is not hitting its open file descriptor limits. You can check this by running `cat /proc/<zabbix_server_pid>/limits` when the server is misbehaving.
+```bash
+on zabbix server the ss -ltn = recv-q is full for :10051
 
-4.  **Zabbix Server Cache Parameters:**
-    * While the root cause might be external, ensure your `zabbix_server.conf` `CacheSize` parameters are still appropriate for your workload and potentially adjusted upwards slightly to compensate for any new OS overhead. Check `CacheSize`, `HistoryCacheSize`, `ValueCacheSize`, `ConfigCacheSize`.
+```
 
-This shift in focus to the OS upgrade and its impact on caching/database interaction is crucial. It explains *why* the server can't keep up, even if the actual data ingress method (trappers) remains the same.
+I have a monitoring application (Zabbix proxy) installed on RHEL 7.8 and since we have a very large environment, we have 2500+ agents connecting to this one server. We're seeing frequent errors while trying to connect to the sever from the agent. The telnet seems to be working but only intermittently.
+
+https://superuser.com/questions/1636379/tcp-packet-drops-on-application-server
+
+## zabbix generate TCP queue overflow
+
+From time to time generates zabbix a TCP queue overflow.
+Then is no traffic from / to ZABBIX more possible, only zabbix restart help here.
+
+https://support.zabbix.com/browse/ZBX-7933
+
+## 01:00 Summary
+
+Thank you for providing that last piece of information:
+
+Your `innodb row lock waits` goes from **2-3 (normal) to 8 (high) at 01:00.**
+
+### The Complete Picture: Your Database is Overwhelmed
+
+This final metric perfectly aligns with all the other observations and solidifies the diagnosis. You are now seeing a combination of:
+
+* **More frequent waits (`innodb row lock waits` increasing from 2-3 to 8):** Transactions are encountering locked rows much more often.
+* **Longer waits (`innodb row lock times` increasing from 3ms to 18ms):** When transactions *do* have to wait, they are waiting for a significantly longer duration.
+
+This tells us that not only are transactions frequently colliding, but the database is so burdened that it cannot quickly resolve these contentions, causing operations to stall.
+
+### Summary of Database Bottlenecks at 01:00:
+
+Let's put all the database-side symptoms together that you've observed, all peaking at 01:00:
+
+1.  **High Connection Count:** Spiking from ~400 to **1000 connections**.
+2.  **Massive I/O Load:** "IO count" (likely IOPS or cumulative ops) jumping from 10k to **40k**, far exceeding your **600 provisioned IOPS**. This indicates severe disk I/O saturation.
+3.  **Severe Row Lock Contention:** `innodb row lock times` increasing from 3ms to **18ms**, and `innodb row lock waits` increasing from 2-3 to **8**. This is direct evidence of transactions being blocked and waiting on each other due to the database's inability to process operations quickly.
+4.  **Increased Query Load:** `Com_select` (number of SELECT queries) tripling from 1.5k to **4.5k**, adding significant CPU and memory pressure.
+
+### The Clear Conclusion: Database Server is the Bottleneck
+
+Your Zabbix server (with ample CPU, RAM, and no swap usage) is not the problem. Its processes (like your 0% utilized trappers and 60% busy pollers) are acting as they would when they are **blocked, waiting for an unresponsive database**.
+
+The Azure Database for MySQL - Flexible Server, despite its `Standard_D4ds_v4` VM size's *potential* capacity, is critically **under-provisioned and overwhelmed** by the peak workload your Zabbix system demands.
+
+### The Immediate and Essential Solution: Scale Your Database
+
+To resolve this issue, you must **scale up your Azure Database for MySQL - Flexible Server instance**. This is the single most important action to take. You need to provide it with the resources necessary to handle the peak 01:00 workload.
+
+Specifically, you need to increase:
+
+1.  **Provisioned IOPS (by increasing Storage Size):** This is paramount to handle the 40k I/O demand and reduce transaction commit times. You will need to significantly increase your provisioned storage to raise the underlying IOPS limit.
+2.  **vCores:** To provide more CPU power to process the 1000 concurrent connections, parse and execute 4.5k SELECTs, and manage other queries, thereby reducing transaction processing time and freeing up locks faster.
+3.  **RAM:** To eliminate any potential memory pressure or swapping on the DB server, ensuring all operations run efficiently, especially with such high concurrency.
+
+After scaling, continue to monitor these key database metrics in the Azure Portal (CPU, IOPS, Connections, `innodb row lock times`, `innodb row lock waits`) to confirm that the database can now handle the workload without contention.
+
+
+## zabbix generate TCP queue overflow
+
+https://support.zabbix.com/browse/ZBX-7933
+
+
+This bug report is highly relevant to your observed problem! You specifically mentioned:
+
+Your Recv-Q was filling up on Zabbix server port 10051.
+Your trapper processes were showing 0% utilization at 01:00.
+
+
+ZBX-7933 reinforces everything we've discussed: the Recv-Q overflow and the 0% trapper utilization are symptoms of your database being the bottleneck, not necessarily a bug in Zabbix itself that needs a patch (though such patches often improve Zabbix's resilience to slow databases).
+
+
+Resolution: The issue was marked as "Fixed" and the solution was included in Zabbix versions:
+* 5.0.15rc1
+* 5.4.4rc1
+* 6.0.0alpha1 and later versions (including Zabbix 6.0)
+
+You are running Zabbix 6.0. This means that the fix for ZBX-7933 is already included in your Zabbix server version.
+
+As we've diagnosed, your trappers are at 0% utilization, meaning they are not consuming incoming data.
+
+
+This is happening because the database is the bottleneck (due to high connections, IOPS saturation, CPU/RAM limits, and severe row lock contention). Zabbix processes are waiting on the database to commit data or retrieve configuration, which leaves the TCP queues to build up.
+
+
+The solution remains focused on scaling your Azure Database for MySQL - Flexible Server. Once the database can keep up, your Zabbix processes will become active again, consume the incoming TCP queue, and the Recv-Q issue should resolve itself.
+
+
+## It seesm like db slow, zabbix wait, agent fast or the other way around?
