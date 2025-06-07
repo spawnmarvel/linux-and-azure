@@ -301,7 +301,19 @@ This table organizes common Linux commands into logical categories to help you q
 | | `whatis` | Display a one-line description of a command | `whatis ls` |
 | | `whereis` | Locate the binary, source, and manual pages for a command | `whereis wget` |
 | | `which` | Show the full path of an executable command | `which wget` |
-
+| **Privilege & Environment** | `sudo` | Execute a command as another user (usually root) | `sudo apt update` |
+| | `sudo -i` | Start an interactive shell as the root user | `sudo -i` |
+| | `su` | Switch user identity | `su - username` (switch to user's environment) |
+| | `export` | Set an environment variable for the current shell session and its child processes | `export MY_VAR="some_value"` |
+| | `env` | Print all environment variables | `env` |
+| | `echo "$PATH"` | Print the value of a specific environment variable | `echo "$HOME"` |
+| **Package Management (APT)** | `sudo apt update` | Update the local package index | `sudo apt update` |
+| | `sudo apt upgrade` | Upgrade all installed packages to their latest versions | `sudo apt upgrade -y` |
+| | `sudo apt install` | Install new packages | `sudo apt install zip` |
+| | `sudo apt remove` | Uninstall packages, keeping configuration files | `sudo apt remove zip` |
+| | `sudo apt purge` | Uninstall packages and remove all configuration files | `sudo apt purge zip` |
+| | `sudo apt autoremove` | Remove automatically installed packages that are no longer needed | `sudo apt autoremove` |
+| | `apt list --installed` | List all installed packages | `apt list --installed` |
 | **File & Directory Management** | `ls` | List directory contents | `ls -a` (all files, including hidden), `ls -l` (long format with details), `ls -lt` (long format, sorted by modification time, newest first) |
 | | `cd` | Change the current directory | `cd /home/user/documents`, `cd ..` (go up one directory), `cd /` (go to root) |
 | | `pwd` | Print the current working directory's path | `/home/user` |
@@ -311,7 +323,6 @@ This table organizes common Linux commands into logical categories to help you q
 | | `cp` | Copy files or directories | `cp source.txt destination.txt`, `cp -r folder1 folder2` (copy folder recursively) |
 | | `mv` | Move or rename files and directories | `mv old_name.txt new_name.txt`, `mv file.txt /path/to/new/location` |
 | | `rm` | Remove files or directories | `rm file.txt`, `rm -r folder_to_delete` (remove folder recursively) |
-
 | **File Content & Manipulation** | `cat` | Display the content of files | `cat my_file.txt`, `cat data.conf \| grep "uid"` |
 | | `head` | Output the first part (default 10 lines) of files | `head -n 5 data.conf` |
 | | `tail` | Output the last part (default 10 lines) of files; `-f` follows new content | `tail -f logs.txt` |
@@ -324,35 +335,23 @@ This table organizes common Linux commands into logical categories to help you q
 | | `comm` | Compare two sorted files line by line | `comm sorted_file1.txt sorted_file2.txt` |
 | | `sort` | Sort lines of text files | `cat names.txt \| sort` (e.g., outputs: `Anna`, `Bob`, `Jim`, `Xavier`) |
 | | `nano` | Simple command-line text editor | `nano my_document.txt` |
-
-| **Package Management (APT)** | `sudo apt update` | Update the local package index | `sudo apt update` |
-| | `sudo apt upgrade` | Upgrade all installed packages to their latest versions | `sudo apt upgrade -y` |
-| | `sudo apt install` | Install new packages | `sudo apt install zip` |
-| | `sudo apt remove` | Uninstall packages, keeping configuration files | `sudo apt remove zip` |
-| | `sudo apt purge` | Uninstall packages and remove all configuration files | `sudo apt purge zip` |
-| | `sudo apt autoremove` | Remove automatically installed packages that are no longer needed | `sudo apt autoremove` |
-| | `apt list --installed` | List all installed packages | `apt list --installed` |
-
 | **System Information & Resources** | `uname` | Display system information | `uname -a` (all information) |
 | | `hostnamectl` | Query and change system hostname, kernel, and OS distribution | `hostnamectl` |
 | | `lsblk` | List block devices (disks and partitions) | `lsblk -o NAME,SIZE,MOUNTPOINT` |
 | | `df` | Report disk space usage | `df -h` (human-readable sizes) |
 | | `du` | Estimate file space usage | `du -h my_folder/` |
 | | `mount` | Mount a filesystem or display mounted filesystems | `sudo mount /dev/sdb1 /mnt/data` |
-
 | **Process Management** | `ps` | Report a snapshot of current processes | `ps aux` (display all running processes for all users) |
 | | `top` | Display Linux processes dynamically (real-time system activity) | `top` |
 | | `htop` | Interactive process viewer (an enhanced version of `top`) | `htop` |
 | | `kill` | Send a signal (usually to terminate) to processes by Process ID (PID) | `kill 12345` |
 | | `killall` | Kill processes by name | `killall firefox` |
-
 | **User & Permissions** | `whoami` | Print the effective username of the current user | `whoami` |
 | | `useradd` | Create a new user account | `sudo useradd -m soloman` (creates user with home directory) |
 | | `usermod` | Modify a user account | `sudo usermod -aG sudo newuser` (add user to 'sudo' group) |
 | | `passwd` | Change a user's password | `sudo passwd soloman` |
 | | `chmod` | Change file permissions | `chmod +x script.sh` (make executable), `chmod 755 file.txt` |
 | | `chown` | Change file owner and/or group | `chown newuser:newgroup file.txt` |
-
 | **Networking** | `ifconfig` | Display and configure network interfaces (often replaced by `ip a` on newer systems) | `ifconfig eth0` |
 | | `ip a` | Display IP addresses and network interface information (modern alternative to `ifconfig`) | `ip a` (show all interfaces), `ip a show eth0` (show specific interface) |
 | | `traceroute` | Trace the route packets take to a network host | `traceroute www.google.com` |
@@ -361,20 +360,10 @@ This table organizes common Linux commands into logical categories to help you q
 | | `wget` | Non-interactive network downloader for files from the web | `wget https://cdn.example.com/software.tar.gz` |
 | | `curl` | Transfer data with URLs (supports various protocols) | `curl -O https://example.com/data.json` (download with original filename) |
 | | `ssh` | OpenSSH remote login client (secure shell) | `ssh user@ipaddress` |
-
 | **Archiving & Compression** | `tar` | Archive files and directories (create `.tar` archives) | `tar -cvf archive.tar folder/` (create), `tar -xvf archive.tar` (extract) |
 | | `gzip` | Compress or expand files (creates `.gz` or `.z` files) | `gzip -dk server.sql.gz` (decompress and keep compressed file) |
 | | `zip` | Package and compress files into a `.zip` archive | `zip -r my_archive.zip folder_to_compress/` |
-| | `unzip` | Extract files from a `.zip` archive | `unzip my_archive.zip -d /target/directory` |
-
-| **Privilege & Environment** | `sudo` | Execute a command as another user (usually root) | `sudo apt update` |
-| | `sudo -i` | Start an interactive shell as the root user | `sudo -i` |
-| | `su` | Switch user identity | `su - username` (switch to user's environment) |
-| | `export` | Set an environment variable for the current shell session and its child processes | `export MY_VAR="some_value"` |
-| | `env` | Print all environment variables | `env` |
-| | `echo "$PATH"` | Print the value of a specific environment variable | `echo "$HOME"` |
-| | `printf` | Format and print data | `printf "Path: %s\n" "$PATH"` |
-
+| | `unzip` | Extract files from a `.zip` archive | `unzip my_archive.zip -d /target/directory` ||
 | **System Services & Applications** | `systemctl` | Control the systemd system and service manager | `systemctl start apache2`, `systemctl status nginx`, `systemctl enable firewall` |
 | | `service` | Run a System V init script (start, stop, restart services - often deprecated by `systemctl`) | `sudo service ssh stop` |
 | | `git` | Distributed version control system commands | `git --version` (display Git version) |
