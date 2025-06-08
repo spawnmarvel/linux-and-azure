@@ -35,12 +35,28 @@ cd
 ls
 ls -l
 ls -lt
+# hidden files
+# In Chapter 11 we will take a closer look at some of these to see hoy to customize.
+ls -a
 
 ```
-p= 7
-
 ### 3 Exploring the system
 
+```bash
+
+ls
+
+man ls
+
+ls -l
+
+total 25172
+-rw-r--r-- 1 root   root       1067 Apr 16  2024 LICENSE
+-rw-r--r-- 1 root   root       2196 Apr 16  2024 README.md
+-rw-rw-r-- 1 imsdal imsdal      612 Dec 21  2023 add_repository_to_apt.sh
+
+
+```
 ### 4 Manipulating files and directories
 
 ### 5 Working with commands
