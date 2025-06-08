@@ -333,9 +333,6 @@ This table organizes common Linux commands into logical categories to help you q
 | | `iptables` | Administration tool for IP packet filter rules | `sudo iptables -L` (list rules) |
 | | `reboot` | Restart the system | `sudo reboot` (or `sudo shutdown -r now`) |
 
-
-### https://www.digitalocean.com/community/tutorials/linux-commands
-
 ## Script bash, permission and run it
 
 
@@ -403,225 +400,6 @@ check_it="Oil"
 if [[ "$str" =~ .*"$check_it".* ]]; then
    echo "It is here"
 ```
-
-Example
-
-
-## Linux Bash Shell Scripting Tutorial Wiki
-
-Bash variables and command substitution
-
-```bash
-
-varName=someValue
-
-# Variables
-var_a=Hello # (notice no space)
-var_b="Hello World"
-n=10
-inp="/Home/sales/data.txt"
-NOW=$(date)
-# Referencing the value of a variable
-
-# # not advisable unless you know what the variable contains
-echo $var_a 
-# use
-echo "$var_a"
-echo "$var_b"
-echo "$n"
-echo "$inp"
-echo $NOW
-
-```
-
-Valid variable names
-* Should start with either an alphabetical letter or an underscore
-* hey, x9, THESQL_STRING, _secret
-* Variables names are case-sensitive, just like filenames.
-
-
-```bash
-vech=
-echo "$vech"
-
-vech=test
-echo "$vech"
-test
-
-# Generating Output With printf command
-# printf does not provide a new line. 
-# You need to provide format string using % directives and escapes to format numeric and string arguments in a 
-# way that is mostly similar to the C printf() function
-
-# Format control string syntax is as follows:
-printf "%w.pL\n" $varName
-# w - Minimum field width.
-# p - Display number of digits after the decimal point (precision).
-# L - a conversion character. , s - String, d - Integer, e - Exponential, f - Floating point
-
-vech="Car"
-printf "%s\n" $vech
-Car
-
-printf "%s10.5\n" $vech
-Car10.5
-
-no=10
-printf "%d\n" $no
-10
-
-big=5355765
-printf "%e\n" $big
-5.355765e+06
-
-sales=25.123
-printf "%.f\n" $sales
-25
-printf "%.2f\n" $sales
-25.12
-
-```
-
-Default shell variables value
-
-```bash
-
-echo $shellvar
-
-echo ${shellvar:-DefaultValueHere}
-DefaultValueHere
-
-# if $ name is not set use default
-echo ${shellvar=Terminator 2}
-Terminator 2
-
-# if $ unset, set name to default 
-echo ${shellvar:=Terminator 2}
-
-echo $shellvar
-
-# The := syntax
-# If the variable is an empty, you can assign a default value. The syntax is:
-${var:=defaultValue}
-
-```
-
-The internal field separator
-* The global variable IFS is what Bash uses to split a string of expanded into separate words
-* By default, the IFS variable is set to three characters: newline, space, and the tab. If you echo $IFS, you won't see anything because those characters
-
-
-Quoting
-
-```bash
-echo "$PATH"
-/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-
-echo /etc/*.conf
-/etc/adduser.conf /etc/ca-certificates.conf /etc/debconf.conf /etc/deluser.conf [...]
-
-echo "Path: $PATH"
-Path: /usr/local/sbin: [...]
-
-echo 'Path: $PATH'
-Path: $PATH
-
-```
-The Backslash
-
-```bash
-# The backslash ( \ ) alters the special meaning of the ' and " i.e. it will escape or cancel the special meaning of the next character.
-\b     backspace
-\e     an escape character
-\n     new line
-\r     carriage return
-\t     horizontal tab
-\v     vertical tab
-\\     backslash
-\'     single quote
-echo "Pizza bill \$22.5"
-echo "CIFS path must be \\\\NT-Server-Name\\ShareName"
-echo -e "Sr.no\t DVD (price) "
-
-```
-
-Export
-
-```bash
-export backup="/nas10/mysql"
-echo "bck $backup"
-# list all vlocal vars
-export
-[...]
-declare -x backup="/nas10/mysql"
-```
-
-Getting User Input Via Keyboard and IFS
-
-```bash
-#!/bin/bash
-# Read txt
-read -p "Enter db name: " name
-read -s -p "Enter password: " my_password
-echo "Password: $my_passsord"
-echo "Db: $name. Do stuff."
-
-# Read nr
-read -p "Enter ID one: " n1
-read -p "Enter ID two: " n2
-read -p "Enter ID three: " n3
-echo "ID : $n1, $n2, $n3"
-
-# IFS, the IFS variable worked as token delimiter or separator.
-echo "IFS: $IFS .You will see a whitespace which is nothing but a space, a tab, and a newline (default). "
-
-nameservers="ns1.nixcraft.net ns2.nixcraft.net ns3.nixcraft.net"
-echo "$nameservers"
-read -r ns1 ns2 ns3 <<< "$nameservers"
-echo "DNS #1: $ns1"
-echo "DNS #2: $ns2"
-echo "DNS #3: $ns3"
-
-# Change IFS separator
-pwd="gitevivek:x:1002:1002::/home/gitevivek:/bin/sh"
-old="$IFS"
-echo "$IFS"
-# Set IFS to :
-IFS=:
-read -r login password uid gid info home shell <<< "$pwd"
-echo "$login, $password, $uid, $gid, $info, $home, $shell"
-
-# Array -a
-# Set the IFS to split on whitespace
-IFS=$'\n'
-words="one two three"
-read -r -a words <<< "$words"
-echo "${words[@]}"
-
-# Make array
-arr=("one" "two" "three")
-echo "${arr[1]}"
-
-
-```
-Perform arithmetic operations
-```bash
-#!/bin/bash
-# Create an integer variable
-declare -i sale=100
-declare -i bonus=12
-total=$(( sale + bonus))
-echo "Total sum int = $total"
-
-# input
-# input
-read -p "Enter two numbers: " x y
-ans=$(( x + y ))
-echo "$x + $y = $ans"
-
-```
-https://bash.cyberciti.biz/guide/Main_Page
-
 
 ## Setting Up Environment Variables on Ubuntu
 
@@ -708,19 +486,13 @@ E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are y
 sudo apt install zip
 
 ```
-* Step 4 — Setting Up a Basic Firewall, UFW, or Uncomplicated Firewall
+Step 4 — Setting Up a Basic Firewall, UFW, or Uncomplicated Firewall
 
-(
-    
-    Note: ufw by default is initially disabled. 
+Note: ufw by default is initially disabled. 
+ref https://ubuntu.com/server/docs/security-firewall#:~:text=ufw%20%2D%20Uncomplicated%20Firewall,by%20default%20is%20initially%20disabled
+Note: using IPV6
+ref https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-22-04
 
-    ref https://ubuntu.com/server/docs/security-firewall#:~:text=ufw%20%2D%20Uncomplicated%20Firewall,by%20default%20is%20initially%20disabled
-
-    Note: using IPV6
-
-    ref https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-22-04
-
-)
 
 ```bash
 # Applications can register their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name.
