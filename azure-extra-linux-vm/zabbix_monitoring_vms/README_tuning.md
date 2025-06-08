@@ -62,9 +62,21 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 # Os was upgraded some days before, kernel but that did not influence it.
 # The agent was crazy, update the agent to new version.
 
-# If you still see te same error, try to upgrade to agent new version, not agent2 new version.
+# If you still see the same error, try to upgrade to agent new version, not agent2 new version.
 
-# Last it was OF, now it was AE that had the same error above.
+# Last it was OF
+
+```
+
+Again
+
+```bash
+# Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also
+
+# on zabbix server the 
+ss -ltn
+# recv-q is full for :10051
+
 ```
 
 
