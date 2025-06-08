@@ -7,6 +7,63 @@ We have been here before.
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
 
+Steps
+
+```bash
+
+
+sudo tail -f zabbix_server.log
+# 1357:20240130:133326.485 failed to accept an incoming connection: connection rejected, getpername() faild: [107] Transport endpoint is not connected.
+
+# tmp fix
+sudo service zabbix-server stop
+sudo service zabbix-server start
+```
+
+The utilization of the trapper data collector was in 100% also.
+
+After I found this post, I have checked with my team, and they have confirmed that our DNS was down.
+
+When they fixed the DNS, the utilization of the trapper data collector fell to 0%, and Zabbix resumed to work properly.
+
+https://github.com/phothet/zabbix/issues/11
+
+```bash
+netstat -tulpn
+
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:12563         0.0.0.0:*               LISTEN      -
+tcp      951      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      -
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      -
+
+# turns out...... it was a host that was sending much data.
+# Host logs, is is pilling up and doing to much.
+
+2024/01/11 00:49:27.024498 Detected performance counter with negative denominator the second time after retry, giving up...
+2024/01/11 00:49:28.024616 Detected performance counter with negative denominator the second time after retry, giving up...
+2024/01/11 00:49:29.025564 Detected performance counter with negative denominator the second time after retry, giving up...
+2024/01/11 00:49:30.026362 Detected performance counter with negative denominator the second time after retry, giving up...
+2024/01/11 00:49:27.024499 [101] cannot receive data from [ZABBIX-IP:10051]: Cannot read message: 'read tcp HOST-IP21:64868->ZABBIX-IP21:10051: i/o timeout'
+2024/01/11 00:49:27.024500 [101] active check configuration update from host [HOST-IP-FQDN] started to fail
+
+# Checked:
+# Network Watcher | Traffic Analytics
+# Traffic distrubution IP21:Checked Top 20 IPs with respect to network traffic flow count
+# NSG hits: Checked: view analytics for NSG and NSG rules across your envornment units in Flows
+# Total traffic
+
+# Stopped Zabbix agent2 on the host..
+# Better for 1.5 hours
+# turns out...... it was also one more host that was sending much data.
+# Stopped Zabbix agent2 on the other host..
+# better for 2 hours an counting.....se after the night.
+# It looks good in the morning (+ 7h) the last stopped agent was even started up again, and it seems stabil.
+# Maybe just agent hang and in need of a restart, looks ok after starting it again.
+# Os was upgraded some days before, kernel but that did not influence it.
+# The agent was crazy, maybe update the agent version.
+```
+
+
 ## Environment requirements
 
 * The more physical memory you have, the faster the database (and therefore Zabbix) works.
@@ -28,8 +85,10 @@ https://www.zabbix.com/documentation/current/en/manual/installation/requirements
 
 This README provides a comprehensive guide to optimizing your Zabbix environment for peak performance. Zabbix is a powerful monitoring solution, but its efficiency heavily depends on proper configuration and tuning, especially as your monitored infrastructure grows.
 
+
 ## Table of Contents
 
+0.  [Short intro]
 1.  [General Principles]
 2.  [Triggers: When to Use What]
       * [Trigger Best Practices]
@@ -42,6 +101,67 @@ This README provides a comprehensive guide to optimizing your Zabbix environment
 6.  [Monitoring Zabbix's Own Performance]
 
 -----
+
+## 0\. Short intro
+
+Number of values processed per second (NVPS)
+* Update frequency greatly affects NVPS.
+
+Zabbix is able to deliver 2 million of values per minute or around 30.000 of values per second
+
+What affects performance?
+* Type of items, value types, SNMPv3, number of triggers and complexity of triggers.
+* Housekeeper settings and thus size of the database
+* Number of users working with the WEB interface
+* Choose update frequency and duration of storage carefully
+
+History analysis affects performance of Zabbix. But not so much!
+|                                 | Slow    | Fast
+|---------------------------------| ------- |------
+| DB Size                         | Large   | Fits into memory
+| Low level detection             | Update freq, 30s, 15m, 30m | Update freq, 1h, 1d, 7d
+| Trigger expressions             | min(), max(), avg() | last(), nodata()
+| Data collection                 | Polling (SNMP, agent-less, passive agent) | Trapping (active agents)
+| Data types                      | Text, string | Numeric
+
+Common problems of initial setup
+* Default database settings
+* * Tune database for the best performance (https://github.com/hermanekt/Zabbix_MYSQL_tunned_for_40k)
+* Not optimal configuration of Zabbix Server
+* * Tune Zabbix Server configuration (Monitoring > Dashboard > Zabbix server health)
+* Housekeeper settings do not match hardware spec
+* * (Use partitions in DB) 
+* Use of default templates
+* * Make your own smarter templates
+* Use of older releases
+* * Always use the latest one!
+
+"If it's up to 10 minutes, you can probably ignore that and tune the trigger to be less sensitive. If it's more, it is a general Zabbix DB performance issue."
+
+https://stackoverflow.com/questions/40040509/zabbix-housekeeper-processes-more-than-75-busy
+
+Tuning, what to check.
+
+* When did it start (around new year or short time after? Wait a week)
+* How long does it take, what was it before?
+* How is general performance?
+* Did the DB performance decline also?
+* Did the DB grow?
+* What is the DB size, should be flat after some time?
+* What is the DB IO?
+* tail -f zabbix_server.log and zabbix_agentd.log logs
+* Check administration and queue?
+* Check general and houskeeping settings?
+* Has there been changes lately to templates or hosts?
+* Num of users?
+* What is num of Startpoller?
+* Has new values per seconds increased?
+* Can you reduce new values per second`?
+* Use less min, avg, max more last and nodata.
+* For history use smallets days possible, not default 90, 45, 14 or even 7.
+* Better to keep trend for longer times, example, history 14 days, trends 1 year.
+* Can we live with this?
+
 
 ## 1\. General Principles
 
