@@ -59,6 +59,13 @@ total 25172
 !(permission)[https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/images/permission.jpg]
 
 
+```bash
+# determine file type
+file README.md
+README.md: ASCII text
+```
+
+p = 17
 ### 4 Manipulating files and directories
 
 ### 5 Working with commands
