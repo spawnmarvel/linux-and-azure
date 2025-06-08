@@ -60,7 +60,9 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 # It looks good in the morning (+ 7h) the last stopped agent was even started up again, and it seems stabil.
 # Maybe just agent hang and in need of a restart, looks ok after starting it again.
 # Os was upgraded some days before, kernel but that did not influence it.
-# The agent was crazy, maybe update the agent version.
+# The agent was crazy, update the agent to new version.
+
+# If you still see te same error, try to upgrade to agent new version, not agent2 new version.
 ```
 
 
