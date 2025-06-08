@@ -248,7 +248,7 @@ Recv-Q shows the number of incoming connection requests that are currently queue
 ss -ltn
 
 ```
-### Linux Command Reference
+## Linux Command Reference
 
 This table organizes common Linux commands into logical categories to help you quickly find what you need, with corrected descriptions and clearer examples.
 
