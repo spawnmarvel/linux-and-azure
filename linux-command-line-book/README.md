@@ -3,6 +3,8 @@
 * Download it and just note down the page number on elo.
 * Store it in your head, not here, learn it.
 
-https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/TheLinuxCommandLineLCL-24.11.pdf
+https://linuxcommand.org/tlcl.php
+
+
 
 
