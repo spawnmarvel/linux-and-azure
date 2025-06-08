@@ -2,7 +2,9 @@
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/TheLinuxCommandLineLCL-24.11.pdf
 
-## Part 1
+But go to C:\giti2025 and open it in browser
+
+## Part 1 Learning the shell
 
 ### 1 What is the shell
 
