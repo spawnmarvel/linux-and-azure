@@ -275,6 +275,7 @@ This table organizes common Linux commands into logical categories to help you q
 | **File & Directory Management** | `ls` | List directory contents | `ls -a` (all files, including hidden), `ls -l` (long format with details), `ls -lt` (long format, sorted by modification time, newest first) |
 | | `cd` | Change the current directory | `cd /home/user/documents`, `cd ..` (go up one directory), `cd /` (go to root) |
 | | `pwd` | Print the current working directory's path | `/home/user` |
+| | `ls` | List current directories, long list, sort by t time | `ls, ls -l, ls -lt` |
 | | `mkdir` | Create new directories | `mkdir new_folder` |
 | | `rmdir` | Remove an empty directory | `rmdir empty_folder` |
 | | `touch` | Create a new empty file or update the timestamp of an existing file | `touch new_file.txt` |

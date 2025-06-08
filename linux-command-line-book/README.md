@@ -20,10 +20,23 @@ root@vmdocker01:~#
 date
 uptime
 df
+free -h
 exit
-```
 
+```
 ### 2 Navigation
+
+```bash
+
+pwd
+
+cd
+
+ls
+ls -l
+
+```
+p= 7
 
 ### 3 Exploring the system
 
