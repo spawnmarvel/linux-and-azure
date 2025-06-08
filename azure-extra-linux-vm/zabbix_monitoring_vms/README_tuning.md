@@ -37,7 +37,7 @@ tcp      951      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      
 tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      -
 
 # turns out...... it was a host that was sending much data.
-# Host logs, is is pilling up and doing to much.
+# Host/ Agent logs, is is pilling up and doing to much.
 
 2024/01/11 00:49:27.024498 Detected performance counter with negative denominator the second time after retry, giving up...
 2024/01/11 00:49:28.024616 Detected performance counter with negative denominator the second time after retry, giving up...
