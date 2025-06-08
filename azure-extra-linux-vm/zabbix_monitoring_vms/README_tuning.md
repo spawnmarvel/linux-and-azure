@@ -64,7 +64,7 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 
 # If you still see the same error, try to upgrade to agent new version, not agent2 new version.
 
-# Last it was OF
+# Agent OF
 
 ```
 
@@ -140,6 +140,10 @@ Zabbix server: Utilization of trapper data collector process, in % = 0
 # on zabbix server the 
 ss -ltn
 # recv-q is full for :10051
+
+# tmp fix
+sudo service zabbix-server stop
+sudo service zabbix-server start
 
 # Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also.
 ```
