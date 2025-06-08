@@ -55,8 +55,10 @@ total 25172
 -rw-r--r-- 1 root   root       2196 Apr 16  2024 README.md
 -rw-rw-r-- 1 imsdal imsdal      612 Dec 21  2023 add_repository_to_apt.sh
 
-
 ```
+
+
+
 ### 4 Manipulating files and directories
 
 ### 5 Working with commands
