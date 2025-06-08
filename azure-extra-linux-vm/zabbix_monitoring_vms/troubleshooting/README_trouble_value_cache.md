@@ -299,7 +299,7 @@ Network and port flooding?
 ### Fix 3 Cache is 99.99
 
 Q: 
-zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have check and we get 99.99, but still hits chnage from 400 vps to 200 vps from time to time, what more to check?
+zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have check and we get 99.99, but still hits change from 400 vps to 200 vps from time to time, what more to check?
 
 A:
 If your **Zabbix Value Cache hit ratio is 99.99%** but the **hits per second (VPS) fluctuate between 200 and 400**, this suggests that while the cache is highly efficient, there may still be underlying performance issues. Here’s what to investigate further:

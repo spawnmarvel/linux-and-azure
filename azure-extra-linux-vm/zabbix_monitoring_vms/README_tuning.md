@@ -68,15 +68,80 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 
 ```
 
-Again
+Again, yes
+
+Every night at around 01:00 (worst, but 18:00 and small random also), inbound flows are high also, like flodding port 100051
+
+* It could be an zabbix agent on a server
+* It could be something with zabbix server tuning
+* Since cache hits are low, zabbix need to get more data from the database to calculate
+
+Disable this:
+
+Trigger name a name max(item.insidentcount, 336h)>=1
+
+Q: 
+zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have check and we get 99.99, but still hits change from 400 vps to 200 vps from time to time, what more to check?
+
+A:
+If your **Zabbix Value Cache hit ratio is 99.99%** but the **hits per second (VPS) fluctuate between 200 and 400**, this suggests that while the cache is highly efficient, there may still be underlying performance issues.
+
+
+Run:
+```bash
+zabbix_server -c /etc/zabbix/zabbix_server.conf -R diaginfo=valuecache
+
+# zabbix_server: This is the Zabbix server daemon.
+# -c /etc/zabbix/zabbix_server.conf: Specifies the configuration file to use.
+# -R diaginfo=valuecache: This is a runtime control command that tells the Zabbix server to return diagnostic information about the value cache.
+
+```
+From your diaginfo=valuecache output, here's the analysis and recommended actions:
+
+1. Cache Usage
+
+Total Size: 266,518,696 bytes (~254MB)
+Used: 1,689,944 bytes (~1.6MB)
+Free: 266,518,696 bytes (~254MB)
+Utilization: ~0.63% (extremely low)
+
+2. Items vs. Values
+Items: 3,295
+Values: 57,279
+Ratio: ~17 values per item (normal for active monitoring)
+3. Performance
+Time: 0.000965s (very fast response)
+
+We change to:
+```ini
+innodb_io_capacity=400
+innodb_io_capacity_max=4000
+```
+
+```ini
+innodb_io_capacity=600
+innodb_io_capacity_max=4000
+```
+
+Trendavg vs avg
+* trendavg uses TRENDS, not HISTORY.
+* This specific trigger (trendavg) DOES NOT use the Zabbix Value Cache.
+* Therefore, this trigger cannot be the cause of your Value Cache misses.
+
+
+Zabbix server: Utilization of unreacable poller data collector process, in % = 300
+
+Zabbix server: Utilization of trapper data collector process, in % = 0
+
+
 
 ```bash
-# Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also
 
 # on zabbix server the 
 ss -ltn
 # recv-q is full for :10051
 
+# Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also.
 ```
 
 
