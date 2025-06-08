@@ -7,7 +7,9 @@ We have been here before.
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
 
-Steps
+- It is so tiny load, should work like a charm on those 4 cpus and 32G of mem... DB is on the same host? look around, what does it do at those times... I would suspect it is not really able to perform, either not given enough resources or on very slow disks or something...
+
+Steps for first fix
 
 ```bash
 
@@ -68,7 +70,7 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 
 ```
 
-Again, yes
+Again, yes Steps for second fix
 
 Every night at around 01:00 (worst, but 18:00 and small random also), inbound flows are high also, like flodding port 100051
 
