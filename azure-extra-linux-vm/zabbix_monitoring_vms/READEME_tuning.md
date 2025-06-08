@@ -7,22 +7,39 @@ We have been here before.
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
 
+## Environment requirements
+
+* The more physical memory you have, the faster the database (and therefore Zabbix) works.
+* CPU, Zabbix and especially Zabbix database may require significant CPU resources depending on number of monitored parameters and chosen database engine.
+
+Examples of hardware configuration
+The table provides examples of hardware configuration, assuming a Linux/BSD/Unix platform.
+
+These are size and hardware configuration examples to start with. Each Zabbix installation is unique. Make sure to benchmark the performance of your Zabbix system in a staging or development environment, so that you can fully understand your requirements before deploying the Zabbix installation to its production environment.
+
+![Requirements matrix ](https://github.com/spawnmarvel/quickguides/blob/main/zabbix/images/requirements.jpg)
+
+1 1 metric = 1 item + 1 trigger + 1 graph
+2 Example with Amazon general purpose EC2 instances, using ARM64 or x86_64 architecture, a proper instance type like Compute/Memory/Storage optimised should be selected during Zabbix installation evaluation and testing before installing in its production environment.
+
+https://www.zabbix.com/documentation/current/en/manual/installation/requirements
+
 ## Zabbix Performance Tuning Best Practices
 
 This README provides a comprehensive guide to optimizing your Zabbix environment for peak performance. Zabbix is a powerful monitoring solution, but its efficiency heavily depends on proper configuration and tuning, especially as your monitored infrastructure grows.
 
 ## Table of Contents
 
-1.  [General Principles](https://www.google.com/search?q=%23general-principles)
-2.  [Triggers: When to Use What](https://www.google.com/search?q=%23triggers-when-to-use-what)
-      * [Trigger Best Practices](https://www.google.com/search?q=%23trigger-best-practices)
-      * [Triggers to Avoid](https://www.google.com/search?q=%23triggers-to-avoid)
-3.  [History vs. Trends: Data Storage Strategies](https://www.google.com/search?q=%23history-vs-trends-data-storage-strategies)
-4.  [zabbix\_server.conf Parameters for Tuning](https://www.google.com/search?q=%23zabbix_serverconf-parameters-for-tuning)
-      * [Key Parameters](https://www.google.com/search?q=%23key-parameters)
-      * [Database Tuning Considerations](https://www.google.com/search?q=%23database-tuning-considerations)
-5.  [Hardware and OS Considerations](https://www.google.com/search?q=%23hardware-and-os-considerations)
-6.  [Monitoring Zabbix's Own Performance](https://www.google.com/search?q=%23monitoring-zabbixs-own-performance)
+1.  [General Principles]
+2.  [Triggers: When to Use What]
+      * [Trigger Best Practices]
+      * [Triggers to Avoid]
+3.  [History vs. Trends: Data Storage Strategies]
+4.  [zabbix\_server.conf Parameters for Tuning]
+      * [Key Parameters]
+      * [Database Tuning Considerations]
+5.  [Hardware and OS Considerations]
+6.  [Monitoring Zabbix's Own Performance]
 
 -----
 
