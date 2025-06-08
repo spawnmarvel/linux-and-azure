@@ -76,6 +76,22 @@ Every night at around 01:00 (worst, but 18:00 and small random also), inbound fl
 * It could be something with zabbix server tuning
 * Since cache hits are low, zabbix need to get more data from the database to calculate
 
+Check for Scheduled Tasks/Cron Jobs
+* This is a very strong candidate for processes starting/stopping or blocking Zabbix at specific times.
+
+```bash
+# System-wide Cron Jobs
+sudo crontab -l                  # For root's crontab
+sudo grep -r "zabbix" /etc/cron.* /etc/crontab /var/spool/cron/crontabs/ # Check all cron directories
+
+# User-specific Cron Jobs
+sudo crontab -u zabbix -l       # If Zabbix runs as user 'zabbix'
+
+# Systemd Timers
+systemctl list-timers --all
+
+```
+
 Disable this:
 
 Trigger name a name max(item.insidentcount, 336h)>=1
@@ -132,8 +148,6 @@ Trendavg vs avg
 Zabbix server: Utilization of unreacable poller data collector process, in % = 300
 
 Zabbix server: Utilization of trapper data collector process, in % = 0
-
-
 
 ```bash
 
