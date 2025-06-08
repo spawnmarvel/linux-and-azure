@@ -489,8 +489,11 @@ sudo apt install zip
 Step 4 — Setting Up a Basic Firewall, UFW, or Uncomplicated Firewall
 
 Note: ufw by default is initially disabled. 
+
 ref https://ubuntu.com/server/docs/security-firewall#:~:text=ufw%20%2D%20Uncomplicated%20Firewall,by%20default%20is%20initially%20disabled
+
 Note: using IPV6
+
 ref https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-22-04
 
 
