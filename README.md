@@ -298,6 +298,7 @@ This table organizes common Linux commands into logical categories to help you q
 | | `lsblk` | List block devices (disks and partitions) | `lsblk -o NAME,SIZE,MOUNTPOINT` |
 | | `df` | Report disk space usage | `df -h` (human-readable sizes) |
 | | `du` | Estimate file space usage | `du -h my_folder/` |
+| | `free` | Summary of RAM Aand swap usage | `free -h` |
 | | `mount` | Mount a filesystem or display mounted filesystems | `sudo mount /dev/sdb1 /mnt/data` |
 | **Process Management** | `ps` | Report a snapshot of current processes | `ps aux` (display all running processes for all users) |
 | | `top` | Display Linux processes dynamically (real-time system activity) | `top` |

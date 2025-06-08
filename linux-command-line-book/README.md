@@ -2,11 +2,26 @@
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/TheLinuxCommandLineLCL-24.11.pdf
 
-But go to C:\giti2025 and open it in browser
+But go to C:\giti2025 and open it in browser, recap use p for page in the chapter.
 
 ## Part 1 Learning the shell
 
 ### 1 What is the shell
+
+```bash
+# user normal $
+imsdal@vmdocker01:~$
+
+# root user #
+root@vmdocker01:~#
+
+
+# try some simple
+date
+uptime
+df
+exit
+```
 
 ### 2 Navigation
 
