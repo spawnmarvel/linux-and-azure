@@ -20,7 +20,7 @@ sudo service zabbix-server stop
 sudo service zabbix-server start
 ```
 
-The utilization of the trapper data collector was in 100% also.
+The utilization of the trapper data collector was in 100% also. (We had 0% since 10051 was exhausted)
 
 After I found this post, I have checked with my team, and they have confirmed that our DNS was down.
 
