@@ -56,7 +56,7 @@ total 25172
 -rw-rw-r-- 1 imsdal imsdal      612 Dec 21  2023 add_repository_to_apt.sh
 
 ```
-
+!(permission)[https://github.com/spawnmarvel/linux-and-azure/blob/main/linux-command-line-book/images/permission.jpg]
 
 
 ### 4 Manipulating files and directories
