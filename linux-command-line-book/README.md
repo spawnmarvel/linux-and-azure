@@ -34,6 +34,7 @@ cd
 
 ls
 ls -l
+ls -lt
 
 ```
 p= 7
