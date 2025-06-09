@@ -77,6 +77,44 @@ If **recv-q** is full, the Zabbix server is overwhelmed and not able to process 
 4. **DNS/Reverse DNS issues**: If the server is trying to resolve hostnames and DNS is misconfigured, this can cause errors.
 5. **Resource exhaustion**: Too many open sockets or file descriptors on the Zabbix server.
 
+Troubleshooting and Solutions
+
+
+```bash
+# 1. Check Zabbix Server Load
+# Check CPU and Memory usage
+htop
+
+# Check Zabbix process count
+ ps aux | grep zabbix
+
+# 2. Increase Zabbix Pollers and Other Worker Processes
+  StartPollers=50
+  StartPollersUnreachable=10
+  # The `StartTrappers` parameter controls how many threads handle incoming connections on port 10051.
+  # If this is too low, increase it (e.g., set `StartTrappers=20` or higher depending on your hardware and load).
+  StartTrappers=50
+  StartPingers=10
+  StartDBSyncers=8
+
+#3. Check Database Performance
+# - The Zabbix server is often limited by its database (MySQL/PostgreSQL). Check for slow queries or high load.
+# - Optimize your database (indexes, hardware, configuration).
+
+# 5. Check OS Limits
+ulimit -a
+# ncrease nofile (number of open files) if low:
+ ulimit -n 65536
+# Or set in /etc/security/limits.conf for persistence.
+# - Sysctl parameters for networking (if you have very high load):
+net.core.somaxconn = 1024
+
+# Set in /etc/sysctl.conf and reload with sysctl -p.
+
+# 6. Monitor and Scale
+# Use Zabbix's own internal monitoring (e.g., zabbix[queue], zabbix[process]) to watch for bottlenecks.- Consider scaling: use Zabbix proxies to distribute load if you have a large environment.
+```
+
 Again, yes Steps for second fix
 
 Every night at around 01:00 (worst, but 18:00 and small random also), inbound flows are high also, like flodding port 100051
@@ -101,7 +139,7 @@ systemctl list-timers --all
 
 ```
 
-Disable this:
+Disable this and look fir similar, the issues became worse in april:
 
 Trigger name a name max(item.insidentcount, 336h)>=1
 
@@ -154,9 +192,9 @@ Trendavg vs avg
 * Therefore, this trigger cannot be the cause of your Value Cache misses.
 
 
-Zabbix server: Utilization of unreacable poller data collector process, in % = 300
-
-Zabbix server: Utilization of trapper data collector process, in % = 0
+Zabbix server: Utilization of http poller data collector process, in % = 42.3
+Zabbix server: Utilization of poller data collector process, in % = 72.9
+Zabbix server: Utilization of unreacable poller data collector process, in % = 56.1
 
 ```bash
 
