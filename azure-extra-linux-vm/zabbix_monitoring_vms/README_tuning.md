@@ -241,7 +241,7 @@ But it came back:
 Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
 
-## Environment requirements
+# Environment requirements and tuning check list starts here
 
 * The more physical memory you have, the faster the database (and therefore Zabbix) works.
 * CPU, Zabbix and especially Zabbix database may require significant CPU resources depending on number of monitored parameters and chosen database engine.
