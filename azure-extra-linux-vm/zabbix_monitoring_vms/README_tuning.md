@@ -94,6 +94,7 @@ htop
   # The `StartTrappers` parameter controls how many threads handle incoming connections on port 10051.
   # If this is too low, increase it (e.g., set `StartTrappers=20` or higher depending on your hardware and load).
   StartTrappers=50
+  # A full recv-q on port 10051 means your Zabbix server’s trapper processes are overloaded. Increase StartTrappers, check server and database performance, and monitor internal Zabbix queues for bottlenecks.
   StartPingers=10
   StartDBSyncers=8
 
