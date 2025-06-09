@@ -221,11 +221,13 @@ But it came back:
 
 * Check whats agents that has errors at given times, upgrade thoose was zabbix_agent2-6.0.26
 
-Zabbix is now Zabbix 6.0.40. © 2001–2025, Zabbix SIA
+```bash
+# Zabbix is now Zabbix 6.0.40. © 2001–2025, Zabbix SIA
+# It makes sense to upgrade the agents to same version, zabbix_agent2-6.0.40-windows-amd64-openssl.msi
 
-It makes sense to upgrade the agents to same version, zabbix_agent2-6.0.40-windows-amd64-openssl.msi
+```
 
-Work here if yoy neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
+Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
 
 ## Environment requirements
