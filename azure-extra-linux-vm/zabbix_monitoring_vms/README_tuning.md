@@ -243,7 +243,9 @@ But it came back:
 
 ```
 
-Now it came at 18:00 and stopped P A1PE and 
+Now it came at 18:00 and stopped P A1PE and agent is same version as zabbix and new 1 h before 18:00, v 6.0.40, must be network since this server is far away.
+
+Try to stopp it for 24h, is it still Zabbix server: Utilization of trapper data collector process, in % = 0?
 
 Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
