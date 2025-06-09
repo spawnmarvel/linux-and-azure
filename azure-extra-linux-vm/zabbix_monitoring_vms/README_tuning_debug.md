@@ -25,7 +25,7 @@ If ss -ltn shows that the recv-q is full for port :10051 (which is the default l
 ## Common Reasons
 
 - **Too few trapper processes** (see StartTrappers in zabbix_server.conf).- **Server underpowered** (CPU, disk, memory bottlenecks).
-- **Sudden spike in incoming data** (many hosts sending at the same time).
+- **Sudden spike in incoming data** (many hosts sending at the same time). !!!!!!
 - **Slow database performance** (Zabbix can’t write to DB fast enough).
 
 ---
