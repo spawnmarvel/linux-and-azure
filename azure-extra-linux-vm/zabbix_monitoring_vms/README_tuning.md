@@ -69,6 +69,13 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 # Agent OF
 
 ```
+If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
+
+1. **Client disconnected prematurely**: The agent or client might have closed the connection before the server tried to read from it.
+2. **Network instability**: Temporary network issues between the Zabbix server and clients.
+3. **Firewall or Security Software**: Some intermediate device or software is interfering with the connection.
+4. **DNS/Reverse DNS issues**: If the server is trying to resolve hostnames and DNS is misconfigured, this can cause errors.
+5. **Resource exhaustion**: Too many open sockets or file descriptors on the Zabbix server.
 
 Again, yes Steps for second fix
 
@@ -161,8 +168,10 @@ ss -ltn
 sudo service zabbix-server stop
 sudo service zabbix-server start
 
-# Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also.
 ```
+If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
+
+Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also.
 
 
 ## Environment requirements
