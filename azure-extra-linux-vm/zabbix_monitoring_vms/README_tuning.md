@@ -77,7 +77,7 @@ If **recv-q** is full, the Zabbix server is overwhelmed and not able to process 
 4. **DNS/Reverse DNS issues**: If the server is trying to resolve hostnames and DNS is misconfigured, this can cause errors.
 5. **Resource exhaustion**: Too many open sockets or file descriptors on the Zabbix server.
 
-Troubleshooting and Solutions
+Troubleshooting and Solutions example
 
 
 ```bash
@@ -148,6 +148,8 @@ zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have c
 
 A:
 If your **Zabbix Value Cache hit ratio is 99.99%** but the **hits per second (VPS) fluctuate between 200 and 400**, this suggests that while the cache is highly efficient, there may still be underlying performance issues.
+
+The reason why cache hits is low, is because it is not used at that time, since now new data is coming in (? makes sense to myself?)
 
 
 Run:
