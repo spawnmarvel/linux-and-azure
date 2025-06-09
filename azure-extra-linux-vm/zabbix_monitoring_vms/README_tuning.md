@@ -222,7 +222,7 @@ But it came back:
 * Check whats agents that has errors
 * Check other things also
 
-
+Work here https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
 
 ## Environment requirements
