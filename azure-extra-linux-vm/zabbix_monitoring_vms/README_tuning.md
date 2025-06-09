@@ -206,6 +206,10 @@ Zabbix server: Utilization of unreacable poller data collector process, in % = 5
 
 Zabbix server: Utilization of trapper data collector process, in % = 0
 - Typically refers to how much of the system’s resources (CPU, memory, etc.) are being used by the trapper process in data collection
+- Trapper utilization is the percentage of time Zabbix trapper processes are busy processing incoming data on port 10051.
+- 0% utilization means the trapper processes are not receiving or processing any data most of the time.
+- The trapper processes are waiting for data, but nothing is arriving (or arrivals are very infrequent).
+- Expecting active data, but 0% Data not arriving or misconfigured,  Investigate config/network
 
 Poller data checks
 - 0-75%: Generally considered a healthy range.
@@ -235,8 +239,11 @@ But it came back:
 ```bash
 # Zabbix is now Zabbix 6.0.40. © 2001–2025, Zabbix SIA
 # It makes sense to upgrade the agents to same version, zabbix_agent2-6.0.40-windows-amd64-openssl.msi
-# must be that, get agent on same version as zabbix minor.
+# Must be that, get agent on same version as zabbix minor.
+
 ```
+
+Now it came at 18:00 and stopped P A1PE and 
 
 Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
