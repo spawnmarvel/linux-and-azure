@@ -195,13 +195,21 @@ Trendavg vs avg
 
 
 Zabbix server: Utilization of http poller data collector process, in % = 42.3
+
 Zabbix server: Utilization of poller data collector process, in % = 72.9
+- Pollers are Zabbix server processes responsible for actively collecting monitoring data from hosts.
+- If poller utilization is 95%, it means your pollers are busy 95% of the time and may soon become a bottleneck.
+- If it’s 30%, you have spare capacity.
+
 Zabbix server: Utilization of unreacable poller data collector process, in % = 56.1
 
+Zabbix server: Utilization of trapper data collector process, in % = 0
+- Typically refers to how much of the system’s resources (CPU, memory, etc.) are being used by the trapper process in data collection
+
 Poller data checks
-* 0-75%: Generally considered a healthy range.
-* > 75%: Indicates that your pollers are becoming busy and might be struggling to keep up with the workload. Zabbix often has default triggers set for "poller processes more than 75% busy."
-* 100%: Means your pollers are completely saturated and cannot process any more new checks. This will lead to increased queue size, delayed data collection, and eventually items going "unsupported" or agents becoming "unreachable."
+- 0-75%: Generally considered a healthy range.
+- > 75%: Indicates that your pollers are becoming busy and might be struggling to keep up with the workload. Zabbix often has default triggers set for "poller processes more than 75% busy."
+- 100%: Means your pollers are completely saturated and cannot process any more new checks. This will lead to increased queue size, delayed data collection, and eventually items going "unsupported" or agents becoming "unreachable."
 
 
 ```bash
