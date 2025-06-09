@@ -196,6 +196,12 @@ Zabbix server: Utilization of http poller data collector process, in % = 42.3
 Zabbix server: Utilization of poller data collector process, in % = 72.9
 Zabbix server: Utilization of unreacable poller data collector process, in % = 56.1
 
+Poller data checks
+* 0-75%: Generally considered a healthy range.
+* > 75%: Indicates that your pollers are becoming busy and might be struggling to keep up with the workload. Zabbix often has default triggers set for "poller processes more than 75% busy."
+* 100%: Means your pollers are completely saturated and cannot process any more new checks. This will lead to increased queue size, delayed data collection, and eventually items going "unsupported" or agents becoming "unreachable."
+
+
 ```bash
 
 # on zabbix server the 
@@ -209,7 +215,14 @@ sudo service zabbix-server start
 ```
 If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
 
-Now it was AE that had the same error above, agent was upgraded. Will upgrade the rest of the list also.
+Now it was AE that had the same error above, agent was upgraded. 
+
+But it came back:
+
+* Check whats agents that has errors
+* Check other things also
+
+
 
 
 ## Environment requirements
