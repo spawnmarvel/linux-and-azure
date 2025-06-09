@@ -235,7 +235,7 @@ But it came back:
 ```bash
 # Zabbix is now Zabbix 6.0.40. © 2001–2025, Zabbix SIA
 # It makes sense to upgrade the agents to same version, zabbix_agent2-6.0.40-windows-amd64-openssl.msi
-
+# must be that, get agent on same version as zabbix minor.
 ```
 
 Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
