@@ -102,7 +102,7 @@ es, you can tune how **Zabbix agents** connect, reconnect, and handle timeoutsâ€
 ---
 
 ### **Example Tuning in zabbix_agentd.conf:**
-ini
+```ini
 
 Server=your.zabbix.server
 ServerActive=your.zabbix.server
@@ -114,7 +114,15 @@ BufferSize=100
 StartAgents=3
 
 
----
+### Option: Timeout
+#	Specifies how long to wait (in seconds) for establishing connection and exchanging data with Zabbix proxy or server.
+#
+# Mandatory: no
+# Range: 1-30
+# Default:
+# Timeout=3
+Timeout=30
+```
 
 ## **On the Zabbix Server Side (zabbix_server.conf):**
 ### **1. Trapper/Connection Handling**
@@ -337,6 +345,15 @@ Or something with windows agents on the top hosts?
 
 ## When we restart the Zabbix agent the issue is resolved, but reoccurs after a period of time.
 
+
+
+```bash
+
+2025/06/12 07:14:13.005504 Detected performance counter with negative denominator the second time after retry, giving up...
+2025/06/12 07:14:14.007742 Detected performance counter with negative denominator the second time after retry, giving up...
+2025/06/12 07:15:20.005585 Detected performance counter with negative denominator the second time after retry, giving up...
+
+```
 
 As temporary workaround, an automatic service restart on failure can be implemented on Windows level.
 
