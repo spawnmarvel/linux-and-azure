@@ -249,6 +249,12 @@ Recv-Q shows the number of incoming connection requests that are currently queue
 # list tcp
 ss -ltn
 
+
+# This will show all lines where either the local or remote side is port 10051.
+# - ESTAB: The state of the connection (ESTABLISHED)- Recv-Q: Receive queue- Send-Q: Send queue- Local Address:Port: The local IP and port- Peer Address:Port: The remote IP and port
+ss -tn | grep ':10051'
+
+
 # State      Recv-Q Send-Q Local Address:Port    Peer Address:Port
 # Displays IP addresses and port numbers in numeric format (no DNS/port name resolution).
 ss -tn
@@ -256,10 +262,6 @@ ss -tn
 # State      Recv-Q Send-Q Local Address:Port    Peer Address:Port
 # Displays hostnames when possible (resolves IP addresses to domain names by default)
 ss -t
-
-# This will show all lines where either the local or remote side is port 10051.
-ss -tn | grep ':10051'
-
 ```
 ## Linux Command Reference
 
