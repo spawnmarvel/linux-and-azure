@@ -313,3 +313,38 @@ ListenBacklog
 
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_server
+
+## CLOSE-WAIT	11432
+
+
+```bash
+ss -tn | grep ':10051'
+
+```
+state	      recv-q	send-q	local	remote
+CLOSE-WAIT	11432	0	10.10.10.10:10051	10.10.10.140:63015
+
+
+If you have lots of connections staying in CLOSE_WAIT it means that the process responsible is not closing the socket once it goes into CLOSE_WAIT. 
+
+You could use tcpdump, or other network traffic capture tools, to look at the packets.
+
+lot of connections stuck in CLOSE-WAIT
+
+https://serverfault.com/questions/65944/running-lsof-i-shows-a-lot-of-connections-in-close-wait-should-i-worry
+
+Or something with windows agents on the top hosts?
+
+## When we restart the Zabbix agent the issue is resolved, but reoccurs after a period of time.
+
+
+As temporary workaround, an automatic service restart on failure can be implemented on Windows level.
+
+1. Open run, type "services.msc"
+2. Find Zabbix agent, click on it
+3. Go to "Recovery" tab
+4. Configure agent to be restarted on failure.
+
+
+https://support.zabbix.com/browse/ZBX-21703
+
