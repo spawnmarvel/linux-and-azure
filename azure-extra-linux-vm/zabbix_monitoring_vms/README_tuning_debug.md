@@ -1,6 +1,152 @@
 # Tuning debug
 
 
+## How a Single Agent Can Jam Port 10051
+
+
+1. Flooding with Data
+
+- If an agent is misconfigured or buggy and sends data at a very high frequency (much more than needed), it can quickly fill the receive queue (`recv-q`) for port 10051.
+- This can overwhelm the Zabbix server’s trapper processes.
+
+2. Large Data Packets
+
+- An agent sending unusually large payloads or too many items at once might cause processing delays, making it harder for trappers to keep up.
+
+3. Rapid Reconnects
+
+- If an agent repeatedly connects/disconnects (e.g., in a crash loop or bad script), it can consume TCP connections and fill the queue.
+
+4. Network Issues
+
+- If the agent’s network path is flaky, it might keep retrying, further increasing load on the port.
+
+---
+
+Symptoms of a Jammed Port
+
+
+- High `recv-q` value for port 10051 (observed using `ss -ltn` or `netstat`).
+- Trapper utilization spikes or trappers become 100% busy.
+- Zabbix server log shows errors like:
+  - `Zabbix trapper processes more than 75% busy`
+  - `cannot accept new connection: [104] Connection reset by peer`
+- Other agents/proxies cannot send data; their connections are delayed or refused.
+- Dropped or delayed monitoring data in Zabbix frontend.
+
+---
+
+How to Investigate and Mitigate
+
+
+1. Identify the Offending Source
+
+- Use `ss -antp | grep 10051` or `netstat -anp | grep 10051` to see which IPs have many or frequent connections.
+- Check Zabbix server log for clues about rapidly connecting hosts.
+
+2. Throttling or Blocking
+
+- If necessary, use firewall rules (e.g., `iptables`, `firewalld`) to temporarily block the offending agent’s IP.
+- Contact the system owner to fix or reconfigure the problematic agent.
+
+3. Server Hardening
+
+- Increase `StartTrappers` (number of trapper processes) if appropriate.
+- Ensure your server and database can handle the expected load.
+- Limit maximum connections via OS-level settings if needed.
+
+4. Agent Configuration
+
+- On the agent side, check `Hostname`, item update intervals, and ensure it’s not set to send huge amounts of data.
+
+---
+
+Summary Table
+
+
+| Scenario                      | Effect on Port 10051 | Solution                      |
+|-------------------------------|----------------------|-------------------------------|
+| One agent floods with data     | Port jammed, recv-q fills | Block agent, fix config        |
+| One agent sends huge packets   | Port slow, possibly jammed | Fix agent, limit payload size  |
+| Many rapid connects/disconnects| Port jammed, trappers busy | Block or fix agent             |
+
+---
+
+In short:  
+Yes, a single rogue Zabbix agent can jam port 10051 by sending too much or too frequent data. Identify and fix the agent; if necessary, block it temporarily to restore server function. Always monitor your Zabbix server’s connections and trapper utilization for early warnings.
+
+## Tune agents
+
+es, you can tune how **Zabbix agents** connect, reconnect, and handle timeouts—both on the **agent** and the **server** side. Below are the main parameters you can adjust and where to find them.
+
+---
+
+## **On the Zabbix Agent Side (zabbix_agentd.conf or zabbix_agent2.conf):**
+### **1. Active Check Intervals**
+- **RefreshActiveChecks**: How often the agent requests the list of active checks from the server (default: 120 seconds).
+- **ServerActive**: The address of the Zabbix server or proxy for active checks.
+
+### **2. Connection/Timeout Settings**
+- **Timeout**: Maximum number of seconds for agent checks (default: 3 seconds, can be increased if checks are slow).
+- **StartAgents**: Number of pre-forked instances for passive checks (for handling concurrent requests).
+- **HostnameItem**: Which system value to use as agent hostname (not related to connections, but can help avoid duplicate/confused hosts).
+
+### **3. Buffer/Queue Controls (Agent 2)**
+- **BufferSend**: How often the agent sends buffered data in seconds.
+- **BufferSize**: How many values are buffered before being sent.
+- **MaxLinesPerSecond**: Throttle how many log lines are sent per second for log monitoring.
+
+### **4. Debugging**
+- **LogRemoteCommands**: Can help identify command or connection issues.
+
+---
+
+### **Example Tuning in zabbix_agentd.conf:**
+ini
+
+Server=your.zabbix.server
+ServerActive=your.zabbix.server
+
+RefreshActiveChecks=60
+Timeout=5
+BufferSend=5
+BufferSize=100
+StartAgents=3
+
+
+---
+
+## **On the Zabbix Server Side (zabbix_server.conf):**
+### **1. Trapper/Connection Handling**
+- **StartTrappers**: Number of trapper processes to handle incoming agent/connections.
+- **Timeout**: How long the server waits for agent or proxy responses.
+
+### **2. Incoming Connection Limits (OS-level)**
+- You can further tune connection queue sizes and timeouts at the OS/network stack level (e.g., net.core.somaxconn, tcp_tw_reuse, tcp_fin_timeout in /etc/sysctl.conf).
+---
+
+## **Other Tips:**
+
+- **Reduce agent data frequency** if not all data is needed as often.
+- **Avoid massive log monitoring** with loose patterns, as this can flood the server.
+- **Distribute agent check times** (avoid all agents sending at the same second).
+- **Upgrade agents** to the latest version for performance and bug fixes.
+
+---
+
+## **References:**
+
+- [Zabbix Agent parameters (official)](https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd)
+- [Zabbix Agent 2 parameters](https://www.zabbix.com/documentation/current/en/manual/concepts/agent/agent2)
+
+---
+
+## **In summary:**
+
+You can tune Zabbix agent connection, reconnection, and timeout behavior directly in the agent’s config file (zabbix_agentd.conf or zabbix_agent2.conf). You can also adjust server and OS parameters for better handling of connections and timeouts. Most common settings to tweak are Timeout, RefreshActiveChecks, BufferSend, and BufferSize.
+If you want a sample config for your environment, just let me know your use case!
+
+
 ## We have seen it before
 
 
@@ -134,3 +280,36 @@ For most environments:
 - Medium: **10–20**
 - Large (hundreds of hosts, proxies): **20–50** (or even higher)
 
+
+
+## ss- ltn  recvQ size is not decreasing
+
+- The proxy and server are set up on the vm machines based on openstack, and someone changed the security group that caused the problem. After restore the security group setting, everything is fine now.
+
+
+https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/408334-can-t-connect-to-the-proxy-s-10051-from-agent-sometimes
+
+
+We had a similar situation years ago and it was due to the number and frequency of connections.
+
+This turned out to be an issue with the zabbix server/proxy instead of the settings on the OS side
+
+The Zabbix issue on this can be found here. ListenBacklog is now a parameter and can be set in the configuration file.
+
+https://support.zabbix.com/browse/ZBX-7933?_gl=1%2A3osmch%2A_gcl_au%2AODY2MzI1MDAzLjE3NDk2NDIyODE.%2A_ga%2AMTA2MTg0NDAyMi4xNzQ5NjQyMjgx%2A_ga_1F6WJN99ZG%2AczE3NDk2NDIyODAkbzEkZzEkdDE3NDk2NDI1NzMkajgkbDAkaDA.
+
+https://www.zabbix.com/forum/zabbix-for-large-environments/421171-proxy-connections-unstable-on-large-environments
+
+## Zabbix server parameters
+
+
+ListenBacklog
+* The maximum number of pending connections in the TCP queue.
+* The default value is a hard-coded constant, which depends on the system.
+* The maximum supported value depends on the system, too high values may be silently truncated to the 'implementation-specified maximum'.
+
+* Default: SOMAXCONN
+* Range: 0 - INT_MAX
+
+
+https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_server

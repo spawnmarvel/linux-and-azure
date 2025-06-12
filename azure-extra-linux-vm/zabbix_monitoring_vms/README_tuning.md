@@ -48,6 +48,7 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 2024/01/11 00:49:27.024499 [101] cannot receive data from [ZABBIX-IP:10051]: Cannot read message: 'read tcp HOST-IP21:64868->ZABBIX-IP21:10051: i/o timeout'
 2024/01/11 00:49:27.024500 [101] active check configuration update from host [HOST-IP-FQDN] started to fail
 
+
 # Checked:
 # Network Watcher | Traffic Analytics
 # Traffic distrubution IP21:Checked Top 20 IPs with respect to network traffic flow count
@@ -69,6 +70,11 @@ tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      
 # Agent OF
 
 ```
+
+**In short:**  
+A non-zero Recv-Q on a LISTEN socket means your application is not accepting new TCP connections quickly enough. This can lead to refused connections if the queue fills up.
+
+
 If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
 
 1. **Client disconnected prematurely**: The agent or client might have closed the connection before the server tried to read from it.
@@ -245,7 +251,13 @@ But it came back:
 
 Now it came at 18:00 and stopped P A1PE and agent is same version as zabbix and new 1 h before 18:00, v 6.0.40, must be network since this server is far away.
 
-Try to stopp it for 24h, is it still Zabbix server: Utilization of trapper data collector process, in % = 0?
+Try to stopp it for 24h, is it still Zabbix server: Utilization of trapper data collector process, in % = 0? 
+
+
+Yes, one misbehaving Zabbix agent (or any client using the Zabbix protocol, such as `zabbix_sender` or a proxy) can jam or overload port 10051 on your Zabbix server. Here’s how and why this can happen:
+
+
+***work here if you need to***
 
 Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
