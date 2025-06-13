@@ -3,6 +3,14 @@
 ## Sudden peaks in inbound flows to Zabbix from Agents, halting Zabbix
 
 We have been here before.
+
+2025
+* 
+
+https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
+
+2024
+
 * Updated to new agents on hosts.
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
