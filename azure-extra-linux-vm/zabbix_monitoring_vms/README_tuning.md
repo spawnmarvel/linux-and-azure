@@ -5,12 +5,28 @@
 We have been here before.
 
 2025
-* 
+
+* Upgraded some agents to latest version equal to zabbix 6.0.40 (the ones that had errors or timeout on same time, adjusted 2 agenets to timeout=30)
+* Removed some bad triggers that used history-> moved to trend function or simply removed.
+* sudo tail -f zabbiz_server.log
+* Tried to get rid of all errors, like this one, by disable items on default templates
+```bash
+# log full of
+4028739:20250613:151604.073 Zabbix agent item "perf_counter_en["\HTTP Service Request Queues(.NET v4.5 Classic)\CurrentQueueSize"]" on host "FDQN-AGENT": first network error, wait for 15 seconds
+```
+* Diasabled all items that had no triggers on template IIS by Zabbix agent, now 4 items and 4 triggers (only monitor important stuff)
+* After 20 min Utilization of unreachable poller data collector process, in % whent from 10-30% to 0% = good.
+* Utilization of poller data collector process, in % is 10% (unchanged, good)
+* Utilization of trapper data collector process, in % is 0.5 % (unchanged, good)
+* Value cache hits is 400 vps ish (good)
+* NVP is 45.14 (Down from 56.16 ish)
+* More?
 
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
 2024
 
+* Required server performance, new values per second 56.16
 * Updated to new agents on hosts.
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
