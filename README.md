@@ -258,6 +258,9 @@ ss -tn | grep ':10051'
 
 ss -tn | grep ':10051' > port_10051.txt
 
+# grep a bit of the log also
+sudo tail -f /var/log/zabbix/zabbix_server.log >> tmp_logs
+
 
 # State      Recv-Q Send-Q Local Address:Port    Peer Address:Port
 # Displays IP addresses and port numbers in numeric format (no DNS/port name resolution).

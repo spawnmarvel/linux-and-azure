@@ -365,3 +365,28 @@ As temporary workaround, an automatic service restart on failure can be implemen
 
 https://support.zabbix.com/browse/ZBX-21703
 
+
+
+## [Z3008] query failed due to primary key constraint:
+
+we have
+```ini
+
+4028678:20250613:204626.381 executing housekeeper
+4028694:20250613:204718.158 [Z3008] query failed due to primary key constraint: [1062] Duplicate entry '52189-1749840437-776661741' for key 'history.PRIMARY'
+4028694:20250613:204718.161 skipped 1 duplicates
+4028678:20250613:204756.578 housekeeper [deleted 240402 hist/trends, 0 items/triggers, 31 events, 4 problems, 63 sessions, 0 alarms, 0 audit, 0 autoreg_host, 0 records in 90.160465 sec, idle for 1 hour(s)]
+4028695:20250613:205337.661 [Z3008] query failed due to primary key constraint: [1062] Duplicate entry '52189-1749840816-444865391' for key 'history.PRIMARY'
+4028695:20250613:205337.681 skipped 1 duplicates
+4028691:20250613:205748.270 [Z3008] query failed due to primary key constraint: [1062] Duplicate entry '52189-1749841067-936851269' for key 'history.PRIMARY'
+4028691:20250613:205748.273 skipped 1 duplicates
+4028694:20250613:205955.871 [Z3008] query failed due to primary key constraint: [1062] Duplicate entry '58852-1749841194-820270211' for key 'history_uint.PRIMARY'
+4028694:20250613:205955.873 skipped 1 duplicates
+
+```
+52189
+
+You have itemid (from error message) - go to edit page of any item and replace the itemid number in browser url.
+
+
+https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/498278-z3008-query-failed-due-to-primary-key-constraint
