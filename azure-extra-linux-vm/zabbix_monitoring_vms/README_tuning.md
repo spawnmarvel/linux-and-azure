@@ -320,7 +320,7 @@ https://www.zabbix.com/documentation/current/en/manual/installation/requirements
 
 This README provides a comprehensive guide to optimizing your Zabbix environment for peak performance. Zabbix is a powerful monitoring solution, but its efficiency heavily depends on proper configuration and tuning, especially as your monitored infrastructure grows.
 
-PDF
+PDF Webinar Zabbix performance tuning
 
 https://www.initmax.cz/wp-content/uploads/2022/06/zabbix_performance_tuning_6.0.pdf
 
