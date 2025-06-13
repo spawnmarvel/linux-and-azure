@@ -390,3 +390,13 @@ You have itemid (from error message) - go to edit page of any item and replace t
 
 
 https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/498278-z3008-query-failed-due-to-primary-key-constraint
+
+## Agent log Interrogate
+
+```ini
+2025/06/13 23:49:15.832551 unsupported windows service command 'Interrogate' received
+```
+
+Also have same problem on WinServ2019 with Agent2
+
+https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/414831-agent2-on-windows-server-unsupported-windows-service-command-recieved

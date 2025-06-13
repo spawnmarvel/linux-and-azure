@@ -20,6 +20,19 @@ We have been here before.
 * Utilization of trapper data collector process, in % is 0.5 % (unchanged, good)
 * Value cache hits is 400 vps ish (good)
 * NVP is 45.14 (Down from 56.16 ish)
+* Utilization of unreachable poller data collector process has been higher from 28 04 2025
+
+example zabbix server logs
+
+```ini
+701954:20250614:010341.279 Zabbix agent item "system.uptime" on host "AGENTNAME" failed: another network error, wait for 15 seconds
+701982:20250614:010342.054 resuming Zabbix agent checks on host "AGENTNAME": connection restored
+```
+* sudo cp zabbix_server.conf zabbix_server.conf_bck3
+```bash
+# StartPollersUnreachable=5
+StartPollersUnreachable=6
+```
 * More?
 
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
@@ -307,6 +320,9 @@ https://www.zabbix.com/documentation/current/en/manual/installation/requirements
 
 This README provides a comprehensive guide to optimizing your Zabbix environment for peak performance. Zabbix is a powerful monitoring solution, but its efficiency heavily depends on proper configuration and tuning, especially as your monitored infrastructure grows.
 
+PDF
+
+https://www.initmax.cz/wp-content/uploads/2022/06/zabbix_performance_tuning_6.0.pdf
 
 ## Table of Contents
 
