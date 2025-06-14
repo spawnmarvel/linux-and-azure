@@ -2,9 +2,10 @@
 
 ## Sudden peaks in inbound flows to Zabbix from Agents, halting Zabbix
 
+### 2025
+
 We have been here before.
 
-2025
 
 * Upgraded some agents to latest version equal to zabbix 6.0.40 (the ones that had errors or timeout on same time, adjusted 2 agenets to timeout=30)
 * Removed some bad triggers that used history-> moved to trend function or simply removed.
@@ -62,7 +63,7 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
-2024
+### 2024
 
 * Required server performance, new values per second 56.16
 * Updated to new agents on hosts.
