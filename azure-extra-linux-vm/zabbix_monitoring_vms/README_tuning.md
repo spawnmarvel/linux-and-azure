@@ -321,7 +321,7 @@ Yes, one misbehaving Zabbix agent (or any client using the Zabbix protocol, such
 
 ***work here if you need to***
 
-Work here if you neeed https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_tuning_debug.md
 
 
 # Environment requirements and tuning check list starts here
