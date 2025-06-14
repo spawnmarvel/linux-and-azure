@@ -28,12 +28,21 @@ example zabbix server logs
 701954:20250614:010341.279 Zabbix agent item "system.uptime" on host "AGENTNAME" failed: another network error, wait for 15 seconds
 701982:20250614:010342.054 resuming Zabbix agent checks on host "AGENTNAME": connection restored
 ```
+
+* When this happens Zabbix starts to get recv-q higher and higher if fixes it self, but takes too long time
 * sudo cp zabbix_server.conf zabbix_server.conf_bck3
 ```bash
 # StartPollersUnreachable=5
 StartPollersUnreachable=6
 ```
-* More?
+* Follow Utilization of unreachable poller data collector process does it go down and not peak over 40% and 75%?
+* * At 01 it can go over 80%, at 18 up to 40%
+* StartPollersUnreachable looks ok last 24 h it has been 10%, but still usually there are 5 to 8 hosts that becomes unreachable to change to 10
+
+```bash
+# StartPollersUnreachable=5
+StartPollersUnreachable=10
+```
 
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
