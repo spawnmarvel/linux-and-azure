@@ -44,6 +44,11 @@ StartPollersUnreachable=6
 StartPollersUnreachable=10
 ```
 
+*  It is really that sensitive og did we not:
+* * what does it do at those times
+* * I would suspect it is not really able to perform, either not given enough resources!!
+* * or on very slow disks or something
+
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
 2024
