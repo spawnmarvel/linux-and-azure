@@ -322,6 +322,8 @@ This README provides a comprehensive guide to optimizing your Zabbix environment
 
 PDF Webinar Zabbix performance tuning
 
+![Performance](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/performance.jpg)
+
 https://www.initmax.cz/wp-content/uploads/2022/06/zabbix_performance_tuning_6.0.pdf
 
 ## Table of Contents
