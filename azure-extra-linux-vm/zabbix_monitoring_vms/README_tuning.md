@@ -54,6 +54,12 @@ StartPollersUnreachable=10
 * * I would suspect it is not really able to perform, either not given enough resources!!
 * * or on very slow disks or something
 
+
+Example with 2 host and StartPollersUnreachable=1 (default)
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable.jpg
+
+
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
 2024
