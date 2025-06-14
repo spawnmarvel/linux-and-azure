@@ -40,8 +40,13 @@ StartPollersUnreachable=6
 * StartPollersUnreachable looks ok last 24 h it has been 10%, but still usually there are 5 to 8 hosts that becomes unreachable to change to 10
 
 ```bash
+# When a host is detected as unreachable, it is no longer checked by the regular pollers (set by `StartPollers`).
+# Instead, it is periodically checked by the "unreachable pollers" to see if it has become available again.
+# once the host responds successfully, it is moved back to regular monitoring by the standard pollers.
+
 # StartPollersUnreachable=5
 StartPollersUnreachable=10
+
 ```
 
 *  It is really that sensitive og did we not:
