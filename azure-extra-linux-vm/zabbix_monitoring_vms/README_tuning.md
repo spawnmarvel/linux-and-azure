@@ -47,8 +47,12 @@ StartPollersUnreachable=6
 
 # StartPollersUnreachable=5
 StartPollersUnreachable=10
+# seems worse, maybe down to 6/7 again runt it for 48 h before set back.
+# But the queue is still full for 10051, so it must be something else.
+# It seems that the agents no on the same vnet is causing timeout
 
 ```
+
 
 *  It is really that sensitive og did we not:
 * * what does it do at those times
@@ -61,7 +65,55 @@ Example with 2 host and StartPollersUnreachable=1 (default)
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable.jpg
 
 
+
+Note!!
+Got a tips
+
+net.netfilter.nf_conntrack_max
+
+```bash
+cat /proc/sys/net/netfilter/nf_conntrack_max
+262144
+```
+
+
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
+
+
+
+It always points to
+
+This is still an issue.  Not a correctness issue; just a performance issue.  All of those dropped TCP connections hurt performance.  On my system, I find that when the maximum listen queue is very large, the backlog quickly spikes from 0 to 215 connections before plateauing.  This strongly suggests that raising the listen queue size is the correct solution.
+
+
+https://support.zabbix.com/si/jira.issueviews:issue-html/ZBX-7933/ZBX-7933.html
+
+***Configurable TCP queue maximum size***
+
+A new configuration parameter ListenBacklog has been added to Zabbix server, Zabbix proxy, and Zabbix agent (Unix/Windows) configuration. This optional parameter can be used to specify the maximum number of pending connections in the TCP queue.
+
+* ListenBacklog
+
+
+https://support.zabbix.com/si/jira.issueviews:issue-html/ZBX-7933/ZBX-7933.html
+
+
+**In summary:**  
+Your system can track up to **262,144 concurrent connections**. This is a performance and stability setting for network-heavy environments. If you start running out, you can adjust it higher, but ensure you have enough RAM (each entry uses memory).
+
+| Term      | Meaning                              | Controls/Shows           | Tunable? | Typical Usage       |
+|-----------|--------------------------------------|--------------------------|----------|---------------------|
+| SOMAXCONN | Pending connection queue length       | Number of unaccepted connections | Yes      | Argument to listen() || Recv-Q    | Receive queue (bytes of unread data) | Amount of data waiting to be read | No       | Output of netstat  |
+---
+
+
+
+Azure inbound flows at spikes
+* Number of unique incoming TCP/UDP flows to the VM per minute can be 2.50k
+
+SOMAX
+* 262,144 concurrent connections
+
 
 ### 2024
 
