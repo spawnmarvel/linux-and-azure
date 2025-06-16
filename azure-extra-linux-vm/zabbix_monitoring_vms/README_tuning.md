@@ -38,7 +38,7 @@ StartPollersUnreachable=6
 ```
 * Follow Utilization of unreachable poller data collector process does it go down and not peak over 40% and 75%?
 * * At 01 it can go over 80%, at 18 up to 40%
-* StartPollersUnreachable looks ok last 24 h it has been 10%, but still usually there are 5 to 8 hosts that becomes unreachable to change to 10
+* StartPollersUnreachable looks ok last 24 h it has been 10%, but still usually there are 5 to 8 hosts that becomes unreachable so change to 10
 
 ```bash
 # When a host is detected as unreachable, it is no longer checked by the regular pollers (set by `StartPollers`).
@@ -50,7 +50,14 @@ StartPollersUnreachable=10
 
 ```
 
-It seems better the Utilization of unreachable poller data collector is down a bit.
+Added also HOSTNAME to the agent interfaces on Zabbix since 5 hosts were unreachable at the time, zabbix server logs (Network issues 15 sec x 3)
+
+```ini
+701954:20250614:010341.279 Zabbix agent item "system.uptime" on host "AGENT-HOST" failed: another network error, wait for 15 seconds
+```
+* IP, DNS = HOSTNAME
+
+Wait 48 h, it seems better the Utilization of unreachable poller data collector is down a bit.
 
 ![StartPollersUnreachable10](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable2.jpg)
 
