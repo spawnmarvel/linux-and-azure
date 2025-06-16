@@ -251,6 +251,9 @@ ss -ltn
 
 ss -ltn >> exhaust.txt
 
+# Check also how many TIME_WAIT when it is full
+netstat -an | grep TIME_WAIT | wc -l
+
 
 # This will show all lines where either the local or remote side is port 10051.
 # - ESTAB: The state of the connection (ESTABLISHED)- Recv-Q: Receive queue- Send-Q: Send queue- Local Address:Port: The local IP and port- Peer Address:Port: The remote IP and port
@@ -260,6 +263,8 @@ ss -tn | grep ':10051' > port_10051.txt
 
 # grep a bit of the log also
 sudo tail -f /var/log/zabbix/zabbix_server.log >> tmp_logs
+
+
 
 
 # State      Recv-Q Send-Q Local Address:Port    Peer Address:Port

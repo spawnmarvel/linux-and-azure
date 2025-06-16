@@ -62,6 +62,23 @@ Wait 48 h, it seems better the Utilization of unreachable poller data collector 
 ![StartPollersUnreachable10](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable2.jpg)
 
 
+Again more queue in recv-q, now the logs says.
+
+16 06 20 25 09:06 just one ip, and that is not same zone.
+
+Zabbix server:
+
+```ini
+1032497:20250616:090630.429 failed to accept an incoming connection: from AGENT-HOST: reading first byte from connection failed: [104] Connection reset by peer
+1032497:20250616:090630.429 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
+1032497:20250616:090630.429 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
+```
+
+Agent
+```ini
+
+```
+
 *  It is really that sensitive?
 * * what does it do at those times
 * * I would suspect it is not really able to perform, either not given enough resources!!
