@@ -52,7 +52,7 @@ StartPollersUnreachable=10
 
 It seems better the Utilization of unreachable poller data collector is down a bit.
 
-
+![StartPollersUnreachable10](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable2.jpg)
 
 
 *  It is really that sensitive?
