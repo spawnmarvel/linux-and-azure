@@ -47,14 +47,15 @@ StartPollersUnreachable=6
 
 # StartPollersUnreachable=5
 StartPollersUnreachable=10
-# seems worse, maybe down to 6/7 again runt it for 48 h before set back.
-# But the queue is still full for 10051, so it must be something else.
-# It seems that the agents no on the same vnet is causing timeout
 
 ```
 
+It seems better the Utilization of unreachable poller data collector is down a bit.
 
-*  It is really that sensitive og did we not:
+
+
+
+*  It is really that sensitive?
 * * what does it do at those times
 * * I would suspect it is not really able to perform, either not given enough resources!!
 * * or on very slow disks or something
@@ -115,6 +116,40 @@ SOMAX
 * 262,144 concurrent connections
 
 
+#### DNS?
+
+Since it has issues with fail to get and rejected
+
+* Verified DNS on the Zabbix appliance server & ensured names can be resolved from client to host & vice versa.
+
+* Verified zabbix_agentd.conf file & ensured that hostnames & ports are properly set (using FQDN).
+
+
+#### Go back to root
+
+```ini
+1032499:20250615:071457.174 failed to accept an incoming connection: from 10.77.64.5: reading first byte from connection failed: [104] Connection reset by peer
+```
+
+##### Root Common Causes
+1. **The client closed the connection before sending any data**  
+   The remote application may have crashed, timed out, or closed the socket right after connecting.
+
+2. **Firewall or Network Interruption**  
+   There might be a firewall or network device in between that is terminating the connection.
+
+3. **Application Misconfiguration or Bug**  
+   The client app (on 10.77.64.5) could have a bug or is misconfigured.
+
+4. **Resource Limits**  
+   If your server is overloaded (too many connections or too many open files), it might not accept connections properly, but in that case, you would usually see a different error.
+
+### Troubleshooting Steps
+- **Check Client Logs:** Look at logs on 10.77.64.5 to see why it disconnects so quickly.
+- **Network Monitoring:** Use tcpdump or Wireshark to monitor the connection attempts.
+- **Check Server Resource Usage:** Ensure your server isn't overloaded.
+- **Firewall Rules:** Make sure no firewalls are interfering with the connection.
+- **Test Connectivity:** Try connecting manually (e.g., with telnet or nc) to see if you can reproduce the issue.
 ### 2024
 
 * Required server performance, new values per second 56.16

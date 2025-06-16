@@ -227,7 +227,7 @@ A full recv-q on port 10051 means your Zabbix server’s trapper processes are o
 
 ## Config
 
- sudo cat zabbix_server.conf | grep 'Start*'
+sudo cat zabbix_server.conf | grep 'Start*'
 ### Option: StartPollers
 StartPollers=30
 ### Option: StartIPMIPollers
