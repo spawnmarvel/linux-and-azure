@@ -482,6 +482,46 @@ Dual Mode (Optional)
 
 You can enable both modes by setting both Server and ServerActive in the config file.
 
+Example logs
+
+```ini
+192.168.3.4
+
+# Server=
+Server=192.168.3.5
+
+# ServerActive=
+ServerActive=192.168.3.5
+
+Template and interface 192.168.3.4, 10050
+
+Linux by Zabbix agent and not Linux by Zabbix agent active
+
+192.168.3.4
+cd /var/log/zabbix
+sudo tail -f zabbix.agentd.log
+
+6673:20250617:210155.511 **************************
+  6673:20250617:210155.511 using configuration file: /etc/zabbix/zabbix_agentd.conf
+  6673:20250617:210155.511 agent #0 started [main process]
+  6674:20250617:210155.511 agent #1 started [collector]
+  6675:20250617:210155.512 agent #2 started [listener #1]
+  6676:20250617:210155.512 agent #3 started [listener #2]
+  6677:20250617:210155.514 agent #4 started [listener #3]
+  6678:20250617:210155.515 agent #5 started [active checks #1]
+
+
+# ServerActive=192.168.3.5
+6940:20250617:210831.912 **************************
+  6940:20250617:210831.912 using configuration file: /etc/zabbix/zabbix_agentd.conf
+  6940:20250617:210831.912 agent #0 started [main process]
+  6941:20250617:210831.913 agent #1 started [collector]
+  6942:20250617:210831.913 agent #2 started [listener #1]
+  6944:20250617:210831.913 agent #4 started [listener #3]
+  6943:20250617:210831.914 agent #3 started [listener #2]
+
+```
+
 ## HA or Multiple Zabbix server by same agent
 
 To enable passive checks, the node names must be listed in the Server parameter, separated by a comma.
