@@ -60,6 +60,17 @@ Timeout=30
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd
 
+And keep tailing the log on agent and zabbix sever for the last few issues 
+
+
+* Agent2 on Windows server - unsupported windows service command recieved
+
+the older (non version 2 agent) appears to work ok !
+
+
+https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/414831-agent2-on-windows-server-unsupported-windows-service-command-recieved
+
+
 
 Passive and active checks
 * Zabbix agents can perform passive and active checks:
