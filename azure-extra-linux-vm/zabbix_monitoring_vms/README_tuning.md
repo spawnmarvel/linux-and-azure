@@ -40,7 +40,7 @@ ServerActive=ZABBIX-IP2
 # RefreshActiveChecks=120
 ```
 
-And active items were not used or configured, so many agents tried to connect but no answer every 120 sec.
+And active items were not used or configured, so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051
 
 Fix 
 
@@ -63,6 +63,18 @@ The agent check type is configured by selecting the respective monitoring item t
 Troubleshooting and Solutions example
 
 ```bash
+
+sudo tail -f /var/log/zabbix/zabbix_server.log
+
+# list tcp
+# on zabbix server the 
+ss -ltn
+# recv-q is full for :10051
+
+# tmp fix
+sudo service zabbix-server stop
+sudo service zabbix-server start
+
 # Check CPU and Memory usage
 htop
 
@@ -76,15 +88,6 @@ sudo crontab -u zabbix -l       # If Zabbix runs as user 'zabbix'
 
 # Systemd Timers
 systemctl list-timers --all
-
-# on zabbix server the 
-ss -ltn
-# recv-q is full for :10051
-
-# tmp fix
-sudo service zabbix-server stop
-sudo service zabbix-server start
-
 
 ```
 Disable bad triggers/ edit:
