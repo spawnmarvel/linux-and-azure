@@ -40,7 +40,7 @@ ServerActive=ZABBIX-IP2
 # RefreshActiveChecks=120
 ```
 
-And active items were not used or configured, so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051
+SeverActive was configured but not used on Zabbix server (items were not used or configured, neither template active), so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051
 
 Fix 
 
