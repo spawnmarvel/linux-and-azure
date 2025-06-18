@@ -42,7 +42,7 @@ ServerActive=ZABBIX-IP2
 
 SeverActive was configured but not used on Zabbix server (items were not used or configured, neither template active), so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051.
 
-Trapping was used, so much data on port 10051 was correct, but it was not for the active set of data (agent get config from-> server = no reply).
+Trapping was used, so much data on port 10051 was correct, but it was not for the active set of data (agent get config from-> server = no reply since not configured).
 
 Every agent in the same zone was ok, but agents not in same zone (on-prem for example got a greather timeout also)
 
