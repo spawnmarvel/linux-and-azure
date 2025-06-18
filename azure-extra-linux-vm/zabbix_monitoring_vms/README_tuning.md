@@ -65,6 +65,10 @@ And keep tailing the log on agent and zabbix sever for the last few issues
 
 * Agent2 on Windows server - unsupported windows service command recieved
 
+```bash
+unsupported windows service command recieved
+```
+
 the older (non version 2 agent) appears to work ok !
 
 
