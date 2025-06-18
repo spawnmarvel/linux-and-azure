@@ -1,6 +1,6 @@
 # Zabbix tuning
 
-## Sudden peaks in inbound flows to Zabbix from Agents, halting Zabbix
+## Sudden peaks in inbound flows to Zabbix from Agents, halting Zabbix, reqv-q is full
 
 ### 2025 and 2024
 
