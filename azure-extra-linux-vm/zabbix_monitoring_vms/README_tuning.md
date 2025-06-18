@@ -40,13 +40,20 @@ ServerActive=ZABBIX-IP2
 # RefreshActiveChecks=120
 ```
 
-SeverActive was configured but not used on Zabbix server (items were not used or configured, neither template active), so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051
+SeverActive was configured but not used on Zabbix server (items were not used or configured, neither template active), so many agents tried to connect but no answer every 120 sec and caused a DDOS in 10051.
+
+Every agent in the same zone was ok, but agents not in same zone (on-prem for example got a greather timeout also)
 
 Fix 
 
 ```bash
 # ServerActive The Zabbix server/proxy address or cluster configuration to get active checks from.
 # ServerActive=ZABBIX-IP2
+
+# Specifies how long to wait (in seconds) for establishing connection and exchanging data with Zabbix proxy or server.
+# Default: 3
+# Timeout=3
+Timeout=30
 ```
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd
