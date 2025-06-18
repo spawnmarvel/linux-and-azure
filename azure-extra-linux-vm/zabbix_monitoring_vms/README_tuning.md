@@ -2,312 +2,71 @@
 
 ## Sudden peaks in inbound flows to Zabbix from Agents, halting Zabbix
 
-### 2025
+### 2025 and 2024
 
-We have been here before.
-
-
-* Upgraded some agents to latest version equal to zabbix 6.0.40 (the ones that had errors or timeout on same time, adjusted 2 agenets to timeout=30)
-* Removed some bad triggers that used history-> moved to trend function or simply removed.
-* sudo tail -f zabbiz_server.log
-* Tried to get rid of all errors, like this one, by disable items on default templates
-```bash
-# log full of
-4028739:20250613:151604.073 Zabbix agent item "perf_counter_en["\HTTP Service Request Queues(.NET v4.5 Classic)\CurrentQueueSize"]" on host "FDQN-AGENT": first network error, wait for 15 seconds
-```
-* Diasabled all items that had no triggers on template IIS by Zabbix agent, now 4 items and 4 triggers (only monitor important stuff)
-* After 20 min Utilization of unreachable poller data collector process, in % whent from 10-30% to 0% = good.
-* Utilization of poller data collector process, in % is 10% (unchanged, good)
-* Utilization of trapper data collector process, in % is 0.5 % (unchanged, good)
-* Value cache hits is 400 vps ish (good)
-* NVP is 45.14 (Down from 56.16 ish)
-* Utilization of unreachable poller data collector process has been higher from 28 04 2025
-
-example zabbix server logs
-
-```ini
-701954:20250614:010341.279 Zabbix agent item "system.uptime" on host "AGENTNAME" failed: another network error, wait for 15 seconds
-701982:20250614:010342.054 resuming Zabbix agent checks on host "AGENTNAME": connection restored
-```
-
-* When this happens Zabbix starts to get recv-q higher and higher if fixes it self, but takes too long time
-* sudo cp zabbix_server.conf zabbix_server.conf_bck3
-```bash
-# StartPollersUnreachable=5
-StartPollersUnreachable=6
-```
-* Follow Utilization of unreachable poller data collector process does it go down and not peak over 40% and 75%?
-* * At 01 it can go over 80%, at 18 up to 40%
-* StartPollersUnreachable looks ok last 24 h it has been 10%, but still usually there are 5 to 8 hosts that becomes unreachable so change to 10
-
-```bash
-# When a host is detected as unreachable, it is no longer checked by the regular pollers (set by `StartPollers`).
-# Instead, it is periodically checked by the "unreachable pollers" to see if it has become available again.
-# once the host responds successfully, it is moved back to regular monitoring by the standard pollers.
-
-# StartPollersUnreachable=5
-StartPollersUnreachable=10
-
-```
-
-Added also HOSTNAME to the agent interfaces on Zabbix since 5 hosts were unreachable at the time, zabbix server logs (Network issues 15 sec x 3)
-
-```ini
-701954:20250614:010341.279 Zabbix agent item "system.uptime" on host "AGENT-HOST" failed: another network error, wait for 15 seconds
-```
-* IP, DNS = HOSTNAME
-
-Wait 48 h, it seems better the Utilization of unreachable poller data collector is down a bit.
-
-![StartPollersUnreachable10](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable2.jpg)
-
-
-Again more queue in recv-q, now the logs says.
-
-16 06 20 25 09:06 just one ip, and that is not same zone.
-
-Zabbix server:
-
-```ini
-1032497:20250616:090630.429 failed to accept an incoming connection: from AGENT-HOST: reading first byte from connection failed: [104] Connection reset by peer
-1032497:20250616:090630.429 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
-1032497:20250616:090630.429 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
-```
-
-Agent
-```ini
-
-```
-
-*  It is really that sensitive?
-* * what does it do at those times
-* * I would suspect it is not really able to perform, either not given enough resources!!
-* * or on very slow disks or something
-
-
-Example with 2 host and StartPollersUnreachable=1 (default)
-
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/unreachable.jpg
-
-
-
-Note!!
-Got a tips
-
-net.netfilter.nf_conntrack_max
-
-```bash
-cat /proc/sys/net/netfilter/nf_conntrack_max
-262144
-```
-
+2025
 
 https://www.zabbix.com/forum/zabbix-help/504021-zabbix-server-6-0-40-recv-q-is-full-tcp-10051
 
 
-
-It always points to
-
-This is still an issue.  Not a correctness issue; just a performance issue.  All of those dropped TCP connections hurt performance.  On my system, I find that when the maximum listen queue is very large, the backlog quickly spikes from 0 to 215 connections before plateauing.  This strongly suggests that raising the listen queue size is the correct solution.
-
-
-https://support.zabbix.com/si/jira.issueviews:issue-html/ZBX-7933/ZBX-7933.html
-
-***Configurable TCP queue maximum size***
-
-A new configuration parameter ListenBacklog has been added to Zabbix server, Zabbix proxy, and Zabbix agent (Unix/Windows) configuration. This optional parameter can be used to specify the maximum number of pending connections in the TCP queue.
-
-* ListenBacklog
-
-
-https://support.zabbix.com/si/jira.issueviews:issue-html/ZBX-7933/ZBX-7933.html
-
-
-**In summary:**  
-Your system can track up to **262,144 concurrent connections**. This is a performance and stability setting for network-heavy environments. If you start running out, you can adjust it higher, but ensure you have enough RAM (each entry uses memory).
-
-| Term      | Meaning                              | Controls/Shows           | Tunable? | Typical Usage       |
-|-----------|--------------------------------------|--------------------------|----------|---------------------|
-| SOMAXCONN | Pending connection queue length       | Number of unaccepted connections | Yes      | Argument to listen() || Recv-Q    | Receive queue (bytes of unread data) | Amount of data waiting to be read | No       | Output of netstat  |
----
-
-
-
-Azure inbound flows at spikes
-* Number of unique incoming TCP/UDP flows to the VM per minute can be 2.50k
-
-SOMAX
-* 262,144 concurrent connections
-
-
-#### DNS?
-
-Since it has issues with fail to get and rejected
-
-* Verified DNS on the Zabbix appliance server & ensured names can be resolved from client to host & vice versa.
-
-* Verified zabbix_agentd.conf file & ensured that hostnames & ports are properly set (using FQDN).
-
-
-#### Go back to root
-
-```ini
-1032499:20250615:071457.174 failed to accept an incoming connection: from 10.77.64.5: reading first byte from connection failed: [104] Connection reset by peer
-```
-
-##### Root Common Causes
-1. **The client closed the connection before sending any data**  
-   The remote application may have crashed, timed out, or closed the socket right after connecting.
-
-2. **Firewall or Network Interruption**  
-   There might be a firewall or network device in between that is terminating the connection.
-
-3. **Application Misconfiguration or Bug**  
-   The client app (on 10.77.64.5) could have a bug or is misconfigured.
-
-4. **Resource Limits**  
-   If your server is overloaded (too many connections or too many open files), it might not accept connections properly, but in that case, you would usually see a different error.
-
-### Troubleshooting Steps
-- **Check Client Logs:** Look at logs on 10.77.64.5 to see why it disconnects so quickly.
-- **Network Monitoring:** Use tcpdump or Wireshark to monitor the connection attempts.
-- **Check Server Resource Usage:** Ensure your server isn't overloaded.
-- **Firewall Rules:** Make sure no firewalls are interfering with the connection.
-- **Test Connectivity:** Try connecting manually (e.g., with telnet or nc) to see if you can reproduce the issue.
-### 2024
-
-* Required server performance, new values per second 56.16
-* Updated to new agents on hosts.
+2024
 
 https://www.zabbix.com/forum/zabbix-help/479547-sudden-peaks-in-inbound-flows-to-zabbix-from-agents-halting-zabbix
 
-- It is so tiny load, should work like a charm on those 4 cpus and 32G of mem... DB is on the same host? look around, what does it do at those times... I would suspect it is not really able to perform, either not given enough resources or on very slow disks or something...
-
-Steps for first fix
-
-```bash
-
-
-sudo tail -f zabbix_server.log
-# 1357:20240130:133326.485 failed to accept an incoming connection: connection rejected, getpername() faild: [107] Transport endpoint is not connected.
-
-# tmp fix
-sudo service zabbix-server stop
-sudo service zabbix-server start
-```
-
-The utilization of the trapper data collector was in 100% also. (We had 0% since 10051 was exhausted)
-
-After I found this post, I have checked with my team, and they have confirmed that our DNS was down.
-
-When they fixed the DNS, the utilization of the trapper data collector fell to 0%, and Zabbix resumed to work properly.
-
-https://github.com/phothet/zabbix/issues/11
-
-```bash
-netstat -tulpn
-
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-tcp        0      0 127.0.0.1:12563         0.0.0.0:*               LISTEN      -
-tcp      951      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      -
-tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      -
-
-# turns out...... it was a host that was sending much data.
-# Host/ Agent logs, is is pilling up and doing to much.
-
-2024/01/11 00:49:27.024498 Detected performance counter with negative denominator the second time after retry, giving up...
-2024/01/11 00:49:28.024616 Detected performance counter with negative denominator the second time after retry, giving up...
-2024/01/11 00:49:29.025564 Detected performance counter with negative denominator the second time after retry, giving up...
-2024/01/11 00:49:30.026362 Detected performance counter with negative denominator the second time after retry, giving up...
-2024/01/11 00:49:27.024499 [101] cannot receive data from [ZABBIX-IP:10051]: Cannot read message: 'read tcp HOST-NAME:64868->ZABBIX-IP21:10051: i/o timeout'
-2024/01/11 00:49:27.024500 [101] active check configuration update from host [HOST-NAME] started to fail
-
-
-# Checked:
-# Network Watcher | Traffic Analytics
-# Traffic distrubution IP21:Checked Top 20 IPs with respect to network traffic flow count
-# NSG hits: Checked: view analytics for NSG and NSG rules across your envornment units in Flows
-# Total traffic
-
-# Stopped Zabbix agent2 on the host..
-# Better for 1.5 hours
-# turns out...... it was also one more host that was sending much data.
-# Stopped Zabbix agent2 on the other host..
-# better for 2 hours an counting.....se after the night.
-# It looks good in the morning (+ 7h) the last stopped agent was even started up again, and it seems stabil.
-# Maybe just agent hang and in need of a restart, looks ok after starting it again.
-# Os was upgraded some days before, kernel but that did not influence it.
-# The agent was crazy, update the agent to new version.
-
-# If you still see the same error, try to upgrade to agent new version, not agent2 new version.
-
-# Agent OF
-
-```
 
 **In short:**  
-A non-zero Recv-Q on a LISTEN socket means your application is not accepting new TCP connections quickly enough. This can lead to refused connections if the queue fills up.
+A full recv-q on port 10051 means your Zabbix server’s trapper processes are overloaded. Increase StartTrappers, check server and database performance, and monitor internal Zabbix queues for bottlenecks.
+
+**Application Misconfiguration or Bug**  
+   The client app (on 10.10.10.5) could have a bug or is misconfigured.
+
+The fix after looking in FW, upgrading some agents to same version as zabbix, stopping agents and what not.
+
+* Passive is 10050 (we have passive)
+* Trapping and active is 10051 (we have trapping)
+* But almost all zabbix_agentd.conf had
+
+```bash
+
+# Server A list of comma-delimited IP addresses, optionally in CIDR notation, or DNS names of Zabbix servers and Zabbix proxies.
+Server=ZABBIX-IP2
+
+# ServerActive The Zabbix server/proxy address or cluster configuration to get active checks from.
+ServerActive=ZABBIX-IP2
+
+# Mandatory: no
+# Range : 60-3600
+# Default
+# RefreshActiveChecks=120
+```
+
+And active items were not used or configured, so many agents tried to connect but no answer every 120 sec.
+
+Fix 
+
+```bash
+# ServerActive The Zabbix server/proxy address or cluster configuration to get active checks from.
+# ServerActive=ZABBIX-IP2
+```
+
+https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd
 
 
-If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
+Passive and active checks
+* Zabbix agents can perform passive and active checks:
 
-1. **Client disconnected prematurely**: The agent or client might have closed the connection before the server tried to read from it.
-2. **Network instability**: Temporary network issues between the Zabbix server and clients.
-3. **Firewall or Security Software**: Some intermediate device or software is interfering with the connection.
-4. **DNS/Reverse DNS issues**: If the server is trying to resolve hostnames and DNS is misconfigured, this can cause errors.
-5. **Resource exhaustion**: Too many open sockets or file descriptors on the Zabbix server.
+* Passive checks - Zabbix agent responds to a request from Zabbix server (or proxy). For example, the server requests data (e.g., CPU load), and the agent returns the result.
+* Active checks - Zabbix agent collects and sends data without waiting for a request from Zabbix server (or proxy). First, it retrieves a list of monitoring items from server (CPU load, available memory, etc.), then collects the required data and periodically sends new values back to it.
+
+The agent check type is configured by selecting the respective monitoring item type. Zabbix agent processes items of type "Zabbix agent" or "Zabbix agent (active)".
 
 Troubleshooting and Solutions example
 
-
 ```bash
-# 1. Check Zabbix Server Load
 # Check CPU and Memory usage
 htop
 
-# Check Zabbix process count
- ps aux | grep zabbix
-
-# 2. Increase Zabbix Pollers and Other Worker Processes
-  StartPollers=50
-  StartPollersUnreachable=10
-  # The `StartTrappers` parameter controls how many threads handle incoming connections on port 10051.
-  # If this is too low, increase it (e.g., set `StartTrappers=20` or higher depending on your hardware and load).
-  StartTrappers=50
-  # A full recv-q on port 10051 means your Zabbix server’s trapper processes are overloaded. Increase StartTrappers, check server and database performance, and monitor internal Zabbix queues for bottlenecks.
-  StartPingers=10
-  StartDBSyncers=8
-
-#3. Check Database Performance
-# - The Zabbix server is often limited by its database (MySQL/PostgreSQL). Check for slow queries or high load.
-# - Optimize your database (indexes, hardware, configuration).
-
-# 5. Check OS Limits
-ulimit -a
-# ncrease nofile (number of open files) if low:
- ulimit -n 65536
-# Or set in /etc/security/limits.conf for persistence.
-# - Sysctl parameters for networking (if you have very high load):
-net.core.somaxconn = 1024
-
-# Set in /etc/sysctl.conf and reload with sysctl -p.
-
-# 6. Monitor and Scale
-# Use Zabbix's own internal monitoring (e.g., zabbix[queue], zabbix[process]) to watch for bottlenecks.- Consider scaling: use Zabbix proxies to distribute load if you have a large environment.
-```
-
-Again, yes Steps for second fix
-
-Every night at around 01:00 (worst, but 18:00 and small random also), inbound flows are high also, like flodding port 100051
-
-* It could be an zabbix agent on a server
-* It could be something with zabbix server tuning
-* Since cache hits are low, zabbix need to get more data from the database to calculate
-
-Check for Scheduled Tasks/Cron Jobs
-* This is a very strong candidate for processes starting/stopping or blocking Zabbix at specific times.
-
-```bash
+# Check for Scheduled Tasks/Cron Jobs
 # System-wide Cron Jobs
 sudo crontab -l                  # For root's crontab
 sudo grep -r "zabbix" /etc/cron.* /etc/crontab /var/spool/cron/crontabs/ # Check all cron directories
@@ -318,22 +77,22 @@ sudo crontab -u zabbix -l       # If Zabbix runs as user 'zabbix'
 # Systemd Timers
 systemctl list-timers --all
 
-```
+# on zabbix server the 
+ss -ltn
+# recv-q is full for :10051
 
-Disable this and look fir similar, the issues became worse in april:
+# tmp fix
+sudo service zabbix-server stop
+sudo service zabbix-server start
+
+
+```
+Disable bad triggers/ edit:
 
 Trigger name a name max(item.insidentcount, 336h)>=1
 
-Q: 
-zabbix value cache formula Hit ratio = (hits / (hits + misses)) * 100. We have check and we get 99.99, but still hits change from 400 vps to 200 vps from time to time, what more to check?
 
-A:
-If your **Zabbix Value Cache hit ratio is 99.99%** but the **hits per second (VPS) fluctuate between 200 and 400**, this suggests that while the cache is highly efficient, there may still be underlying performance issues.
-
-The reason why cache hits is low, is because it is not used at that time, since now new data is coming in (? makes sense to myself?)
-
-
-Run:
+Test cache Run:
 ```bash
 zabbix_server -c /etc/zabbix/zabbix_server.conf -R diaginfo=valuecache
 
@@ -396,39 +155,15 @@ Poller data checks
 - > 75%: Indicates that your pollers are becoming busy and might be struggling to keep up with the workload. Zabbix often has default triggers set for "poller processes more than 75% busy."
 - 100%: Means your pollers are completely saturated and cannot process any more new checks. This will lead to increased queue size, delayed data collection, and eventually items going "unsupported" or agents becoming "unreachable."
 
-
-```bash
-
-# on zabbix server the 
-ss -ltn
-# recv-q is full for :10051
-
-# tmp fix
-sudo service zabbix-server stop
-sudo service zabbix-server start
-
-```
-If **recv-q** is full, the Zabbix server is overwhelmed and not able to process all incoming traffic from agents or proxies.
-
-Now it was AE that had the same error above, agent was upgraded. 
-
-But it came back:
-
-* Check whats agents that has errors at given times, upgrade thoose was zabbix_agent2-6.0.26
-
-```bash
-# Zabbix is now Zabbix 6.0.40. © 2001–2025, Zabbix SIA
-# It makes sense to upgrade the agents to same version, zabbix_agent2-6.0.40-windows-amd64-openssl.msi
-# Must be that, get agent on same version as zabbix minor.
-
-```
-
-Now it came at 18:00 and stopped P A1PE and agent is same version as zabbix and new 1 h before 18:00, v 6.0.40, must be network since this server is far away.
-
-Try to stopp it for 24h, is it still Zabbix server: Utilization of trapper data collector process, in % = 0? 
+Summary Table
 
 
-Yes, one misbehaving Zabbix agent (or any client using the Zabbix protocol, such as `zabbix_sender` or a proxy) can jam or overload port 10051 on your Zabbix server. Here’s how and why this can happen:
+| Scenario                      | Effect on Port 10051 | Solution                      |
+|-------------------------------|----------------------|-------------------------------|
+| One agent floods with data     | Port jammed, recv-q fills | Block agent, fix config        |
+| One agent sends huge packets   | Port slow, possibly jammed | Fix agent, limit payload size  |
+| Many rapid connects/disconnects| Port jammed, trappers busy | Block or fix agent             |
+
 
 
 ***work here if you need to***
