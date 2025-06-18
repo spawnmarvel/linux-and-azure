@@ -44,7 +44,7 @@ SeverActive was configured but not used on Zabbix server (items were not used or
 
 Every agent in the same zone was ok, but agents not in same zone (on-prem for example got a greather timeout also)
 
-Fix 
+Fix comment out ServerActive and edit Timeout.
 
 ```bash
 # ServerActive The Zabbix server/proxy address or cluster configuration to get active checks from.
