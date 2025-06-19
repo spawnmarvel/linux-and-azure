@@ -87,6 +87,25 @@ Possible causes:
 - The client application crashed or was terminated abruptly.
 - There’s a software bug or version mismatch between client and server.
 
+
+* Trapper agents port 10051 (only thoose left now) c#, piling up with random errors
+* bug Async
+
+```bash
+System.Threading.CancellationToken.ThrowIfCancellationRequested()
+
+```
+- **Synchronous**: The program does one thing at a time and waits for each task to complete before moving to the next.
+- **Asynchronous**: The program can start a task and move on to other things before that task finishes. When the task is done, the program handles the result.
+
+This
+
+https://www.nuget.org/packages/Zabbix_Sender#versions-body-tab
+
+Or this
+https://www.nuget.org/packages/ZabbixSender.Async/1.2.0
+
+
 ***MISC***
 
 Passive and active checks
