@@ -75,6 +75,19 @@ the older (non version 2 agent) appears to work ok !
 https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/414831-agent2-on-windows-server-unsupported-windows-service-command-recieved
 
 
+* And some errors on zabbix server log (it does not seem related but must be fixed)
+
+```bash
+476705:20250619:092228.385 failed to accept an incoming connection: from ZABBIX-AGENT: reading first byte from connection failed: [104] Connection reset by peer
+```
+Possible causes:
+
+- The client (ZABBIX-AGENT) closed the connection before communication could start.
+- There is a firewall or network device dropping or interfering with the connection.
+- The client application crashed or was terminated abruptly.
+- There’s a software bug or version mismatch between client and server.
+
+***MISC***
 
 Passive and active checks
 * Zabbix agents can perform passive and active checks:
