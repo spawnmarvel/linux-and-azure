@@ -264,6 +264,11 @@ ss -tn | grep ':10051' > port_10051.txt
 # grep a bit of the log also
 sudo tail -f /var/log/zabbix/zabbix_server.log >> tmp_logs
 
+# 100 lines
+sudo tail -100 /var/log/zabbix/zabbix_server.log
+
+# get lines with reading firs
+sudo tail -2000 /var/log/zabbix/zabbix_server.log | grep 'reading first*'
 
 
 
