@@ -58,6 +58,8 @@ Fix comment out ServerActive and edit Timeout.
 Timeout=30
 ```
 
+Much better after this, not many 10051 ss -ltn peaks now.
+
 https://www.zabbix.com/documentation/current/en/manual/appendix/config/zabbix_agentd
 
 And keep tailing the log on agent and zabbix sever for the last few issues 
