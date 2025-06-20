@@ -138,8 +138,8 @@ Should You Always Use await in async Functions?
 Passive and active checks
 * Zabbix agents can perform passive and active checks:
 
-* Passive checks - Zabbix agent responds to a request from Zabbix server (or proxy). For example, the server requests data (e.g., CPU load), and the agent returns the result.
-* Active checks - Zabbix agent collects and sends data without waiting for a request from Zabbix server (or proxy). First, it retrieves a list of monitoring items from server (CPU load, available memory, etc.), then collects the required data and periodically sends new values back to it.
+* Passive checks - Zabbix agent responds to a request from Zabbix server (or proxy). For example, the server requests data (e.g., CPU load), and the agent returns the result, 10050
+* Active checks - Zabbix agent collects and sends data without waiting for a request from Zabbix server (or proxy). First, it retrieves a list of monitoring items from server (CPU load, available memory, etc.), then collects the required data and periodically sends new values back to it, 10051
 
 The agent check type is configured by selecting the respective monitoring item type. Zabbix agent processes items of type "Zabbix agent" or "Zabbix agent (active)".
 
