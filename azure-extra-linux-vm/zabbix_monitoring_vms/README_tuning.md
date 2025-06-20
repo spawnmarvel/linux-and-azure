@@ -108,6 +108,31 @@ Or this
 https://www.nuget.org/packages/ZabbixSender.Async/1.2.0
 
 
+```cs
+GetZabbixSender().SendTagValues(TagCollection)
+
+// await was not used, it spaned endless treads.
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+2025/06/19 10:45:20.952|ERROR|Error while sending to IMS OC: A task was canceled. |.Tag.Agent.NLogAdapter|
+
+await GetZabbixSender().SendTagValues(TagCollection)
+```
+
+- The await keyword pauses the execution of the async function until the awaited operation completes.- It lets you write asynchronous code that looks and behaves much like synchronous code.
+
+Should You Always Use await in async Functions?
+
+**Usually, yes!**
+- The main benefit of async functions is that you can use await to handle asynchronous operations easily.- If you declare a function as async but don’t use await inside, it will still return a promise/task, but you won’t get the benefits of pausing execution.
+**But it’s not mandatory:**
+- Technically, you can have an async function without await, but this is rare and usually unnecessary.- If your function doesn’t need to wait for any asynchronous work, you don’t need to make it async at all.
+
 ***MISC***
 
 Passive and active checks
