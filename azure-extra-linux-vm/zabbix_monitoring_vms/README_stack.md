@@ -7,7 +7,9 @@ Example with Zabbix server and a Linux VM with Linux template as test bases for 
 
 ![Zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix6.jpg)
 
-Start both vms
+View the README_install docs in this folder.
+
+Azure environment
 
 * VNET, vnet-uks-central/vms03
 * Zabbix vm (vmzabbix02), 192.168.3.5
@@ -125,7 +127,7 @@ https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
 
 
 
-### Install Zabbix agent (default with passive checks)
+### Install Zabbix agent (default with passive checks) and Template Linux by Zabbix agent
 
 Note!!
 
@@ -297,9 +299,53 @@ https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
 
 
-### Template Linux by Zabbix agent recap
+### Install Zabbix agent and Template Linux by Zabbix agent active
 
-Lets add the passive template
+
+* A single Zabbix Agent can collect metrics in both passive and active modes
+* Zabbix Agent is backward compatible
+* The frontend ZBX interface icon is related only to passive checks 
+* Active Zabbix Agent doesn’t require an interface configuration in Zabbix frontend
+* For active checks, the Zabbix Agent Hostname in the configuration file must match the Host name in the frontend
+
+https://blog.zabbix.com/handy-tips-15-deploying-zabbix-passive-and-active-agents/17696/
+
+
+Lets use the active template on vm dummy03
+
+Check agent installed
+
+```bash
+# ssh from vm dummy01 to vm dummy 03, since dummy01 is proxy
+imsdal@dummy03:~$ zabbix_agentd --version
+zabbix_agentd (daemon) (Zabbix) 6.0.40
+
+sudo nano /etc/zabbix/zabbix_agentd.conf
+# edit config
+Server=192.168.3.5
+ServerActive=192.168.3.5
+
+Hostname=dummy03
+
+# Default:
+# RefreshActiveChecks=120  
+```
+
+Check the log for the active statment
+
+```bash
+imsdal@dummy03:/etc/zabbix$ sudo tail -f /var/log/zabbix/zabbix_agentd.log
+  1744:20250622:130917.987 IPv6 support:          YES
+  1744:20250622:130917.987 TLS support:           YES
+  1744:20250622:130917.987 **************************
+  1744:20250622:130917.987 using configuration file: /etc/zabbix/zabbix_agentd.conf
+  1744:20250622:130917.987 agent #0 started [main process]
+  1745:20250622:130917.988 agent #1 started [collector]
+  1746:20250622:130917.989 agent #2 started [listener #1]
+  1747:20250622:130917.989 agent #3 started [listener #2]
+  1748:20250622:130917.990 agent #4 started [listener #3]
+  1749:20250622:130917.995 agent #5 started [active checks #1]
+```
 
 In the Templates parameter, type or select Linux by Zabbix agent template.
 
