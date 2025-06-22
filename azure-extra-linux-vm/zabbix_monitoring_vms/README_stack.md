@@ -228,8 +228,28 @@ But now our agent interface fails
 Lets fix that
 
 ```bash
+sudo ufw allow 10050
+Rule added
+Rule added (v6)
+
+sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere
+10050                      ALLOW IN    Anywhere
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
+10050 (v6)                 ALLOW IN    Anywhere (v6)
 
 ```
+
+Green and valid
+
+![Agent passive interface not ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive_ok_again.jpg)
 
 ### AI
 
