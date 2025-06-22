@@ -46,7 +46,7 @@ This plugin writes metrics to Zabbix via traps. It has been tested with versions
 
 https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 
-### Install zabbix sender on vm dummy01 linux vm
+## Install zabbix sender on vm dummy01 linux vm
 
 ```bash
 pwd
@@ -65,7 +65,7 @@ which zabbix_sender
 
 ```
 
-### Make a trapper item
+## Make a trapper item
 
 
 ```bash
@@ -127,7 +127,7 @@ https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
 
 
 
-### Install Zabbix agent (default with passive checks) and Template Linux by Zabbix agent 10050
+## Install Zabbix agent (default with passive checks) and Template Linux by Zabbix agent 10050
 
 Note!!
 
@@ -168,7 +168,7 @@ zabbix_agentd (daemon) (Zabbix) 6.0.40
 
 
 ```
-### Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
+## Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
 
 A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
 
@@ -254,10 +254,10 @@ Green and valid
 
 ![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive_check_ok_again.jpg)
 
-### User Parameters (Optional but Recommended)
+## User Parameters (Optional but Recommended)
 
 
-#### User parameter simple
+## User parameter simple
 User Parameters (Optional but Recommended): For better organization and security, you can define user parameters within the zabbix_agentd.conf file. These parameters allow you to specify custom metrics that the agent will report
 
 * Update interval: How often the data should be collected (e.g., 60 seconds).
@@ -291,7 +291,7 @@ And we have the custom data
 
 The host is green and healthy and no template was used, the item was added tot the host and zabbix agent executed it and sent via port 10050.
 
-#### User parameter advanced
+## User parameter advanced
 
 TBD
 
@@ -299,7 +299,7 @@ https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
 
 
-### Install Zabbix agent and Template Linux by Zabbix agent active 10051
+## Install Zabbix agent and Template Linux by Zabbix agent active 10051
 
 
 * A single Zabbix Agent can collect metrics in both passive and active modes
@@ -358,7 +358,7 @@ And after RefreshActiveChecks=120, we get the data.
 
 
 
-### Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
+## Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
 
 We will do this on the same host
 
