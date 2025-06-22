@@ -185,36 +185,51 @@ And it already works since the vm can talk to each other on the same vnet using 
 Now lets block that port.
 
 
-Edit ufw since it is enabled
+Edit ufw since it is disabled
 
 ```bash
-imsdal@vmdocker01:/etc/zabbix$ hostname
-vmdocker01
+imsdal@dummy01:/var/log/zabbix$ sudo ufw status
+Status: inactive
 
-sudo ufw status
+sudo ufw app list
+Available applications:
+  OpenSSH
+
+sudo ufw allow OpenSSH
+Rules updated
+Rules updated (v6)
+
+sudo ufw show added
+Added user rules (see 'ufw status' for running firewall):
+ufw allow OpenSSH
+
+sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+
+sudo ufw status verbose
 Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
 
-sudo ufw allow 10050
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
 
-# lets deny this since it is for active
-sudo ufw deny 10051
-
-Rule added
-Rule added (v6)
-
-sudo ufw reload
-
-sudo ufw status
-
-10050                      ALLOW       Anywhere
-10051                      DENY        Anywhere
 
 ```
 
-Green and healthy linux host, but without data.
+But now our agent interface fails
 
-![green host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_host2.jpg)
+![Agent passive interface not ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive_10050.jpg)
 
+Lets fix that
+
+```bash
+
+```
 
 ### AI
 
