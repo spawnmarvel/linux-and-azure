@@ -289,7 +289,9 @@ And we have the custom data
 
 The host is green and healthy and no template was used, port is still 10050.
 
-#### User parameter advanced TBD
+#### User parameter advanced
+
+TBD
 
 https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
