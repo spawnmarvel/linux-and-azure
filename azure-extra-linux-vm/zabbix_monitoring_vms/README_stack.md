@@ -50,19 +50,11 @@ https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 pwd
 # /home/imsdal
 
-ls
-# we already had due to installed zabbix agent
-zabbix-release_latest_6.0+ubuntu24.04_all.deb
-
-which zabbix_agentd
-# /usr/sbin/zabbix_agentd
-
-# so we not need to run:
-# Example for Zabbix 6.0 on Ubuntu 22.04 - adjust for your version
+# Example for Zabbix 6.0 on Ubuntu 24.04 - adjust for your version
 wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_6.0+ubuntu24.04_all.deb
 sudo dpkg -i zabbix-release_6.0-1+ubuntu22.04_all.deb
 
-# But we run
+# install
 sudo apt update -y
 sudo apt install zabbix-sender
 which zabbix_sender
