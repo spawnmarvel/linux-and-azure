@@ -289,7 +289,7 @@ And we have the custom data
 
 ![echo 1 agent value](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1_value.jpg)
 
-The host is green and healthy and no template was used, port is still 10050.
+The host is green and healthy and no template was used, the item was added tot the host and zabbix agent executed it and sent via port 10050.
 
 #### User parameter advanced
 
@@ -349,7 +349,7 @@ imsdal@dummy03:/etc/zabbix$ sudo tail -f /var/log/zabbix/zabbix_agentd.log
 
 In the Templates parameter, type or select Linux by Zabbix agent template.
 
-![template passive](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive.jpg)
+![Active agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_agent.jpg)
 
 And we have data after server has been asking for parameters.
 
