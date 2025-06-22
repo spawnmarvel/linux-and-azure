@@ -353,7 +353,7 @@ In the Templates parameter, type or select Linux by Zabbix agent template, we ha
 
 And after RefreshActiveChecks=120, we get the data.
 
-![Active agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_agent_ok.jpg)
+![Active agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_active_ok.jpg)
 
 
 
