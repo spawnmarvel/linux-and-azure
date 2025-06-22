@@ -249,18 +249,9 @@ To                         Action      From
 
 Green and valid
 
-![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_check_ok_again.jpg)
+![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/passive_check_ok_again.jpg)
 
-### AI
-
-Lets add some passive data
-
-Question:
-```log
-A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server. how to configure that?
-```
-
-Answer:
+### User Parameters (Optional but Recommended)
 
 User Parameters (Optional but Recommended): For better organization and security, you can define user parameters within the zabbix_agentd.conf file. These parameters allow you to specify custom metrics that the agent will report
 
