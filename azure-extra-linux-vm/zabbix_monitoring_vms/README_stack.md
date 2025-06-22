@@ -268,6 +268,10 @@ vm.memory.size[available] (Available memory)
 * UserParameter: If you defined user parameters in the agent configuration, you would specify them here. For example, my.custom.metric[argument1]
 
 
+Example
+
+![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_files.jpg)
+
 Let's say you want to monitor the number of files in a specific directory. You'd add this to your zabbix_agentd.conf:
 
 ```log
