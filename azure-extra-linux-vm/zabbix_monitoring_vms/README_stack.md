@@ -168,7 +168,7 @@ zabbix_agentd (daemon) (Zabbix) 6.0.40
 
 
 ```
-## Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
+### Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
 
 A passive check is a simple data request. Zabbix server or proxy asks for some data (for example, CPU load) and Zabbix agent sends back the result to the server.
 
@@ -356,7 +356,7 @@ And after RefreshActiveChecks=120, we get the data.
 ![Active agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_active_ok.jpg)
 
 
-Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 min on 10051)
+### Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 min on 10051)
 
 ***Conclusion: It all comes down to who is responsible for the processing and use of power***
 
