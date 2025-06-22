@@ -145,7 +145,7 @@ https://www.zabbix.com/documentation/current/en/manual/appendix/items/activepass
 
 # https://www.zabbix.com/documentation/3.0/en/manual/installation/install_from_packages/agent_installation
 
-# we are on the sam evm as we installed zabbix-sender so w ehave the packet already
+# we are on the same vm as we installed zabbix-sender so we have the packet already
 # install it
 sudo apt install zabbix-agent
 
