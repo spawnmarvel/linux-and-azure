@@ -127,7 +127,7 @@ https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
 
 
 
-### Install Zabbix agent (default with passive checks) and Template Linux by Zabbix agent
+### Install Zabbix agent (default with passive checks) and Template Linux by Zabbix agent 10050
 
 Note!!
 
@@ -299,7 +299,7 @@ https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
 
 
-### Install Zabbix agent and Template Linux by Zabbix agent active
+### Install Zabbix agent and Template Linux by Zabbix agent active 10051
 
 
 * A single Zabbix Agent can collect metrics in both passive and active modes
