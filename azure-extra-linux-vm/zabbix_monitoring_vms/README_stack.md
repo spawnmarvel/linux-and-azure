@@ -356,69 +356,9 @@ And after RefreshActiveChecks=120, we get the data.
 ![Active agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_active_ok.jpg)
 
 
+Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 min on 10051)
 
-
-## Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
-
-We will do this on the same host
-
-In the Templates parameter, remove Linux by Zabbix agent
-
-![unlink ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_unlink.jpg)
-
-In the Templates parameter, type or select Linux by Zabbix agent active and add it
-
-![template_active ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_active.jpg)
-
-Configure the host to use active server
-
-```bash
-# edit and add
-
-cat zabbix_agentd.conf | grep "Hostname*"
-
-Hostname=vmdocker01
-
-cat zabbix_agentd.conf | grep "ServerActive*"
-
-ServerActive=192.168.3.5
-
-imsdal@vmdocker01:/etc/zabbix$ sudo nano zabbix_agentd.conf
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent restart
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
-
-```
-
-Lets make a deny rule for 10051
-
-![deny rule](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule.jpg)
-
-and log at the logs
-
-```bash
-sudo tail -f zabbix_agentd.log
- 10413:20241124:150500.676 **************************
- 10413:20241124:150500.676 using configuration file: /etc/zabbix/zabbix_agentd.conf
- 10413:20241124:150500.676 agent #0 started [main process]
- 10415:20241124:150500.677 agent #1 started [collector]
- 10417:20241124:150500.677 agent #3 started [listener #2]
- 10419:20241124:150500.677 agent #5 started [active checks #1]
- 10418:20241124:150500.677 agent #4 started [listener #3]
- 10416:20241124:150500.678 agent #2 started [listener #1]
- 10419:20241124:150500.722 active check "vfs.file.cksum[/etc/passwd,sha256]" is not supported: Too many parameters.
- 10419:20241124:151403.255 active check data upload to [192.168.3.5:10051] started to fail ([connect] cannot connect to [[192.168.3.5]:10051]: [4] Interrupted system call)
-```
-
-View collected metrics with deny 10051, template uses 10051, user paramter in passive uses 10050 and is updated
-
-![deny rule data ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/deny_rule_data.jpg)
-
-View collected metrics with allow 10051, remove NSG
-
-![allow rule data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/allow_rule_data.jpg)
-
-
-## Conclusion: It all comes down to who is responsible for the processing and use of power
+***Conclusion: It all comes down to who is responsible for the processing and use of power***
 
 ## Zabbix Agent Configuration Guide
 
