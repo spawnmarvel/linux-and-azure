@@ -11,7 +11,7 @@ Start both vms
 
 * VNET, vnet-uks-central/vms03
 * Zabbix vm (vmzabbix02), 192.168.3.5
-* VM dummy01, 192.168.3.4 (updated 22 06 2025)
+* VM dummy01 192.168.3.4, dummy03 192.168.3.6 (updated 22 06 2025)
 
 
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
