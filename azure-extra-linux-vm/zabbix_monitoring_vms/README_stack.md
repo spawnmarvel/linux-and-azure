@@ -260,9 +260,8 @@ User Parameters (Optional but Recommended): For better organization and security
 * Update interval: How often the data should be collected (e.g., 60 seconds).
 * UserParameter: If you defined user parameters in the agent configuration, you would specify them here. For example, my.custom.metric[argument1]
 
-![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1.jpg)
 
-Lets do that+
+Lets do that
 
 ```bash
  cat zabbix_agentd.conf | grep "UserPa*"
@@ -272,30 +271,25 @@ Lets do that+
 ### Option: UserParameter
 #       Format: UserParameter=<key>,<shell command>
 # UserParameter=
-UserParameter=varname, echo 1
-
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent stop
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent start
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
-● zabbix-agent.service - Zabbix Agent
-     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sun 2024-11-24 14:23:39 UTC; 2s ago
+UserParameter=echo1, echo 1
 
 ```
+
+![echo 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1.jpg)
+
 On zabbix host add item ping and host will be healthy after the request.
 
 
-![varname user paramter](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname.jpg)
+![echo 1 agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1_agent.jpg)
 
 And we have the custom data
 
-![varname data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/varname_data.jpg)
+![echo 1 agent value](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1_value.jpg)
 
-The host is green and healthy but with not template
-
-![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
+The host is green and healthy and no template was used, port is still 10050.
 
 #### User parameter advanced
+
 ### Template Linux by Zabbix agent
 
 Lets add the passive template
