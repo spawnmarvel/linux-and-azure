@@ -11,7 +11,7 @@ Start both vms
 
 * VNET, vnet-uks-central/vms03
 * Zabbix vm (vmzabbix02), 192.168.3.5
-* Docker and InfluxDB vm (vmdocker01), 192.168.3.4
+* VM dummy01, 192.168.3.4 (updated 22 06 2025)
 
 
 ![Vnet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/vnet.jpg)
@@ -44,7 +44,7 @@ This plugin writes metrics to Zabbix via traps. It has been tested with versions
 
 https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 
-### Install zabbix sender on vmdocker01 linux vm
+### Install zabbix sender on vm dummy01 linux vm
 
 ```bash
 pwd
@@ -63,7 +63,7 @@ wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix
 sudo dpkg -i zabbix-release_6.0-1+ubuntu22.04_all.deb
 
 # But we run
-sudo apt update
+sudo apt update -y
 sudo apt install zabbix-sender
 which zabbix_sender
 # /usr/bin/zabbix_sender
@@ -133,7 +133,7 @@ https://blog.zabbix.com/zabbix-agent-active-vs-passive/9207/
 
 
 
-### Install Zabbix agent
+### Install Zabbix agent (default with passive checks)
 
 Note!!
 
@@ -145,7 +145,6 @@ zabbix_server -V
 
 ```
 
-
 We will use zabbix agent and not zabbix agent2
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/items/activepassive
@@ -154,61 +153,25 @@ https://www.zabbix.com/documentation/current/en/manual/appendix/items/activepass
 
 # https://www.zabbix.com/documentation/3.0/en/manual/installation/install_from_packages/agent_installation
 
-# the agent is running must have installed it before
-
-imsdal@vmdocker01:~$ sudo service zabbix-agent status
-● zabbix-agent.service - Zabbix Agent
-     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sat 2024-11-23 15:11:52 UTC; 21min ago
-
-
-# lets uninstall it and install it again since it is a low version
-
-zabbix_agentd --version
-zabbix_agentd (daemon) (Zabbix) 5.0.17
-Revision 0a4ac3dabc 18 October 2021, compilation time: Nov 19 2021 00:15:32
-
-# name
-sudo service zabbix-agent status
-
-# remove it
-sudo apt-get --purge autoremove zabbix-agent
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following packages will be REMOVED:
-  zabbix-agent*
-0 upgraded, 0 newly installed, 1 to remove and 36 not upgraded.
-After this operation, 945 kB disk space will be freed.
-Do you want to continue? [Y/n] y
-(Reading database ... 163439 files and directories currently installed.)
-Removing zabbix-agent (1:5.0.17+dfsg-1) ...
-Processing triggers for man-db (2.10.2-1) ...
-(Reading database ... 163423 files and directories currently installed.)
-Purging configuration files for zabbix-agent (1:5.0.17+dfsg-1) ...
-dpkg: warning: while removing zabbix-agent, directory '/etc/zabbix' not empty so not removed
-
-# just update pack
-sudo apt update -y
-
+# we are on the sam evm as we installed zabbix-sender so w ehave the packet already
 # install it
 sudo apt install zabbix-agent
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following NEW packages will be installed:
-  zabbix-agent
+
+# configure the agent for passive
+
+sudo nano /etc/zabbix/zabbix_agentd.conf
+
+Server=192.168.3.5
+# ServerActive=127.0.0.1
+Hostname=dummy01
 
 # check running or start it
-
 sudo service zabbix-agent status
-● zabbix-agent.service - Zabbix Agent
-     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sun 2024-11-24 13:33:26 UTC; 3min 41s ago
 
 # check version
 zabbix_agentd --version
-zabbix_agentd (daemon) (Zabbix) 5.0.17
+zabbix_agentd (daemon) (Zabbix) 6.0.40
+
 
 ```
 ### Configure Zabbix for monitoring Passive checks 10050, it means that the poller (internal server process) connects to the agent on port 10050/TCP and polls for a certain value
