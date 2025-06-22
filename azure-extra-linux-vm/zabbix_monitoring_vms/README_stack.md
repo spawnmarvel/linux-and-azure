@@ -174,7 +174,7 @@ A passive check is a simple data request. Zabbix server or proxy asks for some d
 * In the Interfaces parameter, add Agent interface and specify the IP address or DNS name of the Linux machine where the agent is installed.
 
 
-![Docker Influxdb host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/influxdb_host.jpg)
+![Agent passive interface](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive.jpg)
 
 
 
