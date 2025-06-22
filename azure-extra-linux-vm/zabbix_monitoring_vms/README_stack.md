@@ -295,7 +295,7 @@ https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
 
 
-### Template Linux by Zabbix agent
+### Template Linux by Zabbix agent recap
 
 Lets add the passive template
 
