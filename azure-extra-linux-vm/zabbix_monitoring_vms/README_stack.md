@@ -177,27 +177,13 @@ A passive check is a simple data request. Zabbix server or proxy asks for some d
 ![Agent passive interface](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive.jpg)
 
 
-
-```bash
-## lets configure it correct to get the linux data
-cd /etc/zabbix/
+And it already works since the vm can talk to each other on the same vnet using port 10050.
 
 
-# edit and add 
-cat zabbix_agentd.conf | grep "Server="
+![Agent passive interface ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive_ok.jpg)
 
-Server=192.168.3.5
+Now lets block that port.
 
-
-# bck
-imsdal@vmdocker01:/etc/zabbix$ sudo cp zabbix_agentd.conf zabbix_agentd.conf_bck
-imsdal@vmdocker01:/etc/zabbix$ sudo nano zabbix_agentd.conf
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent restart
-imsdal@vmdocker01:/etc/zabbix$ sudo service zabbix-agent status
-● zabbix-agent.service - Zabbix Agent
-     Loaded: loaded (/lib/systemd/system/zabbix-agent.service; enabled; vendor preset: enabled)
-     Active: active (running) since Sat 2024-11-23 15:39:12 UTC; 6s ago
-```
 
 Edit ufw since it is enabled
 
