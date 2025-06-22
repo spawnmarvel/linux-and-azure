@@ -253,34 +253,14 @@ Green and valid
 
 ### User Parameters (Optional but Recommended)
 
+
+#### User parameter simple
 User Parameters (Optional but Recommended): For better organization and security, you can define user parameters within the zabbix_agentd.conf file. These parameters allow you to specify custom metrics that the agent will report
-
-* Add Host: In the Zabbix web interface, navigate to "Configuration" -> "Hosts". Click "Create host."
-* Items: This is where you define the passive checks. Navigate to the "Items" tab of the newly added host. Click "Create item."
-* Key: This is the crucial part. For built-in metrics, you'll find keys in the Zabbix documentation. Examples:
-
-```log
-system.cpu.load[all,avg1] (Average CPU load over 1 minute)
-vm.memory.size[available] (Available memory)
-```
 
 * Update interval: How often the data should be collected (e.g., 60 seconds).
 * UserParameter: If you defined user parameters in the agent configuration, you would specify them here. For example, my.custom.metric[argument1]
 
-
-Example
-
-![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_files.jpg)
-
-Let's say you want to monitor the number of files in a specific directory. You'd add this to your zabbix_agentd.conf:
-
-```log
-UserParameter=files.count[/tmp],ls -l /tmp | wc -l
-```
-
-Then, in the Zabbix server, you'd create an item with the key files.count[/tmp]. The agent will execute the ls -l /tmp | wc -l command and return the number of files.
-
-https://www.zabbix.com/documentation/current/en/manual/config/items/userparameters
+![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1.jpg)
 
 Lets do that+
 
@@ -315,6 +295,7 @@ The host is green and healthy but with not template
 
 ![green no template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/green_no_template.jpg)
 
+#### User parameter advanced
 ### Template Linux by Zabbix agent
 
 Lets add the passive template
