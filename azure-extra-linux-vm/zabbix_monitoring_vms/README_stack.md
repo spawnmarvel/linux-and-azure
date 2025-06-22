@@ -322,13 +322,25 @@ zabbix_agentd (daemon) (Zabbix) 6.0.40
 
 sudo nano /etc/zabbix/zabbix_agentd.conf
 # edit config
-Server=192.168.3.5
+# Server=192.168.3.5, Comment out or remove the Server parameter, or set it to 127.0.0.1 (no real server will connect):
+Server=127.0.0.1
 ServerActive=192.168.3.5
 
 Hostname=dummy03
 
 # Default:
-# RefreshActiveChecks=120  
+# RefreshActiveChecks=120
+
+# If you want to further restrict the agent from listening for passive requests, set:
+# ListenIP=127.0.0.1 or ListenPort=0
+### Option: ListenIP
+#       List of comma delimited IP addresses that the agent should listen on.
+#       First IP address is sent to Zabbix server if connecting to it to retrieve list of active checks.
+#
+# Mandatory: no
+# Default:
+# ListenIP=0.0.0.0
+ListenIP=127.0.0.1
 ```
 
 Check the log for the active statment
@@ -412,6 +424,7 @@ Windows: C:\Program Files\Zabbix Agent\zabbix_agentd.conf
 Set the following parameters:
 
 ```bash
+Server=127.0.0.1
 ServerActive=your.zabbix.server.ip
 Hostname=your-agent-hostname
 
