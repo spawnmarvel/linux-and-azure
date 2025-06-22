@@ -347,14 +347,16 @@ imsdal@dummy03:/etc/zabbix$ sudo tail -f /var/log/zabbix/zabbix_agentd.log
   1749:20250622:130917.995 agent #5 started [active checks #1]
 ```
 
-In the Templates parameter, type or select Linux by Zabbix agent template.
+In the Templates parameter, type or select Linux by Zabbix agent template, we have no interface.
 
 ![Active agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_agent.jpg)
 
-And we have data after server has been asking for parameters.
+And after RefreshActiveChecks=120, we get the data.
+
+![Active agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_agent_ok.jpg)
 
 
-![template passive data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive_data.jpg)
+
 
 ### Active checks all data processing is performed on the agent, without the interference of pollers. (agent ask for parameters every 2 ,im 10051)
 
