@@ -249,7 +249,7 @@ To                         Action      From
 
 Green and valid
 
-![Agent passive interface not ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_passive_ok_again.jpg)
+![Agent passive interface ok again](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_check_ok_again.jpg)
 
 ### AI
 
