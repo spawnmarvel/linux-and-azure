@@ -143,6 +143,17 @@ Passive and active checks
 
 The agent check type is configured by selecting the respective monitoring item type. Zabbix agent processes items of type "Zabbix agent" or "Zabbix agent (active)".
 
+
+Bonus: How to spot issues with "to many connections":
+
+```bash
+# Bad, to many sessions
+Housekeeper [deleted 236436 hist/trends, 0 items/triggers, 28 events, 12 problems, 62 sessions, 0 alarms, 0 audit, 0 autoreg_host, 0 records in 95.029074 sec, idle for 1 hour(s)]
+
+# Good, no dead sessions
+housekeeper [deleted 10913 hist/trends, 2056 items/triggers, 0 events, 13 problems, 0 sessions, 0 alarms, 0 audit, 0 autoreg_host, 0 records in 40.836741 sec, idle for 1 hour(s)]
+```
+
 Troubleshooting and Solutions example
 
 ```bash
