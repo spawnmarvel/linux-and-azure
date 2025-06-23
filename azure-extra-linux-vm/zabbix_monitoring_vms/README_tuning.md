@@ -80,7 +80,9 @@ https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/414831-agent2-o
 * And some errors on zabbix server log (it does not seem related but must be fixed)
 
 ```bash
-476705:20250619:092228.385 failed to accept an incoming connection: from ZABBIX-AGENT: reading first byte from connection failed: [104] Connection reset by peer
+2078326:20250623:153240.421 failed to accept an incoming connection: from ZABBIX-AGENT: reading first byte from connection failed: [104] Connection reset by peer
+
+2078326:20250623:153240.422 failed to accept an incoming connection: connection rejected, getpeername() failed: [107] Transport endpoint is not connected
 ```
 Possible causes:
 

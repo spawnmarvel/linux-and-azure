@@ -293,6 +293,16 @@ The host is green and healthy and no template was used, the item was added tot t
 
 ## User parameter advanced
 
+
+So we added this
+
+UserParameter=<key>,<command>
+
+```bash
+UserParameter=echo1, echo 1
+```
+Lets add some more advancec parameters:
+
 TBD
 
 https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
@@ -554,13 +564,11 @@ https://www.zabbix.com/forum/zabbix-help/379138-one-node-monitored-by-2-differen
 
 View folder troubleshooting 
 
-
 ### Test more templates and stuff
 
 View folder templates
 
 ### Enable ssl tbd
-
 
 * Openssl
 * and AI
