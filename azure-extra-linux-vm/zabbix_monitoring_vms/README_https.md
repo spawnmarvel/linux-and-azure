@@ -58,7 +58,7 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl
 
 # from clean install with http
 http://server_domain_or_IP
-# to
+
 
 # Step 1 — Creating the SSL Certificate
 openssl version

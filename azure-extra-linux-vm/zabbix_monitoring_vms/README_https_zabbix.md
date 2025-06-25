@@ -145,3 +145,42 @@ sudo systemctl restart apache2
 ```
 
 ![cert renew](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https2.jpg)
+
+
+## To automatically redirect all HTTP traffic to HTTPS in Apache2, you need to update your Apache configuration. Here’s a straightforward way to do it:
+
+
+
+```bash
+# ## 1. **Enable the Rewrite Module**
+sudo a2enmod rewrite
+sudo systemctl reload apache2
+
+# ## 2. **Edit Your HTTP Virtual Host**
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+
+```ini
+# <VirtualHost *:80>
+
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# </VirtualHost>
+
+```
+
+```bash
+# Test it
+sudo apachectl configtest
+
+# Reload
+sudo systemctl reload apache2
+```
+
+
+http://mydomain/zabbix/zabbix.php?action=dashboard.view should go to https://mydomain/zabbix/zabbix.php?action=dashboard.view
