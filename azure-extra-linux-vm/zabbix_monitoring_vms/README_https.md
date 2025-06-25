@@ -1,8 +1,6 @@
 # Security
 
-## Openssl self signed
-
-Extra linux vm public or private cert, since public CAs cannot issue certificates for .local domains. 
+## Openssl CSR
 
 ```bash
 sudo apt update
@@ -31,6 +29,11 @@ openssl req -text -noout -verify -in mysite.local.csr
 # If you have a private CA, submit the CSR to your CA according to their process.
 
 # Create a self-signed certificate (if not using a CA):
+
+```
+## Openssl self signed from CSR (above)
+
+```bash
 # If you're using the certificate for internal purposes and do not have a private CA, you can create a self-signed certificate with the following command:
 
 openssl x509 -signkey mysite.local.key -in mysite.local.csr -req -days 365 -out mysite.local.crt
