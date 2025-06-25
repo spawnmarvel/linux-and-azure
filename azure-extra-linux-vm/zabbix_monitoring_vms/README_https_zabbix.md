@@ -97,3 +97,44 @@ View cert
 
 ![cert one]()
 
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https.jpg
+
+## Renew cert
+
+```bash
+
+# 2. Generate a Private Key
+openssl genrsa -out renew_mysite.local.key 4096
+
+# 3. Generate the CSR
+openssl req -new -key renew_mysite.local.key -out renew_mydomain.csr
+
+# Once you have generated the CSR, you may want to review it to ensure all information is correct.
+# This command will display the contents of the CSR in a human-readable format.
+openssl req -text -noout -verify -in renew_mydomain.csr
+
+# Submit the CSR:
+# For a private domain like mysite.local, you would typically use a self-signed certificate or a private Certificate Authority (CA) since public CAs cannot issue certificates for .local domains. 
+# If you have a private CA, submit the CSR to your CA according to their process.
+
+# Create a self-signed certificate (if not using a CA):
+# If you're using the certificate for internal purposes and do not have a private CA, you can create a self-signed certificate with the following command:
+
+openssl x509 -signkey renew_mysite.local.key -in renew_mydomain.csr -req -days 730 -out renew_mydomain.crt
+# This will create a certificate file named mysite.local.crt that is valid for 730 days.
+
+# copy
+# Tip:** Overwrite the old files with the new ones if you used those filenames in your Apache config. 
+# If you change the file names, update the paths in your Apache config as described in the previous answer.
+sudo cp renew_mysite.local.key /etc/ssl/private/mysite.local.key
+sudo cp renew_mydomain.crt /etc/ssl/certs/mydomain.crt
+
+# Reload or restart Apache so it picks up the new certificate:
+sudo systemctl reload apache2
+# or
+sudo systemctl restart apache2
+```
+
+![cert renew]()
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https2.jpg
