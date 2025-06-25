@@ -1,5 +1,16 @@
 # Security
 
+## Understanding Apache Config Files
+
+- **sites-enabled/** contains symlinks (shortcuts) to the actual configuration files in **sites-available/**.
+- You generally **edit the configuration files in sites-available/**. 
+
+Changes are reflected in sites-enabled/ because of the symlinks.
+
+If you change the certificate file names or locations, **edit the virtual host configuration file** (usually in /etc/apache2/sites-available/).
+
+- You do **not** need to edit anything in sites-enabled/.
+
 ## Openssl CSR
 
 ```bash
