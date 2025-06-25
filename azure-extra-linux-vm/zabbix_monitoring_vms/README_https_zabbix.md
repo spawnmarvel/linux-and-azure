@@ -95,9 +95,7 @@ https://mydomain/zabbix/zabbix.php?action=dashboard.view
 
 View cert
 
-![cert one]()
-
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https.jpg
+![cert one](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https.jpg)
 
 ## Renew cert
 
@@ -135,6 +133,4 @@ sudo systemctl reload apache2
 sudo systemctl restart apache2
 ```
 
-![cert renew]()
-
-https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https2.jpg
+![cert renew](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/https2.jpg)
