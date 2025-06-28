@@ -1,9 +1,9 @@
-# How To Install and Start Using RabbitMQ on Ubuntu 22.04
+# How To Install and Start Using RabbitMQ on Ubuntu 24.04
 
-## Install RabbitMQ TBD
+## Install RabbitMQ
 
 
-### Test Cloudsmith, check version
+### Recommended option apt repositories on a Cloudsmith mirror
 
 RabbitMQ is included in standard Debian and Ubuntu repositories. However, the versions included are many releases behind latest RabbitMQ releases and may provide RabbitMQ versions that are already out of support.
 
