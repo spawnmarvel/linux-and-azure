@@ -122,11 +122,26 @@ Create a user since default user is default to localhost TBD
 
 ```bash
 # Only root or rabbitmq can run rabbitmqctl
-sudo rabbitmqctl add_user username amazing-password
+sudo rabbitmqctl add_user kasparov amazing-805
 sudo rabbitmqctl list_users
-sudo rabbitmqctl set_user_tags newuser administrator
-sudo rabbitmqctl set_permissions -p / newuser ".*" ".*" ".*"
+# Listing users ...
+# user    tags
+# guest   [administrator]
+# kasparov 
+
+sudo rabbitmqctl set_user_tags kasparov administrator
+sudo rabbitmqctl list_users
+# Listing users ...
+# user    tags
+# guest   [administrator]
+# kasparov        [administrator]
+
+sudo rabbitmqctl set_permissions -p / kasparov ".*" ".*" ".*"
 sudo rabbitmqctl list_permissions
+# Listing permissions for vhost "/" ...
+# user    configure       write   read
+# guest   .*      .*      .*
+# kasparov        .*      .*      .*
 
 ```
 
@@ -142,13 +157,17 @@ Create RabbitMQ Virtual Host, RabbitMQ manages user permissions on a virtual hos
 ```bash
 sudo rabbitmqctl add_vhost segment01
 sudo rabbitmqctl list_vhosts
+# Listing vhosts ...
+# name
+# segment01
+# /
 ```
 
 Set specific user permission for a user on the new vhost
 ```bash
 sudo rabbitmqctl set_permissions -p <virtual_host> <user_name> <permissions>
 # Example full permission
-sudo rabbitmqctl set_permissions -p segment01 newuser ".*" ".*" ".*"
+sudo rabbitmqctl set_permissions -p segment01 kasparov ".*" ".*" ".*"
 ```
 Args
 * -p is used to define the virtual host.
@@ -158,6 +177,9 @@ Args
 
 ```bash
 sudo rabbitmqctl list_permissions
+# Listing permissions for vhost "/" ...
+# user    configure       write   read
+# kasparov        .*      .*      .*
 ```
 
 Get log and bin / exe
@@ -167,39 +189,44 @@ whereis rabbitmq-server
 rabbitmq-server: /usr/sbin/rabbitmq-server /usr/share/man/man8/rabbitmq-server.8.gz
 
 # Identify and report the location of the provided executable
- which rabbitmq-server
+which rabbitmq-server
 /usr/sbin/rabbitmq-server
 
 # View path for log
-```bash
 sudo systemctl status rabbitmq-server
+# Jun 28 16:52:05 amqp04 rabbitmq-server[750]:   Logs: /var/log/rabbitmq/rabbit@amqp04.log
 
+# or
+cd /var/log/rabbitmq
 ```
 Path
 ```log
-Jul 14 07:53:35 simpleLinuxVM-XXXXXXXX rabbitmq-server[4595]:   Logs: /var/log/rabbitmq/rabbit@simpleLinuxVM-26446.log
-Jul 14 07:53:35 simpleLinuxVM-XXXXXXXX rabbitmq-server[4595]:         <stdout>
-Jul 14 07:53:35 simpleLinuxVM-XXXXXXXX rabbitmq-server[4595]:   Config file(s): (none)
-Jul 14 07:53:37 simpleLinuxVM-XXXXXXXX rabbitmq-server[4595]:   Starting broker... completed with 3 plugins.
+Jun 28 16:52:05 amqp04 rabbitmq-server[750]:   Logs: /var/log/rabbitmq/rabbit@amqp04.log
+Jun 28 16:52:05 amqp04 rabbitmq-server[750]:         <stdout>
+Jun 28 16:52:05 amqp04 rabbitmq-server[750]:   Config file(s): (none)
+Jun 28 16:52:06 amqp04 rabbitmq-server[750]:   Starting broker... completed with 3 plugins.
 ```
 
 Tail
 
 ```bash
- sudo tail -f /var/log/rabbitmq/rabbit@simpleLinuxVM-XXXXX.log
+sudo systemctl stop rabbitmq-server
+sudo systemctl start rabbitmq-server
+
+sudo tail -f /var/log/rabbitmq/rabbit@amqp04.log
 ```
 
 ```log
-2023-07-14 07:53:37.639980+00:00 [info] <0.544.0> Resetting node maintenance status
-2023-07-14 07:53:37.651443+00:00 [info] <0.603.0> Management plugin: HTTP (non-TLS) listener started on port 15672
-2023-07-14 07:53:37.651598+00:00 [info] <0.631.0> Statistics database started.
-2023-07-14 07:53:37.651682+00:00 [info] <0.630.0> Starting worker pool 'management_worker_pool' with 3 processes in it
-2023-07-14 07:53:37.652008+00:00 [info] <0.544.0> Ready to start client connection listeners
-2023-07-14 07:53:37.653575+00:00 [info] <0.655.0> started TCP listener on [::]:5672
-2023-07-14 07:53:37.720077+00:00 [info] <0.544.0> Server startup complete; 3 plugins started.
-2023-07-14 07:53:37.720077+00:00 [info] <0.544.0>  * rabbitmq_management
-2023-07-14 07:53:37.720077+00:00 [info] <0.544.0>  * rabbitmq_web_dispatch
-2023-07-14 07:53:37.720077+00:00 [info] <0.544.0>  * rabbitmq_management_agent
+2025-06-28 17:11:33.013529+00:00 [info] <0.583.0> Management plugin: HTTP (non-TLS) listener started on port 15672
+2025-06-28 17:11:33.013850+00:00 [info] <0.611.0> Statistics database started.
+2025-06-28 17:11:33.013969+00:00 [info] <0.610.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+2025-06-28 17:11:33.014374+00:00 [info] <0.525.0> Ready to start client connection listeners
+2025-06-28 17:11:33.016815+00:00 [info] <0.635.0> started TCP listener on [::]:5672
+2025-06-28 17:11:33.108779+00:00 [info] <0.525.0> Server startup complete; 3 plugins started.
+2025-06-28 17:11:33.108779+00:00 [info] <0.525.0>  * rabbitmq_management
+2025-06-28 17:11:33.108779+00:00 [info] <0.525.0>  * rabbitmq_management_agent
+2025-06-28 17:11:33.108779+00:00 [info] <0.525.0>  * rabbitmq_web_dispatch
+2025-06-28 17:11:33.225099+00:00 [info] <0.10.0> Time to start RabbitMQ: 2917 ms
 ```
 
 ## Config files
@@ -213,30 +240,39 @@ RabbitMQ packages or nodes will not create any configuration files. Users and de
 |Debian and Ubuntu |  /etc/rabbitmq/ | /etc/rabbitmq/rabbitmq.conf, /etc/rabbitmq/advanced.config
 
 ```bash
-# Make file
-sudo nano /etc/rabbitmq/advanced.config
+/etc/rabbitmq
+# only one file
+enabled_plugins
+
+# Make file advanced
+sudo nano advanced.config
 # append [].
 
-# Make file
-cd /etc/rabbitmq/
+# Make file conf
 sudo touch rabbitmq.conf
 ls
+# advanced.config  enabled_plugins  rabbitmq.conf
 ```
+Restart rabbitmq-server
 
 ```bash
 
 sudo systemctl restart rabbitmq-server
+
+# Then view new settings with
+sudo systemctl status rabbitmq-server
+
 ```
 
 rabbitmq.conf and advanced.config changes take effect after a node restart.
 
 ```log
-Jul 14 08:21:37 simpleLinuxVM-XXXXX rabbitmq-server[643]:   Logs: /var/log/rabbitmq/rabbit@simpleLinuxVM-26446.log
-Jul 14 08:21:37 simpleLinuxVM-XXXXX rabbitmq-server[643]:         <stdout>
-Jul 14 08:21:37 simpleLinuxVM-XXXXX rabbitmq-server[643]:   Config file(s): /etc/rabbitmq/advanced.config
-Jul 14 08:21:37 simpleLinuxVM-XXXXX rabbitmq-server[643]:                   /etc/rabbitmq/rabbitmq.conf
-Jul 14 08:21:40 simpleLinuxVM-XXXXX rabbitmq-server[643]:   Starting broker... completed with 3 plugins.
-Jul 14 08:21:40 simpleLinuxVM-XXXXX systemd[1]: Started RabbitMQ broker.
+Jun 28 17:15:25 amqp04 rabbitmq-server[2468]:   Logs: /var/log/rabbitmq/rabbit@amqp04.log
+Jun 28 17:15:25 amqp04 rabbitmq-server[2468]:         <stdout>
+Jun 28 17:15:25 amqp04 rabbitmq-server[2468]:   Config file(s): /etc/rabbitmq/advanced.config
+Jun 28 17:15:25 amqp04 rabbitmq-server[2468]:                   /etc/rabbitmq/rabbitmq.conf
+Jun 28 17:15:26 amqp04 rabbitmq-server[2468]:   Starting broker... completed with 3 plugins.
+Jun 28 17:15:26 amqp04 systemd[1]: Started rabbitmq-server.service - RabbitMQ broker.
 ```
 
 If rabbitmq-env.conf doesn't exist, it can be created manually in the location specified by the RABBITMQ_CONF_ENV_FILE variable
@@ -249,13 +285,82 @@ Environment variables can be used to override the location of the configuration 
 * overrides environment variable file location
 * RABBITMQ_CONF_ENV_FILE=/path/to/a/custom/location/rabbitmq-env.conf
 
-
-
 https://www.rabbitmq.com/configure.html#env-variable-interpolation
 
+Ok, then we have all the basis stuff up and running, but that took some time, lets make it quicker using definitions.json
 
-## TLS rmq_client.cloud
+## definitions.json
 
-## Shovel between rmq_client.cloud -> rmq_server.cloud
+Nodes and clusters store information that can be thought of schema, metadata or topology. Users, vhosts, queues, exchanges, bindings, runtime parameters all fall into this category. This metadata is called definitions in RabbitMQ parlance.
 
-## mTLS Shovel between rmq_client.cloud -> rmq_server.cloud
+Definitions can be exported to a file and then imported into another cluster or used for schema backup or data seeding.
+
+Lets do the steps
+
+1. Update the empty rabbitmq.conf
+2. Make a definition.json
+
+```bash
+cd /etc/rabbitmq
+ls
+# advanced.config  definitions.json  enabled_plugins  rabbitmq.conf
+```
+3. Restart rabbitmq-server
+4. Verify definition.json
+
+Lets verify this
+
+```bash
+sudo cat /var/log/rabbitmq/rabbit@amqp04.log
+```
+
+```log
+2025-06-28 17:35:21.179997+00:00 [info] <0.588.0> Management plugin: HTTP (non-TLS) listener started on port 15672
+2025-06-28 17:35:21.180204+00:00 [info] <0.616.0> Statistics database started.
+2025-06-28 17:35:21.180299+00:00 [info] <0.615.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+2025-06-28 17:35:21.180786+00:00 [info] <0.530.0> Ready to start client connection listeners
+2025-06-28 17:35:21.183077+00:00 [info] <0.640.0> started TCP listener on [::]:5672
+2025-06-28 17:35:21.273214+00:00 [info] <0.530.0> Server startup complete; 3 plugins started.
+2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_management
+2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_management_agent
+2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_web_dispatch
+2025-06-28 17:35:21.392803+00:00 [info] <0.10.0> Time to start RabbitMQ: 3534 ms
+```
+
+List queues, and users
+
+```bash
+sudo rabbitmqctl list_users
+# Listing users ...
+# user    tags
+# kasparov        [administrator]
+# consumer        []
+
+sudo rabbitmqctl list_permissions
+# Listing permissions for vhost "/" ...
+# user    configure       write   read
+# kasparov        .*      .*      .*
+# consumer                        .*
+
+sudo rabbitmqctl list_queues
+# Timeout: 60.0 seconds ...
+# Listing queues for vhost / ...
+# name    messages
+# az-queue        0
+
+sudo rabbitmqctl list_bindings
+```
+
+And then we see that it has loaded the definition.json
+
+![definitions json](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/def_json.jpg)
+
+
+https://www.rabbitmq.com/docs/definitions#import-after-boot
+
+
+## TLS amqp04_client.cloud
+
+## Shovel between amqp04_client.cloud -> amqp05_server.cloud
+
+## mTLS Shovel between amqp04_client.cloud -> amqp05_server.cloud
