@@ -359,8 +359,77 @@ And then we see that it has loaded the definition.json
 https://www.rabbitmq.com/docs/definitions#import-after-boot
 
 
+Now lets publish one msg and restart rabbitmq-server to see that the queue is durable.
+
+```bash
+
+# Type it in console
+python3
+# Python 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] on linux
+
+# venv
+sudo apt install python3.12-venv
+
+# make and activate v env
+python3 -m venv testamqp
+source testamqp/bin/activate
+
+(testamqp) Imsdal@amqp04:~$
+
+# install pip inside v env
+sudo apt install python3-pip
+
+# install pika in v env
+pip install pika
+
+sudo nano publish_amqp.py
+
+# deactivate v env
+deactivate
+```
+
+Code in Python for publish_amqp.py
+
+```py
+# publish.py
+import pika, sys
+credentials = pika.PlainCredentials('kasparov', 'amazing-805')
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost', credentials=credentials))
+channel = connection.channel()
+
+# channel.queue_declare(queue='az-queue', durable=True)
+# we did this in definitions.json
+
+channel.basic_publish(exchange='amq.direct', routing_key='az-routing-key', body='Hello, RabbitMQ!', properties=pika.BasicProperties(delivery_mode=2))
+print("Publish done")
+connection.close()
+```
+
+Run the script and list queues and view one message
+```bash
+(testamqp) Imsdal@amqp04:~$ python3 publish_amqp.py
+Publish done
+deactivate
+
+sudo rabbitmqctl list_queues
+# Timeout: 60.0 seconds ...
+# Listing queues for vhost / ...
+# name    messages
+# az-queue        1
+
+```
+
+Now restart rabbitmq-server
+
+https://github.com/pika/pika/blob/main/examples/publish.py
+
+
+
+
+
+
 ## TLS amqp04_client.cloud
 
-## Shovel between amqp04_client.cloud -> amqp05_server.cloud
+## Shovel between amqp04_client.cloud -> amqp05_server.cloud make new readme for shovel and mtls
 
 ## mTLS Shovel between amqp04_client.cloud -> amqp05_server.cloud
