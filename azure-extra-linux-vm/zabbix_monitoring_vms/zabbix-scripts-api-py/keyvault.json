@@ -2,7 +2,7 @@
     
     "keyvault": [
         {
-            "url": "http://51.143.149.24/zabbix/api_jsonrpc.php",
+            "url": "http://IP-address/zabbix/api_jsonrpc.php",
             "user": "Admin",
             "cred": "linux45jimmy"
         }
