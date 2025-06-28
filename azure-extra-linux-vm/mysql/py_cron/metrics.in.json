@@ -1,0 +1,16 @@
+[
+    {
+        "measurement": "tag1",
+        "value": 50,
+        "active": 1,
+        "state": 0,
+        "quality": "good"
+    },
+    {
+        "measurement": "tag2",
+        "value": 62,
+        "active": 1,
+        "state": 1,
+        "quality": "good"
+    }
+]

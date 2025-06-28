@@ -1,0 +1,44 @@
+{
+    "users": [{
+      "name": "kasparov",
+      "password": "amazing-805",
+      "tags": "administrator"
+    }, {
+      "name": "consumer",
+      "password": "qweqwe",
+      "tags": ""
+    }],
+    "vhosts": [{
+      "name": "/"
+    }],
+    "permissions": [{
+      "user": "kasparov",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }, {
+      "user": "consumer",
+      "vhost": "/",
+      "configure": "",
+      "write": "",
+      "read": ".*"
+    }],
+    "queues": [{
+      "name": "az-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    }],
+    "bindings": [{
+      "source": "amq.direct",
+      "vhost": "/",
+      "destination": "az-queue",
+      "destination_type": "queue",
+      "routing_key": "az-routing-key",
+      "arguments": {}
+    }]
+  }
