@@ -95,6 +95,8 @@ sudo rabbitmq-plugins list
 rabbitmq-plugins enable rabbitmq_management
 ```
 
+![plugins](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/plugins.jpg)
+
 Create a user since default user is default to localhost
 
 ```bash
