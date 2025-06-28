@@ -92,12 +92,33 @@ General install amqp https://www.rabbitmq.com/docs/install-debian#supported-dist
 
 ```bash
 sudo rabbitmq-plugins list
-rabbitmq-plugins enable rabbitmq_management
+
+sudo rabbitmq-plugins enable rabbitmq_management
+Enabling plugins on node rabbit@amqp04:
+rabbitmq_management
+The following plugins have been configured:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_web_dispatch
+Applying plugin configuration to rabbit@amqp04...
+The following plugins have been enabled:
+  rabbitmq_management
+  rabbitmq_management_agent
+  rabbitmq_web_dispatch
+
 ```
 
-![plugins](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/plugins.jpg)
+Let's check curl on localhost:
 
-Create a user since default user is default to localhost
+```bash
+
+ curl -s http://localhost:15672 | grep -i "<title>"
+    <title>RabbitMQ Management</title>
+
+```
+![curl management](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/management.jpg)
+
+Create a user since default user is default to localhost TBD
 
 ```bash
 # Only root or rabbitmq can run rabbitmqctl
@@ -108,12 +129,6 @@ sudo rabbitmqctl set_permissions -p / newuser ".*" ".*" ".*"
 sudo rabbitmqctl list_permissions
 
 ```
-
-Open port 15672 inbound to server
-
-Visit http://IP-ADDRESS:15672/
-
-![RabbitMQ management](https://github.com/spawnmarvel/azure-automation/blob/main/images/rabbitmqmanagement.jpg)
 
 Delete default user
 ```bash
