@@ -1,7 +1,5 @@
 # How To Install and Start Using RabbitMQ on Ubuntu 22.04
 
-https://www.cherryservers.com/blog/how-to-install-and-start-using-rabbitmq-on-ubuntu-22-04
-
 ## Install RabbitMQ TBD
 
 https://www.rabbitmq.com/docs/install-debian#supported-distributions
