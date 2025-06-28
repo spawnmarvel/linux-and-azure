@@ -82,6 +82,9 @@ bash install_rabbitmq.sh
 Here are the steps and versions we got.
 
 
+![installed versions](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/install_amqp.jpg)
+
+
 General install amqp https://www.rabbitmq.com/docs/install-debian#supported-distributions
 
 
