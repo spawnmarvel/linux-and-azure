@@ -419,6 +419,8 @@ sudo rabbitmqctl list_queues
 
 ```
 
+![v env](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/venv.jpg)
+
 Now restart rabbitmq-server
 
 https://github.com/pika/pika/blob/main/examples/publish.py
