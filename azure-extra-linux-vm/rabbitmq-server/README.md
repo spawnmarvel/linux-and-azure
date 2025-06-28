@@ -69,13 +69,20 @@ https://www.rabbitmq.com/docs/install-debian#apt-quick-start-cloudsmith
 
 Let make a new vm and test it.
 
-Resource group Rg-ukamqp-0004
+Resource group Rg-ukamqp-0004, amqp04, login to proxy vm dummy01 and do ssh to 192.168.3.7
+
+```bash
+sudo nano install_rabbitmq.sh
+
+# add the content from above script
+
+bash install_rabbitmq.sh
+```
+
+Here are the steps and versions we got.
 
 
-
-
-
-General https://www.rabbitmq.com/docs/install-debian#supported-distributions
+General install amqp https://www.rabbitmq.com/docs/install-debian#supported-distributions
 
 
 ## Enable RabbitMQ Management Console
