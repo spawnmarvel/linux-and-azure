@@ -367,6 +367,13 @@ To see the operational_data live edit the global dashboard and set operational_d
 
 ![operational_data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/operational_data.jpg)
 
+ref https://www.zabbix.com/documentation/current/en/manual/web_interface/frontend_sections/dashboards/widgets/problems
+
+
+![operational_result](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/operational_result.jpg)
+
+
+
 More user parameter TBD
 
 https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
