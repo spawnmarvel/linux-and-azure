@@ -280,7 +280,7 @@ UserParameter=echo1, echo 1
 
 ![echo 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1.jpg)
 
-On zabbix host add item ping and host will be healthy after the request.
+On zabbix host add item custom item echo1.
 
 
 ![echo 1 agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1_agent.jpg)
@@ -289,7 +289,7 @@ And we have the custom data
 
 ![echo 1 agent value](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/echo1_value.jpg)
 
-The host is green and healthy and no template was used, the item was added tot the host and zabbix agent executed it and sent via port 10050.
+The custom item was added the host and zabbix agent executed it and sent via port 10050.
 
 ## User parameter advanced
 
@@ -301,7 +301,7 @@ UserParameter=<key>,<command>
 ```bash
 UserParameter=echo1, echo 1
 ```
-Lets add some more advancec parameters:
+Lets add some more advanced parameters:
 
 TBD
 
