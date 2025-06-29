@@ -305,7 +305,7 @@ And on the host we used a custom name and key of type Zabbix agent.
 
 Lets add some more advanced parameters:
 
-Count all files in a directory
+Count all files in a directory:
 
 ```bash
 sudo nano zabbix_agentd.conf
@@ -333,9 +333,35 @@ Give it 1 min
 
 ![user_param_advanced_2_files](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_advanced_2_files.jpg)
 
+Now we can use that parameter for all files thr Zabbix agent has access to, if not we need to grant access.
+
+```bash
+zabbix_agentd -t 'count.files.in.dir[/var/log/apt]'
+count.files.in.dir[/var/log/apt]              [t|3]
+```
+We have just one UserParameter and to items with different paths.
 
 
-TBD
+Count the size of a file:
+
+```bash
+sudo nano zabbix_agentd.conf
+
+UserParameter=file.size[*],stat -c%s "$1"
+
+# restart zabbix agent and test
+
+zabbix_agentd -t 'file.size[/var/log/zabbix/zabbix_agentd.log]'
+# file.size[/var/log/zabbix/zabbix_agentd.log]  [t|2658]
+```
+
+The file is 2658 bytes
+
+Now add it to Zabbix host and view all values.
+
+![user_param_3](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_3.jpg)
+
+More user parameter TBD
 
 https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
 
