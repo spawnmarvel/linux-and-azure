@@ -363,6 +363,10 @@ Now add it to Zabbix host and view all values.
 
 ![user_param_3](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_3.jpg)
 
+To see the operational_data live edit the global dashboard and set operational_data separately
+
+![operational_data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/operational_data.jpg)
+
 More user parameter TBD
 
 https://www.zabbix.com/documentation/6.0/en/manual/config/items/userparameters
