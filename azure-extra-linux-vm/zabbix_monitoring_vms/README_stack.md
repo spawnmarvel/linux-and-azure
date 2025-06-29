@@ -302,6 +302,7 @@ UserParameter=<key>,<command>
 UserParameter=echo1, echo 1
 ```
 And on the host we used a custom name and key of type Zabbix agent.
+
 Lets add some more advanced parameters:
 
 Count all files in a directory
@@ -328,6 +329,9 @@ Ok, lets add the item to zabbix server on the host
 
 ![user_param_advanced](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_advanced.jpg)
 
+Give it 1 min
+
+![user_param_advanced_2_files](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_advanced_2_files.jpg)
 
 
 
