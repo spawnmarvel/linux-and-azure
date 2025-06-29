@@ -301,7 +301,35 @@ UserParameter=<key>,<command>
 ```bash
 UserParameter=echo1, echo 1
 ```
+And on the host we used a custom name and key of type Zabbix agent.
 Lets add some more advanced parameters:
+
+Count all files in a directory
+
+```bash
+sudo nano zabbix_agentd.conf
+
+# Add
+UserParameter=count.files.in.dir[*],find "$1" -type f | wc -l
+
+# Restart
+sudo service zabbix-agent stop
+sudo service zabbix-agent start
+sudo service zabbix-agent status
+
+# Test it
+zabbix_agentd -t 'count.files.in.dir[/var/log/zabbix]'
+# count.files.in.dir[/var/log/zabbix]           [t|2]
+
+```
+
+Ok, lets add the item to zabbix server on the host
+
+
+![user_param_advanced](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/user_param_advanced.jpg)
+
+
+
 
 TBD
 
