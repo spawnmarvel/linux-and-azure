@@ -335,6 +335,8 @@ Give it 1 min
 
 Now we can use that parameter for all files thr Zabbix agent has access to, if not we need to grant access.
 
+Lets add for /var/log/apt also, to keep track of updates.
+
 ```bash
 zabbix_agentd -t 'count.files.in.dir[/var/log/apt]'
 count.files.in.dir[/var/log/apt]              [t|3]
