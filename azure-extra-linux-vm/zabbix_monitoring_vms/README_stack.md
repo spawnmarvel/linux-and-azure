@@ -293,6 +293,14 @@ The custom item was added the host and zabbix agent executed it and sent via por
 
 ## User parameter advanced
 
+You can extend Zabbix functionality in many ways, for example, with user parameters, external checks, and system.run[] Zabbix agent items. These work very well, but have one major drawback, namely fork(). 
+* Zabbix has to fork a new process every time it handles a user metric, which is not good for performance. 
+* It is not a big deal normally, however it could be a serious issue when monitoring embedded systems, having a large number of monitored parameters or heavy scripts with complex logic or long startup time.
+
+Support of loadable modules offers ways for extending Zabbix agent, server and proxy without sacrificing performance....
+
+Ref https://www.zabbix.com/documentation/current/en/manual/extensions/loadablemodules
+
 
 So we added this
 
