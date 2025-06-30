@@ -6,6 +6,15 @@ May those be First network errors, hosts becoming unavailable or unreachable, th
 
 https://www.youtube.com/watch?v=XaTNmoGzZXM&list=LL&index=2
 
+
+## Zabbix Basic Concepts
+
+https://www.youtube.com/watch?v=7inJAmqyc0g
+
+## An Introduction to Basic Zabbix Concepts. Part One - Hosts, Items, and Triggers
+
+https://www.youtube.com/watch?v=goVOlBTBtwQ
+
 ## Zabbix Performance Issues Troubleshooting
 
 This video is literally just a small tiny step in quite a long road to understanding how Zabbix functions internally, and what are most common bottlenecks, how to identify them and try to solve the issue.
