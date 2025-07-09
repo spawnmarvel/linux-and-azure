@@ -438,6 +438,8 @@ https://github.com/pika/pika/blob/main/examples/publish.py
 
 ## TLS amqp04_client.cloud
 
+Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/README_openssl.md
+
 ## Shovel between amqp04_client.cloud -> amqp05_server.cloud make new readme for shovel and mtls
 
 ## mTLS Shovel between amqp04_client.cloud -> amqp05_server.cloud
