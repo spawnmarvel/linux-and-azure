@@ -58,7 +58,7 @@ openssl x509 -noout -ext keyUsage < ca_certificate.pem
 # Most software uses the former but some tools require the latter.
 ```
 
-## Certificates for server (client) amqp04_client.cloud
+## Certificates for server (client) amqp04_client.cloud TBD 09 07 2025 TODO
 
 amqp04_client.cloud
 
