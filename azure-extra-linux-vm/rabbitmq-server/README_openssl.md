@@ -7,20 +7,23 @@ The openssl.cnf for used here was translated to Linux.
 
 ```bash
 
+mkdir rmq-x2-ssl
 cd rmq-x2-ssl
 mkdir cert-store
 cd cert-store
 mkdir certs
 ls
-openssl.cnf
+# paste the content in openssl.cnf
+sudo nano openssl.cnf
 
 openssl version
-OpenSSL 3.0.2 15 Mar 2022 (Library: OpenSSL 3.0.2 15 Mar 2022)
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
 
-mkdir certs private
-chmod 700 private # remove all permission
+mkdir private
+# remove all permission
+chmod 700 private 
 echo 01 > serial # should have content 01
-touch > index.txt
+touch index.txt
 ls
 certs  index.txt  openssl.cnf  private  serial
 
@@ -31,7 +34,7 @@ certs  index.txt  openssl.cnf  private  serial
 # 1 Generate the key and cert
 /rmq-x2-ssl/cert-store
 
-openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 3652 -out ca_certificate.pem -outform PEM -subj /CN=SocratesIncCa/ -nodes
+openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 3652 -out ca_certificate.pem -outform PEM -subj /CN=MotorheadCA/ -nodes
 
 
 /rmq-x2-ssl/cert-store/private ls
@@ -40,16 +43,10 @@ ca_private_key.pem
 /rmq-x2-ssl/cert-store ls
 ca_certificate.pem  certs  index.txt  openssl.cnf  private  serial
 
-# Generate certificate DER form
-openssl x509 -in ca_certificate.pem  -out ca_certificate.cer -outform DER
-
-/rmq-x2-ssl/cert-store ls
-ca_certificate.cer  ca_certificate.pem  certs  index.txt  openssl.cnf  private  serial
-
 # view the CN
 openssl x509 -noout -subject -in ca_certificate.pem
 
-subject=CN = SocratesIncCa
+subject=CN = MotorheadCA
 
 # view extensions, KeyUsage must be Certificate Signing, Off-line CRL Signing, CRL Signing (06) or at least keyCertSign, cRLSign
 openssl x509 -noout -ext keyUsage < ca_certificate.pem
@@ -61,9 +58,9 @@ openssl x509 -noout -ext keyUsage < ca_certificate.pem
 # Most software uses the former but some tools require the latter.
 ```
 
-## Certificates for server (client) rmq_client.cloud
+## Certificates for server (client) amqp04_client.cloud
 
-rmq_client.cloud
+amqp04_client.cloud
 
 ```bash
 cd cert-store
@@ -73,7 +70,7 @@ mkdir client
 openssl genrsa -out ./client/private_key.pem 2048
 
 # Generating request
-openssl req -new -key ./client/private_key.pem -out ./client/req.pem -outform PEM -subj /CN=rmq_client.cloud -nodes
+openssl req -new -key ./client/private_key.pem -out ./client/req.pem -outform PEM -subj /CN=amqp04_client.cloud -nodes
 
 # Server and client extension
 openssl ca -config openssl.cnf -in ./client/req.pem -out ./client/client_certificate.pem -notext -batch -extensions client_server_extension
@@ -82,7 +79,7 @@ openssl ca -config openssl.cnf -in ./client/req.pem -out ./client/client_certifi
 # Check that the request matches the signature
 # Signature ok
 # The Subject's Distinguished Name is as follows
-# commonName            :ASN.1 12:'rmq_client.cloud'
+# commonName            :ASN.1 12:'amqp04_client.cloud'
 # Certificate is to be certified until Jan 27 14:58:35 2034 GMT (3652 days)
 # Write out database with 1 new entries
 # Data Base Updated
@@ -91,7 +88,7 @@ openssl ca -config openssl.cnf -in ./client/req.pem -out ./client/client_certifi
 # view cn
 openssl x509 -noout -subject -in ./client/client_certificate.pem
 
-subject=CN = rmq_client.cloud
+subject=CN = amqp04_client.cloud
 
 # view extensions
 openssl x509 -noout -ext keyUsage < ./client/client_certificate.pem
@@ -123,9 +120,9 @@ ls
 
 ```
 
-## Certificates for server (server) rmq_server.cloud
+## Certificates for server (server) amqp05_server.cloud
 
-rmq_server.cloud
+amqp05_server.cloud
 
 ```bash
 cd cert-store
@@ -135,7 +132,7 @@ mkdir server
 openssl genrsa -out ./server/private_key.pem 2048
 
 # Generating request
-openssl req -new -key ./server/private_key.pem -out ./server/req.pem -outform PEM -subj /CN=rmq_server.cloud -nodes
+openssl req -new -key ./server/private_key.pem -out ./server/req.pem -outform PEM -subj /CN=amqp05_server.cloud -nodes
 
 # Server and client extension
 openssl ca -config openssl.cnf -in ./server/req.pem -out ./server/server_certificate.pem -notext -batch  -extensions client_server_extension
@@ -144,7 +141,7 @@ openssl ca -config openssl.cnf -in ./server/req.pem -out ./server/server_certifi
 # Check that the request matches the signature
 # Signature ok
 # The Subject's Distinguished Name is as follows
-# commonName            :ASN.1 12:'rmq_server.cloud'
+# commonName            :ASN.1 12:'amqp05_server.cloud'
 # Certificate is to be certified until Jan 27 15:03:23 2034 GMT (3652 days)
 # Write out database with 1 new entries
 # Data Base Updated
@@ -152,7 +149,7 @@ openssl ca -config openssl.cnf -in ./server/req.pem -out ./server/server_certifi
 # view cn
 openssl x509 -noout -subject -in ./server/server_certificate.pem
 
-subject=CN = rmq_server.cloud
+subject=CN = amqp05_server.cloud
 
 # view extensions 
 openssl x509 -noout -ext keyUsage < ./server/server_certificate.pem
