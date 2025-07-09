@@ -112,7 +112,7 @@ Let's check curl on localhost:
 
 ```bash
 
- curl -s http://localhost:15672 | grep -i "<title>"
+curl -s http://localhost:15672 | grep -i "<title>"
     <title>RabbitMQ Management</title>
 
 ```
@@ -302,11 +302,21 @@ Lets do the steps
 
 ```bash
 cd /etc/rabbitmq
+sudo nano definitions.json
 ls
 # advanced.config  definitions.json  enabled_plugins  rabbitmq.conf
 ```
 3. Restart rabbitmq-server
 4. Verify definition.json
+
+```bash
+
+sudo systemctl restart rabbitmq-server
+
+# Then view new settings with
+sudo systemctl status rabbitmq-server
+
+```
 
 Lets verify this
 
@@ -315,16 +325,16 @@ sudo cat /var/log/rabbitmq/rabbit@amqp04.log
 ```
 
 ```log
-2025-06-28 17:35:21.179997+00:00 [info] <0.588.0> Management plugin: HTTP (non-TLS) listener started on port 15672
-2025-06-28 17:35:21.180204+00:00 [info] <0.616.0> Statistics database started.
-2025-06-28 17:35:21.180299+00:00 [info] <0.615.0> Starting worker pool 'management_worker_pool' with 3 processes in it
-2025-06-28 17:35:21.180786+00:00 [info] <0.530.0> Ready to start client connection listeners
-2025-06-28 17:35:21.183077+00:00 [info] <0.640.0> started TCP listener on [::]:5672
-2025-06-28 17:35:21.273214+00:00 [info] <0.530.0> Server startup complete; 3 plugins started.
-2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_management
-2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_management_agent
-2025-06-28 17:35:21.273214+00:00 [info] <0.530.0>  * rabbitmq_web_dispatch
-2025-06-28 17:35:21.392803+00:00 [info] <0.10.0> Time to start RabbitMQ: 3534 ms
+2025-07-09 20:23:21.630414+00:00 [info] <0.534.0> Management plugin: HTTP (non-TLS) listener started on port 15672
+2025-07-09 20:23:21.630630+00:00 [info] <0.562.0> Statistics database started.
+2025-07-09 20:23:21.630724+00:00 [info] <0.561.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+2025-07-09 20:23:21.631000+00:00 [info] <0.476.0> Ready to start client connection listeners
+2025-07-09 20:23:21.633272+00:00 [info] <0.586.0> started TCP listener on [::]:5672
+2025-07-09 20:23:21.720212+00:00 [info] <0.476.0> Server startup complete; 3 plugins started.
+2025-07-09 20:23:21.720212+00:00 [info] <0.476.0>  * rabbitmq_management
+2025-07-09 20:23:21.720212+00:00 [info] <0.476.0>  * rabbitmq_management_agent
+2025-07-09 20:23:21.720212+00:00 [info] <0.476.0>  * rabbitmq_web_dispatch
+2025-07-09 20:23:21.857431+00:00 [info] <0.10.0> Time to start RabbitMQ: 3299 ms
 ```
 
 List queues, and users
@@ -424,10 +434,6 @@ sudo rabbitmqctl list_queues
 Now restart rabbitmq-server
 
 https://github.com/pika/pika/blob/main/examples/publish.py
-
-
-
-
 
 
 ## TLS amqp04_client.cloud

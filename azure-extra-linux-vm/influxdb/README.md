@@ -13,6 +13,33 @@ https://follow-e-lo.com/tag/influxdb/
 
 https://docs.influxdata.com/influxdb/v2/
 
+## Don’t have too many series
+
+In no particular order, we recommend that you:
+
+Encode meta data in tags
+Tags are indexed and fields are not indexed. This means that queries on tags are more performant than those on fields.
+
+In general, your queries should guide what gets stored as a tag and what gets stored as a field:
+
+Store data in tags if they’re commonly-queried meta data
+Store data in tags if you plan to use them with GROUP BY()
+Store data in fields if you plan to use them with an InfluxQL function
+Store data in fields if you need them to be something other than a string - tag values are always interpreted as strings
+
+
+Don’t have too many series
+Tags containing highly variable information like UUIDs, hashes, and random strings will lead to a large number of series in the database, known colloquially as high series cardinality. High series cardinality is a primary driver of high memory usage for many database workloads.
+
+See Hardware sizing guidelines for series cardinality recommendations based on your hardware. If the system has memory constraints, consider storing high-cardinality data as a field rather than a tag.
+
+https://blog.zhaw.ch/icclab/influxdb-design-guidelines-to-avoid-performance-issues/
+
+
+However, there is a huge caveat – a series cardinality being a major factor that affects RAM requirements. Based on the most recent InfluxDB hardware sizing guidelines, you will need around 2-4 GB of RAM for a low load with less than 100,000 unique series. Imagine that your database consists of one measurement that has only two tags, but those values are highly dynamic, both in the thousands. This would result in the need for more than 32 GB, because InfluxDB would try to construct an inverted index in memory, which would always be growing with the cardinality.
+
+A rule of thumb would be to persist highly dynamic values as fields and only use tags for GROUP BY clauses and InfluxQL functions, carefully designing your application around it. 
+
 ## Install influxdb
 
 OS: Linux vmdocker01 6.5.0-1023-azure #24~22.04.1-Ubuntu
