@@ -341,29 +341,17 @@ List queues, users and test 5672
 
 ```bash
 sudo rabbitmqctl list_users
-# Listing users ...
-# user    tags
-# kasparov        [administrator]
-# consumer        []
 
 sudo rabbitmqctl list_permissions
-# Listing permissions for vhost "/" ...
-# user    configure       write   read
-# kasparov        .*      .*      .*
-# consumer                        .*
 
 sudo rabbitmqctl list_queues
-# Timeout: 60.0 seconds ...
-# Listing queues for vhost / ...
-# name    messages
-# az-queue        0
 
 sudo rabbitmqctl list_bindings
 
-# exit amqp04
-imsdal@dummy01:~$ telnet amqp04 5672
-Trying 192.168.3.7...
-Connected to amqp04.
+# telnet localhost
+telnet localhost 5672
+Trying 127.0.0.1...
+Connected to localhost.
 Escape character is '^]'.
 Connection closed by foreign host.
 
