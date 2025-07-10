@@ -45,8 +45,7 @@ ca_certificate.pem  certs  index.txt  openssl.cnf  private  serial
 
 # view the CN
 openssl x509 -noout -subject -in ca_certificate.pem
-
-subject=CN = MotorheadCA
+# subject=CN = MotorheadCA
 
 # view extensions, KeyUsage must be Certificate Signing, Off-line CRL Signing, CRL Signing (06) or at least keyCertSign, cRLSign
 openssl x509 -noout -ext keyUsage < ca_certificate.pem
@@ -58,7 +57,7 @@ openssl x509 -noout -ext keyUsage < ca_certificate.pem
 # Most software uses the former but some tools require the latter.
 ```
 
-## Certificates for server (client) amqp04_client.cloud TBD 09 07 2025 TODO
+## Certificates for server (client) amqp04_client.cloud
 
 amqp04_client.cloud
 
@@ -80,29 +79,28 @@ openssl ca -config openssl.cnf -in ./client/req.pem -out ./client/client_certifi
 # Signature ok
 # The Subject's Distinguished Name is as follows
 # commonName            :ASN.1 12:'amqp04_client.cloud'
-# Certificate is to be certified until Jan 27 14:58:35 2034 GMT (3652 days)
+# Certificate is to be certified until Jul 10 19:15:40 2035 GMT (3652 days)
+
 # Write out database with 1 new entries
-# Data Base Updated
+# Database updated
 
 
 # view cn
 openssl x509 -noout -subject -in ./client/client_certificate.pem
-
-subject=CN = amqp04_client.cloud
+# subject=CN = amqp04_client.cloud
 
 # view extensions
 openssl x509 -noout -ext keyUsage < ./client/client_certificate.pem
 # X509v3 Key Usage:
 #    Digital Signature, Non Repudiation, Key Encipherment
 
+# view extensions for client and server role due to shovel
 openssl x509 -noout -ext extendedKeyUsage < ./client/client_certificate.pem
 # X509v3 Extended Key Usage:
-#    TLS Web Server Authentication, TLS Web Client Authentication, Code Signing, E-mail Protection
+#    TLS Web Client Authentication, TLS Web Server Authentication
 
-# cp to windows import in certificate
-cat ./client/client_certificate.pem
-# import in windows as client_certificate.crt
-# Intended purposes = all
+# or
+openssl x509 -in ./client/client_certificate.pem  -noout -text
 
 # all files
 /rmq-x2-ssl/cert-store ls

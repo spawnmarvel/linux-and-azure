@@ -337,7 +337,7 @@ sudo cat /var/log/rabbitmq/rabbit@amqp04.log
 2025-07-09 20:23:21.857431+00:00 [info] <0.10.0> Time to start RabbitMQ: 3299 ms
 ```
 
-List queues, and users
+List queues, users and test 5672
 
 ```bash
 sudo rabbitmqctl list_users
@@ -359,6 +359,14 @@ sudo rabbitmqctl list_queues
 # az-queue        0
 
 sudo rabbitmqctl list_bindings
+
+# exit amqp04
+imsdal@dummy01:~$ telnet amqp04 5672
+Trying 192.168.3.7...
+Connected to amqp04.
+Escape character is '^]'.
+Connection closed by foreign host.
+
 ```
 
 And then we see that it has loaded the definition.json
