@@ -141,14 +141,14 @@ openssl ca -config openssl.cnf -in ./server/req.pem -out ./server/server_certifi
 # Signature ok
 # The Subject's Distinguished Name is as follows
 # commonName            :ASN.1 12:'amqp05_server.cloud'
-# Certificate is to be certified until Jan 27 15:03:23 2034 GMT (3652 days)
+# Certificate is to be certified until Jul 10 19:32:27 2035 GMT (3652 days)
+
 # Write out database with 1 new entries
 # Data Base Updated
 
 # view cn
 openssl x509 -noout -subject -in ./server/server_certificate.pem
-
-subject=CN = amqp05_server.cloud
+# subject=CN = amqp05_server.cloud
 
 # view extensions 
 openssl x509 -noout -ext keyUsage < ./server/server_certificate.pem
@@ -160,7 +160,7 @@ openssl x509 -noout -ext extendedKeyUsage < ./server/server_certificate.pem
 #    TLS Web Server Authentication, TLS Web Client Authentication, Code Signing, E-mail Protection
 
 # server (server)
-cd client
+cd server
 ls
 private_key.pem  req.pem  server_certificate.pem
 cd ..
@@ -168,6 +168,7 @@ cd certs
 ls
 01.pem  02.pem
 ```
+![amqp05 cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/amqp05server.jpg)
 
 ## Make bundle and copy all certificates
 
