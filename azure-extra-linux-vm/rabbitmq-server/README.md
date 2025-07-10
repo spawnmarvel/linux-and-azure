@@ -118,7 +118,7 @@ curl -s http://localhost:15672 | grep -i "<title>"
 ```
 ![curl management](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/management.jpg)
 
-Create a user since default user is default to localhost TBD
+Example Create a user since default user is default to localhost
 
 ```bash
 # Only root or rabbitmq can run rabbitmqctl
@@ -145,14 +145,14 @@ sudo rabbitmqctl list_permissions
 
 ```
 
-Delete default user
+Example Delete default user
 ```bash
 sudo rabbitmqctl delete_user guest
 sudo rabbitmqctl list_users
 ```
 
 
-Create RabbitMQ Virtual Host, RabbitMQ manages user permissions on a virtual host level.
+Example Create RabbitMQ Virtual Host, RabbitMQ manages user permissions on a virtual host level.
 
 ```bash
 sudo rabbitmqctl add_vhost segment01
@@ -163,7 +163,7 @@ sudo rabbitmqctl list_vhosts
 # /
 ```
 
-Set specific user permission for a user on the new vhost
+Example Set specific user permission for a user on the new vhost
 ```bash
 sudo rabbitmqctl set_permissions -p <virtual_host> <user_name> <permissions>
 # Example full permission
@@ -287,7 +287,7 @@ Environment variables can be used to override the location of the configuration 
 
 https://www.rabbitmq.com/configure.html#env-variable-interpolation
 
-Ok, then we have all the basis stuff up and running, but that took some time, lets make it quicker using definitions.json
+Ok, then we have all the basis stuff up and running, but that can take some time, lets make it quicker using definitions.json
 
 ## definitions.json
 
