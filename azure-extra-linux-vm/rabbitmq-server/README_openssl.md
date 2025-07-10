@@ -57,6 +57,8 @@ openssl x509 -noout -ext keyUsage < ca_certificate.pem
 # Most software uses the former but some tools require the latter.
 ```
 
+CA Auth certificate 
+
 ![ca cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/ca.jpg)
 
 ## Certificates for server (client) amqp04_client.cloud
@@ -117,6 +119,8 @@ cd ..
 
 
 ```
+Client certificate 
+
 ![amqp04 cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/amqp04client.jpg)
 
 ## Certificates for server (server) amqp05_server.cloud
@@ -168,6 +172,9 @@ cd certs
 ls
 01.pem  02.pem
 ```
+
+Server certificate 
+
 ![amqp05 cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/amqp05server.jpg)
 
 ## Make bundle and copy all certificates
