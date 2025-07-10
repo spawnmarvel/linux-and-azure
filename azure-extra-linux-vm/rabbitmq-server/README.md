@@ -551,6 +551,16 @@ Log
 
 ```
 
+## TLS amqp05_server.cloud
+
+Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/README_openssl.md
+
+No that we have the certs for our server lets enable tls.
+
+But first create the vm same as amqp04
+
+Move the certs to a folder /etc/rabbitmq/
+
 ## Shovel between amqp04_client.cloud -> amqp05_server.cloud make new readme for shovel and mtls
 
 ## mTLS Shovel between amqp04_client.cloud -> amqp05_server.cloud
