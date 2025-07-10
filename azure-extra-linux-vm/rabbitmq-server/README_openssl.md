@@ -104,19 +104,18 @@ openssl x509 -in ./client/client_certificate.pem  -noout -text
 
 # all files
 /rmq-x2-ssl/cert-store ls
-ca_certificate.cer  certs   index.txt       index.txt.old  private  serial.old
-ca_certificate.pem  client  index.txt.attr  openssl.cnf    serial
+ca_certificate.pem  certs  client  index.txt  index.txt.attr  index.txt.old  openssl.cnf  private  serial  serial.old
+
 
 # server (client)
 cd client
 ls
 client_certificate.pem  private_key.pem  req.pem
 cd ..
-cd certs
-ls
-01.pem
+
 
 ```
+![amqp04 cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/amqp04client.jpg)
 
 ## Certificates for server (server) amqp05_server.cloud
 
