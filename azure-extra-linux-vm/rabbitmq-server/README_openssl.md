@@ -116,6 +116,9 @@ cd client
 ls
 client_certificate.pem  private_key.pem  req.pem
 cd ..
+cd certs
+ls
+01.pem
 
 
 ```

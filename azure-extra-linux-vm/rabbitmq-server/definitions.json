@@ -7,6 +7,10 @@
       "name": "consumer",
       "password": "qweqwe",
       "tags": ""
+    }, {
+      "name": "amqp04_client.cloud",
+      "password": "coffedays63",
+      "tags": "administrator"
     }],
     "vhosts": [{
       "name": "/"
@@ -22,6 +26,12 @@
       "vhost": "/",
       "configure": "",
       "write": "",
+      "read": ".*"
+    },{
+      "user": "amqp04_client.cloud",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
       "read": ".*"
     }],
     "queues": [{

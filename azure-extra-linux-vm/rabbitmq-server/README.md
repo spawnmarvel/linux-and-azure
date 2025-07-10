@@ -371,7 +371,7 @@ Connection closed by foreign host.
 
 And then we see that it has loaded the definition.json
 
-![definitions json](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/def_json.jpg)
+![definitions json](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/def_json2.jpg)
 
 
 https://www.rabbitmq.com/docs/definitions#import-after-boot
