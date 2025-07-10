@@ -180,14 +180,25 @@ Server certificate
 
 ![amqp05 cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/amqp05server.jpg)
 
+***So now we have the CA Auth, client and server certificate.***
+
 ## Make bundle and copy all certificates
 
-We use the CA with just one cert as the bundle for each server, snice client and server cert was signed with the same CA.
+We use the CA with just one cert as the bundle for each server, since client and server cert was signed with the same CA.
+
+If we have a differt CA Auth for each cert, all CA certs must be in the bundle used for each server (root, intermediate).
+
 
 ```bash
-cp cert-store/ca_certificate.pem ca.bundle
+cd rmq-x2-ssl/cert-store/
 
+cp ca_certificate.pem ca.bundle
+
+ls
+ca.bundle           certs   index.txt       index.txt.attr.old  openssl.cnf  serial      server
+ca_certificate.pem  client  index.txt.attr  index.txt.old       private      serial.old
 ```
+
 
 
 

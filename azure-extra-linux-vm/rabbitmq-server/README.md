@@ -448,6 +448,109 @@ https://github.com/pika/pika/blob/main/examples/publish.py
 
 Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/README_openssl.md
 
+No that we have the certs for our client lets enable tls.
+
+Move the certs to a folder /etc/rabbitmq/
+
+```bash
+
+cd sudo mkdir /etc/rabbitmq/cert
+
+cd /rmq-x2-ssl/cert-store
+
+# move CA bundle
+sudo cp ca.bundle /etc/rabbitmq/cert/ca.bundle
+
+# move client cert and key
+sudo cp ./client/client_certificate.pem /etc/rabbitmq/cert/client_certificate.pem
+sudo cp ./client/private_key.pem /etc/rabbitmq/cert/private_key.pem
+
+# verify it
+cd /etc/rabbitmq
+ls
+advanced.config  cert  definitions.json  definitions.json_bck  enabled_plugins  rabbitmq.conf
+
+```
+
+
+Now configure amqp to use it, add to rabbitmq.conf.
+
+We still use 5672 for localhost, so we can send data.
+
+bash it
+
+```bash
+
+sudo systemctl stop rabbitmq-server
+
+cd /etc/rabbitmq/cert
+# set permission
+sudo chmod 664 ca.bundle
+sudo chmod 664 client_certificate.pem
+sudo chmod 664 private_key.pem
+```
+
+```ini
+
+loopback_users.guest = false
+
+default_user = kasparov
+default_pass = amazing-805
+
+listeners.tcp.default = 5672
+# management.tcp.port = 15672
+
+vm_memory_high_watermark.relative = 0.3
+disk_free_limit.relative = 1.5
+
+log.file.rotation.count= 5
+log.file.rotation.size= 10485760
+
+management.load_definitions = /etc/rabbitmq/definitions.json
+
+# ssl
+listeners.ssl.default = 5671
+ssl_options.cacertfile = /etc/rabbitmq/cert/ca.bundle
+ssl_options.certfile = /etc/rabbitmq/cert/client_certificate.pem
+ssl_options.keyfile = /etc/rabbitmq/cert/private_key.pem
+ssl_options.verify = verify_none
+ssl_options.fail_if_no_peer_cert = false
+
+# ssl management
+management.ssl.port       = 15671
+management.ssl.cacertfile = /etc/rabbitmq/cert/ca.bundle
+management.ssl.certfile   = /etc/rabbitmq/cert/client_certificate.pem
+management.ssl.keyfile    = /etc/rabbitmq/cert/private_key.pem
+management.hsts.policy    = max-age=31536000; includeSubDomains
+management.ssl.versions.1 = tlsv1.2
+```
+bash it
+
+```bash
+sudo systemctl start rabbitmq-server
+
+# log it
+sudo cat /var/log/rabbitmq/rabbit@amqp04.log
+
+```
+
+Log
+
+```ini
+2025-07-10 20:41:31.973814+00:00 [info] <0.552.0> Management plugin: HTTPS listener started on port 15671
+2025-07-10 20:41:31.973980+00:00 [info] <0.582.0> Statistics database started.
+2025-07-10 20:41:31.974066+00:00 [info] <0.581.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+2025-07-10 20:41:31.974300+00:00 [info] <0.494.0> Ready to start client connection listeners
+2025-07-10 20:41:31.976948+00:00 [info] <0.606.0> started TCP listener on [::]:5672
+2025-07-10 20:41:31.979209+00:00 [info] <0.626.0> started TLS (SSL) listener on [::]:5671
+2025-07-10 20:41:32.072015+00:00 [info] <0.494.0> Server startup complete; 3 plugins started.
+2025-07-10 20:41:32.072015+00:00 [info] <0.494.0>  * rabbitmq_management
+2025-07-10 20:41:32.072015+00:00 [info] <0.494.0>  * rabbitmq_management_agent
+2025-07-10 20:41:32.072015+00:00 [info] <0.494.0>  * rabbitmq_web_dispatch
+2025-07-10 20:41:32.116489+00:00 [info] <0.10.0> Time to start RabbitMQ: 3464 ms
+
+```
+
 ## Shovel between amqp04_client.cloud -> amqp05_server.cloud make new readme for shovel and mtls
 
 ## mTLS Shovel between amqp04_client.cloud -> amqp05_server.cloud
