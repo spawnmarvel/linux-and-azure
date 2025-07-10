@@ -57,6 +57,8 @@ openssl x509 -noout -ext keyUsage < ca_certificate.pem
 # Most software uses the former but some tools require the latter.
 ```
 
+![ca cert](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/ca.jpg)
+
 ## Certificates for server (client) amqp04_client.cloud
 
 amqp04_client.cloud
