@@ -551,6 +551,34 @@ Log
 
 ```
 
+Test telnet
+
+```bash
+telnet localhost 5671
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+Connection closed by foreign host.
+
+telnet localhost 5672
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+Connection closed by foreign host.
+
+```
+
+Verify in logs
+
+```bash
+sudo cat /var/log/rabbitmq/rabbit@amqp04.log
+
+```
+Log telnet
+
+![telnet amqp04 ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/images/telnet.jpg)
+
+
 ## TLS amqp05_server.cloud TODO
 
 Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/rabbitmq-server/README_openssl.md
