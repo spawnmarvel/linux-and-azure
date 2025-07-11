@@ -482,6 +482,9 @@ sudo chmod 664 private_key.pem
 
 loopback_users.guest = false
 
+# for debug
+# log.file.level = debug
+
 default_user = kasparov
 default_pass = amazing-805
 
