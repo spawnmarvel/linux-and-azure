@@ -11,9 +11,6 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 Let s start monitor our MySQL database
 
-https://www.zabbix.com/documentation/current/en/manual/guides/monitor_mysql
-
-
 Install Zabbix agent and MySql client, we already have that since we are on local host 
 
 ```bash
@@ -62,6 +59,8 @@ And data should come.
 
 ![mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql.jpg)
 
+
+https://www.zabbix.com/documentation/current/en/manual/guides/monitor_mysql
 
 ### Template RabbitMQ node by Zabbix agent todo
 
