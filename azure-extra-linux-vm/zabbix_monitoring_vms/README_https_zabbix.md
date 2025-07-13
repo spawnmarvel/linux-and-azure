@@ -1,5 +1,13 @@
 # Security
 
+Other than setting your web frontend URL within Zabbix to https://, ignore zabbix for this task.
+
+Treat it as enabling SSL for apache.
+
+Digital Ocean start
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-18-04
+
 ## Understanding Apache Config Files
 
 - **sites-enabled/** contains symlinks (shortcuts) to the actual configuration files in **sites-available/**.

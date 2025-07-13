@@ -643,14 +643,19 @@ https://www.zabbix.com/forum/zabbix-help/379138-one-node-monitored-by-2-differen
 
 View folder troubleshooting 
 
-### Test more templates and stuff
+### Template MySQL by Zabbix agent
+
+### Template
+
+
 
 View folder templates
 
 ### Enable ssl tbd
 
-* Openssl
-* and AI
+Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_https_zabbix.md
+
+
 
 
 
