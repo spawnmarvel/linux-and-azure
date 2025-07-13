@@ -709,17 +709,23 @@ Revision cd5d20afe2c 22 April 2025, compilation time: Apr 22 2025 07:04:14, buil
 
 ### Template MySQL by Zabbix agent
 
-Let s start monitor our MySQL database https://www.zabbix.com/integrations/mysql
+Let s start monitor our MySQL database
+
+https://www.zabbix.com/documentation/current/en/manual/guides/monitor_mysql
 
 
-1. Install Zabbix agent and MySql client, we already have that since we are on local host 
+Install Zabbix agent and MySql client, we already have that since we are on local host 
 
 ```bash
+# check agent
+zabbix_agent2 -V
+zabbix_agent2 (Zabbix) 6.0.40
+
 # check our mysql client
 dpkg -l | grep mysql-client
 ```
 
-2. Create the MySQL user that will be used for monitoring
+1. Create the MySQL user that will be used for monitoring
 
 ```sql
 
@@ -732,8 +738,23 @@ GRANT REPLICATION CLIENT,PROCESS,SHOW DATABASES,SHOW VIEW ON *.* TO 'zbx_monitor
 
 ```
 
-3.
+2. Log into Zabbix frontend.
 
+On Zabbix server
+
+In the Templates field, type or select the template "MySQL by Zabbix agent 2" that will be linked to the host.
+
+In the Macros tab, switch to Inherited and host macros, look for the following macros and click on Change next to the macro value to update it:
+
+
+{$MYSQL.DSN} tcp://localhost:3306
+
+{$MYSQL.PASSWORD} LudoBicEnhanced#7-
+
+{$MYSQL.USER} zbx_monitor
+
+
+And data should come.
 
 
 
