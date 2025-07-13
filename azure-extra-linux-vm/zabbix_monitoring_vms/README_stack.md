@@ -754,9 +754,13 @@ In the Macros tab, switch to Inherited and host macros, look for the following m
 {$MYSQL.USER} zbx_monitor
 
 
+Zabbix server
+
+![mysql zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_zabbix.jpg)
+
 And data should come.
 
-
+![mysql data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql.jpg)
 
 
 ### Template RabbitMQ node by Zabbix agent
