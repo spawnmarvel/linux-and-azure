@@ -643,19 +643,102 @@ https://www.zabbix.com/forum/zabbix-help/379138-one-node-monitored-by-2-differen
 
 View folder troubleshooting 
 
-### Template MySQL by Zabbix agent
-
-### Template
-
-
-
-View folder templates
-
 ### Enable ssl tbd
 
 Go to https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README_https_zabbix.md
 
+### Upgrade to Zabbix Agent 2
 
+Let s upgrade our agent to agent 2
+
+```bash
+zabbix_agentd -V
+zabbix_agentd (daemon) (Zabbix) 6.0.40
+Revision cd5d20afe2c 22 April 2025, compilation time: Apr 22 2025 06:53:12
+
+# we already have the packet from wget since we have installed on localhost
+# wget https://repo.zabbix.com........
+# sudo dpkg -i zabbix-release_6.0-4+ubuntu..........
+# sudo apt update
+
+sudo apt install zabbix-agent2
+
+ls
+apache.conf  zabbix_agent2.conf  zabbix_agentd.conf      zabbix_agentd.d     zabbix_server.conf.bck
+web          zabbix_agent2.d     zabbix_agentd.conf_bck  zabbix_server.conf  zabbix_server.conf.dpkg-old
+
+# stop old
+sudo service zabbix-agent stop
+
+# enable and start new
+sudo systemctl enable zabbix-agent2
+sudo systemctl start zabbix-agent2
+sudo systemctl status zabbix-agent2
+
+zabbix-agent2.service - Zabbix Agent 2
+     Loaded: loaded (/usr/lib/systemd/system/zabbix-agent2.service; enabled; preset: enabled)
+
+
+# disable old agent
+sudo systemctl disable zabbix-agent
+Synchronizing state of zabbix-agent.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable zabbix-agent
+Removed "/etc/systemd/system/multi-user.target.wants/zabbix-agent.service".
+```
+
+Had one issue, zabbixc host was rejected, so did this before zabbix was green in frontend
+
+```bash
+
+cd /etc/zabbix
+sudo nano zabbix_agent2.conf
+
+Server=192.168.3.5
+ServerActive=192.168.3.5
+
+sudo systemctl start zabbix-agent2
+sudo systemctl stop zabbix-agent2
+sudo systemctl status zabbix-agent2
+
+# check version again
+zabbix_agent2 -V
+zabbix_agent2 (Zabbix) 6.0.40
+Revision cd5d20afe2c 22 April 2025, compilation time: Apr 22 2025 07:04:14, built with: go1.24.1
+
+```
+
+### Template MySQL by Zabbix agent
+
+Let s start monitor our MySQL database https://www.zabbix.com/integrations/mysql
+
+
+1. Install Zabbix agent and MySql client, we already have that since we are on local host 
+
+```bash
+# check our mysql client
+dpkg -l | grep mysql-client
+```
+
+2. Create the MySQL user that will be used for monitoring
+
+```sql
+
+-- login
+sudo mysql -uroot -p
+
+-- create a user for monitor
+CREATE USER 'zbx_monitor'@'%' IDENTIFIED BY 'LudoBicEnhanced#7-';
+GRANT REPLICATION CLIENT,PROCESS,SHOW DATABASES,SHOW VIEW ON *.* TO 'zbx_monitor'@'%';
+
+```
+
+3.
+
+
+
+
+
+### Template RabbitMQ node by Zabbix agent
 
 
 
