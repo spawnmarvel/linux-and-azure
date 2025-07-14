@@ -121,7 +121,7 @@ Now create the host in Zabbix frontend with Linux by zabbix agent (passive), not
 
 ![amqp01 vm zabbix agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_ok.jpg)
 
-
+Now we can monitor amqp rabbitmq
 
 ### Website certificate by Zabbix agent 2 todo
 
