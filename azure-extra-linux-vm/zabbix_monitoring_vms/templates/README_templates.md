@@ -64,6 +64,53 @@ https://www.zabbix.com/documentation/current/en/manual/guides/monitor_mysql
 
 ### Template RabbitMQ node by Zabbix agent todo
 
+Lets install Zabbix Agent 2 oon the vm with rabbitmq, amqp04
+
+
+
+```bash
+# instal repos
+sudo wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_6.0+ubuntu24.04_all.deb
+sudo dpkg -i zabbix-release_latest_6.0+ubuntu24.04_all.deb
+sudo apt update -y
+
+# Install Zabbix agent 2
+sudo apt install zabbix-agent2
+
+# Install Zabbix agent 2 plugins
+# na, not needed now, but this is how
+# sudo apt install zabbix-agent2-plugin-mongodb zabbix-agent2-plugin-mssql zabbix-agent2-plugin-postgresql
+
+# Start Zabbix agent 2 process
+sudo systemctl restart zabbix-agent2
+sudo systemctl enable zabbix-agent2
+
+# log it
+cat /var/log/zabbix/zabbix_agent2.log
+
+```
+
+Edit conf
+
+```ini
+LogFileSize=100
+Server=192.168.3.5
+# equal to no active
+ServerActive=127.0.0.1
+Hostname=amqp04
+```
+
+Restart and check logs
+```bash
+sudo systemctl restart zabbix-agent2
+
+sudo service zabbix-agent2 status
+
+```
+
+https://www.zabbix.com/download?zabbix=6.0&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
+
+
 ### Website certificate by Zabbix agent 2 todo
 
 
