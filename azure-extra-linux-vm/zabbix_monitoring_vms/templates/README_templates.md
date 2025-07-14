@@ -88,6 +88,10 @@ sudo systemctl enable zabbix-agent2
 # log it
 cat /var/log/zabbix/zabbix_agent2.log
 
+
+# edit conf
+cd /etc/zabbix
+sudo nano zabbix-agent2.conf
 ```
 
 Edit conf
@@ -95,8 +99,8 @@ Edit conf
 ```ini
 LogFileSize=100
 Server=192.168.3.5
-# equal to no active
-ServerActive=127.0.0.1
+# set comment
+# ServerActive=127.0.0.1
 Hostname=amqp04
 ```
 
@@ -107,8 +111,16 @@ sudo systemctl restart zabbix-agent2
 sudo service zabbix-agent2 status
 
 ```
+Host name on second last line.
+
+![amqp01 vm zabbix agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04.jpg)
 
 https://www.zabbix.com/download?zabbix=6.0&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
+
+Now create the host in Zabbix frontend with Linux by zabbix agent (passive), not the active.
+
+![amqp01 vm zabbix agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_ok.jpg)
+
 
 
 ### Website certificate by Zabbix agent 2 todo
