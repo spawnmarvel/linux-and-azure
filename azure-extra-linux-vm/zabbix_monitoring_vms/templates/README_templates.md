@@ -170,7 +170,7 @@ Thats it, the data should be ready lets check.
 
 Lets change the rabbitmq.conf
 
-![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limits.jpg)
+![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limit.jpg)
 
 
 https://www.zabbix.com/integrations/rabbitmq
