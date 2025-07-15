@@ -173,6 +173,11 @@ Lets change the rabbitmq.conf
 ![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limit.jpg)
 
 
+And then check it in zabbix, nice.
+
+![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limit_result.jpg)
+
+
 https://www.zabbix.com/integrations/rabbitmq
 
 
