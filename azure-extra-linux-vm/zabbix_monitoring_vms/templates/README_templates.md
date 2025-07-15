@@ -124,13 +124,58 @@ Now create the host in Zabbix frontend with Linux by zabbix agent (passive), not
 Now we can monitor amqp rabbitmq
 
 
-### Template RabbitMQ node by Zabbix agent todo
+### Template RabbitMQ node by Zabbix agent
+
+```bash
+sudo rabbitmqctl add_user zbx_monitor brokenZepplingalaxy7803
+sudo rabbitmqctl set_permissions  -p / zbx_monitor "" "" ".*"
+sudo rabbitmqctl set_user_tags zbx_monitor monitoring
+
+sudo rabbitmqctl list_users
+Listing users ...
+user    tags
+guest   [administrator]
+zbx_monitor     [monitoring]
+kasparov        [administrator]
+amqp04_client.cloud     [administrator]
+consumer        []
+
+sudo cat /var/log/rabbitmq/rabbit@amqp04.log
+# managment is enabled from before
+2025-07-15 18:09:40.746008+00:00 [info] <0.552.0> Management plugin: HTTPS listener started on port 15671
+2025-07-15 18:09:40.746166+00:00 [info] <0.582.0> Statistics database started.
+2025-07-15 18:09:40.746237+00:00 [info] <0.581.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+2025-07-15 18:09:40.746424+00:00 [info] <0.494.0> Ready to start client connection listeners
+2025-07-15 18:09:40.755686+00:00 [info] <0.606.0> started TCP listener on [::]:5672
+2025-07-15 18:09:40.758732+00:00 [info] <0.626.0> started TLS (SSL) listener on [::]:5671
+2025-07-15 18:09:40.819243+00:00 [info] <0.494.0> Server startup complete; 3 plugins started.
+2025-07-15 18:09:40.819243+00:00 [info] <0.494.0>  * rabbitmq_management
+2025-07-15 18:09:40.819243+00:00 [info] <0.494.0>  * rabbitmq_management_agent
+2025-07-15 18:09:40.819243+00:00 [info] <0.494.0>  * rabbitmq_web_dispatch
+2025-07-15 18:09:40.872894+00:00 [info] <0.10.0> Time to start RabbitMQ: 5766 ms
+```
+
+Go to the host amqp04 in Zabbix and add template, RabbitMQ node by Zabbix agent
+
+Then go to Inherited and host macros and add
+
+*
+*
+*
+
+![amqp01 vm template rabbitmq](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_rabbitmq_template.jpg)
 
 
-### Website certificate by Zabbix agent 2 todo
 
 
-### InfluxDB template for zabbix todo
+
+https://www.zabbix.com/integrations/rabbitmq
+
+
+### Website certificate by Zabbix agent 2 TODO
+
+
+### InfluxDB template for zabbix TODO
 
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/influxdb/README_integrate_with_zabbix.md
