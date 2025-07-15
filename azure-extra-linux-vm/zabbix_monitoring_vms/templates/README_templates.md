@@ -161,13 +161,16 @@ Go to the host amqp04 in Zabbix and add template, RabbitMQ node by Zabbix agent
 
 Then go to Inherited and host macros and add, just follow the URL and it is documented there.
 
-![amqp01 vm template rabbitmq](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_rabbitmq_template2.jpg)
+![amqp04 vm template rabbitmq](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_rabbitmq_template2.jpg)
 
 
 Thats it, the data should be ready lets check.
 
-![amqp01 rabbit template succes](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_template_success.jpg)
+![amqp04 rabbit template succes](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_template_success.jpg)
 
+Lets change the rabbitmq.conf
+
+![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limits.jpg)
 
 
 https://www.zabbix.com/integrations/rabbitmq
