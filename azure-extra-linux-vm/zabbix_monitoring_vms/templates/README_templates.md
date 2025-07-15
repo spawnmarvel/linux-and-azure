@@ -177,6 +177,9 @@ And then check it in zabbix, nice.
 
 ![amqp04 limits](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_limit_result.jpg)
 
+Lets publish some messages with python3.
+
+![amqp04 pub zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_pub.jpg)
 
 https://www.zabbix.com/integrations/rabbitmq
 
