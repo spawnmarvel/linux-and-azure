@@ -157,6 +157,8 @@ sudo cat /var/log/rabbitmq/rabbit@amqp04.log
 
 Go to the host amqp04 in Zabbix and add template, RabbitMQ node by Zabbix agent
 
+![template rabbitmq](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_template.jpg)
+
 Then go to Inherited and host macros and add, just follow the URL and it is documented there.
 
 ![amqp01 vm template rabbitmq](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_rabbitmq_template.jpg)
