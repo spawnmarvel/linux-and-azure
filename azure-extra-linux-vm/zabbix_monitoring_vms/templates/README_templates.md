@@ -62,9 +62,9 @@ And data should come.
 
 https://www.zabbix.com/documentation/current/en/manual/guides/monitor_mysql
 
-### Template RabbitMQ node by Zabbix agent todo
+### Install Zabbix Agent 2
 
-Lets install Zabbix Agent 2 oon the vm with rabbitmq, amqp04
+Lets install Zabbix Agent 2 on the vm with rabbitmq, amqp04
 
 
 
@@ -122,6 +122,10 @@ Now create the host in Zabbix frontend with Linux by zabbix agent (passive), not
 ![amqp01 vm zabbix agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/amqp04_ok.jpg)
 
 Now we can monitor amqp rabbitmq
+
+
+### Template RabbitMQ node by Zabbix agent todo
+
 
 ### Website certificate by Zabbix agent 2 todo
 
