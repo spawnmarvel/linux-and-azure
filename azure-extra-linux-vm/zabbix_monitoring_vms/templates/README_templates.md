@@ -211,8 +211,11 @@ After 15 min:
 
 
 
-
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
+
+### Azure Cost Management by HTTP
+
+https://www.zabbix.com/integrations/azure
 
 ### Azure MySQL Flexible Server by HTTP TODO
 
