@@ -214,6 +214,9 @@ After 15 min:
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
 
+### Azure MySQL Flexible Server by HTTP TODO
+
+https://www.zabbix.com/integrations/azure
 
 ### InfluxDB template for zabbix TODO
 
