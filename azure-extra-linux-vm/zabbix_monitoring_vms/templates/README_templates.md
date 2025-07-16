@@ -186,6 +186,34 @@ https://www.zabbix.com/integrations/rabbitmq
 
 ### Website certificate by Zabbix agent 2 TODO
 
+Let s check that we have agent 2
+```bash
+sudo service zabbix-agent2 status
+[sudo] password for imsdal:
+● zabbix-agent2.service - Zabbix Agent 2
+
+# or
+zabbix_agent2 -V
+zabbix_agent2 (Zabbix) 6.0.40
+
+```
+Lets try to configure it.
+Go to zabbix server and add, Website certificate by Zabbix agent 2.
+
+Just follow the link for the actual configuration.
+We are using a self signed cert with IP as CN, so that is used in both fields.
+
+It will take 15 min before zabbix does GET CERT.
+
+![cert agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert.jpg)
+
+After 15 min:
+
+
+
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
+
 
 ### InfluxDB template for zabbix TODO
 
