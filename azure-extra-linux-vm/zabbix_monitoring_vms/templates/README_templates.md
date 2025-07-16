@@ -209,7 +209,7 @@ It will take 15 min before zabbix does GET CERT.
 
 After 15 min:
 
-
+![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok.jpg)
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
 
