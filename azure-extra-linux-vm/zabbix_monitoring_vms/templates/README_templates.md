@@ -241,13 +241,23 @@ New-AzRoleAssignment -ObjectId $sp.Id -RoleDefinitionName "Reader" -Scope "/subs
 
 ```
 
+
+
 Create a host in zabbix with no interface, use template 
 * Azure Cost Management by HTTP
 * Azure Virtual Machine by HTTP
 
+To monitor a vm
+
+```ps1
+$vm = Get-AzVM -ResourceGroupName rg-ukzabbix-0002 -Name vmzabbix02
+$vm.Id
+```
+Use the vm id in the macro
+
 Add macros
 
-![azure host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host.jpg)
+![azure host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host2.jpg)
 
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-14.2.0
 
