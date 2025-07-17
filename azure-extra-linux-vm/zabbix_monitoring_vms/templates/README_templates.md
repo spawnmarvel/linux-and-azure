@@ -213,7 +213,7 @@ After 15 min:
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
 
-### Azure Cost Management by HTTP
+### Azure Cost Management by HTTP and Azure Virtual Machine by HTTP
 
 
 ```ps1
