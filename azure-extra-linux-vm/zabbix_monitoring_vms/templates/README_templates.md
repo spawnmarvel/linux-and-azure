@@ -217,21 +217,25 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificat
 
 
 ```ps1
+# login az
 connect-AzAccount -TenantId ID
 
 # Create a service principal
 $sp = New-AzADServicePrincipal -DisplayName 'zabbix'
-# get pass
+
+# get secret
 $sp.PasswordCredentials.SecretText
 
+# get all spn
 Get-AzAdServicePrincipal | sort DisplayName
 
+# get just zabbix
 Get-AzAdServicePrincipal | where DisplayName -eq 'zabbix'
 
-# get id
+# get azure sub id
 Get-AzSubscription
 
-# set access
+# set access for role
 New-AzRoleAssignment -ObjectId $sp.Id -RoleDefinitionName "Reader" -Scope "/subscriptions/<subscription_id>"
 
 # DisplayName        : zabbix
