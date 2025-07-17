@@ -279,7 +279,7 @@ The template for vm azure was moved to the zabbix server, since that is an azure
 
 It now only has the cost information.
 
-![azure host zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host_zabbbix.jpg)
+![azure host zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host_zabbix.jpg)
 
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-14.2.0
 
