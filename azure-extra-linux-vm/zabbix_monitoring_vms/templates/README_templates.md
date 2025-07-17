@@ -215,6 +215,43 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificat
 
 ### Azure Cost Management by HTTP
 
+
+```ps1
+connect-AzAccount -TenantId ID
+
+# Create a service principal
+$sp = New-AzADServicePrincipal -DisplayName 'zabbix'
+# get pass
+$sp.PasswordCredentials.SecretText
+
+Get-AzAdServicePrincipal | sort DisplayName
+
+Get-AzAdServicePrincipal | where DisplayName -eq 'zabbix'
+
+# get id
+Get-AzSubscription
+
+# set access
+New-AzRoleAssignment -ObjectId $sp.Id -RoleDefinitionName "Reader" -Scope "/subscriptions/<subscription_id>"
+
+# DisplayName        : zabbix
+# SignInName         :
+# RoleDefinitionName : Reader
+# [..]
+
+```
+
+Create a host in zabbix with no interface, use template 
+* Azure Cost Management by HTTP
+* Azure Virtual Machine by HTTP
+
+Add macros
+
+![azure host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host.jpg)
+
+https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-14.2.0
+
+
 https://www.zabbix.com/integrations/azure
 
 ### Azure MySQL Flexible Server by HTTP TODO
