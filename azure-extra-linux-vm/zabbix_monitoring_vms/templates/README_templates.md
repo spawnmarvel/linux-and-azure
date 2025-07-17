@@ -259,6 +259,10 @@ Add macros
 
 ![azure host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host2.jpg)
 
+And if all is correct
+
+![azure host result](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host_result.jpg)
+
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-14.2.0
 
 
