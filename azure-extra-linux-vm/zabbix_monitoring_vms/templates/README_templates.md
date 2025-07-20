@@ -195,7 +195,7 @@ Lets publish some messages with python3.
 https://www.zabbix.com/integrations/rabbitmq
 
 
-### Website certificate by Zabbix agent 2 TODO
+### Website certificate by Zabbix agent 2
 
 Let s check that we have agent 2
 ```bash
