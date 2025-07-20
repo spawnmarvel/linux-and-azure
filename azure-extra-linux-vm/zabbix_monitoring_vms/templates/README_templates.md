@@ -68,6 +68,9 @@ With this template you get dashboards also on the server it was added to.
 
 ![mysql dashboard](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_dash.jpg)
 
+Lets have a a look at the data:
+
+![mysql graph](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_graph.jpg)
 
 
 ### Install Zabbix Agent 2
