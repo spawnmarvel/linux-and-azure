@@ -280,7 +280,9 @@ The template for vm azure was moved to the zabbix server, since that is an azure
 Azure Virtual Machine by HTTP was also added to amqp04 and dummy01.
 
 
-The azurhostnow only has the cost information.
+(The azurhos tnow only has the cost information.)
+
+Example from zabbix server:
 
 ![azure host zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/azure_host_zabbix.jpg)
 
