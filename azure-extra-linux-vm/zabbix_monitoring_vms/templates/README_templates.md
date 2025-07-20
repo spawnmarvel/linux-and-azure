@@ -6,6 +6,13 @@ Template Linux by Zabbix agent on dummy01
 
 Template Linux by Zabbix agent active on dummy03
 
+
+There are some differences like here for the time out.
+
+![template active time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_passive_time.jpg)
+
+![template active time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/template_active_time.jpg)
+
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README.md
 
 
