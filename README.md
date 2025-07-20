@@ -281,22 +281,7 @@ ss -tn
 ss -t
 ```
 
-### Zabbix full?
 
-* Upgrade agent if errors and old version zabbix v vs agent v.
-* Try also to set new timeout
-
-```bash
-edit zabbix_agentd.conf
-### Option: Timeout
-#	Specifies how long to wait (in seconds) for establishing connection and exchanging data with Zabbix proxy or server.
-#
-# Mandatory: no
-# Range: 1-30
-# Default:
-# Timeout=3
-Timeout=30
-```
 ## Linux Command Reference
 
 This table organizes common Linux commands into logical categories to help you quickly find what you need, with corrected descriptions and clearer examples.
