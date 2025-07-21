@@ -54,14 +54,41 @@ openssl req -text -noout -verify -in mydomain.csr
 # If you have a private CA, submit the CSR to your CA according to their process.
 
 ```
-## Openssl self signed from CSR (above)
+## Openssl self signed from CSR
 
 ```bash
+
+# 1. Install OpenSSL (if not already installed)
+openssl version
+# or
+sudo apt install openssl
+
+# 2. Generate a Private Key
+openssl genrsa -out mysite.local.key 4096
+
+# 3. Generate the CSR
+openssl req -new -key mysite.local.key -out mydomain.csr
 # Create a self-signed certificate (if not using a CA):
 # If you're using the certificate for internal purposes and do not have a private CA, you can create a self-signed certificate with the following command:
 
 openssl x509 -signkey mysite.local.key -in mydomain.csr -req -days 365 -out mydomain.crt
 # This will create a certificate file named mysite.local.crt that is valid for 365 days.
+
+# Certificate With SAN
+
+# 2. Generate a Private Key
+openssl genrsa -out mysite2.local.key 4096
+
+# 3. Generate the CSR with SAN
+openssl req -new -key mysite2.local.key -out mydomain2.csr -subj "/C=GB/CN=IP" -addext "subjectAltName=DNS:IP"
+
+openssl x509 -signkey mysite2.local.key -in mydomain2.csr -req -days 365 -out mydomain2.crt
+# This will create a certificate file named mysite.local.crt that is valid for 365 days with SAN
+
+# Check the SAN
+openssl req -in mydomain2.csr -noout -text | grep -A 1 "Subject Alternative Name"
+# X509v3 Subject Alternative Name:
+#                    DNS:51.XXX.XXX.XXX
 
 ```
 
