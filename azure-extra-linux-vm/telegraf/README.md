@@ -754,5 +754,10 @@ Ref purdue, level1->level3->level3 (not skip a level)
 Set up:
 
 * Logfile
-* Telegraf input log, Telegraf output file and amqp
-* Telegraf input amqp, Telegraf output file and zabbix
+* Telegraf input Log file, Telegraf output file and Amqp
+* Telegraf input Amqp, Telegraf output file and Zabbix
+
+Environment
+
+* Windows: Logfile, Telegraf and Amqp.
+* Linux: Zabbix
