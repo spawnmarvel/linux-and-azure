@@ -770,7 +770,7 @@ We added a logfile to telegraf, two inputs: file and disk and two outputs: file 
 
 Format is json.
 
-![purdue_file_disk_amqp_file]()
+![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
 
 
 
