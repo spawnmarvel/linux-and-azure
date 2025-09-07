@@ -775,7 +775,18 @@ Telegraf runs as a service.
 
 Format is json.
 
+Example message:
+
+```json
+{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"BER-0803"},"timestamp":1757274720}
+{"fields":{"free":195134099456,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":510770802688,"used":315636703232,"used_percent":61.79615231938072},"name":"disk","tags":{"device":"C:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\C:"},"timestamp":1757274720}
+{"fields":{"free":421260537856,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":500105248768,"used":78844710912,"used_percent":15.765623557487645},"name":"disk","tags":{"device":"D:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\D:"},"timestamp":1757274720}
+{"fields":{"free":989560467456,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":1099511627776,"used":109951160320,"used_percent":9.999999776482582},"name":"disk","tags":{"device":"Z:","fstype":"MFilesFS","host":"BER-0803","mode":"rw","path":"\\Z:"},"timestamp":1757274720}
+```
+
 ![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
+
+Next up is reading the data from Amqp using a a different Telegraf and insert it to Zabbix.
 
 
 
