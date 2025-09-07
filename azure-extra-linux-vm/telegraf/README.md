@@ -756,7 +756,7 @@ For AMQP, use a shovel if needed to bridge network.
 Set up:
 
 * Logfile
-* Telegraf input Log file, Telegraf output file and Amqp
+* Telegraf input Log file and disk, Telegraf output file and Amqp
 * Telegraf input Amqp, Telegraf output file and Zabbix
 
 Environment
@@ -769,6 +769,8 @@ Environment
 We added a logfile to telegraf, two inputs: file and disk and two outputs: file and Amqp.
 
 Telegraf runs as a service.
+
+* Telegraf input Log file and disk, Telegraf output file and Amqp
 
 ![telegraf service](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/telegraf_service.jpg)
 
@@ -787,6 +789,13 @@ Example message:
 ![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
 
 Next up is reading the data from Amqp using a a different Telegraf and insert it to Zabbix.
+
+The Telegraf Amqp input service would be on a differt machine, and we would maybe use a Amqp shovel to move the data.
+
+For this tutorial, it is about the concept, so we will we just change the Telegraf.conf in C:\Program Files\Telegraf\telegraf-1.32.0\conf
+
+* Telegraf input Amqp, Telegraf output file and Zabbix
+
 
 
 
