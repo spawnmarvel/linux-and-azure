@@ -763,3 +763,15 @@ Environment
 
 * Windows: Logfile, Telegraf and Amqp.
 * Linux: Zabbix
+
+## Telegraf input: File and disk. Telegraf output Amqp
+
+We added a logfile to telegraf, two inputs: file and disk and two outputs: file and Amqp.
+
+Format is json.
+
+![purdue_file_disk_amqp_file]()
+
+
+
+
