@@ -747,7 +747,7 @@ https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 
 https://docs.influxdata.com/telegraf/v1/get-started/
 
-# Purdue Telegraf - Amqp - Telegraf
+# Purdue Telegraf - Amqp - Telegraf - Zabbix
 
 Ref purdue, level1->level3->level3 (not skip a level)
 
