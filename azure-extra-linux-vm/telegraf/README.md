@@ -745,5 +745,14 @@ https://docs.influxdata.com/telegraf/v1/configure_plugins/aggregator_processor/
 
 ## External plugins TODO
 
-
 https://docs.influxdata.com/telegraf/v1/get-started/
+
+# Purdue Telegraf - Amqp - Telegraf
+
+Ref purdue, level1->level3->level3 (not skip a level)
+
+Set up:
+
+* Logfile
+* Telegraf input log, Telegraf output file and amqp
+* Telegraf input amqp, Telegraf output file and zabbix
