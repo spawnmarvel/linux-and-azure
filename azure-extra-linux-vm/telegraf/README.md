@@ -749,7 +749,9 @@ https://docs.influxdata.com/telegraf/v1/get-started/
 
 # Purdue Telegraf - Amqp - Telegraf - Zabbix
 
-Ref purdue, level1->level3->level3 (not skip a level)
+Ref purdue, level1->level3->level3 (not skip a level).
+
+For AMQP, use a shovel if needed to bridge network.
 
 Set up:
 
