@@ -895,6 +895,31 @@ Example message:
 NOTE!! you can use: Secret-store secrets in Telegraf.
 - Avoid putting sensitive credentials (like password = "Linuxrules45Yea") in plain text in telegraf.conf.- Pull secrets from systems like Vault, AWS Secrets Manager, GCP Secret Manager, Azure Key Vault, or even from environment variables.
 
+Secrets in Telegraf configs can be referenced as:
+
+```toml
+password = 'secret://<secretstore>/<path>'
+```
+
+Telegraf will look in the OS environment store for TELEGRAF_RABBITMQ_PASSWORD when starting.
+
+In PowerShell / Windows CMD
+
+```ps1
+set TELEGRAF_RABBITMQ_PASSWORD=Linuxrules45Yea
+```
+
+```toml
+[[outputs.amqp]]
+  brokers = ["amqp://localhost:5672/"]
+  exchange = "telegraf"
+  exchange_type = "topic"
+  exchange_durability = "durable"
+  username = "admin2"
+  password = 'secret://environment/TELEGRAF_RABBITMQ_PASSWORD'
+  data_format = "json"
+```
+
 
 ## Telegraf input: Amqp. Telegraf output File and Zabbix
 
