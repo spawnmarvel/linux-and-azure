@@ -791,6 +791,85 @@ Main log section:
 
 We added a logfile to telegraf, two inputs: file and disk and two outputs: file and Amqp.
 
+
+```toml
+###############################################################################
+#                                  INPUTS                                     #
+###############################################################################
+[[inputs.file]]
+  ## Files to parse each interval.  Accept standard unix glob matching rules,
+  ## as well as ** to match recursive files and directories.
+  files = ["C://Program Files//Telegraf//telegraf-1.32.0//file//metrics.in.json"]
+  
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
+
+# Read metrics about disk usage by mount point
+[[inputs.disk]]
+  ## By default stats will be gathered for all mount points.
+  ## Set mount_points will restrict the stats to only the specified mount points.
+  # mount_points = ["/"]
+```
+
+```toml
+###############################################################################
+#                                  OUTPUTS                                     #
+###############################################################################
+
+# https://github.com/influxdata/telegraf/blob/master/plugins/outputs/amqp/README.md
+
+# Publishes metrics to an AMQP broker
+[[outputs.amqp]]
+  ## Brokers to publish to.  If multiple brokers are specified a random broker
+  ## will be selected anytime a connection is established.  This can be
+  ## helpful for load balancing when not using a dedicated load balancer.
+  brokers = ["amqp://localhost:5672/"]
+
+  ## Maximum messages to send over a connection.  Once this is reached, the
+  ## connection is closed and a new connection is made.  This can be helpful for
+  ## load balancing when not using a dedicated load balancer.
+  # max_messages = 0
+
+  ## Exchange to declare and publish to.
+  exchange = "telegraf"
+
+  ## Exchange type; common types are "direct", "fanout", "topic", "header", "x-consistent-hash".
+  exchange_type = "topic"
+
+  ## If true, exchange will be passively declared.
+  # exchange_passive = false
+
+  ## Exchange durability can be either "transient" or "durable".
+  exchange_durability = "durable"
+  
+  ## Authentication credentials for the PLAIN auth_method.
+  username = "admin2"
+  password = "Linuxrules45Yea"
+  
+  ## Data format to output.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
+  
+# Send telegraf metrics to file(s)
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["C:/Program Files/Telegraf/telegraf-1.32.0//file//metrics.out.json"]
+  
+  ## Data format to output.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
+```
+
 Telegraf runs as a service.
 
 * Telegraf input Log file and disk, Telegraf output file and Amqp
