@@ -764,6 +764,29 @@ Environment
 * Windows: Logfile, Telegraf and Amqp.
 * Linux: Zabbix
 
+Main log section:
+
+```toml
+[agent]
+ interval = "30s" 
+ round_interval = true
+ metric_batch_size = 1000 
+ metric_buffer_limit = 10000 
+ collection_jitter = "0s" 
+ flush_interval = "30s"
+ flush_jitter = "5s" precision = ""
+ debug = true
+ quiet = false # quiet: Log only error level messages.
+ logfile = "C://Program Files//Telegraf//telegraf-1.32.0//telegraf.logs"
+ logfile_rotation_max_size = "10MB"
+ logfile_rotation_max_archives = 10
+ 
+# Readme
+# https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md#agent
+```
+
+
+
 ## Telegraf input: File and disk. Telegraf output Amqp
 
 We added a logfile to telegraf, two inputs: file and disk and two outputs: file and Amqp.
