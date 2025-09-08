@@ -892,7 +892,8 @@ Example message:
 ![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
 
 
-NOTE!! you can use: Secret-store secrets in Telegraf.
+### NOTE!! You can use: Secret-store secrets in Telegraf:
+
 - Avoid putting sensitive credentials (like password = "Linuxrules45Yea") in plain text in telegraf.conf.- Pull secrets from systems like Vault, AWS Secrets Manager, GCP Secret Manager, Azure Key Vault, or even from environment variables.
 
 Secrets in Telegraf configs can be referenced as:
