@@ -890,6 +890,9 @@ Example message:
 
 ![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
 
+
+## Telegraf input: Amqp. Telegraf output File and Zabbix
+
 Next up is reading the data from Amqp using a a different Telegraf and insert it to Zabbix.
 
 The Telegraf Amqp input service would be on a differt machine, and we would maybe use a Amqp shovel to move the data.
