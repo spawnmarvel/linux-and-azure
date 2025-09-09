@@ -97,6 +97,15 @@ https://docs.influxdata.com/telegraf/v1/install/
 https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-telegraf-to-a-secured-influxdb-instance
 
 
+## Test and debug Telegraf
+
+```ps1
+
+.\telegraf.exe --config ".\conf\telegraf.conf" --debug
+
+.\telegraf.exe --config ".\conf\telegraf.conf" --test
+
+```
 
 # Documentation and tutorial
 
