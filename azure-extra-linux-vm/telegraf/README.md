@@ -930,6 +930,85 @@ set TELEGRAF_RABBITMQ_PASSWORD=Linuxrules45Yea
   data_format = "json"
 ```
 
+### Telegraf reconnect amqp
+
+Hm, it is not reconnecting, AI says use: persistent = true
+
+```ps1
+
+.\telegraf.exe --config ".\conf\telegraf.conf" --test
+
+```
+
+Log
+
+```log
+PS C:\Program Files\Telegraf\telegraf-1.32.0> .\telegraf.exe --config ".\conf\telegraf.conf" --test
+2025-09-09T19:37:06Z I! Loading config: .\conf\telegraf.conf
+2025-09-09T19:37:06Z W! DeprecationWarning: Option "url" of plugin "outputs.amqp" deprecated since version 1.7.0 and will be removed in 1.35.0: use 'brokers' instead
+2025-09-09T19:37:06Z W! DeprecationWarning: Option "database" of plugin "outputs.amqp" deprecated since version 1.7.0 and will be removed in 1.35.0: use 'headers' instead
+2025-09-09T19:37:06Z W! DeprecationWarning: Option "retention_policy" of plugin "outputs.amqp" deprecated since version 1.7.0 and will be removed in 1.35.0: use 'headers' instead
+2025-09-09T19:37:06Z E! loading config file .\conf\telegraf.conf failed: plugin outputs.amqp: line 45: configuration specified the fields ["persistent"], but they were not used. This is either a typo or this config option does not exist in this version.
+```
+Upgrade Telegraf
+
+First uninstall
+
+```ps1
+# installed
+.\telegraf --service install --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\'
+
+# uninstalled
+.\telegraf --service uninstall --config-directory 'C:\Program Files\Telegraf\telegraf-1.32.0\conf\'
+The use of --service is deprecated, please use the 'service' command instead!
+Successfully uninstalled service "telegraf"
+```
+
+Download lates zip
+
+https://docs.influxdata.com/telegraf/v1/install/?t=Windows
+
+```ps1
+
+cd C:\Program Files\Telegraf>
+
+Invoke-WebRequest https://dl.influxdata.com/telegraf/releases/telegraf-1.35.4_windows_amd64.zip -OutFile telegraf-1.35.4_windows_amd64.zip
+
+Expand-Archive .\telegraf-1.35.4_windows_amd64.zip 'C:\Program Files\Telegraf\'
+
+mkdir conf
+
+cd conf
+
+copy ..\telegraf.conf telegraf.conf
+
+# copy the conf from the old folder to the new folder
+C:\Program Files\Telegraf\telegraf-1.32.0\conf
+#to
+C:\Program Files\Telegraf\telegraf-1.35.4\conf
+
+```
+
+Test it
+
+```ps1
+.\telegraf.exe --config ".\conf\telegraf.conf" --debug
+
+.\telegraf.exe --config ".\conf\telegraf.conf" --test
+```
+
+Install new
+
+```ps1
+
+.\telegraf.exe --service install --config "C:\Program Files\Telegraf\telegraf-1.35.4\conf\telegraf.conf"
+The use of --service is deprecated, please use the 'service' command instead!
+Successfully installed service "telegraf"
+
+```
+
+It reconnects to amqp if I had a connection and amqp was stopped, it is success.
+
 
 ## Telegraf input: Amqp. Telegraf output File and Zabbix
 
