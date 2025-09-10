@@ -1110,6 +1110,8 @@ The result is messages is consumed as one json but in batch of 10 and then write
 
 ### Telegraf input Amqp, Telegraf output file and Zabbix
 
+Now lets add output zabbix also.
+
 
 
 
