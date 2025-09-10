@@ -1009,6 +1009,7 @@ Successfully installed service "telegraf"
 
 It reconnects to amqp if I had a connection and amqp was stopped, it is success.
 
+![amqp reconnect](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/amqp_reconnect.jpg)
 
 ## Telegraf input: Amqp. Telegraf output File and Zabbix
 
