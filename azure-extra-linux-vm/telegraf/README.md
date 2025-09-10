@@ -107,6 +107,24 @@ https://docs.influxdata.com/influxdb/v2/admin/security/enable-tls/#connect-teleg
 
 ```
 
+## Default Telegraf.conf : 
+
+The default config has all plugins, for agent,  input and output, agr and more configured so you can just copy them.
+
+You see it when you install it:
+
+![Default config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/default_config.jpg)
+
+Example log:
+
+```log
+
+2025-09-10T15:57:13Z I! Starting Telegraf 1.35.4 brought to you by InfluxData the makers of InfluxDB
+2025-09-10T15:57:13Z I! Available plugins: 237 inputs, 9 aggregators, 34 processors, 26 parsers, 65 outputs, 5 secret-stores
+
+
+```
+
 # Documentation and tutorial
 
 ## Install (in this example windows)
