@@ -907,13 +907,10 @@ Telegraf runs as a service.
 
 Format is json.
 
-Example message:
+Example message: (we send one and one msg so it is easy to parser for consumer)
 
 ```json
-{"fields":{"tag1_active":1,"tag1_state":0,"tag1_value":100},"name":"file","tags":{"host":"BER-0803"},"timestamp":1757274720}
-{"fields":{"free":195134099456,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":510770802688,"used":315636703232,"used_percent":61.79615231938072},"name":"disk","tags":{"device":"C:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\C:"},"timestamp":1757274720}
-{"fields":{"free":421260537856,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":500105248768,"used":78844710912,"used_percent":15.765623557487645},"name":"disk","tags":{"device":"D:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\D:"},"timestamp":1757274720}
-{"fields":{"free":989560467456,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":1099511627776,"used":109951160320,"used_percent":9.999999776482582},"name":"disk","tags":{"device":"Z:","fstype":"MFilesFS","host":"BER-0803","mode":"rw","path":"\\Z:"},"timestamp":1757274720}
+{"fields":{"free":284465917952,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":510770802688,"used":226304884736,"used_percent":44.3065428848008},"name":"disk","tags":{"device":"C:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\C:"},"timestamp":1757537880}
 ```
 
 ![purdue_file_disk_amqp_file](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/purdue_file_disk_amqp_file.jpg)
@@ -1039,9 +1036,79 @@ Next up is reading the data from Amqp using a a different Telegraf and insert it
 
 The Telegraf Amqp input service would be on a differt machine, and we would maybe use a Amqp shovel to move the data.
 
-For this tutorial, it is about the concept, so we will we just change the Telegraf.conf in C:\Program Files\Telegraf\telegraf-1.32.0\conf
+For this tutorial, it is about the concept, so we will we just change the Telegraf.conf in C:\Program Files\Telegraf\telegraf-1.35.4\conf
 
-* Telegraf input Amqp, Telegraf output file and Zabbix
+You can look in default telegraf.config the outs are there.
+
+### Telegraf input Amqp, Telegraf output file
+
+* It reads a bit faster then the producer
+* It also has a prefetch for batch
+* It saves in batch to file
+
+Example:
+
+```toml
+[agent]
+ interval = "30s" 
+ round_interval = true
+ metric_batch_size = 1000 
+ metric_buffer_limit = 10000 
+ collection_jitter = "0s" 
+ flush_interval = "5s"
+ flush_jitter = "5s" precision = ""
+ debug = true
+ quiet = false # quiet: Log only error level messages.
+ logfile = "C://Program Files//Telegraf//telegraf-1.35.4//telegraf.logs"
+ logfile_rotation_max_size = "10MB"
+ logfile_rotation_max_archives = 10
+ # startup_always_produce_metrics = true
+ 
+# Readme
+# https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md#agent
+
+###############################################################################
+#                                  INPUTS                                     #
+###############################################################################
+
+[[inputs.amqp_consumer]]
+  brokers = ["amqp://localhost:5672/"]
+  username = "admin2"
+  password = "Linuxrules45Yea"
+  exchange = "telegraf"
+  exchange_type = "topic"
+  exchange_durability = "durable"
+  queue = "from.telegraf"
+  queue_durability = "durable"
+  binding_key = "#"
+  prefetch_count = 10
+  data_format = "json"
+  
+###############################################################################
+#                                  OUTPUTS                                     #
+###############################################################################
+
+# Send telegraf metrics to file(s)
+[[outputs.file]]
+  ## Files to write to, "stdout" is a specially handled file.
+  files = ["C:/Program Files/Telegraf/telegraf-1.35.4//file//from_amqp_metrics.out.json"]
+  
+  ## Data format to output.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  ## data_format = "influx"
+  data_format = "json"
+
+
+```
+
+The result is messages is consumed as one json but in batch of 10 and then write to file.
+
+![amqp_batch_consume ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/amqp_batch_consume.jpg)
+
+
+### Telegraf input Amqp, Telegraf output file and Zabbix
 
 
 
