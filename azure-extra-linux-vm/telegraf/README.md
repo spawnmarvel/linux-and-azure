@@ -907,7 +907,7 @@ Telegraf runs as a service.
 
 Format is json.
 
-Example message: (we send one and one msg so it is easy to parser for consumer)
+Example message: (we send one and one msg so it is easy to parse for consumer)
 
 ```json
 {"fields":{"free":284465917952,"inodes_free":0,"inodes_total":0,"inodes_used":0,"inodes_used_percent":0,"total":510770802688,"used":226304884736,"used_percent":44.3065428848008},"name":"disk","tags":{"device":"C:","fstype":"NTFS","host":"BER-0803","mode":"rw","path":"\\C:"},"timestamp":1757537880}
