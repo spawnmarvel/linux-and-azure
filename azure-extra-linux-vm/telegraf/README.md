@@ -1011,6 +1011,10 @@ It reconnects to amqp if I had a connection and amqp was stopped, it is success.
 
 ![amqp reconnect](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/amqp_reconnect.jpg)
 
+It even logs to event viewer
+
+![event viewer](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/win_log.jpg)
+
 ## Telegraf input: Amqp. Telegraf output File and Zabbix
 
 Next up is reading the data from Amqp using a a different Telegraf and insert it to Zabbix.
