@@ -1,5 +1,8 @@
 # Test more templates and stuff
 
+Zabbix all templates
+https://github.com/zabbix/community-templates
+
 ### Template Linux by Zabbix agent
 
 Template Linux by Zabbix agent on dummy01 
