@@ -20,7 +20,7 @@ There are some differences like here for the time out.
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/README.md
 
 
-## Active templates check
+### Active templates check
 
 Lets see how many active templates there are.
 
