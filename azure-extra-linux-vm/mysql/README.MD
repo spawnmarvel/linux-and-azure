@@ -367,6 +367,11 @@ sudo service apache2 status
 
 ```
 
+![phpmyadmin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/images/phpmyadmin.png)
+
+Create a user
+
+
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04
 
