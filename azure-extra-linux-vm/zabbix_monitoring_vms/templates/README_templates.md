@@ -28,6 +28,11 @@ As you will see a bit later we are using Linux by Zabbix agent active for the se
 
 ![a active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_template.png)
 
+Lets assume we are to monitor Windows.
+
+Here we can see that it is almost one to one, it is the same for Linux.
+
+![windows active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/windows_active.png)
 
 ### Template MySQL by Zabbix agent
 
