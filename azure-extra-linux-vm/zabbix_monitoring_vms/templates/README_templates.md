@@ -27,9 +27,24 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 Lets see how many active templates there are.
 
-As you will see a bit later we are using Linux by Zabbix agent active for the server dummy03.
+As you will see below in the active section we are using Linux by Zabbix agent active for the server dummy03.
 
 ![a active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/active_template.png)
+
+Linux by Zabbix agent active gives us:
+
+* Ping
+* CPU, RAM
+* Processes
+* Boot time, name , uptime, OS info etc
+
+And also discovery for:
+
+![a active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/discovery.png)
+
+
+
+
 
 Lets assume we are to monitor Windows.
 
