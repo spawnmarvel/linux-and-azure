@@ -371,6 +371,15 @@ sudo service apache2 status
 
 Create a user
 
+sudo mysql
+```sql
+CREATE USER 'pikaadmin'@'%' IDENTIFIED BY ' look else where';
+GRANT ALL PRIVILEGES ON *.* TO 'pikaadmin'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EXIT
+```
+
+![phpmyadmin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/images/php_dashboard.png)
 
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04
