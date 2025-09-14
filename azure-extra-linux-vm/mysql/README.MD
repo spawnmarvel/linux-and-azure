@@ -185,7 +185,9 @@ mysql -u pika -h 192.168.3.4 -p
 
 ```
 Result
+
 ![mysql remote ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_remote.png)
+
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
 
 
@@ -291,7 +293,82 @@ select * from table1;
 
 ```
 
-### MySQL Workbench
+### Phpmyadmin app
+
+
+
+```bash
+sudo apt update -y
+
+# Next, install the phpmyadmin package. This command will also install a web server (Apache2) and PHP with the required extensions, as they are dependencies.
+sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+
+# Configure database for phpmyadmin with dbconfig-common?
+# Abort
+# ref https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04
+
+sudo mysql
+
+UNINSTALL COMPONENT "file://component_validate_password";
+exit
+
+# Then try installing the phpmyadmin package again and it will work as expected:
+sudo apt install phpmyadmin
+
+# no just on yes and click
+
+sudo mysql
+INSTALL COMPONENT "file://component_validate_password";
+exit
+
+```
+The installation process adds the phpMyAdmin Apache configuration file into the /etc/apache2/conf-enabled/ directory, where it is read automatically. To finish configuring Apache and PHP to work with phpMyAdmin, the only remaining task in this section of the tutorial is to is explicitly enable the mbstring PHP extension, which you can do by typing:
+
+```bash
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+
+php -v
+# upgrade php is in the link also.
+
+```
+
+Visit phpmyadmin
+
+* Add NSG 80 inbound
+* Edit UFW
+
+```bash
+sudo ufw allow http
+```
+
+Apache http://ip success
+
+Apache http://ip/phpmyadmin fail
+
+```bash
+# does it exist
+ls -l /var/www/html/
+
+# no only index.html
+
+# create it
+# This command creates a symbolic link named phpmyadmin in your web root (/var/www/html), which points to the actual phpMyAdmin installation directory (/usr/share/phpmyadmin)
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+
+# Sometimes, the symbolic link method isn't enough, especially if you have a non-standard Apache configuration. 
+ls -l /etc/apache2/conf-enabled/phpmyadmin.conf
+
+# If the link doesn't exist, create it:
+sudo ln -s /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-enabled/
+
+sudo service apache2 restart
+sudo service apache2 status
+
+```
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04
 
 ### Performance tuning MySQL after installation
 
