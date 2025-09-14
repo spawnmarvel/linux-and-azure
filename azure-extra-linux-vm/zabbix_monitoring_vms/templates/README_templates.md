@@ -37,6 +37,11 @@ Here we can see that it is almost one to one, it is the same for Linux.
 
 ![windows active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/windows_active.png)
 
+
+For SNMP we have a lot of passive ones, but if security is an issue we must use traps:
+
+https://www.youtube.com/watch?v=zZv2VFPz5k4
+
 ### Template MySQL by Zabbix agent
 
 Let s start monitor our MySQL database
