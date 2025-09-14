@@ -381,6 +381,9 @@ EXIT
 
 ![phpmyadmin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/mysql/images/php_dashboard.png)
 
+continue below tutorial
+
+Step 3 — Securing Your phpMyAdmin Instance
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04
 
