@@ -209,7 +209,8 @@ telnet 192.168.3.4 3306
 mysql -u pika -h 192.168.3.4 -p
 
 ```
-
+Result
+![mysql remote ](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_remote.png)
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
 
 ## Configure Zabbix MYSQL
