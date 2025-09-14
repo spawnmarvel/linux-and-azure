@@ -4,6 +4,21 @@
 
 https://www.zabbix.com/download?zabbix=6.0&os_distribution=ubuntu&os_version=22.04&components=server_frontend_agent&db=mysql&ws=apache
 
+## --no-install-recommends
+
+
+```bash
+sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+# vs
+sudo apt install zabbix-server-mysql --no-install-recommends zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+```
+
+The difference between the two commands lies in the inclusion of recommended packages.
+
+* sudo apt install zabbix-server-mysql zabbix-frontend-php ... will install the specified packages along with their recommended dependencies. These are packages that the maintainer of the software believes are very likely to be needed for the software to function as expected or provide a complete user experience.
+
+* sudo apt install zabbix-server-mysql --no-install-recommends ... will install only the specified packages and their strict dependencies (the packages required for the software to run at all). It will not install any of the recommended packages.
+
 ## Install Zabbix
 
 ```bash
