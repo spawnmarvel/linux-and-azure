@@ -1,8 +1,9 @@
 # Learning MySql with Telegraf on Linux with Grafana
 
 * Basic
-* * Run on Linux vmdocker01
-* * Insert use telegraf and file, possible other inputs also
+* * Run on Linux dummy01 (vmdocker01)
+* * Insert use telegraf and file, possible other inputs also was done (this section is moved to misc)
+* * Python as cron job and Grafana is done (this section is moved to misc)
 * Advanced
 * Backup and restore
 * Tuning and performance
@@ -35,7 +36,7 @@ mysql -V
 
 ```
 
-### Step 2 — Configuring MySQL
+### Step 2 — Configuring MySQL example
 
 For fresh installations of MySQL, you’ll want to run the database management system’s included security script. This script changes some of the less secure default options for things like disallowing remote root logins and removing sample users.
 
@@ -68,7 +69,7 @@ https://dev.mysql.com/doc/refman/8.4/en/mysql-secure-installation.html
 
 ###  Step 2 — Configuring MySQL Secure Optional
 
-MySql example install Digital Ocean secure
+MySql example install Digital Ocean secure this was done
 
 Servers used:
 * imsdal@dummy01:~$ ssh imsdal@192.168.3.6
@@ -79,8 +80,13 @@ Servers used:
 # install dummy01
 sudo apt update
 sudo apt install mysql-server
+# when you install MySQL on Ubuntu (via apt install mysql-server), the package automatically enables the MySQL service to start **at boot**.  
 sudo systemctl start mysql.service
 sudo service mysql status
+
+# check boot
+systemctl is-enabled mysql
+# enabled
 
 # configure
 sudo mysql
@@ -185,6 +191,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 
 ### Step 3 — Creating a Dedicated MySQL User and Granting Privileges
 
+Was done above
 
 Upon installation, MySQL creates a root user account which you can use to manage your database. This user has full privileges over the MySQL server, meaning it has complete control over every database, table, user, and so on.
 
@@ -215,6 +222,101 @@ https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/za
 
 https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
 
+
+### mysqld.cnf
+
+Lets move the data directory
+
+Check data on dummy1, sudo mysql.
+
+```sql
+use db1;
+
+select * from table1;
+-- id = 1, name=row1
+```
+
+Edit mysqld.cnf
+
+```bash
+cd /etc/mysql/mysql.conf.d/
+
+ls
+mysql.cnf  mysqld.cnf  mysqld.cnf_bck
+# datadir       = /var/lib/mysql
+
+sudo service mysql stop
+
+# - Inside /var/lib/mysql/, you’ll find a folder for each database (including mysql, information_schema, etc.).
+# - You need **root or mysql user privileges** to view or edit these files.
+sudo su
+cd /var/lib/mysql
+
+mkdir mysql-data
+cd
+sudo rsync -av /var/lib/mysql /var/lib/mysql-data
+
+exit # root
+
+cd /etc/mysql/mysql.conf.d/
+sudo nano mysqld.cnf
+# edit mysql
+datadir       = /var/lib/mysql-data/mysql
+
+sudo chown -R mysql:mysql /var/lib/mysql-data
+
+sudo nano /etc/apparmor.d/usr.sbin.mysqld
+# Allow data dir access
+#  /var/lib/mysql/ r,
+#  /var/lib/mysql/** rwk,
+  /var/lib/mysql-data/ r,
+  /var/lib/mysql-data/** rwk,
+
+# reload armor
+sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.mysqld
+
+sudo service mysql status
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/usr/lib/systemd/system/mysql.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2025-09-14 15:28:25 UTC; 43s ago
+```
+
+```sql
+-- test
+-- sudo mysql
+-- Welcome to the MySQL monitor.  Commands end with ; or \g
+
+use db1;
+select * from table1;
+
+```
+
+### MySQL Workbench
+
+### Performance tuning MySQL after installation
+
+1. Optimize the MySQL configuration file: Adjust settings in /etc/mysql/my.cnf to optimize performance based on your system’s resources.
+2. Use a suitable storage engine: Choose the most appropriate storage engine for your database, such as MyISAM for transactional workloads.
+3. Index your tables: Create indexes on frequently queried columns to improve query performance.
+
+https://dev.mysql.com/doc/refman/8.0/en/create-index.html
+
+4. Regularly update statistics: Run ANALYZE TABLE to update table statistics and improve query optimization.
+
+```sql
+
+# sudo mysql
+
+use db1;
+
+ANALYZE TABLE table1;
+```
+
+5. Monitor performance: Use tools like mysqladmin or sysdig to monitor MySQL performance and identify bottlenecks.
+
+
+
+# Misc
 
 ## Telegraf install and configure file in, file out and mysql out
 
