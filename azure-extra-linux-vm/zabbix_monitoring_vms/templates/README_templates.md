@@ -49,7 +49,7 @@ Lets have a look at interface
 
 Lets have a look at disk
 
-![disk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/interface.png)
+![disk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/disk.png)
 
 
 Lets assume we are to monitor Windows.
