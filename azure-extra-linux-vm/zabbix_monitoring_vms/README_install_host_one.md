@@ -60,7 +60,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-za
 
 ```bash
 
-# some mysql things is installed with zabbix.
+# some mysql things is installed with zabbix, the mysql client tools
 
 # mysql server is not
 dpkg --get-selections | grep mysql
@@ -74,9 +74,10 @@ php-mysql                                       install
 php7.4-mysql                                    install
 zabbix-server-mysql                             install
 
-# install it
+# I install mysql server on the same host in this case
 
 sudo apt install mysql-server
+# for just client tools, i.e a remote server
 # sudo apt install mysql-client
 
 # now it is
