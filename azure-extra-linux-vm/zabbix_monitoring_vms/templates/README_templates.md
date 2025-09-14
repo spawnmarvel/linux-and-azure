@@ -40,9 +40,12 @@ Linux by Zabbix agent active gives us:
 
 And also discovery for:
 
-![a active template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/discovery.png)
+![dicovery](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/discovery.png)
 
 
+Lets have a look at interface
+
+![interface](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/interface.png)
 
 
 
