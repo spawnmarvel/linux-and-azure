@@ -50,8 +50,7 @@ sudo dpkg --list
 sudo apt --purge remove zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
 
 ```
-
-Mysql
+Zabbix example install DO
 
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-zabbix-to-securely-monitor-remote-servers-on-ubuntu-20-04
 
@@ -103,9 +102,117 @@ sudo mysql_secure_installation
 n, y,y,y,y,y
 
 ```
-https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04
+MySql example install DO secure
 
-## Configure Zabbix
+```bash
+# example
+
+# install
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+sudo service mysql status
+
+# configure
+sudo mysql
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pokemon';
+exit
+mysql -u root -p
+
+# Then go back to using the default authentication method using this command:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+exit
+
+# Run the security script with sudo:
+sudo mysql_secure_installation
+
+Press y|Y for Yes, any other key for No: Y
+Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: 0
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : y
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : y
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+Success.
+
+
+# Create a test database and one table
+## 1. Create the database
+CREATE DATABASE db1;
+
+## 2. Switch to the new database
+USE db1;
+
+## 3. Create a table with id and name
+CREATE TABLE table1 (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO table1 (name) values ('row1');
+select * from table1;
+# create a dedicated MySql user and grating privilegs, beside root
+sudo mysql
+# 
+#CREATE USER 'username'@'localhost' IDENTIFIED WITH authentication_plugin BY 'password';
+# '%' (percent sign) is a wildcard that allows connections from **any host** (remote or local)
+CREATE USER 'pika'@'%' IDENTIFIED BY 'mika12';
+
+Your password does not satisfy the current policy requirements
+mysql>
+# Perfect that is what we configured
+CREATE USER 'pika'@'%' IDENTIFIED BY 'pikamika12';
+
+# After creating your new user, you can grant them the appropriate privileges.
+grant all privileges on db1.* to 'pika'@'%';
+FLUSH PRIVILEGES;
+EXIT
+
+# connect
+mysql -u pika -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.43-0ubuntu0.24.04.1 (Ubuntu)
+# query
+show databases;
+use db1;
+select * from db1;
+
+# edit config and UFW on dummy 1
+cd /etc/mysql/mysqld.conf.d/
+sudo cp mysqld.cnf mysqld.cnf_bck
+sudo nano mysqld.cnf
+# bind-address = 0.0.0.0
+
+sudo ufw allow 3306/tcp
+ssudo service mysql stop
+sudo service mysql start
+sudo service mysql status
+
+# check bind adress is 0.0.0.0
+sudo ss -tlnp | grep 3306
+
+# login remote from dummy 3 to dummy1
+imsdal@dummy01:~$ ssh imsdal@192.168.3.6
+imsdal@dummy03:~$
+
+# install mysql client
+sudo apt update
+# This will give you the mysql command-line client, which you can use to connect to remote MySQL databases.
+sudo apt install mysql-client
+
+nc -zv 192.168.3.4 3306
+# Connection to 192.168.3.4 3306 port [tcp/mysql] succeeded!
+telnet 192.168.3.4 3306
+
+mysql -u pika -h 192.168.3.4 -p
+
+```
+
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
+
+## Configure Zabbix MYSQL
 
 ```bash
 # c Create initial database
