@@ -66,7 +66,7 @@ This program enables you to improve the security of your MySQL installation in t
 https://dev.mysql.com/doc/refman/8.4/en/mysql-secure-installation.html
 
 
-####  Step 2 — Configuring MySQL Secure Optional
+###  Step 2 — Configuring MySQL Secure Optional
 
 MySql example install Digital Ocean secure
 
