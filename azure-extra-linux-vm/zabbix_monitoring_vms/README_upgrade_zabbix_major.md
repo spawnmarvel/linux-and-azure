@@ -301,7 +301,7 @@ Check zabbix server logs again
 
 Check frontend
 
-![zabbix 2][]
+![zabbix 2][https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix7.png]
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
