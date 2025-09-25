@@ -458,6 +458,10 @@ We get mysql data also.
 
 ![zabbix_agent_2_7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_data.png)
 
+Close it.
+
+![mysql trigger](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_trigger.png)
+
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
