@@ -464,7 +464,7 @@ Close it.
 
 Version 7 success
 
-![v 7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/v_7.png)
+![v 7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/v7.png)
 
 
 
