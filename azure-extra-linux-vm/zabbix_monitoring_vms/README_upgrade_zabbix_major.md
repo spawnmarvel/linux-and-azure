@@ -367,5 +367,34 @@ MySQL: Version has changed (new version value received: mysqladmin: [ERROR] Unkn
 ![mysql error](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_error.png)
 
 
+Hm, agent logs are success, but still this mysql issue.
+
+Lets re installl zabbix agent, not sure why I had agent 2 also.
+
+
+```bash
+sudo systemctl stop zabbix-agent
+sudo systemctl stop zabbix-agent2
+
+sudo apt purge zabbix-agent -y
+sudo apt purge zabbix-agent2 -y
+
+
+sudo apt install zabbix-agent -y
+sudo nano /etc/zabbix/zabbix_agentd.conf
+
+# We added ip
+grep 'Server*' zabbix_agentd.conf
+# Server=127.0.0.1,192.168.3.5
+# ServerActive=192.168.3.5
+
+sudo systemctl start zabbix-agent
+
+```
+
+Still we new data, logs are good, but the same messages are there.
+
+![mysql error 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_error2.png)
+
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
