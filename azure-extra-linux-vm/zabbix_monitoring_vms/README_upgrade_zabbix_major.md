@@ -379,6 +379,7 @@ sudo systemctl stop zabbix-agent2
 sudo apt purge zabbix-agent -y
 sudo apt purge zabbix-agent2 -y
 
+sudo apt update
 
 sudo apt install zabbix-agent -y
 sudo nano /etc/zabbix/zabbix_agentd.conf
@@ -395,6 +396,64 @@ sudo systemctl start zabbix-agent
 Still we get new data, logs are good, but the same messages are there.
 
 ![mysql error 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_error2.png)
+
+Is it the template?
+
+On host zabbix server: MySQL by Zabbix agent 2, Website certificate by Zabbix agent 2.
+
+So we were using agent two, also.
+
+Remove zabbix-agent
+
+```bash
+sudo systemctl stop zabbix-agent
+sudo apt purge zabbix-agent -y
+
+sudo apt update
+```
+
+Install agent-2
+
+```bash
+sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
+sudo apt update
+sudo apt install zabbix-agent2 zabbix-agent2-plugin-* -y
+sudo nano /etc/zabbix/zabbix_agent2.conf
+
+# We added ip
+grep 'Server*' zabbix_agent2.conf
+# Server=127.0.0.1,192.168.3.5
+# ServerActive=192.168.3.5
+
+# check if it is enabled at boot
+
+sudo systemctl start zabbix-agent
+```
+Agent logs
+
+```
+sudo systemctl status zabbix-agent2
+● zabbix-agent2.service - Zabbix Agent 2
+     Loaded: loaded (/usr/lib/systemd/system/zabbix-agent2.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-09-25 21:30:47 UTC; 1min 26s ago
+   Main PID: 17941 (zabbix_agent2)
+      Tasks: 8 (limit: 4604)
+     Memory: 13.1M (peak: 13.8M)
+        CPU: 179ms
+     CGroup: /system.slice/zabbix-agent2.service
+             └─17941 /usr/sbin/zabbix_agent2 -c /etc/zabbix/zabbix_agent2.conf
+
+Sep 25 21:30:47 vmzabbix02 systemd[1]: Started zabbix-agent2.service - Zabbix Agent 2.
+Sep 25 21:30:47 vmzabbix02 zabbix_agent2[17941]: Starting Zabbix Agent 2 (7.0.18)
+Sep 25 21:30:47 vmzabbix02 zabbix_agent2[17941]: Zabbix Agent2 hostname: [Zabbix server]
+Sep 25 21:30:47 vmzabbix02 zabbix_agent2[17941]: Press Ctrl+C to exit.
+
+```
+
+We get data for everything, inlcuding the zabbix server, it must be something with the template.
+
+![zabbix_agent_2_7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_agent_2_7.png)
+
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
