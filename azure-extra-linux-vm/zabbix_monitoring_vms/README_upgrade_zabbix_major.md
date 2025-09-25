@@ -299,9 +299,73 @@ Check zabbix server logs again
 7989:20250925:201346.942 starting HA manager
 ```
 
-Check frontend
+Check frontend,  and we have version 7.0.18
 
 ![zabbix 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix7.png)
+
+Check the all alerts are gone after some minuttes.
+
+They are, but we have one alert for the zabbix server itself
+
+![agent 7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/agent_7.png)
+
+But we still had values, hm....
+
+```bash
+
+sudo tail -f zabbix_agentd.log
+```
+```log
+
+6379:20250925:201838.281 failed to accept an incoming connection: connection from "192.168.3.5" rejected, allowed hosts: "127.0.0.1"
+```
+That was because we said N to keep the configuration, we must compare and edit it.
+
+```bash
+sudo systemctl stop zabbix-agent
+```
+```log
+
+6382:20250925:203038.280 failed to accept an incoming connection: connection from "192.168.3.5" rejected, allowed hosts: "127.0.0.1"
+6375:20250925:203046.948 Got signal [signal:15(SIGTERM),sender_pid:9928,sender_uid:114,reason:0]. Exiting ...
+6375:20250925:203046.953 Zabbix Agent stopped. Zabbix 7.0.18 (revision 8b4aa26fa68)
+```
+Ok so we are using agent, not agent2, we can remove that after.
+
+Lets edit the config
+
+```bash
+sudo nano zabbix_agentd.conf
+
+# We added ip
+grep 'Server*' zabbix_agentd.conf
+# Server=127.0.0.1,192.168.3.5
+# ServerActive=192.168.3.5
+
+sudo systemctl start zabbix-agent
+```
+
+Zabbix agent logs are ok and the alert is gone
+
+```log
+11550:20250925:204120.052 Starting Zabbix Agent [Zabbix server]. Zabbix 7.0.18 (revision 8b4aa26fa68).
+11550:20250925:204120.052 **** Enabled features ****
+11550:20250925:204120.052 IPv6 support:          YES
+11550:20250925:204120.052 TLS support:           YES
+11550:20250925:204120.052 **************************
+11550:20250925:204120.052 using configuration file: /etc/zabbix/zabbix_agentd.conf
+11550:20250925:204120.053 agent #0 started [main process]
+11551:20250925:204120.054 agent #1 started [collector]
+11552:20250925:204120.054 agent #2 started [listener #1]
+11553:20250925:204120.055 agent #3 started [listener #2]
+```
+
+But a new one came:
+
+MySQL: Version has changed (new version value received: mysqladmin: [ERROR] Unknown suffix 'z' used for variable 'port' (value 'zbx_monitor'). mysqladmin: [ERROR] mysqladmin: Error while setting value 'zbx_monitor' to 'port'.)
+
+![mysql error](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_error.png)
+
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
