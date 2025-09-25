@@ -454,6 +454,10 @@ We get data for everything, inlcuding the zabbix server, it must be something wi
 
 ![zabbix_agent_2_7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_agent_2_7.png)
 
+We get mysql data also.
+
+![zabbix_agent_2_7](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_data.png)
+
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
