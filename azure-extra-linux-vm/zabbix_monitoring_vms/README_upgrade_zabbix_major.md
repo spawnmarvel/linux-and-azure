@@ -392,7 +392,7 @@ sudo systemctl start zabbix-agent
 
 ```
 
-Still we new data, logs are good, but the same messages are there.
+Still we get new data, logs are good, but the same messages are there.
 
 ![mysql error 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/mysql_error2.png)
 
