@@ -48,7 +48,10 @@ https://grafana.com/docs/loki/latest/setup/install/local/loki-3.5.5.tar.gz
 ```bash
 # set correct loki version
 sudo bash install_loki.sh
+
 ```
+#### Steps in script
+
 | Step | Command | Purpose |
 | :--- | :--- | :--- |
 | **Setup** | `mkdir loki-local-install && cd loki-local-install` | Creates the working directory and changes the current location to it. |
@@ -57,6 +60,7 @@ sudo bash install_loki.sh
 | **Permissions** | `chmod +x loki-linux-amd64`<br>`chmod +x promtail-linux-amd64` | Grants **execute permission** to the downloaded binaries. |
 | **Download Configs** | `wget https://raw.githubusercontent.com/grafana/loki/v3.5.3/cmd/loki/loki-local-config.yaml -O loki-local-config.yaml`<br>`wget https://raw.githubusercontent.com/grafana/loki/v3.5.3/clients/cmd/promtail/promtail-local-config.yaml -O promtail-local-config.yaml` | Downloads the necessary **version-specific** local configuration files. |
 | **Run Loki** | `./loki-linux-amd64 -config.file=loki-local-config.yaml` | Executes the **Loki binary**, pointing it to the downloaded local configuration file to start the log aggregation service. |
+
 
 
 ## Grafana
