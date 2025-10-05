@@ -13,7 +13,7 @@ https://grafana.com/docs/loki/latest/send-data/alloy/
 
 grafana_alloy
 
-![grafana_alloy](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/granfana-alloy-loki-grafana/images/grafana_allow.jpg)
+![grafana_alloy](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/granfana-alloy-loki-grafana/images/grafana_alloy.jpg)
 
 ## Loki
 
