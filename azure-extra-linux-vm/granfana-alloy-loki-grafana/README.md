@@ -23,6 +23,8 @@ Log Aggregation System: Stores and indexes the collected log data. Loki is uniqu
 
 https://grafana.com/docs/loki/latest/
 
+![loki](https://github.com/spawnmarvel/linux-and-azure/blob/main/images/loki.png)
+
 ## Grafana
 
 Visualization/Analysis Platform: Provides the user interface for querying, visualizing, and analyzing the logs stored in Loki using its LogQL query language.
