@@ -10,6 +10,24 @@ This is a highly popular and robust stack for log monitoring, often referred to 
 | Elasticsearch | Log/Data Store | The central database that stores the log events as searchable documents. Filebeat often ships data in a structured format (JSON), making it easy for Elasticsearch to index and query. |
 | Grafana | Visualization | The front-end tool used to query the data in Elasticsearch and present it on dashboards, allowing for log analysis, filtering, and visualization of log metrics (e.g., error rate, request volume). |
 
+
+## Filebeat
+
+https://www.elastic.co/docs/reference/beats/filebeat
+
+
+## Elasticsearch
+
+https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-elasticsearch-with-debian-package
+
+### How To Install and Configure Elasticsearch on Ubuntu 22.04
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-22-04
+
+## Elasticsearch Reference
+
+https://www.elastic.co/docs/reference/elasticsearch/
+
 ## Grafana Zabbix
 
 Url
