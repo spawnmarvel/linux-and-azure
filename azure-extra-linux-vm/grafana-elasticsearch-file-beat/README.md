@@ -99,11 +99,6 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-el
 
 https://www.elastic.co/docs/reference/elasticsearch/
 
-## Filebeat
-
-https://www.elastic.co/docs/reference/beats/filebeat
-
-
 
 ## Grafana Elasticsearch
 
@@ -112,3 +107,14 @@ http://192.168.3.4:3000/
 
 ![elasticsearch plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/grafana-elasticsearch-file-beat/images/elasti_plug.png)
 
+
+https://grafana.com/grafana/plugins/elasticsearch/
+
+### Configure the Elasticsearch data source
+
+https://grafana.com/docs/grafana/latest/datasources/elasticsearch/configure-elasticsearch-data-source/#configure-the-elasticsearch-data-source
+
+
+## Filebeat
+
+https://www.elastic.co/docs/reference/beats/filebeat
