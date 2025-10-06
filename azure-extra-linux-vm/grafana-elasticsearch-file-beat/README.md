@@ -110,5 +110,5 @@ https://www.elastic.co/docs/reference/beats/filebeat
 dummy1 (grafana management)
 http://192.168.3.4:3000/
 
-![elasticsearch plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/grafana-elasticsearch-file-beat/elasti_plug.png)
+![elasticsearch plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/grafana-elasticsearch-file-beat/images/elasti_plug.png)
 
