@@ -247,7 +247,11 @@ You should now see the Kibana login page. Log in using the elastic username and 
 # Changed password for user [elastic]
 Kibana.user17
 ```
+![login](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/login_kibana.png)
 
+Success
+
+![success](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/kibana_success.png)
 
 https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
 
