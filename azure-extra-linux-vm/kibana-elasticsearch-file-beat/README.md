@@ -2,6 +2,8 @@
 
 Combination of Filebeat, Elasticsearch, and Kibana (a common variation of the Elastic Stack, formerly known as the ELK stack, with Logstash) is an excellent, popular, and robust solution for centralized log collection, storage, and analysis.
 
+Kibana and Grafana are both powerful, open-source data visualization tools, but they were built for different primary purposes and excel in different areas. Kibana is the log analysis champion, tightly coupled with Elasticsearch, while Grafana is the metrics and multi-source visualization expert
+
 This set of tools provides a complete pipeline for transforming raw log data into actionable insights in real-time
 
 ## Why This Combination Works So Well
@@ -19,8 +21,9 @@ https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-elasticsea
 
 ### How To Install and Configure Elasticsearch on Ubuntu 22.04 (24.04)
 
-dummy1 (grafana management and elastic search)
-http://192.168.3.4:3000/
+dummy3 (elasticsearch, kibana)
+zabbix agent vm active
+ssh imsdal@192.168.3.6
 
 1 Install and 2 configure
 
@@ -34,7 +37,8 @@ echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.
 # Next, update your package lists so APT will read the new Elastic source:
 sudo apt update -y
 
-# sudo apt install elasticsearch
+# install it 
+sudo apt install elasticsearch
 
 
 # Configure
@@ -46,20 +50,22 @@ network.host: localhost
 
 # start
 sudo systemctl start elasticsearch
+# wait 1-2 min
 
 # enable
 sudo systemctl enable elasticsearch
 
 # verify
-sudo systemctl status elasticsearch
+sudo systemctl status elasticsearch.service
 ● elasticsearch.service - Elasticsearch
-     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; disabled; preset: enabled)
-     Active: active (running) since Mon 2025-10-06 18:52:44 UTC; 27s ago
+     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2025-10-06 21:08:30 UTC; 23s ago
        Docs: https://www.elastic.co
-   Main PID: 4109 (java)
-      Tasks: 68 (limit: 4616)
+   Main PID: 2642 (java)
+      Tasks: 70 (limit: 4602)
      Memory: 2.3G (peak: 2.3G)
-        CPU: 56.085s
+        CPU: 53.169s
+
 
 ```
 3 Securing Elasticsearch
@@ -76,9 +82,9 @@ curl -X GET 'http://localhost:9200'
 
 ```json
 {
-  "name" : "dummy01",
+  "name" : "dummy03",
   "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "7QTPLV3MR7WtlafB5dO6nQ",
+  "cluster_uuid" : "6Ll71GVASECa3eIsCX0Q-A",
   "version" : {
     "number" : "7.17.29",
     "build_flavor" : "default",
@@ -92,6 +98,7 @@ curl -X GET 'http://localhost:9200'
   },
   "tagline" : "You Know, for Search"
 }
+ 
 ```
 
 5 Using Elasticsearch TBD
@@ -103,19 +110,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-el
 https://www.elastic.co/docs/reference/elasticsearch/
 
 
-## Grafana Elasticsearch
-
-dummy1 (grafana management)
-http://192.168.3.4:3000/
-
-![elasticsearch plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/grafana-elasticsearch-file-beat/images/elasti_plug.png)
+## Kibana
 
 
-https://grafana.com/grafana/plugins/elasticsearch/
-
-### Configure the Elasticsearch data source
-
-https://grafana.com/docs/grafana/latest/datasources/elasticsearch/configure-elasticsearch-data-source/#configure-the-elasticsearch-data-source
 
 
 ## Filebeat
