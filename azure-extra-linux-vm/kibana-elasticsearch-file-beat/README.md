@@ -19,7 +19,7 @@ This set of tools provides a complete pipeline for transforming raw log data int
 
 https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-elasticsearch-with-debian-package
 
-### How To Install and Configure Elasticsearch on Ubuntu 22.04 (24.04)
+### Elasticsearch install 22.04 (24.04)
 
 dummy3 (elasticsearch, kibana)
 zabbix agent vm active
@@ -59,12 +59,12 @@ sudo systemctl enable elasticsearch
 sudo systemctl status elasticsearch.service
 ● elasticsearch.service - Elasticsearch
      Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
-     Active: active (running) since Mon 2025-10-06 21:08:30 UTC; 23s ago
+     Active: active (running) since Mon 2025-10-06 21:23:18 UTC; 38s ago
        Docs: https://www.elastic.co
-   Main PID: 2642 (java)
-      Tasks: 70 (limit: 4602)
+   Main PID: 5831 (java)
+      Tasks: 72 (limit: 4602)
      Memory: 2.3G (peak: 2.3G)
-        CPU: 53.169s
+        CPU: 53.964s
 
 
 ```
@@ -113,7 +113,156 @@ https://www.elastic.co/docs/reference/elasticsearch/
 ## Kibana
 
 
+### Kibana install 24.04
 
+
+According to the official documentation, you should install Kibana only after installing Elasticsearch. Installing in this order ensures that the components each product depends on are correctly in place.
+
+
+If you're deploying the Elastic Stack in a self-managed cluster, then install the Elastic Stack products you want to use in the following order:
+
+* Elasticsearch
+* Kibana
+* (Logstash)
+* Elastic Agent or Beats
+
+https://www.elastic.co/docs/deploy-manage/deploy/self-managed/installing-elasticsearch
+
+Because you’ve already added the Elastic package source in the previous step, you can just install the remaining components of the Elastic Stack using apt:
+
+```bash
+sudo apt install kibana
+
+sudo systemctl enable kibana
+
+sudo systemctl start kibana
+
+sudo systemctl status kibana
+● kibana.service - Kibana
+     Loaded: loaded (/etc/systemd/system/kibana.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2025-10-06 21:26:39 UTC; 6s ago
+       Docs: https://www.elastic.co
+   Main PID: 6557 (node)
+      Tasks: 11 (limit: 4602)
+     Memory: 112.6M (peak: 112.8M)
+        CPU: 4.340s
+
+
+# Check Configuration: Ensure you set server.host correctly in /etc/kibana/kibana.yml.
+sudo nano /etc/kibana/kibana.yml
+
+#server.host: "localhost"
+server.host: "0.0.0.0"
+
+sudo systemctl restart kibana
+
+sudo systemctl status kibana
+● kibana.service - Kibana
+     Loaded: loaded (/etc/systemd/system/kibana.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2025-10-06 21:31:22 UTC; 2min 29s ago
+
+     
+```
+
+Visit
+
+http://192.168.3.6:5601/
+
+```log
+Kibana server is not ready yet
+```
+
+```bash
+
+sudo ufw status
+Status: inactive
+
+# check
+sudo systemctl status elasticsearch
+
+# verify
+curl -X GET 'http://localhost:9200'
+
+# The URLs of the Elasticsearch instances to use for all your queries.
+elasticsearch.hosts: ["http://localhost:9200"]
+```
+
+If Kibana is failing to connect due to security, you need to use the token method or in this case elasticsearch-setup-passwords
+
+```bash
+
+sudo systemctl status elasticsearch
+● elasticsearch.service - Elasticsearch
+     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2025-10-06 21:41:23 UTC; 29s ago
+
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
+
+# Unexpected response code [500] from calling GET http://127.0.0.1:9200/_security/_authenticate?pretty
+# It doesn't look like the X-Pack security feature is enabled on this Elasticsearch node.
+# Please check if you have enabled X-Pack security in your elasticsearch.yml configuration file.
+
+# ERROR: X-Pack Security is disabled by configuration.
+
+# enable it
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+# Add or uncomment these lines to enable security
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+
+# restart
+sudo systemctl restart elasticsearch
+
+sudo systemctl status elasticsearch
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
+
+# Changed password for user [apm_system]
+# Changed password for user [kibana_system]
+# Changed password for user [kibana]
+# Changed password for user [logstash_system]
+# Changed password for user [beats_system]
+# Changed password for user [remote_monitoring_user]
+# Changed password for user [elastic]
+
+sudo nano /etc/kibana/kibana.yml
+
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "Kibana.user17"
+
+# restart
+sudo systemctl restart kibana
+
+```
+Verification
+After Kibana restarts (wait about 30 seconds), access the web interface at:
+
+http://<Your_Server_IP>:5601
+
+You should now see the Kibana login page. Log in using the elastic username and the password you generated for the elastic user. Your full Elastic Stack should now be running and connected!
+
+```bash
+# Changed password for user [elastic]
+Kibana.user17
+```
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
+
+
+https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-kibana-with-debian-package
+
+What is Included for Free (Basic Tier)
+
+The free Basic license tier allows you to use the core components with essential functionality, which now includes critical features that used to be paid:
+
+* Component	Free Features Included
+* Elasticsearch	Search, Indexing, REST APIs, and most core functionality.
+* Kibana	All core visualization tools (Discover, Visualize, Lens, Maps, Dev Tools) and dashboards.
+* Security (X-Pack)	Basic authentication (like the username/password you just set up), TLS/SSL encryption, and role-based access control (RBAC).
+* Monitoring	Basic stack monitoring to ensure Elasticsearch and Kibana are healthy.
 
 ## Filebeat
 
