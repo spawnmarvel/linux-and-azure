@@ -13,3 +13,8 @@ Url
 
 https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app/
 
+
+## Dashboards
+
+https://grafana.com/docs/grafana-cloud/visualizations/dashboards/build-dashboards/create-dashboard/
+
