@@ -258,7 +258,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-lo
 
 https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-kibana-with-debian-package
 
-What is Included for Free (Basic Tier)
+### Kibana what is Included for Free (Basic Tier)
 
 The free Basic license tier allows you to use the core components with essential functionality, which now includes critical features that used to be paid:
 
@@ -271,3 +271,7 @@ The free Basic license tier allows you to use the core components with essential
 ## Filebeat
 
 https://www.elastic.co/docs/reference/beats/filebeat
+
+### Kibana set up https
+
+https://www.elastic.co/docs/deploy-manage/security/set-up-basic-security-plus-https#encrypt-kibana-https
