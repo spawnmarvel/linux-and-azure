@@ -3,13 +3,24 @@
 
 ## Telegraf Best Practices: SNMP Plugin
 
+
+https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/toplogy.png
+
+
 https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 
-## Telegraf SNMP
+## Telegraf SNMP Input Plugin **
 
-The actual plugin, but there is two.
+We will focus on this
 
 https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp
+
+## Telegraf SNMP Trap Input Plugin
+
+https://github.com/influxdata/telegraf/blob/master/plugins/inputs/snmp_trap/README.md#snmp-trap-input-plugin
+
+
+# Misc
 
 ## Zabbix SNMP Monitoring - Beginner's Guide to Setup and Configuration
 
@@ -19,7 +30,7 @@ https://www.youtube.com/watch?v=R3JDBxU4sow
 
 https://www.youtube.com/watch?v=eXVD8ukx4-Q
 
-## TODO
+## More Zabbix
 
 https://www.youtube.com/watch?v=R3JDBxU4sow
 
