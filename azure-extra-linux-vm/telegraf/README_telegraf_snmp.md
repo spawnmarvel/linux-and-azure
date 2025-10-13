@@ -10,7 +10,7 @@ https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 
 ## Telegraf SNMP Input Plugin **
 
-We will focus on this
+We will focus on this Telegraf SNMP Input Plugin.
 
 ![SNMP input Plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/toplogy.png)
 
