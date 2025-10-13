@@ -1,7 +1,13 @@
 # SNMP
 
+
+## Telegraf Best Practices: SNMP Plugin
+
+https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
+
 ## Telegraf SNMP
 
+The actual plugin, but there is two.
 
 https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp
 
