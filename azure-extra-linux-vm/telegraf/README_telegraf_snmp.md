@@ -19,7 +19,21 @@ https://github.com/influxdata/telegraf/blob/master/plugins/inputs/snmp_trap/READ
 
 ## Telegraf SNMP Input Plugin
 
-TODO
+* Telegraf installed on a Linux server
+* Monitor remote Windows
+* Monitor remote Linux
+
+Toplogy:
+
+* After gathering all SNMP data you could:
+* Have output plugin to AMQP (AMQP server can be moved within the segements of network)
+* Have output zabbix direct plugin after AMQP or as-is.
+
+Lets first set up telegraf with logfile
+
+Lets configure SNMP and log data to file
+
+
 
 # Misc
 
