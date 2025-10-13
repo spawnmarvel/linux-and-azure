@@ -3,7 +3,6 @@
 
 ## Telegraf Best Practices: SNMP Plugin
 
-
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/toplogy.png
 
 
@@ -12,6 +11,8 @@ https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 ## Telegraf SNMP Input Plugin **
 
 We will focus on this
+
+![SNMP input Plugin](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/toplogy.png)
 
 https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp
 
