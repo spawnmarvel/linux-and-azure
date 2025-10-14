@@ -1,10 +1,7 @@
 # SNMP
 
 
-## Telegraf Best Practices: SNMP Plugin
-
-
-https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
+## Telegraf SNMP Plugin
 
 
 We will focus on this Telegraf SNMP Input Plugin.
@@ -17,7 +14,7 @@ There is also Telegraf SNMP Trap Input Plugin
 
 https://github.com/influxdata/telegraf/blob/master/plugins/inputs/snmp_trap/README.md#snmp-trap-input-plugin
 
-## Telegraf SNMP Input Plugin
+## Telegraf SNMP Input Plugin Best Practices
 
 * Telegraf installed on a Linux server
 * Monitor remote Windows
@@ -33,7 +30,7 @@ Lets first set up telegraf with logfile
 
 Lets configure SNMP and log data to file
 
-
+https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 
 # Misc
 
