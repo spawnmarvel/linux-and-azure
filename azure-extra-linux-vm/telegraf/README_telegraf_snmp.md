@@ -61,6 +61,10 @@ That's it! You have successfully configured SNMP on your Windows machine.
 ![config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/config.png)
 
 
+### Install Telegraf on (Windows Server 2022 Datacenter Azure Edition) get SNMP data
+
+### Install Telegraf remote host get SNMP data
+
 https://blog.paessler.com/how-to-enable-snmp-on-your-operating-system
 
 
