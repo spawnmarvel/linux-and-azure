@@ -116,10 +116,56 @@ https://www.ireasoning.com/download.shtml
 
 ![mib browser](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/mib_browser.png)
 
+The iReasoning MIB Browser is highly popular because it makes the process of working with SNMP straightforward. Here is a step-by-step guide on how to typically use it, broken down into three main phases: **Setup, Discovery, and Operation.**
 
+***
 
+## How to Use iReasoning MIB Browser (read it and skip to Use snmpwalk from remote machine)
 
+### Phase 1: Setup (Loading the MIB Files)
 
+Before you can talk to a device using its proprietary names, the MIB browser needs to know those names.
+
+1.  **Download and Install:** Install the iReasoning MIB Browser (Personal Edition is often free for private use).
+2.  **Obtain MIB Files:** Download the custom MIB files for the network device you are targeting (e.g., a Cisco router, a server, a printer). These are typically found on the manufacturer's support website.
+3.  **Load MIBs:**
+    * Go to **File** $\rightarrow$ **Load MIBs**.
+    * Browse to the location of the MIB files you downloaded and select the ones you need (you can often select multiple files at once).
+    * The browser will parse the files, and the corresponding tree structure will appear in the left-hand panel under the standard OID branches.
+
+### Phase 2: Discovery (Connecting to the Device)
+
+This step tells the browser which device to query and what credentials to use.
+
+1.  **Enter Agent Address:** In the **Address** field (usually near the top toolbar), enter the **IP address** or hostname of your SNMP-enabled network device (the SNMP *Agent*).
+2.  **Configure SNMP Credentials:**
+    * Set the **Port** (default is usually 161).
+    * Set the **SNMP Version** (v1, v2c, or v3).
+    * If using **v1 or v2c**, enter the **Read Community** string (default is often `public`).
+    * If using **v3**, click the **Advanced** button to set the security parameters (Username, Security Level, Auth Protocol, Priv Protocol, etc.).
+3.  **Select Starting OID (Optional but Recommended):** The default OID in the OID field might be the root of the entire MIB tree. For targeted operations, you can select a more specific node in the MIB Tree on the left (like the `system` branch, or your vendor's specific branch) as your starting point.
+
+### Phase 3: Operation (Querying the Data)
+
+Once configured, you can perform various SNMP operations to retrieve or modify data.
+
+| SNMP Operation | Icon/Button | How to Use | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Get** | **Go** button (or equivalent) | 1. Select a specific MIB object in the left-hand tree. 2. Click the **Get** button. | Retrieves the **single, current value** of the selected Object Identifier (OID). |
+| **GetNext** | **Go** dropdown | 1. Select a specific MIB object. 2. Click **GetNext**. | Retrieves the value of the **next sequential OID** in the MIB tree. This is essential for iterating through tables. |
+| **Walk** | **Go** dropdown | 1. Select a MIB object or branch (like `interfaces`). 2. Click **Walk**. | Performs a series of `GetNext` operations automatically to retrieve **all values** in a branch or sub-tree and displays them in the result table. This is the fastest way to map out all available information. |
+| **Table View** | **Go** dropdown | 1. Select an OID that represents a MIB table (e.g., `ifTable`). 2. Click **Table View**. | Presents the tabular MIB data (like a list of network interfaces) in an easy-to-read, spreadsheet-like format. |
+| **Set** | **Set** button | 1. Select a writable MIB object. 2. Enter a new **Value** and its data type. 3. Click **Set**. | **Writes a new value** to the device to change a configuration setting (e.g., change the system contact email). *Requires the Write Community string for v1/v2c or the appropriate v3 credentials.* |
+
+### Key Benefit: OID Translation
+
+Throughout this process, the MIB Browser displays the **human-readable symbolic names** in the MIB tree, and when you select a node, the **numerical OID** is clearly displayed in the OID field, performing the translation for you instantly.
+
+## Use snmpwalk from remote machine
+
+First we must add the allowed host, update the snmp service and add ip of the server where we will run snmpwalk.
+
+https://www.youtube.com/watch?v=pxM-t751l0Y
 
 ### Install Telegraf on (Windows Server 2022 Datacenter Azure Edition) get SNMP data
 
