@@ -61,6 +61,45 @@ That's it! You have successfully configured SNMP on your Windows machine.
 ![config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/config.png)
 
 
+### Powershell SNMP
+
+
+```ps1
+# Define the IP address of your SNMP-enabled device
+$DeviceIP = '127.0.0.1' # Replace with your device's actual IP address
+
+# Define the SNMP community string (commonly 'public' for read-only access)
+$CommunityString = 'Public'
+
+# Create a new OleSNMP object
+$SNMP = New-Object -ComObject olePrn.OleSNMP
+
+# Open the connection to the device
+# The parameters are: IP address, community string, SNMP version (2 for v2c), timeout in milliseconds
+$SNMP.Open($DeviceIP, $CommunityString, 2, 1000)
+
+# Define the OID you want to query (e.g., device description)
+# You will need to find the correct OID for the specific information you want to retrieve.
+# MIB browsers and manufacturer documentation are helpful for this.
+$OID_DeviceDescription = ".1.3.6.1.2.1.1.1.0" # sysDescr.0
+
+# Get the value for the specified OID
+$DeviceDescription = $SNMP.Get($OID_DeviceDescription)
+
+# Display the retrieved data
+Write-Host "Device Description: $DeviceDescription"
+
+# Close the SNMP connection
+$SNMP.Close()
+
+```
+
+
+![powershell test](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/powershell_test.png)
+
+How do you obtain the numerical OID for a named object in SNMP?
+
+
 ### Install Telegraf on (Windows Server 2022 Datacenter Azure Edition) get SNMP data
 
 ### Install Telegraf remote host get SNMP data
