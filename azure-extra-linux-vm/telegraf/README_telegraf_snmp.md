@@ -114,6 +114,8 @@ iReasoning MIB Browser
 
 https://www.ireasoning.com/download.shtml
 
+![mib browser](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/mib_browser.png)
+
 
 
 
