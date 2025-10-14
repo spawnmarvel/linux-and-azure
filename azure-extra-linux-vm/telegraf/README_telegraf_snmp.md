@@ -32,6 +32,15 @@ Lets configure SNMP and log data to file
 
 https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 
+### Windows Windows (Windows Server 2022 Datacenter Azure Edition) enable SNMP
+
+First we need to enable SNMP.
+
+Server Manager, go to features, Under Select features, select SNMP Service, and then confirm by clicking on Add Features.
+
+![snmp_win](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/snmp_win.png)
+
+
 # Misc
 
 ## Zabbix SNMP Monitoring - Beginner's Guide to Setup and Configuration
