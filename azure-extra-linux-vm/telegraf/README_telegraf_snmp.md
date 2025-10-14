@@ -46,6 +46,12 @@ Step 2: Configure SNMP
 
 ![snmp_service](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/snmp_service.png)
 
+Tick all the boxes
+
+![enable](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/enable.png)
+
+
+https://blog.paessler.com/how-to-enable-snmp-on-your-operating-system
 
 
 # Misc
