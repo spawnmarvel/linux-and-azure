@@ -309,8 +309,6 @@ Start filebeat service
 # check modules to monitor
 PS C:\Program Files\filebeat> .\filebeat.exe modules list
 
-PS C:\Program Files\filebeat> .\filebeat.exe modules enable system
-Enabled system
 
 ```
 
