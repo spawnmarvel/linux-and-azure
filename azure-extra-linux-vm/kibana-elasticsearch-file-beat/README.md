@@ -349,7 +349,7 @@ audit_trail                          string      OS
 SQL>
 ```
 
-![oracle logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_logs.png)
+![oracle logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_logs.jpg)
 
 In the module config under modules.d, change the module settings to match your environment. You must enable at least one fileset in the module. Filesets are disabled by default.
 
