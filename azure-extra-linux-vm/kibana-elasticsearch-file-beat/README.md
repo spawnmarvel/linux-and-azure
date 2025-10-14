@@ -284,6 +284,17 @@ This guide describes how to get started quickly with log collection. You’ll le
 * visualize the log data in Kibana
 
 
+Download the Filebeat Windows zip file.
+
+Extract the contents of the zip file into C:\Program Files.
+
+Rename the filebeat-[version]-windows-x86_64 directory to Filebeat.
+
+Open a PowerShell prompt as an Administrator (right-click the PowerShell icon and select Run As Administrator).
+
+From the PowerShell prompt, run the following commands to install Filebeat as a Windows service:
+
+
 ```ps1
 PS C:\Program Files\filebeat> Set-ExecutionPolicy Unrestricted
 PS C:\Program Files\filebeat> .\install-service-filebeat.ps1
@@ -298,62 +309,14 @@ Start filebeat service
 # check modules to monitor
 PS C:\Program Files\filebeat> .\filebeat.exe modules list
 
-PS C:\Program Files\filebeat> .\filebeat.exe modules enable oracle
-Enabled oracle
+PS C:\Program Files\filebeat> .\filebeat.exe modules enable system
+Enabled system
 
 ```
 
-But first check if Oracle logs to file.
+filestream input
 
-No it did not, it logged to db, so we changed it
-
-```cmd
-Microsoft Windows [Version 10.0.20348.4171]
-(c) Microsoft Corporation. All rights reserved.
-
-C:\Users\imsdal>sqlplus / as sysdba
-
-SQL*Plus: Release 21.0.0.0.0 - Production on Tue Oct 14 22:05:26 2025
-Version 21.3.0.0.0
-
-Copyright (c) 1982, 2021, Oracle.  All rights reserved.
-
-
-Connected to:
-Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
-Version 21.3.0.0.0
-
-SQL> ALTER SYSTEM SET audit_trail=OS SCOPE=SPFILE;
-
-System altered.
-
-SQL> SHUTDOWN IMMEDIATE;
-Database closed.
-Database dismounted.
-ORACLE instance shut down.
-SQL> STARTUP;
-ORACLE instance started.
-
-Total System Global Area 1610608752 bytes
-Fixed Size                  9855088 bytes
-Variable Size             436207616 bytes
-Database Buffers         1157627904 bytes
-Redo Buffers                6918144 bytes
-Database mounted.
-Database opened.
-SQL> SHOW PARAMETER audit_trail;
-
-NAME                                 TYPE        VALUE
------------------------------------- ----------- ------------------------------
-audit_trail                          string      OS
-SQL>
-```
-
-![oracle logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_logs.jpg)
-
-Now get the orcale log location
-
-![oracle location](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_location.png)
+https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-system
 
 In the module config under modules.d, change the module settings to match your environment. You must enable at least one fileset in the module. Filesets are disabled by default.
 
