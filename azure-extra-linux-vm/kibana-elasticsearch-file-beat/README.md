@@ -351,6 +351,10 @@ SQL>
 
 ![oracle logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_logs.jpg)
 
+Now get the orcale log location
+
+![oracle location](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/oracle_location.jpg)
+
 In the module config under modules.d, change the module settings to match your environment. You must enable at least one fileset in the module. Filesets are disabled by default.
 
 
