@@ -50,6 +50,15 @@ Tick all the boxes
 
 ![enable](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/enable.png)
 
+For now we will add the comunity string and use only localhost
+
+Navigate to the Security tab and configure SNMP settings, including the community string and the IP address/host filter list, according to your security compliance requirements. For example, add the community name "public" with READ ONLY rights and allow SNMP packets from at least the address of your monitoring server.
+
+To ensure proper configuration, make sure your SNMP agent is set up correctly to accept SNMP packets from authorized sources. This step is crucial for remote access and effective troubleshooting of network devices.
+That's it! You have successfully configured SNMP on your Windows machine.
+
+![config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/config.png)
+
 
 https://blog.paessler.com/how-to-enable-snmp-on-your-operating-system
 
