@@ -34,11 +34,18 @@ https://www.influxdata.com/blog/telegraf-best-practices-snmp-plugin/
 
 ### Windows Windows (Windows Server 2022 Datacenter Azure Edition) enable SNMP
 
+Step 1: Install SNMP
+
 First we need to enable SNMP.
 
 Server Manager, go to features, Under Select features, select SNMP Service, and then confirm by clicking on Add Features.
 
 ![snmp_win](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/snmp_win.png)
+
+Step 2: Configure SNMP
+
+![snmp_service](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/snmp_service.png)
+
 
 
 # Misc
