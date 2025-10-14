@@ -58,7 +58,7 @@ To ensure proper configuration, make sure your SNMP agent is set up correctly to
 
 That's it! You have successfully configured SNMP on your Windows machine.
 
-![config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/config.png)
+![config](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/telegraf/images/config2.png)
 
 
 ### Powershell SNMP
@@ -69,7 +69,7 @@ That's it! You have successfully configured SNMP on your Windows machine.
 $DeviceIP = '127.0.0.1' # Replace with your device's actual IP address
 
 # Define the SNMP community string (commonly 'public' for read-only access)
-$CommunityString = 'Public'
+$CommunityString = 'public'
 
 # Create a new OleSNMP object
 $SNMP = New-Object -ComObject olePrn.OleSNMP
@@ -101,7 +101,22 @@ How do you obtain the numerical OID for a named object in SNMP?
 
 With pain:
 
+How do you read an OID?
+
+```log
+
+```
+
 https://www.dpstele.com/snmp/what-does-oid-network-elements.php#:~:text=Search%20Within%20the%20MIB%20File,OID%20in%20a%20hierarchical%20structure.
+
+
+iReasoning MIB Browser
+
+https://www.ireasoning.com/download.shtml
+
+
+
+
 
 
 ### Install Telegraf on (Windows Server 2022 Datacenter Azure Edition) get SNMP data
