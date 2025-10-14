@@ -312,7 +312,15 @@ PS C:\Program Files\filebeat> .\filebeat.exe modules list
 
 ```
 
-filestream input
+***Powershell log script***
+
+Create a ps1 script that just logs each min
+
+```ps1
+
+
+```
+Use filestream input
 
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-system
 
