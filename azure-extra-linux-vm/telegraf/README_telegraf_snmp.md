@@ -99,6 +99,10 @@ $SNMP.Close()
 
 How do you obtain the numerical OID for a named object in SNMP?
 
+With pain:
+
+https://www.dpstele.com/snmp/what-does-oid-network-elements.php#:~:text=Search%20Within%20the%20MIB%20File,OID%20in%20a%20hierarchical%20structure.
+
 
 ### Install Telegraf on (Windows Server 2022 Datacenter Azure Edition) get SNMP data
 
