@@ -545,6 +545,7 @@ filebeat.inputs:
       - C:\Logs\ps1.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
+  encoding: utf-16le
   fields: 
     my-app-id: "app-1"
     
@@ -562,6 +563,7 @@ filebeat.inputs:
       - C:\Logs\ps2.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
+  encoding: utf-16le
   fields: 
     my-app-id: "app-2"
 ```
@@ -618,6 +620,14 @@ We can now select and view visuals
 Lets edit the filter and select only app-1
 
 ![app 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/app1.png)
+
+Then we have the statistics for app1
+
+![app 1 stats](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/app1_stats.png)
+
+Lets go and view the log content.
+
+
 
 
 https://discuss.elastic.co/t/how-to-filter-filebeat-output-by-input-id/329603/3
