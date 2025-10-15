@@ -419,7 +419,9 @@ Edit the elasticsearch.yml
 
 sudo nano /etc/elasticsearch/elasticsearch.yml
 
+```
 
+```yml
 # By default Elasticsearch is only accessible on localhost. Set a different
 # address here to expose this node on the network:
 #
@@ -428,10 +430,9 @@ network.host: 0.0.0.0
 
 #cluster.initial_master_nodes: ["node-1", "node-2"]
 cluster.initial_master_nodes: node-1
-
-
 ```
-Logs 
+
+Stop and start elastic search and view status 
 ```log
 sudo systemctl status elasticsearch
 ● elasticsearch.service - Elasticsearch
