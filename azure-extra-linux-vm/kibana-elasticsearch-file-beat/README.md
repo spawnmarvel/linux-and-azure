@@ -557,6 +557,10 @@ Config OK
 
 Verify that we now have both logs
 
+### Data Ingestion with Filebeat: Ingesting JSON data from APIs with Filebeat
+
+https://www.youtube.com/watch?v=zjw6bCxG_j4
+
 ## Data streams type filestream
 
 
