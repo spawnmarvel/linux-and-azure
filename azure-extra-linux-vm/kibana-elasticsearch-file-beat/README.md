@@ -504,6 +504,11 @@ Start the service, if we need more logs from the app we must run the ps1 script 
 ![Setup ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/setup_ok.png)
 
 
+From the Kibana main menu, navigate to Observability > Logs.
+
+![Stream logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/stream_logs.png)
+
+
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-installation-configuration
 
 ### Kibana set up https
