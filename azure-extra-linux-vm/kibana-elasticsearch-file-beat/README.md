@@ -644,8 +644,101 @@ https://discuss.elastic.co/t/how-to-filter-filebeat-output-by-input-id/329603/3
 
 
 
+Lets add a third log file, zabbix
+
+Stop filebeat service
+
+```yml
+filebeat.inputs:
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input-specific configurations.
+
+# filestream is an input for collecting log messages from files.
+- type: filestream
+
+  # Unique ID among all inputs, an ID is required.
+  id: my-filestream-ps1-1
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+      - C:\Logs\ps1.log
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+  encoding: utf-16le
+  fields: 
+    my-app-id: "app-1"
+    
+# filestream is an input for collecting log messages from files.
+- type: filestream
+
+  # Unique ID among all inputs, an ID is required.
+  id: my-filestream-ps1-2
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+      - C:\Logs\ps2.log
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+  encoding: utf-16le
+  fields: 
+    my-app-id: "app-2"
+    
+# filestream is an input for collecting log messages from files.
+- type: filestream
+
+  # Unique ID among all inputs, an ID is required.
+  id: my-filestream-zabbix
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+      - "C:\\Program Files\\Zabbix Agent 2\\zabbix_agent2.log"
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+  # encoding: utf-16le
+  fields: 
+    my-app-id: "app-zabbix"
+```
+
+Config check
+
+```ps1
+PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files\filebeat\filebeat.yml"
+
+{"log.level":"info","@timestamp":"2025-10-15T22:08:52.030+0200","log.logger":"modules","log.origin":{"function":"github.com/elastic/beats/v7/filebeat/fileset.newModuleRegistry","file.name":"fileset/modules.go","file.line":135},"message":"Enabled modules/filesets: ","service.name":"filebeat","ecs.version":"1.6.0"}
+Config OK
+
+```
+
+Go to discover end refresh.
+
+![3 discover](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/3_discover.png)
+
+Now go to stream and logs:
+
+
+![3 loggers](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/3_loggers.png)
+
+Filter for CPU
+
+![Filter cpu](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/filter_cpu.png)
+
+
+
 https://www.elastic.co/docs/manage-data/data-store/data-streams
 
+
+## Elasticsearch admin 101, files, datastore etc
 
 ### Kibana set up https
 
