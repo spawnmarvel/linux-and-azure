@@ -317,14 +317,63 @@ PS C:\Program Files\filebeat> .\filebeat.exe modules list
 Create a ps1 script that just logs each min
 
 ```ps1
+# Define the log file path
+$LogFilePath = "C:\Logs\ps1.log"
+
+# Log an informational message
+"$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [INFO] - Script started." | Out-File -FilePath $LogFilePath -Append
+
+# Perform some operations
+Write-Host "Performing task 1..."
+# ... (your script logic) ...
+
+# Log a success message
+"$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [SUCCESS] - Task 1 completed." | Out-File -FilePath $LogFilePath -Append
 
 
 ```
 Use filestream input
 
+Take a backup of filebeat.yaml and edit the orginal file
+
+```yml
+filebeat.inputs:
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input-specific configurations.
+
+# filestream is an input for collecting log messages from files.
+- type: filestream
+
+  # Unique ID among all inputs, an ID is required.
+  id: my-filestream-id
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+      - C:\Logs\ps1.log
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+```
+
+Test the config on windows
+
+```cmd
+PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files\filebeat\filebeat.yml"
+
+{"log.level":"info","@timestamp":"2025-10-15T09:08:35.750+0200","log.logger":"modules","log.origin":{"function":"github.com/elastic/beats/v7/filebeat/fileset.newModuleRegistry","file.name":"fileset/modules.go","file.line":135},"message":"Enabled modules/filesets: ","service.name":"filebeat","ecs.version":"1.6.0"}
+Config OK
+
+```
+
+Start the service, if we need more logs from the app we must run the ps1 script again.
+
+
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-system
 
-In the module config under modules.d, change the module settings to match your environment. You must enable at least one fileset in the module. Filesets are disabled by default.
 
 
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-installation-configuration
