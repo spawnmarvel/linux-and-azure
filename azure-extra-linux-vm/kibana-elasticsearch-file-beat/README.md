@@ -632,6 +632,12 @@ message : task
 ![search 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/search1.png)
 
 
+If you want to search by hostname.
+
+"agent.hostname":"dmzwindows07"
+
+
+![mark field](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/mark.png)
 
 
 https://discuss.elastic.co/t/how-to-filter-filebeat-output-by-input-id/329603/3
