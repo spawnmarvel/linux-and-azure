@@ -19,7 +19,7 @@ We use Ubuntu 24.04
 
 ```bash
 
-#!/bin/sh
+#!/bin/bash
 
 sudo apt-get install curl gnupg apt-transport-https -y
 
