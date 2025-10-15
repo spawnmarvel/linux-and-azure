@@ -625,7 +625,11 @@ Then we have the statistics for app1
 
 ![app 1 stats](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/app1_stats.png)
 
-Lets go and view the log content.
+Lets go and view the log content and search for some content
+
+message : task
+
+![search 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/search1.png)
 
 
 
