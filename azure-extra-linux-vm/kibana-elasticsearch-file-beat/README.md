@@ -615,6 +615,9 @@ We can now select and view visuals
 
 ![visual 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/visual1.png)
 
+Lets edit the filter and select only app-1
+
+![app 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/app1.png)
 
 
 https://discuss.elastic.co/t/how-to-filter-filebeat-output-by-input-id/329603/3
