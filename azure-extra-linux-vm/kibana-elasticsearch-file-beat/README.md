@@ -564,13 +564,24 @@ Test the config on windows
 ```cmd
 PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files\filebeat\filebeat.yml"
 
-{"log.level":"info","@timestamp":"2025-10-15T09:08:35.750+0200","log.logger":"modules","log.origin":{"function":"github.com/elastic/beats/v7/filebeat/fileset.newModuleRegistry","file.name":"fileset/modules.go","file.line":135},"message":"Enabled modules/filesets: ","service.name":"filebeat","ecs.version":"1.6.0"}
+{"log.level":"info","@timestamp":"2025-10-15T15:12:29.784+0200","log.logger":"modules","log.origin":{"function":"github.com/elastic/beats/v7/filebeat/fileset.newModuleRegistry","file.name":"fileset/modules.go","file.line":135},"message":"Enabled modules/filesets: ","service.name":"filebeat","ecs.version":"1.6.0"}
 Config OK
 
 ```
+
+Start the filebeat services
+
+
 Copy the script and alter the log statment so we can know the difference between them
 
 ```ps1
+PS C:\Users\imsdal\Desktop> & '.\ps1_logger.ps1'
+Task 1
+Performing task 1...
+PS C:\Users\imsdal\Desktop> & '.\ps1_logger2.ps1'
+Task 2
+Performing task 2...
+
 ```
 Verify that we now have both logs
 
@@ -581,6 +592,11 @@ Verify that we now have both logs
 https://www.youtube.com/watch?v=zjw6bCxG_j4
 
 ## Data streams type filestream
+
+We now have both logs in the stream
+
+![Two logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/two_logs.png)
+
 
 
 https://www.elastic.co/docs/manage-data/data-store/data-streams
