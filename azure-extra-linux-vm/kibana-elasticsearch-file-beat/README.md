@@ -274,6 +274,8 @@ Filebeat is a lightweight shipper for forwarding and centralizing log data. Inst
 
 https://www.elastic.co/docs/reference/beats/filebeat
 
+
+### Step 1: Install Filebeat
 Lets install for windows on dmzwindows07
 
 This guide describes how to get started quickly with log collection. You’ll learn how to:
@@ -300,8 +302,37 @@ PS C:\Program Files\filebeat> Set-ExecutionPolicy Unrestricted
 PS C:\Program Files\filebeat> .\install-service-filebeat.ps1
 
 ```
+### Step 2: Connect to the Elastic Stack
 
-Edit the filebeat.yaml
+Edit the filebeat.yaml to connect to elstaicsearch
+
+```yml
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["192.168.3.6:9200"]
+
+  # Performance preset - one of "balanced", "throughput", "scale",
+  # "latency", or "custom".
+  preset: balanced
+
+  # Protocol - either `http` (default) or `https`.
+  #protocol: "https"
+
+  # Authentication credentials - either API key or username/password.
+  #api_key: "id:api_key"
+  username: "elastic"
+  password: "Kibana.user17"
+```
+
+
+Test the config
+
+```cmd
+PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files\filebeat\filebeat.yml"
+
+Config OK
+
+```
 
 Start filebeat service
 
@@ -311,6 +342,7 @@ PS C:\Program Files\filebeat> .\filebeat.exe modules list
 
 
 ```
+### Step 3: Collect log data
 
 ***Powershell log script***
 
@@ -333,6 +365,8 @@ Write-Host "Performing task 1..."
 
 ```
 Use filestream input
+
+Stop filebeat service
 
 Take a backup of filebeat.yaml and edit the orginal file
 
@@ -368,12 +402,106 @@ PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files
 Config OK
 
 ```
+### Step 4: Set up assets
+
+
+```cmd
+PS C:\Program Files\filebeat> .\filebeat.exe setup -e
+
+No connection could be made because the target machine actively refused it.]","service.name":"filebeat","ecs.version":"1.6.0"}
+Exiting: couldn't connect to any of the configured Elasticsearch hosts. Errors: [error connecting to Elasticsearch at http://192.168.3.6:9200: Get "http://192.168.3.6:9200": dial tcp 192.168.3.6:9200: connectex: No connection could be made because the target machine actively refused it.]
+
+```
+
+Edit the elasticsearch.yml
+
+```bash
+
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+
+# By default Elasticsearch is only accessible on localhost. Set a different
+# address here to expose this node on the network:
+#
+#network.host: 192.168.0.1
+network.host: 0.0.0.0
+
+#cluster.initial_master_nodes: ["node-1", "node-2"]
+cluster.initial_master_nodes: node-1
+
+sudo systemctl status elasticsearch
+● elasticsearch.service - Elasticsearch
+     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2025-10-15 07:53:01 UTC; 56s ago
+
+```
+
+
+```cmd
+PS C:\Program Files\filebeat> .\filebeat.exe setup -e
+Exiting: error connecting to Kibana: fail to get the Kibana version: HTTP GET request to http://localhost:5601/api/status fails: fail to execute the HTTP GET request: Get "http://localhost:5601/api/status": dial tcp 127.0.0.1:5601: connectex: No connection could be made because the target machine actively refused it. (status=0). Response:
+```
+
+Changed kibana in filebeat
+
+```bash
+sudo nano /etc/kibana/kibana.yml
+
+```
+
+```yml
+# =================================== Kibana ===================================
+
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana:
+
+  # Kibana Host
+  # Scheme and port can be left out and will be set to the default (http and 5601)
+  # In case you specify and additional path, the scheme is required: http://localhost:5601/path
+  # IPv6 addresses should always be defined as: https://[2001:db8::1]:5601
+  host: "192.168.3.6:5601"
+```
+
+```bash
+sudo service kibana stop
+sudo service kibana start
+sudo service kibana status
+```
+
+Test again
+
+```ps1
+
+PS C:\Program Files\filebeat> .\filebeat.exe setup -e
+
+```
+
+Log
+
+```log
+Index setup finished.
+Loading dashboards (Kibana must be running and reachable)
+{"log.level":"info","@timestamp":"2025-10-15T09:59:27.714+0200","log.logger":"kibana","log.origin":{"function":"github.com/elastic/elastic-agent-libs/kibana.NewClientWithConfigDefault","file.name":"kibana/client.go","file.line":181},"message":"Kibana url: http://192.168.3.6:5601","service.name":"filebeat","ecs.version":"1.6.0"}
+{"log.level":"info","@timestamp":"2025-10-15T09:59:28.265+0200","log.logger":"kibana","log.origin":{"function":"github.com/elastic/elastic-agent-libs/kibana.NewClientWithConfigDefault","file.name":"kibana/client.go","file.line":181},"message":"Kibana url: http://192.168.3.6:5601","service.name":"filebeat","ecs.version":"1.6.0"}
+```
+
+### Step 5: Start Filebeat
 
 Start the service, if we need more logs from the app we must run the ps1 script again.
 
 
-https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-system
+### Step 6: View your data in Kibana
 
+
+* Point your browser to http://localhost:5601, replacing localhost with the name of the Kibana host.
+
+* In the side navigation, click Discover. To see Filebeat data, make sure the predefined filebeat-* data view is selected.
+
+* In the side navigation, click Dashboard, then select the dashboard that you want to open.
+
+
+![Setup ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/setup_ok.png)
 
 
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-installation-configuration
