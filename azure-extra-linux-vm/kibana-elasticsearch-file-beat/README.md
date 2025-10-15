@@ -520,7 +520,7 @@ Use filestream input again add a second stream, Each - is an input.
 
 Stop filebeat service
 
-Take a backup of filebeat.yaml and edit the orginal file
+Take a backup of filebeat.yaml and edit the orginal file, change the id
 
 ```yml
 filebeat.inputs:
@@ -533,7 +533,7 @@ filebeat.inputs:
 - type: filestream
 
   # Unique ID among all inputs, an ID is required.
-  id: my-filestream-id
+  id: my-filestream-ps1-1
 
   # Change to true to enable this input configuration.
   enabled: true
@@ -541,6 +541,20 @@ filebeat.inputs:
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
       - C:\Logs\ps1.log
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+# filestream is an input for collecting log messages from files.
+- type: filestream
+
+  # Unique ID among all inputs, an ID is required.
+  id: my-filestream-ps1-2
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+      - C:\Logs\ps2.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
 ```
@@ -554,8 +568,13 @@ PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files
 Config OK
 
 ```
+Copy the script and alter the log statment so we can know the difference between them
 
+```ps1
+```
 Verify that we now have both logs
+
+![Two ps1 scripts](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/ps_2_scripts.png)
 
 ### Data Ingestion with Filebeat: Ingesting JSON data from APIs with Filebeat
 
