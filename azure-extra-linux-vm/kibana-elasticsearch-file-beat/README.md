@@ -557,7 +557,7 @@ Config OK
 
 Verify that we now have both logs
 
-## Data streams filestream
+## Data streams type filestream
 
 
 https://www.elastic.co/docs/manage-data/data-store/data-streams
