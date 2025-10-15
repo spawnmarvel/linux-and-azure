@@ -607,6 +607,12 @@ We now have both logs in the stream
 
 Lets filter on this new field and view visual
 
+Add field in discover
+
+![Add field](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/add_field.png)
+
+We can now select and view visuals
+
 ![visual 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/visual1.png)
 
 
