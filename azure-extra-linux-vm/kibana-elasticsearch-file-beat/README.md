@@ -514,6 +514,12 @@ From the Kibana main menu, navigate to Observability > Logs.
 
 https://www.elastic.co/docs/reference/beats/filebeat/filebeat-installation-configuration
 
+### Add more logging and learn the navigation and search
+
+Setup one more host to use filebeat so w ehave two sets of logs
+
+
+
 ### Kibana set up https
 
 https://www.elastic.co/docs/deploy-manage/security/set-up-basic-security-plus-https#encrypt-kibana-https
