@@ -523,6 +523,8 @@ Stop filebeat service
 Take a backup of filebeat.yaml and edit the orginal file, change the id
 
 ```yml
+# ============================== Filebeat inputs ===============================
+
 filebeat.inputs:
 
 # Each - is an input. Most options can be set at the input level, so
@@ -543,6 +545,9 @@ filebeat.inputs:
       - C:\Logs\ps1.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
+  fields: 
+    my-app-id: "app-1"
+    
 # filestream is an input for collecting log messages from files.
 - type: filestream
 
@@ -557,9 +562,11 @@ filebeat.inputs:
       - C:\Logs\ps2.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
+  fields: 
+    my-app-id: "app-2"
 ```
 
-Test the config on windows
+Test the config on windows use space 2 or 4 spaces.
 
 ```cmd
 PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files\filebeat\filebeat.yml"
@@ -572,7 +579,7 @@ Config OK
 Start the filebeat services
 
 
-Copy the script and alter the log statment so we can know the difference between them
+Copy the script and alter the log statment so we can know the difference between them and send some more data.
 
 ```ps1
 PS C:\Users\imsdal\Desktop> & '.\ps1_logger.ps1'
@@ -596,6 +603,15 @@ https://www.youtube.com/watch?v=zjw6bCxG_j4
 We now have both logs in the stream
 
 ![Two logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/two_logs.png)
+
+
+Lets filter on this new field and view visual
+
+![visual](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/visual.png)
+
+
+
+https://discuss.elastic.co/t/how-to-filter-filebeat-output-by-input-id/329603/3
 
 
 
