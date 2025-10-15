@@ -555,6 +555,12 @@ Config OK
 
 ```
 
+Verify that we now have both logs
+
+## Data streams filestream
+
+
+https://www.elastic.co/docs/manage-data/data-store/data-streams
 
 
 ### Kibana set up https
