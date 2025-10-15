@@ -607,7 +607,7 @@ We now have both logs in the stream
 
 Lets filter on this new field and view visual
 
-![visual](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/visual.png)
+![visual 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/visual1.png)
 
 
 
