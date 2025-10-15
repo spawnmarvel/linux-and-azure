@@ -429,13 +429,15 @@ network.host: 0.0.0.0
 #cluster.initial_master_nodes: ["node-1", "node-2"]
 cluster.initial_master_nodes: node-1
 
+
+```
+Logs 
+```log
 sudo systemctl status elasticsearch
 ● elasticsearch.service - Elasticsearch
      Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
      Active: active (running) since Wed 2025-10-15 07:53:01 UTC; 56s ago
-
 ```
-
 
 ```cmd
 PS C:\Program Files\filebeat> .\filebeat.exe setup -e
