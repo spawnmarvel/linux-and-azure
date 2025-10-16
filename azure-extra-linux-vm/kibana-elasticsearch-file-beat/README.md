@@ -738,7 +738,15 @@ Filter for CPU
 https://www.elastic.co/docs/manage-data/data-store/data-streams
 
 
-## Elasticsearch admin 101, files, datastore etc
+## Elastic fundamentals
+
+
+
+https://www.elastic.co/docs/get-started
+
+## KQL
+
+https://www.elastic.co/docs/explore-analyze/query-filter/languages/kql
 
 ### Kibana set up https
 
