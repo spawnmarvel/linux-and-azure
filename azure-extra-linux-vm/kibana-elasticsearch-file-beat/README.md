@@ -741,12 +741,13 @@ https://www.elastic.co/docs/manage-data/data-store/data-streams
 ## Elastic fundamentals
 
 
-
 https://www.elastic.co/docs/get-started
 
 ## KQL
 
 https://www.elastic.co/docs/explore-analyze/query-filter/languages/kql
+
+## Docker elasticsearch and kibana, filebeat om vms
 
 ### Kibana set up https
 
