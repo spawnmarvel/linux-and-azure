@@ -747,7 +747,7 @@ https://www.elastic.co/docs/get-started
 
 https://www.elastic.co/docs/explore-analyze/query-filter/languages/kql
 
-## Docker elasticsearch and kibana, filebeat om vms
+## Docker elasticsearch and kibana, filebeat on vm's
 
 ### Kibana set up https
 
