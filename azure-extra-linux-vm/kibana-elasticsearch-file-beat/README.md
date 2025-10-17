@@ -666,7 +666,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-      - C:\Logs\ps1.log
+      - C:\ps1Logs\ps1.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
   encoding: utf-16le
@@ -684,7 +684,7 @@ filebeat.inputs:
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-      - C:\Logs\ps2.log
+      - C:\ps1Logs\ps2.log
     # - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
   encoding: utf-16le
@@ -750,6 +750,16 @@ Beats are open source data shippers that you install as agents on your servers t
 https://www.elastic.co/docs/reference/beats
 
 ## Elastic fundamentals
+
+Use case
+
+* Full-text search: Build a fast, relevant full-text search solution using inverted indexes, tokenization, and text analysis.
+
+Observability
+
+* Logs, metrics, and traces: Collect, store, and analyze logs, metrics, and traces from applications, systems, and services.
+
+![components](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/components.png)
 
 
 https://www.elastic.co/docs/get-started
