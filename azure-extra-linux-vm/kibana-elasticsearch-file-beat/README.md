@@ -719,6 +719,12 @@ PS C:\Program Files\filebeat> .\filebeat.exe test config -e -c "C:\Program Files
 Config OK
 
 ```
+Add the same user to security on the zabbix agent services as running the filebeat service to allow read file.
+
+* Filebeat service users, local system
+* Zabbix agent 2 user, local system, on security tab, add SYSTEM user if you do not get harvest message from filebeat.
+
+![system user](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/system_user.png)
 
 Go to discover end refresh.
 
