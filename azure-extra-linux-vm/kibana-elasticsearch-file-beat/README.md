@@ -737,6 +737,11 @@ Filter for CPU
 
 https://www.elastic.co/docs/manage-data/data-store/data-streams
 
+## Other beats
+
+Beats are open source data shippers that you install as agents on your servers to send operational data to Elasticsearch
+
+https://www.elastic.co/docs/reference/beats
 
 ## Elastic fundamentals
 
