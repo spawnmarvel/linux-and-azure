@@ -765,8 +765,52 @@ Observability
 
 ![components](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/components.png)
 
+Ingest
+
+* Elastic Agent is a single, unified way to add monitoring for logs, metrics, and other types of data to a host. It can also protect hosts from security threats, query data from operating systems, forward data from remote services or hardware, and more.
+* Fleet enables you to centrally manage Elastic Agents and their policies. 
+
+APM
+
+* Elastic APM is an application performance monitoring system built on the Elastic Stack. It allows you to monitor software services and applications in real-time,
+
+Beats
+
+* Beats are data shippers that you install as agents on your servers to send operational data to Elasticsearch. Beats are available for many standard observability data scenarios,
+
+Elasticsearch ingest pipelines
+
+* Ingest pipelines let you perform common transformations on your data before indexing them into Elasticsearch. You can configure one or more "processor" tasks .
+
+Logstash
+
+* 
+
+Store
+
+* Elasticsearch is the distributed search and analytics engine at the heart of the Elastic Stack.
+
+Consume
+
+* Use Kibana to query and visualize the data that’s stored in Elasticsearch. Or, use the Elasticsearch clients to access data in Elasticsearch directly from common programming languages.
+
+Version compatibility
+
+* When installing the Elastic Stack, you must use the same version across the entire stack.
+
+Installation order
+
+* Elastic search with the update apt.sources
+* Kibana
+
+Then we can deploy beats agents on remote hosts.
+
 
 https://www.elastic.co/docs/get-started
+
+## Elasticsearch manage data
+
+https://www.elastic.co/docs/manage-data/
 
 ## KQL
 
