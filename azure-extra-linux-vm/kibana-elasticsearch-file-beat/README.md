@@ -726,6 +726,10 @@ Add the same user to security on the zabbix agent services as running the filebe
 
 ![system user](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/system_user.png)
 
+Runng in task schduler
+
+![task scheduler](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/task_scheduler.png)
+
 Go to discover end refresh.
 
 ![3 discover](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/3_discover.png)
