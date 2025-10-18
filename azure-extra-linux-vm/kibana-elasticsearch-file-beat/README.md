@@ -974,8 +974,58 @@ In the Hot phase, by default an ILM-managed index rolls over when either:
 
 https://www.elastic.co/docs/manage-data/lifecycle/index-lifecycle-management
 
+On debian or ubuntu
+
+```bash
+sudo su
+
+/var/lib/elasticsearch/nodes/0/indices
+```
+
+***Method 1: Relocating the Entire Node's Data Path (Least Downtime)***
+
+Prerequisites
+* The new drive must be mounted and formatted.
 
 
+We added a disk from the portal, 8GB
+
+![disk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/disk.png)
+
+Now mount and format.
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+
+* The Elasticsearch user must have full read/write permissions to the new directory.
+* Crucial: Take a Snapshot of your cluster first as a backup.
+
+```bash
+# Example for Systemd
+sudo systemctl stop elasticsearch
+```
+Copy Data to the New Location: Use a reliable copy command
+
+```bash
+# Replace /old/data/path with your current path.data
+# Replace /new/data/path with the mount point of your new drive
+sudo rsync -aHv --progress /old/data/path/ /new/data/path/
+```
+
+Update path.data in elasticsearch.yml
+
+```bash
+# /etc/elasticsearch/elasticsearch.yml (or similar)
+path:
+  data: /new/data/path
+```
+
+Verify Permissions:
+
+```bash
+# Replace elasticsearch:elasticsearch with the correct user:group if necessary
+sudo chown -R elasticsearch:elasticsearch /new/data/path
+
+```
 https://www.elastic.co/docs/manage-data/data-store
 
 
