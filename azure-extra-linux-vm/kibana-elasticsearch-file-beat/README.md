@@ -404,6 +404,7 @@ Config OK
 ```
 ### Step 4: Set up assets
 
+Filebeat comes with predefined assets for parsing, indexing, and visualizing your data.
 
 ```cmd
 PS C:\Program Files\filebeat> .\filebeat.exe setup -e
