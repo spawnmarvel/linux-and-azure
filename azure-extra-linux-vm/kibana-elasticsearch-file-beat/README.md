@@ -994,6 +994,8 @@ We added a disk from the portal, 8GB
 
 Now mount and format.
 
+![disk ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/disk_ok.png)
+
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
 
 * The Elasticsearch user must have full read/write permissions to the new directory.
