@@ -602,6 +602,12 @@ https://www.youtube.com/watch?v=zjw6bCxG_j4
 
 ## Data streams type filestream
 
+A data stream acts as a layer of abstraction over a set of indices that are optimized for storing append-only time series data. 
+
+Data streams are well-suited for logs, events, metrics, and other continuously generated data.
+
+https://www.elastic.co/docs/manage-data/data-store/data-streams
+
 We now have both logs in the stream
 
 ![Two logs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/two_logs.png)
@@ -811,6 +817,36 @@ https://www.elastic.co/docs/get-started
 ## Elasticsearch manage data
 
 https://www.elastic.co/docs/manage-data/
+
+## Elasticsearch data store
+
+The documentation in this section details how Elasticsearch works as a data store starting with the fundamental unit of storage in Elasticsearch: the index.
+
+### Index basics
+
+An index is a fundamental unit of storage in Elasticsearch. It is a collection of documents uniquely identified by a name or an alias
+
+Index components
+An index is made up of the following components.
+
+* Elasticsearch serializes and stores data in the form of JSON documents
+* An indexed document contains data and metadata.
+* Each index has a mapping or schema for how the fields in your documents are indexed. A mapping defines the data type for each field, how the field should be indexed, and how it should be stored.
+
+Index management
+
+* Elastic's Index Management
+* Convenient way to manage your cluster’s indices, data streams, templates, and enrich policies. 
+
+Search for Index
+
+Example our stream, where we can view health and storage.
+
+![index_yellow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/index_yellow.png)
+
+
+https://www.elastic.co/docs/manage-data/data-store
+
 
 ## KQL
 
