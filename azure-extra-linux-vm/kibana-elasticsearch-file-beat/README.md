@@ -952,6 +952,30 @@ Json returnd.
 ![index_green](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/index_green.png)
 
 
+Available index operations:
+
+* Show overview, settings, mapping, stats
+* Close, open, force merge
+* Refresh, clear cache, flush, delete
+* Add life cycle policy
+
+![hot](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/hot.png)
+
+https://www.elastic.co/docs/manage-data/data-store/perform-index-operations
+
+### Index lifecycle management
+
+An index lifecycle management (ILM) policy defines how your indices are managed over time, automating when and how they transition as they age. 
+
+In the Hot phase, by default an ILM-managed index rolls over when either:
+
+* It reaches 30 days of age.
+* One or more primary shards reach 50 GB in size.
+
+https://www.elastic.co/docs/manage-data/lifecycle/index-lifecycle-management
+
+
+
 https://www.elastic.co/docs/manage-data/data-store
 
 
