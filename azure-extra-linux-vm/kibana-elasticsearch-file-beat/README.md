@@ -1,5 +1,7 @@
 # Elastic Stack new ELK (Elasticsearch, Filebeat and Kibana)
 
+Elastic Stack, which is commonly known as the ELK Stack when using Logstash (L) in place of or in addition to Filebeat.
+
 Combination of Filebeat, Elasticsearch, and Kibana (a common variation of the Elastic Stack, formerly known as the ELK stack, with Logstash) is an excellent, popular, and robust solution for centralized log collection, storage, and analysis.
 
 Kibana and Grafana are both powerful, open-source data visualization tools, but they were built for different primary purposes and excel in different areas. Kibana is the log analysis champion, tightly coupled with Elasticsearch, while Grafana is the metrics and multi-source visualization expert
