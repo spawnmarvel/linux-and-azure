@@ -1,4 +1,4 @@
-# F-E-K (Filebeat, Elasticsearch, Kibana)
+# Elastic Stack new ELK (Elasticsearch, Filebeat and Kibana)
 
 Combination of Filebeat, Elasticsearch, and Kibana (a common variation of the Elastic Stack, formerly known as the ELK stack, with Logstash) is an excellent, popular, and robust solution for centralized log collection, storage, and analysis.
 
