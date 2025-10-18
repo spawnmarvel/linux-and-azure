@@ -844,6 +844,120 @@ Example our stream, where we can view health and storage.
 
 ![index_yellow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/index_yellow.png)
 
+Health Status Colors: Green, Yellow, and Red
+
+* Green Status: All primary and replica shards are allocated. This indicates that the cluster is ready for use.
+* Yellow Status: All primary shards are allocated, but few replica shards are not. This indicates that the cluster is partially functional.
+* Red Status: One or more primary shards are not allocated. This indicates that the cluster may experience significant issues.
+
+Get status using curl
+
+```bash
+curl -X GET "http://localhost:9200/_cluster/health?pretty"
+
+curl -u elastic:password -X GET "http://localhost:9200/_cluster/health?pretty"
+
+```
+
+Json returnd.
+
+```json
+{
+  "cluster_name" : "elasticsearch",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 14,
+  "active_shards" : 14,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 1,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 93.33333333333333
+}
+```
+
+if you run a cluster with number_of_data_nodes: 1, the cluster health will almost always be Yellow by default.
+
+Yellow Status Definition: In Elasticsearch, a Yellow status means all primary shards are allocated and operational, but one or more replica shards are unassigned. The cluster is fully functional, but it lacks redundancy.
+
+The Single-Node Problem: With only one data node, there is nowhere for the replica shards to be placed, as they cannot share the single node with their corresponding primary shards. The replica requirement is not met, so the cluster status remains Yellow.
+
+How to Get a Green Status on a Single Data Node
+To achieve a Green status (meaning all primary and replica shards are allocated), you must tell Elasticsearch that it does not need any replicas.
+
+You can do this by setting the number of replicas to zero ("index.number_of_replicas": 0) for all indices.
+
+***Single Server Single Node vs Single Server Multiple Node***
+
+* If you only have one physical machine, a replica is kind of a waste of resources so "no replica" is an advantage IMO, and "no fail tolerance" applies to both options.
+
+https://discuss.elastic.co/t/single-server-single-node-vs-single-server-multiple-node/324081/2
+
+
+The most reliable, dynamic, and version-agnostic way to set index.number_of_replicas: 0 for all new indices is by creating a global index template. This template is stored in the cluster state and applies automatically.
+
+```bash
+
+# Set number_of_replicas to 0 for all existing indices
+curl -X PUT "http://localhost:9200/_settings" -H 'Content-Type: application/json' -d '{"index.number_of_replicas": 0}'
+
+curl -u elastic:passsword -X PUT "http://localhost:9200/_settings" -H 'Content-Type: application/json' -d '{"index.number_of_replicas": 0}'
+
+{"acknowledged":true}
+
+```
+
+To change the number of replicas for an existing index (or all existing indices), you must use the Index Update Settings API
+
+```bash
+# Create a template to set number_of_replicas to 0 for all future indices
+curl -X PUT "http://localhost:9200/_index_template/global_no_replicas" -H 'Content-Type: application/json' -d '{"index_patterns": ["*"], "priority": 10, "template": {"settings": {"number_of_replicas": 0}}}'
+
+curl -u elastic:passsword -X PUT "http://localhost:9200/_index_template/global_no_replicas" -H 'Content-Type: application/json' -d '{"index_patterns": ["*"], "priority": 10, "template": {"settings": {"number_of_replicas": 0}}}'
+
+{"acknowledged":true}
+
+```
+
+Now get the node status again.
+
+```bash
+curl -X GET "http://localhost:9200/_cluster/health?pretty"
+
+curl -u elastic:password -X GET "http://localhost:9200/_cluster/health?pretty"
+
+```
+
+Json returnd.
+
+```json
+{
+  "cluster_name" : "elasticsearch",
+  "status" : "green",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 14,
+  "active_shards" : 14,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 0,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 100.0
+}
+```
+
+
+![index_green](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/index_green.png)
+
 
 https://www.elastic.co/docs/manage-data/data-store
 
