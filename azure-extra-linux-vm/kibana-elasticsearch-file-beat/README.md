@@ -883,13 +883,6 @@ Json returnd.
 
 if you run a cluster with number_of_data_nodes: 1, the cluster health will almost always be Yellow by default.
 
-Yellow Status Definition: In Elasticsearch, a Yellow status means all primary shards are allocated and operational, but one or more replica shards are unassigned. The cluster is fully functional, but it lacks redundancy.
-
-The Single-Node Problem: With only one data node, there is nowhere for the replica shards to be placed, as they cannot share the single node with their corresponding primary shards. The replica requirement is not met, so the cluster status remains Yellow.
-
-How to Get a Green Status on a Single Data Node
-To achieve a Green status (meaning all primary and replica shards are allocated), you must tell Elasticsearch that it does not need any replicas.
-
 You can do this by setting the number of replicas to zero ("index.number_of_replicas": 0) for all indices.
 
 ***Single Server Single Node vs Single Server Multiple Node***
