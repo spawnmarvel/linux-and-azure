@@ -996,7 +996,49 @@ Now mount and format.
 
 ![disk ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/disk_ok.png)
 
+
 https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+
+Check and fix access
+
+```bash
+imsdal@dummy03:/datadrive$ ls -ld
+drwxr-xr-x 2 root root 6 Oct 18 09:39 .
+
+```
+
+The permissions are set to drwxr-xr-x. This means:
+
+* d: It is a directory.
+* rwx (Owner): The root user (the owner) has read, write, and execute permissions.
+* r-x (Group): The root group has read and execute permissions.
+* r-x (Others): All other users have read and execute permissions
+
+Allow other users to read/ write:
+
+```bash
+# list all users
+cat /etc/passwd
+
+# [...]
+imsdal:x:1000:1000:Ubuntu:/home/imsdal:/bin/bash
+zabbix:x:110:114::/var/lib/zabbix/:/usr/sbin/nologin
+elasticsearch:x:111:115::/nonexistent:/bin/false
+kibana:x:112:116::/nonexistent:/bin/false
+
+```
+
+Add elasticsearch as owner
+
+```bash
+sudo chown elasticsearch:elasticsearch /datadrive/
+ls -ld /datadrive/
+drwxr-xr-x 2 elasticsearch elasticsearch 6 Oct 18 09:39 /datadrive/
+
+# The standard and most secure permission for this type of application directory is often $\mathbf{775}$ (rwxrwxr-x), which grants full read/write access to both the Owner and the Group.
+sudo chmod 775 /datadrive
+
+```
 
 * The Elasticsearch user must have full read/write permissions to the new directory.
 * Crucial: Take a Snapshot of your cluster first as a backup.
@@ -1011,23 +1053,56 @@ Copy Data to the New Location: Use a reliable copy command
 # Replace /old/data/path with your current path.data
 # Replace /new/data/path with the mount point of your new drive
 sudo rsync -aHv --progress /old/data/path/ /new/data/path/
+sudo rsync -aHv --progress /var/lib/elasticsearch /datadrive
 ```
 
 Update path.data in elasticsearch.yml
 
 ```bash
 # /etc/elasticsearch/elasticsearch.yml (or similar)
-path:
-  data: /new/data/path
+
+# path.data: /var/lib/elasticsearch
+path.data: /datadrive/elasticsearch
 ```
 
-Verify Permissions:
+Start the Elasticsearch service.
 
 ```bash
-# Replace elasticsearch:elasticsearch with the correct user:group if necessary
-sudo chown -R elasticsearch:elasticsearch /new/data/path
+sudo service elasticsearch start
+sudo service elasticsearch status
+● elasticsearch.service - Elasticsearch
+     Loaded: loaded (/usr/lib/systemd/system/elasticsearch.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2025-10-18 10:20:06 UTC; 15s ago
 
 ```
+
+Verify path
+
+```bash
+curl -X GET "localhost:9200/_nodes/_local?filter_path=nodes.*.settings.path&pretty"
+
+curl -u elastic:password -X GET "localhost:9200/_nodes/_local?filter_path=nodes.*.settings.path&p
+retty"
+
+```
+
+Log
+```json
+{
+  "nodes" : {
+    "yMIzPqnNRMKAcZSRwmSQxA" : {
+      "settings" : {
+        "path" : {
+          "data" : "/datadrive/elasticsearch",
+          "logs" : "/var/log/elasticsearch",
+          "home" : "/usr/share/elasticsearch"
+        }
+      }
+    }
+  }
+}
+```
+
 https://www.elastic.co/docs/manage-data/data-store
 
 
