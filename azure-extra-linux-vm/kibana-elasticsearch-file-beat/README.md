@@ -752,6 +752,9 @@ Filter for CPU
 
 ![Filter cpu](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/filter_cpu.png)
 
+Statistics
+
+![all apps](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/all_apps.png)
 
 
 https://www.elastic.co/docs/manage-data/data-store/data-streams
