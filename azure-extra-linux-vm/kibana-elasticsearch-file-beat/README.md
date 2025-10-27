@@ -846,7 +846,7 @@ Index management
 
 Search for Index
 
-Example our stream, where we can view health and storage.
+Example: Go to Data stream, press the stream, and it shows the indices line (health and storage).
 
 ![index_yellow](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/index_yellow.png)
 
