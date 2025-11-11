@@ -32,6 +32,7 @@ Create a configuration file to specify the target repository.
 > ⚠️ IMPORTANT: Replace YOUR_DISTRIBUTION (e.g., bookworm, jammy) and YOUR_ARCH (e.g., amd64) with the values appropriate for your client systems.
 > 
 # Create the config file
+
 '''bash 
 cat << EOF | sudo tee zabbix-mirror.conf
 --root=/var/www/html/zabbix-mirror
