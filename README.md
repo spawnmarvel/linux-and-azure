@@ -1,6 +1,6 @@
 # linux-and-azure all things guide
 
-# Set Up a Firewall with UFW on Ubuntu
+# Set Up Firewall with UFW on Ubuntu
 
 https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-security/README.md
 
