@@ -15,7 +15,8 @@ This comprehensive guide includes all necessary steps to set up the mirror serve
 🚀 Server Setup: Creating the Mirror
 1. Prerequisites and Initial Installation
 You'll need debmirror for the sync and Apache to serve the files via HTTP.
-# Update package list
+
+### Update package list
 sudo apt update
 
 ### Install debmirror and Apache Web Server
@@ -23,6 +24,7 @@ sudo apt install debmirror apache2 -y
 
 2. Prepare the Mirror Directory
 Create the directory where the Zabbix packages will be stored. We'll use the standard Apache web root for simplicity.
+
 ### Create the dedicated directory inside the Apache web root
 sudo mkdir -p /var/www/html/zabbix-mirror
 
@@ -47,7 +49,8 @@ sudo debmirror --config-file=zabbix-mirror.conf
 
 4. Configure Apache and Verification
 Apache should be running by default after installation. The mirror should be accessible via your server's IP address.
-# Ensure Apache service is active
+
+### Ensure Apache service is active
 sudo systemctl status apache2
 
 The mirror content is now accessible at:
