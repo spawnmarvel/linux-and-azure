@@ -12,7 +12,12 @@ https://louwrentius.com/how-to-setup-a-local-or-private-ubuntu-mirror.html
 
 ## debmirror ubuntu wiki
 
-write about different types
+!Feature          | debmirror	                                    | apt-mirror                                   | rsync |
+Primary           | Use	Highly configurable repository mirroring.	| Simple, full repository mirroring.	       | General file synchronization.
+Configuration	  | Command-line flags (easiest for scripts).	    | Dedicated configuration file (mirror.list).  | Scripting required for filtering.
+Update Efficiency |	Good (uses timestamps/metadata).	            | Good (uses timestamps/metadata).	           | Excellent (only transfers binary differences).
+Complexity	      | Medium	                                        | Low	                                       | High (for repo management)
+Best For	      | Targeting specific architectures/versions.	    | Mirroring a complete distribution.           | Fast, bandwidth-efficient syncs.
 
 https://help.ubuntu.com/community/Debmirror
 
