@@ -43,6 +43,13 @@ Architecture: amd64 (x64)
 
 Mirror Root: /var/www/html/zabbix_mirror
 
+Link used for zabbix agent
+
+https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
+
+![zabbix packet](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/zabbix_packet.png)
+
+
 ### 1. Mirror Server Setup & Initial Sync
 
 This section covers the installation of the necessary tools (debmirror and Apache) and the initial synchronization of the repository.
