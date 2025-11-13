@@ -462,7 +462,47 @@ Add to the eof
 # Run the Zabbix mirror sync script daily at 3:00 AM (0 3 * * *)
 0 3 * * * /usr/local/bin/sync_zabbix_mirror.sh
 ```
+
+nano output
+
 ![cron](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/cron.png)
 
+Verify the job is in the crontab:
+
+```bash
+sudo crontab -l
+```
+
+Monitor the log file (which your script uses) after 3:00 AM the next morning to confirm a successful run:
+
+```bash
+tail /var/log/zabbix-mirror-sync.log
+```
 
 
+
+### Test sync_zabbix_mirror.sh
+
+```bash
+
+# Run it
+sudo /usr/local/bin/sync_zabbix_mirror.sh
+
+# Get logs
+tail -20 /var/log/zabbix-mirror-sync.log
+
+```
+
+Verify it in logs and output
+
+```log
+
+[...]
+Files to download: 0 B
+Downloaded 7901 B in 2s at 3.85 kiB/s.
+Everything OK. Moving meta files ...
+Cleanup mirror.
+All done.
+Thu Nov 13 19:42:26 UTC 2025: Synchronization completed successfully.
+
+```
