@@ -168,10 +168,24 @@ du -sh *
 
 Verify that the mirrored repository is accessible via HTTP from any client machine. Replace YOUR_MIRROR_SERVER_IP with the actual IP address or hostname of your mirror server.
 
+(Add NSG to public IP allow http 80 for test)
+
 Expected Test URL: http://YOUR_MIRROR_SERVER_IP/zabbix_mirror/
 
 ![apache mirror files](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/apache_mirror.png)
 
+You should be able to browse the contents, specifically seeing directories like dists/ and pool/. If you see a "Forbidden" error, check the permissions in Step 1.2.
+
+(Remove NSG to public IP allow http 80 for test)
+
+
+### 2. Client Configuration & Test
+
+This section details how to configure the Zabbix Agent machines (the clients) to use your new local repository instead of the public one.
+
+#### 2.1 Add the Zabbix GPG Key
+
+The client machine must trust the Zabbix signing key. On modern Ubuntu systems (24.04), we use the non-deprecated install method.
 
 
 
