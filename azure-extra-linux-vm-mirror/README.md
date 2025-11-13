@@ -427,8 +427,13 @@ Verify that it uses the mirror server.
 
 If the Get: line starts with http://172.64.0.4/zabbix_mirror/ (or your mirror's actual IP), then the package is being pulled directly from your mirror.
 
-```log
+```bash
 sudo apt install zabbix-agent2
+```
+Log
+
+```log
+
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
