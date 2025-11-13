@@ -32,6 +32,7 @@ This sets up the server to host the Zabbix Agent packages using Apache and `rsyn
 
 Install the web server and the synchronization tool.
 
+no rsync write about the differences between tools, view Ubuntu use deb mirror.
 ```bash
 # Update and install tools
 sudo apt update && sudo apt install apache2 rsync -y
