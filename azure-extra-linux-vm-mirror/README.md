@@ -170,7 +170,7 @@ Verify that the mirrored repository is accessible via HTTP from any client machi
 
 Expected Test URL: http://YOUR_MIRROR_SERVER_IP/zabbix_mirror/
 
-
+![apache mirror files](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/apache_mirror.png)
 
 
 
