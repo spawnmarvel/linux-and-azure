@@ -355,8 +355,13 @@ deb [signed-by=/etc/apt/keyrings/zabbix-archive-keyring.gpg] http://172.64.0.4/z
 ```
 Log with success
 
+```bash
+sudo apt update
+```
+
+log
+
 ```log
- sudo apt update
 Get:1 http://172.64.0.4/zabbix_mirror noble InRelease [3975 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
