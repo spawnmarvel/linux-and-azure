@@ -22,6 +22,13 @@ https://louwrentius.com/how-to-setup-a-local-or-private-ubuntu-mirror.html
 
 https://help.ubuntu.com/community/Debmirror
 
+Since you are dealing with multiple, distinct third-party repositories (Zabbix, xabbix—assuming a second vendor repo, and MySQL), and you need to pull specific packages for a single distribution (Ubuntu 24.04), ***the best all-around tool is debmirror.***
+
+While apt-mirror is simple, it's often designed to mirror an entire distribution, which is overkill and inefficient for just a few vendor repos. Using rsync requires heavy manual scripting to correctly manage the metadata for each separate repository.
+
+debmirror provides the best balance of control, efficiency, and automated metadata handling for this mixed-vendor scenario.
+
+
 ## Zabbix Agent Repository Mirroring Guide (Ubuntu 24.04)
 
 This guide provides a complete, step-by-step process for mirroring the Zabbix Debian/Ubuntu repository for a specific version and distribution using debmirror and serving it via Apache.
