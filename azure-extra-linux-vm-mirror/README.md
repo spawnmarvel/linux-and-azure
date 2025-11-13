@@ -374,6 +374,95 @@ Reading state information... Done
 ![Mirror succces](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/mirror_success.png)
 
 
+#### ⚙️ 2.4 Install Zabbix Agent
+
+```bash
+# Update packets
+sudo apt update -y
+# Install agent2
+sudo apt install zabbix-agent2
+
+# check it
+sudo service zabbix-agent2 status
+● zabbix-agent2.service - Zabbix Agent 2
+     Loaded: loaded (/usr/lib/systemd/system/zabbix-agent2.service; enabled; preset: enabled)
+
+# enable it
+systemctl enable zabbix-agent2
+systemctl restart zabbix-agent2
+
+# check it again
+sudo systemctl status zabbix-agent2
+
+```
+
+Verify that it uses the mirror server.
+
+If the Get: line starts with http://172.64.0.4/zabbix_mirror/ (or your mirror's actual IP), then the package is being pulled directly from your mirror.
+
+```log
+sudo apt install zabbix-agent2
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  zabbix-agent2
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 5693 kB of archives.
+After this operation, 19.4 MB of additional disk space will be used.
+Get:1 http://172.64.0.4/zabbix_mirror noble/main amd64 zabbix-agent2 amd64 1:7.0.21-2+ubuntu24.04 [5693 kB]
+Fetched 5693 kB in 0s (79.2 MB/s)
+[...]
+
+```
+
+Check Apache Access Logs (Mirror Server Side)
+
+```bash
+# exit ssh client vm ssh imsdal@172.64.0.5
+exit
+imsdal@dmzdocker03:~$ sudo tail -20 /var/log/apache2/access.log
+```
+
+Log
+
+```log
+172.64.0.5 - - [13/Nov/2025:18:26:30 +0000] "GET /zabbix_mirror/zabbix-official-repo.key HTTP/1.1" 200 18365 "-" "Wget/1.21.4"
+172.64.0.5 - - [13/Nov/2025:18:38:06 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 200 4180 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:18:42:22 +0000] "GET /zabbix_mirror/zabbix-official-repo.key HTTP/1.1" 200 18365 "-" "Wget/1.21.4"
+172.64.0.5 - - [13/Nov/2025:19:09:06 +0000] "GET /zabbix_mirror/zabbix-official-repo.key HTTP/1.1" 200 18365 "-" "Wget/1.21.4"
+172.64.0.5 - - [13/Nov/2025:19:10:46 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 416 592 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:10:46 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 200 4180 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:18:19 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 416 592 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:18:19 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 200 4180 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:18:20 +0000] "GET /zabbix_mirror/dists/noble/main/binary-all/Packages.gz HTTP/1.1" 200 13974 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:18:20 +0000] "GET /zabbix_mirror/dists/noble/main/binary-amd64/Packages.gz HTTP/1.1" 200 74178 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+172.64.0.5 - - [13/Nov/2025:19:22:26 +0000] "GET /zabbix_mirror/dists/noble/InRelease HTTP/1.1" 304 193 "-" "Debian APT-HTTP/1.3 (2.8.3) non-interactive"
+```
+
+The presence of the client's IP (172.64.0.5 in this example) requesting Zabbix package files directly from the /zabbix_mirror/ path confirms the mirror is in use.
+
+
+### 📅 Automating Mirror Synchronization (Cron Job)
+Run the following steps on your Mirror Server (where your mirror files are located).
+
+Open the root user's crontab for editing. We use sudo crontab -e because the sync script needs root permissions to write to /var/www/html/zabbix_mirror/
+
+```bash
+# exit ssh client vm ssh imsdal@172.64.0.5
+exit
+sudo crontab -e
+
+# 1 for nano
+
+```
+Add to the eof
+
+```log
+# Run the Zabbix mirror sync script daily at 3:00 AM (0 3 * * *)
+0 3 * * * /usr/local/bin/sync_zabbix_mirror.sh
+```
+![cron](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/cron.png)
 
 
 
