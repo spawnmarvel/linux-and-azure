@@ -47,6 +47,7 @@ dmzdocker03
 
 
 ```bash
+ssh
 # Update package lists
 sudo apt update
 
@@ -250,6 +251,7 @@ scp -r ~/gnupg_transfer imsdal@172.64.0.5:~/gnupg_offline/
 
 # --- On the OFFLINE Client VM ---
 # Navigate to the folder where you transferred the .deb files.
+exit
 ssh imsdal@172.64.0.5
 cd ~/gnupg_offline/gnupg_transfer
 
