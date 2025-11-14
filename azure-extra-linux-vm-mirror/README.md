@@ -11,6 +11,7 @@ In an environment like this, it would be more efficient if one system would down
 
 ```mermaid
 graph TD;
+    SubServer-->MirrorServer;
     MirrorServer-->Internet;
   
    
