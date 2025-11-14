@@ -29,6 +29,26 @@ While apt-mirror is simple, it's often designed to mirror an entire distribution
 debmirror provides the best balance of control, efficiency, and automated metadata handling for this mixed-vendor scenario.
 
 
+## Virtual machines
+
+dmzdocker03 (mirror master)
+
+* Linux (ubuntu 24.04)
+* Standard B2s (2 vcpus, 4 GiB memory)
+* VM architecture x64
+
+
+docker03getmirrortest (using mirror master for zabbx agent apt)
+
+* Linux (ubuntu 24.04)
+* Standard B2s (2 vcpus, 4 GiB memory)
+* VM architecture x64
+
+
+
+![vms](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/vms.png)
+
+
 ## Zabbix Agent Repository Mirroring Guide (Ubuntu 24.04)
 
 This guide provides a complete, step-by-step process for mirroring the Zabbix Debian/Ubuntu repository for a specific version and distribution using debmirror and serving it via Apache.
