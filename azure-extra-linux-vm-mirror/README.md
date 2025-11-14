@@ -8,6 +8,15 @@ In an environment like this, it would be more efficient if one system would down
 
 ## Why
 
+
+```mermaid
+graph TD;
+    MirrorServer-->Internet;
+    SubServer-->MirrorServer;
+   
+```
+
+
 https://louwrentius.com/how-to-setup-a-local-or-private-ubuntu-mirror.html
 
 ## debmirror ubuntu wiki
