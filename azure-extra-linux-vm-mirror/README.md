@@ -570,3 +570,7 @@ All done.
 Thu Nov 13 19:42:26 UTC 2025: Synchronization completed successfully.
 
 ```
+
+### 3. 💾 Mirroring the MySQL Repository (Ubuntu 24.04) tbd
+
+### 4. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
