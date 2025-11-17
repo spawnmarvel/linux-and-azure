@@ -640,6 +640,10 @@ message : task
 
 ![search 1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/search1.png)
 
+message : CPU
+
+![search 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/kibana-elasticsearch-file-beat/images/search2.png)
+
 
 If you want to search by hostname.
 
