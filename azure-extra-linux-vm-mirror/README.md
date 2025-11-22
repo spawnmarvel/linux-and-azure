@@ -577,6 +577,8 @@ GOTO README_mysql.md
 
 Yes, if you mirror the Single LTS Release (Ubuntu 24.04, Noble) limited to the amd64 architecture, you will have MySQL available.
 
+Yes, PHP is also hosted in the official Ubuntu repositories and will be included in your mirrored scope
+
 ### 4. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
 
 
