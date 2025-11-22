@@ -573,4 +573,57 @@ Thu Nov 13 19:42:26 UTC 2025: Synchronization completed successfully.
 
 ### 3. 💾 Mirroring the MySQL Repository (Ubuntu 24.04) tbd
 
-### 4. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
+GOTO README_mysql.md
+
+### 4. 💾Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+
+To get the full set of Zabbix components—including the server, frontend, and associated utilities—you don't necessarily need to modify the mirror synchronization script (sync_zabbix_mirror.sh) because the existing setup already mirrors the entire repository path where those packages reside.
+
+The only thing you need to adjust is the client configuration to tell the system which packages to install.
+
+By specifying the root /zabbix/7.0/ubuntu and the distribution noble (Ubuntu 24.04) and section main, you are mirroring the structure that contains all Zabbix packages for that version and distribution.
+
+Therefore, the following packages are already downloaded to your mirror server (/var/www/html/zabbix_mirror/pool/main/z/...):
+
+* zabbix-release
+
+* zabbix-server-mysql
+
+* zabbix-frontend-php
+
+* zabbix-apache-conf
+
+* zabbix-sql-scripts
+
+* zabbix-agent2 (which you already tested)
+
+The package download link you provided: wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb is a direct link to a package file, but the whole point of an APT mirror is that you only need to use APT to pull them by name.
+
+Step 1. : Update Package Lists
+Ensure your client has the latest package list from your local mirror.
+
+```bash
+# On the Client VM (docker03getmirrortest)
+sudo apt update
+```
+
+Step 2. : Install Full Zabbix Stack
+
+```bash
+sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+```
+
+The follow the rest from https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=server_frontend_agent_2&db=mysql&ws=apache
+
+
+### 5. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
+
+
+Mirror Scope	Approximate Required Size
+
+* Full Archive (All releases, all architectures)	> 3.6 TB
+* Single LTS Release (e.g., Ubuntu 24.04, noble)	150 GB to 300 GB
+* Single LTS Release & Architecture (e.g., 24.04, amd64 only)	~150 GB to 250 GB
+
+GOTO
+
