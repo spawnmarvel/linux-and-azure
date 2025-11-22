@@ -4,6 +4,12 @@ Here is the full, step-by-step guide for setting up the MySQL mirror alongside y
 
 -----
 
+## Note
+
+Yes, if you mirror the Single LTS Release (Ubuntu 24.04, Noble) limited to the amd64 architecture, you will have MySQL available.
+
+Yes, PHP is also hosted in the official Ubuntu repositories and will be included in your mirrored scope
+
 ## 💾 1. Mirror Server Setup (dmzdocker03)
 
 This section covers creating the directory, setting up the synchronization script, and hosting the GPG key.
