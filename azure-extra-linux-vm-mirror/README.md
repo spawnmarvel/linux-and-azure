@@ -575,7 +575,20 @@ Thu Nov 13 19:42:26 UTC 2025: Synchronization completed successfully.
 
 GOTO README_mysql.md
 
-### 4. 💾Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+Yes, if you mirror the Single LTS Release (Ubuntu 24.04, Noble) limited to the amd64 architecture, you will have MySQL available.
+
+### 4. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
+
+
+Mirror Scope	Approximate Required Size
+
+* Full Archive (All releases, all architectures)	> 3.6 TB
+* Single LTS Release (e.g., Ubuntu 24.04, noble)	150 GB to 300 GB
+* Single LTS Release & Architecture (e.g., 24.04, amd64 only)	~150 GB to 250 GB
+
+GOTO README_lts_24.04.md
+
+### 5. 💾Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
 
 To get the full set of Zabbix components—including the server, frontend, and associated utilities—you don't necessarily need to modify the mirror synchronization script (sync_zabbix_mirror.sh) because the existing setup already mirrors the entire repository path where those packages reside.
 
@@ -615,15 +628,4 @@ sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabb
 
 The follow the rest from https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=server_frontend_agent_2&db=mysql&ws=apache
 
-
-### 5. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
-
-
-Mirror Scope	Approximate Required Size
-
-* Full Archive (All releases, all architectures)	> 3.6 TB
-* Single LTS Release (e.g., Ubuntu 24.04, noble)	150 GB to 300 GB
-* Single LTS Release & Architecture (e.g., 24.04, amd64 only)	~150 GB to 250 GB
-
-GOTO
 
