@@ -510,6 +510,27 @@ Lets deny outbound 80 and 443 on docker03getmirrortest:
 
 ![deny out](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/deny_out.png)
 
+Lets enable the server in zabbix and configure it.
+
+```bash
+imsdal@dmzdocker03:~$ ssh imsdal@172.64.0.5
+
+sudo nano /etc/zabbix/zabbix_agent2.conf
+
+# LogFileSize=100
+# Server=192.168.3.5
+# Hostname=docker03getmirrortest
+
+# retstart
+sudo systemctl restart zabbix-agent2.service
+
+# verify log
+sudo tail -f /var/log/zabbix/zabbix_agent2.log
+
+```
+
+![in zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/in_zabbix.png)
+
 ### 📅 Automating Mirror Synchronization (Cron Job)
 Run the following steps on your Mirror Server (where your mirror files are located).
 
