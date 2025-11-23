@@ -529,6 +529,8 @@ sudo tail -f /var/log/zabbix/zabbix_agent2.log
 
 ```
 
+And we have data in zabbix.
+
 ![in zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/in_zabbix.png)
 
 ### 📅 Automating Mirror Synchronization (Cron Job)
