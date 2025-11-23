@@ -506,6 +506,9 @@ Log
 
 The presence of the client's IP (172.64.0.5 in this example) requesting Zabbix package files directly from the /zabbix_mirror/ path confirms the mirror is in use.
 
+Lets deny outbound 80 and 443 on docker03getmirrortest:
+
+![deny out](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/deny_out.png)
 
 ### 📅 Automating Mirror Synchronization (Cron Job)
 Run the following steps on your Mirror Server (where your mirror files are located).
@@ -589,6 +592,16 @@ Mirror Scope	Approximate Required Size
 * Single LTS Release & Architecture (e.g., 24.04, amd64 only)	~150 GB to 250 GB
 
 GOTO README_lts_24.04.md
+
+#### 4. Virtual machines
+
+dmzdocker03 (mirror master)
+
+* Linux (ubuntu 24.04)
+* Standard B2s (2 vcpus, 4 GiB memory)
+* VM architecture x64
+
+Lets add a datadisk to the vm dmzdocker03
 
 ### 5. 💾Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
 
