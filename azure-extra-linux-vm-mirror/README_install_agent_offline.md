@@ -12,7 +12,7 @@ cd zabbix_offline_2404
 ```
 
 
-# 1. Add the Zabbix 7.0 (or 6.4) Repo for Ubuntu 24.04
+## 1. Add the Zabbix 7.0 (or 6.4) Repo for Ubuntu 24.04
 
 ```bash
 wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
@@ -23,7 +23,7 @@ sudo apt update
 
 ```
 
-# 2. Download the agent and its specific dependencies without installing them
+## 2. Download the agent and its specific dependencies without installing them
 ```bash
 apt-get download zabbix-agent libpcre2-8-0 libssl3 libldap-2.5-0
 ```
@@ -57,7 +57,7 @@ sudo systemctl restart zabbix-agent
 sudo systemctl enable zabbix-agent
 ```
 
-Troubleshooting Dependencies on 24.04
+## Troubleshooting Dependencies on 24.04
 If dpkg -i complains about a missing dependency, it is almost always one of these three. You can check what is missing by running:
 ```bash
 ldd /usr/sbin/zabbix_agentd
