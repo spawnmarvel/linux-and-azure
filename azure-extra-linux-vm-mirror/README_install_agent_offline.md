@@ -19,6 +19,8 @@ wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix
 sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
 sudo apt update
 
+# or use the same packet as you already have on the Zabbix server from before
+
 ```
 
 # 2. Download the agent and its specific dependencies without installing them
