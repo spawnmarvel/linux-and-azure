@@ -32,6 +32,19 @@ Step 2: Transfer and Install (On the Offline Machine) using scp
  * Copy the zabbix_offline_2404 folder to your offline server.
 
  ```bash
+# scp if installed
+scp
+# or rsync
+rsync -avz zabbix-agent.deb user@10.0.x.x:/tmp/
+
+# or make a python webserver and use wget in remote machine
+#src vm
+cd /path/to/zabbix_files
+python3 -m http.server 8000
+
+#destination vm
+wget http://[Source_IP]:8000/zabbix-agent_7.0.0.deb
+
 
  ```
 
