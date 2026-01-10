@@ -48,7 +48,7 @@ wget http://[Source_IP]:8000/zabbix-agent_7.0.0.deb
 
  ```
 
- * Navigate into that folder and install:
+ * Navigate into that folder on offline vm and install:
 ```bash
 sudo dpkg -i *.deb
 ```
