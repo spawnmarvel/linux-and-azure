@@ -7,14 +7,20 @@ Step 1: Download Packages (On an Online Machine)
 * You need to download the Zabbix Agent and its specific Ubuntu 24.04 dependencies. * Open a terminal on an online Ubuntu 24.04 machine:
 
 ```bash
+# ssh to Zabbix server 192.168.3.5 that has internet access
 mkdir zabbix_offline_2404
 cd zabbix_offline_2404
+pwd
+/home/imsdal/zabbix_offline_24_04
 ```
 
 
 ## 1. Add the Zabbix 7.0 (or 6.4) Repo for Ubuntu 24.04
 
 ```bash
+# we have already run the below commands since Zabbix is installed
+# but now we will add packets to the folder
+# cd /home/imsdal/zabbix_offline_24_04
 wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
 sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
 sudo apt update
@@ -25,7 +31,9 @@ sudo apt update
 
 ## 2. Download the agent and its specific dependencies without installing them
 ```bash
-apt-get download zabbix-agent libpcre2-8-0 libssl3 libldap-2.5-0
+# cd /home/imsdal/zabbix_offline_24_04
+
+apt-get download zabbix-agent zabbix-sender zabbix-get $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances zabbix-agent | grep "^\w" | sort -u)
 ```
 
 Step 2: Transfer and Install (On the Offline Machine) using scp
