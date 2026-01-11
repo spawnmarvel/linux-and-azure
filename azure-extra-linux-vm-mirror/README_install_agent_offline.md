@@ -39,8 +39,12 @@ apt-get download zabbix-agent zabbix-sender zabbix-get $(apt-cache depends --rec
 ```
 
 Step 2: Transfer and Install (On the Offline Machine) using scp
-* Make a deny rule on the vm, vmoffline01,192.168.3.4,   Deny-AllInternet
-* Copy the zabbix_offline_2404 folder to your offline server.
+* Make 3 deny outbund rules (or all in one) on the vm, vmoffline01,192.168.3.4
+* Deny-AllInternet 8080, priority 4096
+* Deny-AllInternet2 80, priority 4095
+* Deny-AllInternet3 443, priority 4094
+
+After that copy the zabbix_offline_2404 from vm folder to your offline server.
 
  ```bash
 # rsync
