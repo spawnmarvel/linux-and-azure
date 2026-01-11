@@ -7,7 +7,9 @@ Step 1: Download Packages (On an Online Machine)
 * You need to download the Zabbix Agent and its specific Ubuntu 24.04 dependencies. * Open a terminal on an online Ubuntu 24.04 machine:
 
 ```bash
-# ssh to Zabbix server 192.168.3.5 that has internet access
+# ssh to Zabbix server that has internet access
+ssh imsdal@145.xxx.xx.xx
+
 mkdir zabbix_offline_2404
 cd zabbix_offline_2404
 pwd
@@ -37,46 +39,71 @@ apt-get download zabbix-agent zabbix-sender zabbix-get $(apt-cache depends --rec
 ```
 
 Step 2: Transfer and Install (On the Offline Machine) using scp
- * Copy the zabbix_offline_2404 folder to your offline server.
+* Make a deny rule on the vm, vmoffline01,192.168.3.4,   Deny-AllInternet
+* Copy the zabbix_offline_2404 folder to your offline server.
 
  ```bash
-# scp if installed
-scp
-# or rsync
-rsync -avz zabbix-agent.deb user@10.0.x.x:/tmp/
+# rsync
+sync -azv zabbix_offline_24_04/ imsdal@192.168.3.4:/home/imsdal/zabbix_offline_24_04
 
+# or scp if installed
+# scp
 # or make a python webserver and use wget in remote machine
-#src vm
-cd /path/to/zabbix_files
-python3 -m http.server 8000
-
-#destination vm
-wget http://[Source_IP]:8000/zabbix-agent_7.0.0.deb
+# src vm
+# cd /path/to/zabbix_files
+# python3 -m http.server 8000
+# destination vm
+# wget http://[Source_IP]:8000/zabbix-agent_7.0.0.deb
 
 
  ```
 
  * Navigate into that folder on offline vm and install:
 ```bash
+ssh imsdal@192.168.3.4
+cd zabbix_offline_24_04/
 sudo dpkg -i *.deb
+
+# installing stuff
+zabbix_agentd --version
+zabbix_agentd (daemon) (Zabbix) 7.0.22
+# success
+
+# check the service
+sudo service zabbix-agent status
+● zabbix-agent.service - Zabbix Agent
+     Loaded: loaded (/usr/lib/systemd/system/zabbix-agent.service;>
+     Active: active (running) since Sun 2026-01-11 21:09:51 UTC; 1
 ```
 
 Step 3: Configure for your Environment
 Once installed, the service will be registered but won't work correctly until you tell it where the server is.
+
+Configure the host in zabbix also
 
 ```bash
 # Edit the config file:
 sudo nano /etc/zabbix/zabbix_agentd.conf
 
 # Update these three lines, select either passive or active depending og uses case:
-# Server=192.168.x.x (Your Zabbix Server IP)
-# ServerActive=192.168.x.x (Your Zabbix Server IP)
-# Hostname=Ubuntu-Offline-Server (Must match exactly what you name it in the Zabbix Web UI)
+# Server=192.168.3.5(Your Zabbix Server IP)
+# ServerActive=127.0.0.1 (Your Zabbix Server IP), commented this out but used the other two
+# Hostname=vmoffline01
 
 # Restart the agent:
 sudo systemctl restart zabbix-agent
 sudo systemctl enable zabbix-agent
 ```
+
+Log or data from zabbix
+
+```log
+vmoffline01 Linux: Host name of Zabbix agent running 1m 48s	vmoffline01	component: system
+
+vmoffline01 Linux: Zabbix agent ping 21s	Up (1)		component: system
+```
+It works great
+
 
 ## Troubleshooting Dependencies on 24.04
 If dpkg -i complains about a missing dependency, it is almost always one of these three. You can check what is missing by running:
