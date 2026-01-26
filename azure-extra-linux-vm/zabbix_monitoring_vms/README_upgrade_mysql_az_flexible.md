@@ -120,6 +120,12 @@ Verify frontend after login.
 ![zabbix flex](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_flex.png)
 
 
+```bash
+# get db password
+
+sudo grep 'DBPass*' /etc/zabbix/zabbix_server.conf
+```
+
 ## Upgrade MySql
 
 
