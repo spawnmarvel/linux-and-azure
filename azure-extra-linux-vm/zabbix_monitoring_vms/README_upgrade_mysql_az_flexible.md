@@ -115,6 +115,14 @@ http://ip/zabbix
 ![done flex](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/done_flex.png)
 
 
+Verify frontend after login.
+
+![zabbix flex](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix_flex.png)
+
+
 ## Upgrade MySql
 
 
+
+
+https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
