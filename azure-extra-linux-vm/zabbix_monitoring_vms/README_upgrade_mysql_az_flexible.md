@@ -126,9 +126,30 @@ Verify frontend after login.
 sudo grep 'DBPass*' /etc/zabbix/zabbix_server.conf
 ```
 
-## Upgrade MySql
+## Upgrade MySql checklist
+
+```bash
+zabbix_server --version
+zabbix_server (Zabbix) 6.0.43
+
+```
+verify zabbix requirements
+
+mysql v for zabbix 6
+
+```log
+Added support for MySQL versions:
+- 8.1 since Zabbix 6.0.21;
+- 8.2 since Zabbix 6.0.26;
+- 8.3 since Zabbix 6.0.27;
+- 8.4 since Zabbix 6.0.32;
+- 9.0 since Zabbix 6.0.33;
+- 9.5 since Zabbix 6.0.43.
+```
+
+https://www.zabbix.com/documentation/6.0/en/manual/installation/requirements
 
 
-
+### Upgrade MySql checklist
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
