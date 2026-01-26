@@ -42,17 +42,77 @@ mysql -h name.mysql.database.azure.com -u imsdal --password=xxxx
 ```sql
 create database zabbix character set utf8mb4 collate utf8mb4_bin;
 
-create user zabbix@'%' identified by 'password123';
+create user zabbix@'%' identified by 'xxxxxxxxx';
 
 grant all privileges on zabbix.* to zabbix@'%';
 
 set global log_bin_trust_function_creators = 1;
 -- ERROR 1227 (42000): Access denied; you need (at least one of) the SUPER or SYSTEM_VARIABLES_ADMIN privilege(s) for this operation
+
+quit;
 ```
 
 But this is on by default in azure mysql
 
 ![bin_trust](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/bin_trust.png)
+
+
+```bash
+# zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+
+zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -u zabbix -h mysqlzabbix0101.mysql.database.azure.com -P 3306 --password=xxxxx Zabbix
+
+# when this is done
+```
+count tables
+
+```sql
+SELECT COUNT(*) AS total_tables 
+FROM information_schema.tables 
+WHERE table_schema = 'zabbix';
+
+-- total tables
+-- 173
+
+-- we should normally set this, but it is default on in azure mysql so we skip ti
+set global log_bin_trust_function_creators = 0;
+quit;
+```
+configure zabbix server
+
+```bash
+cd /etc/zabbix
+
+sudo nano zabbix_server.conf
+
+# DBPassword=password
+# DBHost=host
+
+
+```
+Restart and enable at boot
+
+```bash
+sudo systemctl restart zabbix-server
+sudo systemctl restart zabbix-agent
+sudo systemctl restart apache2
+
+sudo systemctl enable zabbix-server
+sudo systemctl enable zabbix-agent
+sudo systemctl enable apache2
+
+# check it
+sudo systemctl is-enabled zabbix-server.service
+sudo systemctl is-enabled zabbix-agent.service
+sudo systemctl is-enabled apache
+
+```
+
+Open nsg and visit
+
+http://ip/zabbix
+
+![done flex](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/done_flex.png)
 
 
 ## Upgrade MySql
