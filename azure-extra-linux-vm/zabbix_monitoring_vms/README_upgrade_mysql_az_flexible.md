@@ -207,6 +207,6 @@ SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'zabbix';
 
 In this version, it is test /dev, the native is none editable.
 
-![native no mod](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/native_no_mode.png)
+![native no mod](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/native_no_mod.png)
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
