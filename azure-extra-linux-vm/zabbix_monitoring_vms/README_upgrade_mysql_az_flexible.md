@@ -238,7 +238,7 @@ Since your database size is tiny (6.12 MB), the actual data migration will be ne
 lets convert the user
 
 ```bash
--- log in as super user
+#  log in as super user
 mysql -h name.mysql.database.azure.com -u superuser --password='xxxxxxxx'
 
 ```
@@ -319,4 +319,36 @@ Target Compute Tier(Major version upgrade only) : Standard_D2ds_v4
 Upgrade Success Behavior : Rollback to previous compute tier
 
 ```
+
+Deployment is in progress, Once the Status changes to "Available"
+
+```bash
+
+#  log in as super user
+mysql -h name.mysql.database.azure.com -u superuser --password='xxxxxxxx'
+
+# login as zabbix
+mysql -h name.mysql.database.azure.com -u zabbix --password=xxxxxxxxx
+
+```
+
+Start Zabbix server if success
+
+```bash
+sudo systemctl start zabbix-server
+
+sudo tail -f /var/log/zabbix/zabbix_server.log
+
+# What to watch for: Any "Unsupported DB version" warnings. Since you are on 6.0.43, you should see a message saying the version is supported.
+sudo grep "Unsupported*" /var/log/zabbix/zabbix_server.log | tail -n 5
+
+# to be absolutely certain that the connection is active and healthy, try running this to see the most recent "success" messages:
+sudo grep -E "database is up|connection to database" /var/log/zabbix/zabbix_server.log | tail -n 5
+
+```
+Verify the Frontend if above success
+
+* Log into your Zabbix Web UI. Go to Reports -> System information.
+* Check the Database status row. It should show OK and reflect the new MySQL 8.4 version.
+
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
