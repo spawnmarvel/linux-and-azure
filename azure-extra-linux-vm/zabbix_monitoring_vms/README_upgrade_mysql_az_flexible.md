@@ -306,4 +306,17 @@ Trigger Azure Upgrade: In the Azure Portal, navigate to Upgrade under the settin
 ![upgrade](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/upgrade.png)
 
 
+Information
+
+![information](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/information.png)
+
+```log
+
+Current MySQL version : 8.0
+Target Server Version : 8.4
+Current Compute Tier : Standard_B1ms
+Target Compute Tier(Major version upgrade only) : Standard_D2ds_v4
+Upgrade Success Behavior : Rollback to previous compute tier
+
+```
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
