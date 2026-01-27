@@ -293,4 +293,17 @@ still running
 ![still running](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/still_running.png)
 
 
+stop zabbix
+
+```bash
+sudo systemctl stop zabbix-server
+sudo systemctl status zabbix-server.servic
+#  Active: inactive (dead) since Tue 2026-01-27 19:52:27 UTC; 3s ago
+```
+
+Trigger Azure Upgrade: In the Azure Portal, navigate to Upgrade under the settings of your Flexible Server and select 8.4.
+
+![upgrade](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/upgrade.png)
+
+
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
