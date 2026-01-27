@@ -201,12 +201,96 @@ SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'zabbix';
 
 * The Fix: You have two choices:
 
-1. Server-side: Ensure the Azure Flexible Server parameter mysql_native_password is set to ON (if Azure provides this toggle in the 8.4 preview/release) to allow the legacy plugin.
+- 1. Server-side: Ensure the Azure Flexible Server parameter mysql_native_password is set to ON (if Azure provides this toggle in the 8.4 preview/release) to allow the legacy plugin.
 
-2. Best Practice: Convert the Zabbix user to the newer plugin before or during the upgrade: ALTER USER 'zabbix'@'%' IDENTIFIED WITH caching_sha2_password BY 'your_password';
+- 2. Best Practice: Convert the Zabbix user to the newer plugin before or during the upgrade: ALTER USER 'zabbix'@'%' IDENTIFIED WITH caching_sha2_password BY 'your_password';
 
 In this version, it is test /dev, the native is none editable.
 
 ![native no mod](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/native_no_mod.png)
+
+
+2. Upgrade Strategy for Azure Flexible Server
+Since your database size is tiny (6.12 MB), the actual data migration will be near-instant.
+
+3. Pre-Upgrade Checklist
+
+- 1. Manual Backup: Even though Azure takes automated backups, trigger a manual snapshot before starting.
+
+- 2. Zabbix Maintenance: Stop the zabbix-server service on your Ubuntu box before the upgrade to prevent the logs from filling up with connection errors.
+
+- 3. Check Deprecated Features: MySQL 8.4 removed several legacy variables. Check your Server Parameters in the Azure portal to ensure you aren't using custom flags that are no longer supported in 8.4.
+
+4. Recommended Workflow
+
+- 1. Stop Zabbix: sudo systemctl stop zabbix-server
+
+- 2. Change Auth (Optional but recommended): Update the Zabbix user to caching_sha2_password.
+
+- 3. Perform Upgrade: Initiate the Major Version Upgrade to 8.4 via the Azure Portal.
+
+-4. Verify Connection: Once Azure shows "Available," try connecting manually from your Ubuntu CLI: mysql -h your-server.mysql.database.azure.com -u zabbix -p
+
+- 5.Restart Zabbix: sudo systemctl start zabbix-server
+
+- 6. Monitor Logs: Check /var/log/zabbix/zabbix_server.log for any "unsupported DB version" errors (though with 6.0.43, you should be fine).
+
+lets convert the user
+
+```bash
+-- log in as super user
+mysql -h name.mysql.database.azure.com -u superuser --password='xxxxxxxx'
+
+```
+
+edit user
+
+```sql
+-- get user before
+select user, host, plugin from mysql.user where user = 'zabbix';
++--------+------+-----------------------+
+| user   | host | plugin                |
++--------+------+-----------------------+
+| zabbix | %    | mysql_native_password |
++--------+------+-----------------------+
+1 row in set (0.00 sec)
+
+-- That is the most seamless way to do it. 
+-- Keeping the same password while switching the plugin to caching_sha2_password ensures that your 
+-- zabbix_server.conf file doesn't need any manual edits—it will just "work" as long as the handshake succeeds.
+
+ALTER USER 'zabbix'@'%' IDENTIFIED WITH caching_sha2_password BY 'your_existing_password';
+
+-- after flush
+FLUSH PRIVILEGES;
+
+-- get user
+select user, host, plugin from mysql.user where user = 'zabbix';
++--------+------+-----------------------+
+| user   | host | plugin                |
++--------+------+-----------------------+
+| zabbix | %    | caching_sha2_password |
++--------+------+-----------------------+
+1 row in set (0.00 sec)
+
+```
+
+One quick verification for Ubuntu
+After you run the ALTER command, but before you trigger the Azure upgrade, verify that your Ubuntu Zabbix node can still talk to the 8.0 DB.
+
+```bash
+sudo systemctl restart zabbix-server
+
+sudo systemctl status zabbix-server.service
+#  Active: active (running) since Tue 2026-01-27 19:48:32 UTC; 24s ago
+
+sudo grep "database network restore" /var/log/zabbix/zabbix_server.log | tail -n 5
+
+```
+
+still running
+
+![still running](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/still_running.png)
+
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
