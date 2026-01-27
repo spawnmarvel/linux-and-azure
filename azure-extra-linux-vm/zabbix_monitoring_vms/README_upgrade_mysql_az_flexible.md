@@ -229,7 +229,7 @@ Since your database size is tiny (6.12 MB), the actual data migration will be ne
 
 - 3. Perform Upgrade: Initiate the Major Version Upgrade to 8.4 via the Azure Portal.
 
--4. Verify Connection: Once Azure shows "Available," try connecting manually from your Ubuntu CLI: mysql -h your-server.mysql.database.azure.com -u zabbix -p
+- 4. Verify Connection: Once Azure shows "Available," try connecting manually from your Ubuntu CLI: mysql -h your-server.mysql.database.azure.com -u zabbix -p
 
 - 5.Restart Zabbix: sudo systemctl start zabbix-server
 
@@ -332,9 +332,45 @@ Your deployment is complete
 #  log in as super user
 mysql -h name.mysql.database.azure.com -u superuser --password='xxxxxxxx'
 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 126
+Server version: 8.4.5-azure Source distribution
+
 # login as zabbix
 mysql -h name.mysql.database.azure.com -u zabbix --password=xxxxxxxxx
 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 129
+Server version: 8.4.5-azure Source distribution
+
+# You can use the mysqlcheck utility directly from your Ubuntu terminal. 
+# This is the fastest way to scan every table in the Zabbix database for errors.
+mysqlcheck -h name.mysql.database.azure.com -u zabbix -p --databases Zabbix --password=xxxxxx
+
+```
+* Expected Output: Every table (e.g., history, trends, hosts) should show OK.
+
+* What it does: It runs the CHECK TABLE command on every single table in your schema.
+
+```log
+zabbix.acknowledges                                OK
+zabbix.actions                                     OK
+zabbix.alerts                                      OK
+zabbix.auditlog                                    OK
+zabbix.autoreg_host                                OK
+zabbix.conditions                                  OK
+zabbix.config                                      OK
+zabbix.config_autoreg_tls                          OK
+zabbix.corr_condition                              OK
+zabbix.corr_condition_group                        OK
+zabbix.corr_condition_tag                          OK
+[...]
+
+```
+sql check optional
+
+```sql
+SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'zabbix';
 ```
 
 Start Zabbix server if success
@@ -348,12 +384,28 @@ sudo tail -f /var/log/zabbix/zabbix_server.log
 sudo grep "Unsupported*" /var/log/zabbix/zabbix_server.log | tail -n 5
 
 # to be absolutely certain that the connection is active and healthy, try running this to see the most recent "success" messages:
-sudo grep -E "database is up|connection to database" /var/log/zabbix/zabbix_server.log | tail -n 5
+sudo grep -E 'current database version' /var/log/zabbix/zabbix_server.log | tail -n 3
+
+1034:20260127:190732.174 current database version (mandatory/optional): 06000000/06000055
+2662:20260127:194832.147 current database version (mandatory/optional): 06000000/06000055
+# Looking at your log timestamp (20:41:43.94)
+4912:20260127:204143.941 current database version (mandatory/optional): 06000000/06000055
+
+
+# One final "Checkup"
+# Since the server started at 20:41, you should now check if the Housekeeper has run its first cycle on the new version
+sudo grep 'houskeeper' /var/log/zabbix/zabbix_server.log
+# not run yet, let it run for 1h then check again.
 
 ```
-Verify the Frontend if above success
+Verify the Frontend if above success (zabbix v 7.0 and 6.4, not 6.0.x)
 
 * Log into your Zabbix Web UI. Go to Reports -> System information.
 * Check the Database status row. It should show OK and reflect the new MySQL 8.4 version.
+
+Lets check the 6.0.43 frontend and verify
+
+![verify zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/verify_zabbix.png)
+
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
