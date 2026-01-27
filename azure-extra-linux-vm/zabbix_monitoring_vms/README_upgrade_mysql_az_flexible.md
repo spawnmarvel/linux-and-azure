@@ -320,7 +320,12 @@ Upgrade Success Behavior : Rollback to previous compute tier
 
 ```
 
-Deployment is in progress, Once the Status changes to "Available"
+Deployment is in progress, Once the Status changes to "Available".
+
+Your deployment is complete
+
+![8_4](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/8_4.png)
+
 
 ```bash
 
