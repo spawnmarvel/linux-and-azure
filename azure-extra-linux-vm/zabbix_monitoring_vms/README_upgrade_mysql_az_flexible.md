@@ -150,6 +150,63 @@ Added support for MySQL versions:
 https://www.zabbix.com/documentation/6.0/en/manual/installation/requirements
 
 
-### Upgrade MySql checklist
+### Major version upgrade in Azure Database for MySQL checklist
+
+* Upgrading the major MySQL version is irreversible.
+* MySQL driversmight encounter connection failures after the upgrade due to unsupported authentication methods, character sets, or protocol changes. 
+
+Since you are running Zabbix 6.0.43, you are well within the supported range for MySQL 8.4 (which was introduced back in 6.0.32).
+
+```sql
+select user, host, plugin from mysql.user
+
+-- zabbix	%	mysql_native_password
+
+```
+
+Lets connect from zabbix to mysql to verify password
+
+```bash
+mysql -h name.mysql.database.azure.com -u zabbix --password=xxxxxxxxx
+
+```
+
+show databases
+
+```sql
+-- show databases
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| zabbix             |
++--------------------+
+3 rows in set (0.01 sec)
+
+-- count tables in zabbix
+SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'zabbix';
++----------+
+| COUNT(*) |
++----------+
+|      173 |
++----------+
+1 row in set (0.01 sec)
+```
+
+1. The Authentication Plugin (Crucial)
+
+* The Change: Starting with MySQL 8.4, the mysql_native_password authentication plugin is deprecated and disabled by default, though it has not been fully removed yet. MySQL 8.0 uses caching_sha2_password as the default, but many older migrations kept the native password for compatibility.
+
+* The Fix: You have two choices:
+
+1. Server-side: Ensure the Azure Flexible Server parameter mysql_native_password is set to ON (if Azure provides this toggle in the 8.4 preview/release) to allow the legacy plugin.
+
+2. Best Practice: Convert the Zabbix user to the newer plugin before or during the upgrade: ALTER USER 'zabbix'@'%' IDENTIFIED WITH caching_sha2_password BY 'your_password';
+
+In this version, it is test /dev, the native is none editable.
+
+![native no mod](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/native_no_mode.png)
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
