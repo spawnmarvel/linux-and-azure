@@ -453,6 +453,7 @@ https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
 
 ```bash
 sudo grep "housekeeper" /var/log/zabbix/zabbix_server.log
+sudo grep "housekeeper" /var/log/zabbix/zabbix_server.log | tail -n 5
 
 # What a "Good" run looks like:
 # 4928:20260127:220044.123 housekeeper [deleted 450 hist/uint, 0 trends, 12 events in 0.045 sec, idle for 1 hour]
@@ -461,6 +462,9 @@ sudo grep "housekeeper" /var/log/zabbix/zabbix_server.log
 # Problem: If you see [Z3005] query failed, it means the Housekeeper is hitting a permissions issue or a syntax error with the new MySQL 8.4 engine.
 
 sudo grep -E "history syncer|query failed" /var/log/zabbix/zabbix_server.log | tail -n 20
+# What a "Good" run looks like:
+# 1094:20260127:190732.786 server #18 started [history syncer #1]
+# 1096:20260127:190732.791 server #20 started [history syncer #3]
 
 # How to verify they are healthy without logs: In the Zabbix Web UI, go to Monitoring -> Dashboard and look at the Zabbix server health widget (if you have the default template linked).
 
@@ -472,4 +476,5 @@ sudo grep -E "history syncer|query failed" /var/log/zabbix/zabbix_server.log | t
 sudo grep "Z3005" /var/log/zabbix/zabbix_server.log
 
 # No output? Your upgrade is 100% stable.
+# That is the "Golden Silence" every Zabbix administrator hopes for after a major upgrade!
 ```
