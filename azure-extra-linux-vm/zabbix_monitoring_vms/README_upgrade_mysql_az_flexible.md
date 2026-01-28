@@ -164,8 +164,6 @@ sudo systemctl restart apache2
 
 ```
 
-
-
 ## Upgrade MySql checklist
 
 ```bash
@@ -450,3 +448,28 @@ Lets check the 6.0.43 frontend and verify
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
 
+
+## Monitor it over the next 24 hours.
+
+```bash
+sudo grep "housekeeper" /var/log/zabbix/zabbix_server.log
+
+# What a "Good" run looks like:
+# 4928:20260127:220044.123 housekeeper [deleted 450 hist/uint, 0 trends, 12 events in 0.045 sec, idle for 1 hour]
+# Success: You see a line like the one above.
+
+# Problem: If you see [Z3005] query failed, it means the Housekeeper is hitting a permissions issue or a syntax error with the new MySQL 8.4 engine.
+
+sudo grep -E "history syncer|query failed" /var/log/zabbix/zabbix_server.log | tail -n 20
+
+# How to verify they are healthy without logs: In the Zabbix Web UI, go to Monitoring -> Dashboard and look at the Zabbix server health widget (if you have the default template linked).
+
+# Verify Database Stability (The "Z3005" Check)
+# In Zabbix logs, [Z3005] is the universal code for a "Query Failed." If MySQL 8.4 has any issues with the Zabbix 6.0 schema, this error will appear.
+
+# Run this periodically:
+
+sudo grep "Z3005" /var/log/zabbix/zabbix_server.log
+
+# No output? Your upgrade is 100% stable.
+```
