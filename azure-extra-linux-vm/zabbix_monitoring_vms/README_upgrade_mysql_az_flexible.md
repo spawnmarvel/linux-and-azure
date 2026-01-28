@@ -478,3 +478,53 @@ sudo grep "Z3005" /var/log/zabbix/zabbix_server.log
 # No output? Your upgrade is 100% stable.
 # That is the "Golden Silence" every Zabbix administrator hopes for after a major upgrade!
 ```
+
+## Zabbix sender test
+
+Make a host in zabbix and use the zabbix_sender on localhost
+
+```bash
+zabbix_sender --version
+
+sudo apt update
+sudo apt install zabbix-get zabbix-sender
+
+whereis zabbix_sender
+zabbix_sender: /usr/bin/zabbix_sender /usr/share/man/man1/zabbix_sender.1.gz
+
+cd /usr/bin
+./zabbix_sender -z localhost -s "cryptoserver" -k crypto1 -o 43
+
+# script
+
+sudo nano sned_trap.sh
+#!/bin/bash
+for i in {1..4}; do
+    # Generates a random number between 1 and 100
+    VAL=$(( ( RANDOM % 100 )  + 1 ))
+    
+    zabbix_sender -z localhost -s "cryptoserver" -k "crypto$i" -o "$VAL"
+done
+
+```
+
+send
+
+```bash
+bash send_trap.sh
+Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000132"
+sent: 1; skipped: 0; total: 1
+Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000037"
+sent: 1; skipped: 0; total: 1
+Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000020"
+sent: 1; skipped: 0; total: 1
+Response from "localhost:10051": "processed: 1; failed: 0; total: 1; seconds spent: 0.000031"
+sent: 1; skipped: 0; total: 1
+
+# edit chmod
+sudo chmod 740 send_trap.sh
+
+sudo chown $USER:$USER send_trap.sh
+
+./send_trap.sh
+```
