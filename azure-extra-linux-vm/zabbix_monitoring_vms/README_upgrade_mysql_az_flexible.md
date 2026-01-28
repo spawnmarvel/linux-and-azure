@@ -409,3 +409,40 @@ Lets check the 6.0.43 frontend and verify
 
 
 https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-upgrade
+
+## https enable zabbix
+
+
+```bash
+
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
+-keyout /etc/ssl/private/zabbix-selfsigned.key \
+-out /etc/ssl/certs/zabbix-selfsigned.crt
+# [!NOTE] It will ask for details like Country and Common Name. For Common Name, use your server's IP address or its internal DNS name.
+
+
+sudo a2enmod ssl
+
+Update the certificate paths inside that file to point to your new files:
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+# SSLCertificateFile    /etc/ssl/certs/zabbix-selfsigned.crt
+# SSLCertificateKeyFile /etc/ssl/private/zabbix-selfsigned.key
+
+sudo apachectl configtest
+# AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.64.0.6. Set the 'ServerName' directive globally to suppress this message
+# Syntax OK
+
+sudo a2ensite default-ssl
+sudo systemctl restart apache2
+
+# Make NSG inbound 443
+
+# Redirect HTTP to HTTPS (Optional but Recommended)
+sudo nano /etc/apache2/sites-available/000-default.conf
+# Add this line inside the <VirtualHost *:80> block:
+# Redirect permanent / https://your-server-ip/zabbix
+
+sudo systemctl restart apache2
+
+```
