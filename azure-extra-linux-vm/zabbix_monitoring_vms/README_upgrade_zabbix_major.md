@@ -469,3 +469,76 @@ Version 7 success
 
 
 https://www.zabbix.com/documentation/current/en/manual/installation/upgrade/packages/debian_ubuntu
+
+## Sometimes MySql stops
+
+After working with this, I have came across that mysql stops.
+
+Disk seems fine, Ram seems fine.
+
+In the zabbix frontend it show, No such file or directory.
+
+```bash
+sudo service mysql status
+
+# mysql.service - MySQL Community Server
+# Loaded: loaded (/usr/lib/systemd/system/mysql.service; enabled; preset: enabled)
+# Active: inactive (dead) since Wed 2026-01-28 19:50:38 UTC; 27min ago
+
+```
+Check logs
+
+```bash
+sudo tail -n 50 /var/log/mysql/error.log
+
+2026-01-28T19:50:35.167862Z 0 [System] [MY-013172] [Server] Received SHUTDOWN from user <via user signal>. Shutting down mysqld (Version: 8.0.44-0ubuntu0.24.04.2).
+
+2026-01-28T19:50:37.192525Z 0 [Warning] [MY-010909] [Server] /usr/sbin/mysqld: Forcing close of thread 16  user: 'zabbix'.
+
+2026-01-28T19:50:37.193039Z 0 [Warning] [MY-010909] [Server] /usr/sbin/mysqld: Forcing close of thread 18  user: 'zabbix'.
+
+2026-01-28T19:50:37.194461Z 0 [Warning] [MY-010909] [Server] /usr/sbin/mysqld: Forcing close of thread 10 
+```
+
+The log shows a clean shutdown (Received SHUTDOWN from user <via user signal>), which means something (likely systemd) told MySQL to stop. It didn't crash; it was invited to leave.
+
+
+```bash
+sudo systemctl status mysql
+sudo systemctl stop mysql
+# stop just hangs
+
+
+# try start as console
+sudo -u mysql /usr/sbin/mysqld --console
+
+# Sometimes MySQL thinks it's stopped, but a "zombie" process is still holding onto the data files. This would prevent a new instance from starting.
+ps aux | grep mysq
+# Look at your ps aux output. MySQL is actually running right now, but it's running in a very messy way.
+# You have multiple instances fighting each other:
+# PID 6263: This is a manual instance running as the mysql user (likely from our debug attempt).
+# PID 6483: This is another instance running as the mysql user.
+
+sudo killall -9 mysqld
+
+sudo systemctl start mysql
+sudo systemctl status mysql
+
+# When we tried the manual debug command, it started the database engine, 
+# but it did so outside of the systemd control loop. 
+# Then, another process likely tried to start. They were essentially "ghost" instances.
+```
+
+How to prevent this in the future
+
+```bash
+sudo systemctl edit mysql
+```
+
+Paste these lines into the file and save it:
+
+```ini
+[Service]
+Restart=on-failure
+RestartSec=5s
+```
