@@ -2,7 +2,7 @@
 
 Example with Zabbix server and a Linux VM with Linux template as test bases for passiv or active agent.
 
-## Zabbix 6 is installed
+## Zabbix 6 is installed (was upgraded to 7)
 
 
 ![Zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/zabbix6.jpg)
@@ -48,7 +48,8 @@ https://github.com/influxdata/telegraf/tree/master/plugins/outputs/zabbix
 
 ## Install zabbix sender on vm dummy01 linux vm
 
-```bash
+You get the agent on the same page as were you download zabbix, just select version and view scripts below
+```bash.
 pwd
 # /home/imsdal
 
