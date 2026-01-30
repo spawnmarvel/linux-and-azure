@@ -13,6 +13,7 @@ Architecture  with proxy:
 - Source zabbix on of the above, size l or m
 - Replica proxy on site with linki to source, size s, l or m
 - Could add grafana-zabbix plugin on the proxy
+- Zabbix plugin for Grafana, https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app/
 
 # How Does the Zabbix Proxy Roll Out Plan Work?
 
@@ -63,6 +64,6 @@ In this mode, the port requirements are unidirectional:
 
  * Proxy → Server: The proxy connects to the server on port 10051.
  * Server → Proxy: No connection is made. The server remains passive and waits for the proxy to check in.
- 
+
 [!IMPORTANT]
 Data Buffering: One of the biggest perks of this setup is that if the connection to the Zabbix Server drops, the proxy will store the collected data in its local database and "push" it all at once when the connection is restored.
