@@ -533,6 +533,18 @@ And we have data in zabbix.
 
 ![in zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/in_zabbix.png)
 
+### Enable / check UWF on docker03getmirrortest TODO
+
+Now lets enable UFW and only allow acces for ssh and dmzdocker03
+
+* ssh
+* 80 and 443 to the dmzdocker03 for apt
+
+Now run a new tags
+
+* Run script for mirro script on dmzdocker03
+* Run apt on docker03getmirrortes
+
 ### 📅 Automating Mirror Synchronization (Cron Job)
 Run the following steps on your Mirror Server (where your mirror files are located).
 
