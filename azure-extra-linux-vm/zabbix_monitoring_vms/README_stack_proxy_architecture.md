@@ -261,6 +261,7 @@ Once you hit Add, wait about 2–5 minutes. Then go to Monitoring → Latest dat
 
 * Zabbix proxy: Sending queue: This tells you if there is a backup of data waiting to be sent to your Main Zabbix server (vmzabbix02).
 
+![proxy queue](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_queue.png)
 
 
 ## Get data from zabbix proxy to main zabbix proxy
