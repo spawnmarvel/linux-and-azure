@@ -205,15 +205,24 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 ```
 
 ```log
- 6472:20260203:213157.621 thread started
-  6474:20260203:213157.623 thread started
-  6475:20260203:213157.623 proxy #30 started [snmp poller #1]
-  6475:20260203:213157.624 thread started
-  6477:20260203:213157.624 proxy #31 started [internal poller #1]
-  6424:20260203:213157.693 cannot send proxy data to server at "192.168.3.5": proxy "zabbix_proxy" not found
+6472:20260203:213157.621 thread started
+6474:20260203:213157.623 thread started
+6475:20260203:213157.623 proxy #30 started [snmp poller #1]
+6475:20260203:213157.624 thread started
+6477:20260203:213157.624 proxy #31 started [internal poller #1]
+6424:20260203:213157.693 cannot send proxy data to server at "192.168.3.5": proxy "zabbix_proxy" not found
 ```
 
+You must register the proxy in the Zabbix frontend so the server knows to accept its data.
 
+ * Go to Administration → Proxies (or Reports → Proxies in newer versions).
+ * Click Create proxy.
+ * Proxy name: Match the Hostname from your config file.
+ * Proxy mode: Select Active.
+ * (Optional) Proxy address: You can list the IP of the proxy here for extra security, but for a true "push" setup from a dynamic IP, you can leave this blank.
+
+
+![proxy success](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy.png)
 
 https://www.zabbix.com/documentation/7.0/en/manual/appendix/config/zabbix_proxy
 
