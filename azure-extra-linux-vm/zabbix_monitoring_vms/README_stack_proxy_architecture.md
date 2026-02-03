@@ -237,6 +237,19 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 
 https://www.zabbix.com/documentation/7.0/en/manual/appendix/config/zabbix_proxy
 
+🔍 Verification Checklist
+
+* Since this is an Active Proxy (ProxyMode=0), it should update every few seconds.
+* Ensure the Proxy can write to its local DB. You can check for database-specific errors in the log:
+```sql
+sudo grep "database is down" /var/log/zabbix/zabbix_proxy.log
+```
+
+## Monitor the proxy's health right now without touching MySQL monitor
+
+
+
+![proxy monitor](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_monitor.png)
 
 ## Get data from zabbix proxy to main zabbix proxy
 
