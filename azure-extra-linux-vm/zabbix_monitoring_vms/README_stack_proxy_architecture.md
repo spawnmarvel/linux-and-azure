@@ -117,6 +117,9 @@ sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
 # install proxy
 sudo apt install zabbix-proxy-mysql zabbix-sql-scripts
 
+zabbix_proxy --version
+# zabbix_proxy (Zabbix) 7.0.22
+
 # install mysql
 sudo apt install mysql-server
 
@@ -185,7 +188,7 @@ sudo nano zabbix_proxy.con
 # DBPassword=password
 # ProxyMode=0: This is the critical setting. 0 sets the proxy to Active (push) mode.
 # Server=192.168.3.5
-# Hostname=zabbix_proxy
+# Hostname=vmchaos09
 
 sudo grep 'DB*' zabbix_proxy.conf
 
@@ -205,12 +208,9 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 ```
 
 ```log
-6472:20260203:213157.621 thread started
-6474:20260203:213157.623 thread started
-6475:20260203:213157.623 proxy #30 started [snmp poller #1]
-6475:20260203:213157.624 thread started
-6477:20260203:213157.624 proxy #31 started [internal poller #1]
-6424:20260203:213157.693 cannot send proxy data to server at "192.168.3.5": proxy "zabbix_proxy" not found
+6982:20260203:214342.990 cannot send proxy data to server at "192.168.3.5": proxy "vmchaos09" not found
+  6982:20260203:214343.993 cannot send proxy data to server at "192.168.3.5": proxy "vmchaos09" not found
+  6982:20260203:214344.997 cannot send proxy data to server at "192.168.3.5": proxy "vmchaos09" not found
 ```
 
 You must register the proxy in the Zabbix frontend so the server knows to accept its data.
@@ -222,7 +222,7 @@ You must register the proxy in the Zabbix frontend so the server knows to accept
  * (Optional) Proxy address: You can list the IP of the proxy here for extra security, but for a true "push" setup from a dynamic IP, you can leave this blank.
 
 
-![proxy success](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy.png)
+![proxy success](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy2.png)
 
 
 ```bash
@@ -232,11 +232,11 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 ```
 
 ```log
-6417:20260203:213337.648 received configuration data from server at "192.168.3.5", datalen 5474
+ 6975:20260203:214352.837 received configuration data from server at "192.168.3.5", datalen 5474
 ```
 
 https://www.zabbix.com/documentation/7.0/en/manual/appendix/config/zabbix_proxy
 
 
-## Get data from zabbix proxy
+## Get data from zabbix proxy to main zabbix proxy
 
