@@ -67,3 +67,46 @@ In this mode, the port requirements are unidirectional:
 
 [!IMPORTANT]
 Data Buffering: One of the biggest perks of this setup is that if the connection to the Zabbix Server drops, the proxy will store the collected data in its local database and "push" it all at once when the connection is restored.
+
+## Install and configure zabbix proxy
+
+* Main zabbix, vmzabbix02
+* Proxy zabbix, vmchaos09
+
+Lets uninstall the zabbix agent on vmchao09 so we can configure it as a proxy
+
+```bash
+zabbix_agent2 --version
+zabbix_agent2 (Zabbix) 7.0.22
+
+sudo apt remove zabbix-agent2
+
+cd /etc/zabbix
+# remove zabbix agent conf
+sudo rm zabbix_agent2.conf
+# remove folder and recursivley
+sudo rm -r zabbix_agent2.d/
+
+
+cd /bin
+# check if we have more files in bin
+ls *zabbix*
+
+# now go to home folder, where we ran weget to download zabbix agent files
+ls
+secure_mysql.sh  zabbix-release_latest_7.0+ubuntu24.04_all.deb
+# remove the zabbix-release file also
+sudo rm zabbix-release_latest_7.0+ubuntu24.04_all.deb
+```
+Now we are ready to install the proxy, we need the samme version as the agent, since that is the version main zabbix is running.
+
+Go to zabbix download and select same version, linux distro and select proxy
+
+https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=proxy&db=mysql&ws=
+
+```bash
+
+```
+
+## Get data from zabbix proxy
+
