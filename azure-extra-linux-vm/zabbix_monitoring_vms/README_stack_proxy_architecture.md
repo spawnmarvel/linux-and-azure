@@ -253,5 +253,15 @@ Go to Data collection → Hosts and click Create host.
 
 ![proxy monitor](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_monitor.png)
 
+Once you hit Add, wait about 2–5 minutes. Then go to Monitoring → Latest data and filter by host vmchaos09. You want to keep an eye on these specific items:
+
+* Zabbix proxy: Configuration cache, % used: If this hits 100%, the proxy can't load new host configurations.
+
+* Zabbix proxy: History write cache, % used: If this is high, your proxy is collecting data faster than it can write to its local database.
+
+* Zabbix proxy: Sending queue: This tells you if there is a backup of data waiting to be sent to your Main Zabbix server (vmzabbix02).
+
+
+
 ## Get data from zabbix proxy to main zabbix proxy
 
