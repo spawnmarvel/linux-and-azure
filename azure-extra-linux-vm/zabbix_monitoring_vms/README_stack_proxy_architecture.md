@@ -263,6 +263,29 @@ Once you hit Add, wait about 2–5 minutes. Then go to Monitoring → Latest dat
 
 ![proxy queue](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_queue.png)
 
+## Configure the Agent on vmchaos09
+
+```bash
+sudo apt update
+sudo apt install zabbix-agent2
+```
+
+Configure for Active Monitoring
+
+```bash
+sudo nano /etc/zabbix/zabbix_agent2.conf
+# LogFileSize=100
+# Server=127.0.0.1
+# ServerActive=127.0.0.1
+# Hostname=vmchaos09
+
+sudo systemctl enable zabbix-agent2
+sudo systemctl restart zabbix-agent2
+```
+
+Update host vmchaos09, add Ensure the template Linux by Zabbix agent active is linked.
+
+![proxy template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_template.png)
 
 ## Get data from zabbix proxy to main zabbix proxy
 
