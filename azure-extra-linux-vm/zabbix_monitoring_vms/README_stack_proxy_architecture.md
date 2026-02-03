@@ -70,11 +70,11 @@ Data Buffering: One of the biggest perks of this setup is that if the connection
 
 ## Install and configure zabbix proxy
 
-Main zabbix, vmzabbix02
+Main zabbix, vmzabbix02, 192.168.3.5
 
 * zabbix_server (Zabbix) 7.0.22, mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64
 
-Proxy zabbix, vmchaos09
+Proxy zabbix, vmchaos09, 192.168.3.4
 
 * Here we will install proxy with same version as above and also mysql
 
@@ -115,19 +115,108 @@ sudo wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/z
 sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
 
 # install proxy
-
 sudo apt install zabbix-proxy-mysql zabbix-sql-scripts
 
 # install mysql
+sudo apt install mysql-server
+
+mysql --version
+# mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64 ((Ubuntu))
+
+sudo systemctl start mysql
+sudo systemctl status mysql
+#  Active: active (running) since Tue 2026-02-03 20:55:03 UTC; 1min 31s ag
+
+systemctl enable mysql
+sudo mysql_secure_installation
+
 
 # login mysql
-
-
-
-
+sudo mysql
+# Welcome to the MySQL monitor.  Commands end with ; or \g
 
 ```
-Now go to docs for proxy on zabbix
+Create initial database
+
+```sql
+create database zabbix_proxy character set utf8mb4 collate utf8mb4_bin;
+create user 'zabbix'@'%' identified by 'password';
+grant all privileges on zabbix_proxy.* to 'zabbix'@'%';
+FLUSH PRIVILEGES;
+set global log_bin_trust_function_creators = 1;
+quit;
+
+-- test login with user
+mysql -u zabbix -p zabbix_proxy -h localhost
+
+```
+On Zabbix server host import initial schema and data. You will be prompted to enter your newly created password.
+
+```bash
+sudo cat /usr/share/zabbix-sql-scripts/mysql/proxy.sql | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix_proxy --password=password
+# takes 1 to 3 min
+
+sudo mysql
+```
+
+Check mysql and remove log bin
+
+```sql
+show databases;
+
+use zabbix_proxy;
+
+SELECT TABLE_NAME, TABLE_ROWS FROM information_schema.tables 
+WHERE table_schema = 'zabbix_proxy';
+-- 203 rows in set (1.74 sec)
+
+set global log_bin_trust_function_creators = 0;
+quit;
+```
+
+Configure the database for Zabbix proxy
+
+```bash
+cd /etx/zabbix
+ls
+# zabbix_proxy.conf  zabbix_proxy.d
+
+sudo nano zabbix_proxy.con
+# DBPassword=password
+# ProxyMode=0: This is the critical setting. 0 sets the proxy to Active (push) mode.
+# Server=192.168.3.5
+# Hostname=zabbix_proxy
+
+sudo grep 'DB*' zabbix_proxy.conf
+
+sudo systemctl restart zabbix-proxy.service
+sudo systemctl enable zabbix-proxy.service
+sudo systemctl status zabbix-proxy.service
+#  Active: active (running) since Tue 2026-02-03 21:23:03 UTC; 32s ag
+
+```
+
+Now go to docs for proxy on zabbix we need to configure it as active / push
+
+```bash
+# check logs
+sudo tail -f /var/log/zabbix/zabbix_proxy.log
+
+```
+
+```log
+ 6472:20260203:213157.621 thread started
+  6474:20260203:213157.623 thread started
+  6475:20260203:213157.623 proxy #30 started [snmp poller #1]
+  6475:20260203:213157.624 thread started
+  6477:20260203:213157.624 proxy #31 started [internal poller #1]
+  6424:20260203:213157.693 cannot send proxy data to server at "192.168.3.5": proxy "zabbix_proxy" not found
+```
+
+
+
+https://www.zabbix.com/documentation/7.0/en/manual/appendix/config/zabbix_proxy
+
 
 ## Get data from zabbix proxy
 
