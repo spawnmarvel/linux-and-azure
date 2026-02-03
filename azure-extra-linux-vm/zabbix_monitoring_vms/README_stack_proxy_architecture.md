@@ -70,8 +70,13 @@ Data Buffering: One of the biggest perks of this setup is that if the connection
 
 ## Install and configure zabbix proxy
 
-* Main zabbix, vmzabbix02
-* Proxy zabbix, vmchaos09
+Main zabbix, vmzabbix02
+
+* zabbix_server (Zabbix) 7.0.22, mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64
+
+Proxy zabbix, vmchaos09
+
+* Here we will install proxy with same version as above and also mysql
 
 Lets uninstall the zabbix agent on vmchao09 so we can configure it as a proxy
 
@@ -105,8 +110,24 @@ Go to zabbix download and select same version, linux distro and select proxy
 https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=proxy&db=mysql&ws=
 
 ```bash
+sudo wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+
+sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
+
+# install proxy
+
+sudo apt install zabbix-proxy-mysql zabbix-sql-scripts
+
+# install mysql
+
+# login mysql
+
+
+
+
 
 ```
+Now go to docs for proxy on zabbix
 
 ## Get data from zabbix proxy
 
