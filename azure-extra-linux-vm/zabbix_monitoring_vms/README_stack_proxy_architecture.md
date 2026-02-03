@@ -247,7 +247,9 @@ sudo grep "database is down" /var/log/zabbix/zabbix_proxy.log
 
 ## Monitor the proxy's health right now without touching MySQL monitor
 
+Create the Proxy Host
 
+Go to Data collection → Hosts and click Create host.
 
 ![proxy monitor](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_monitor.png)
 
