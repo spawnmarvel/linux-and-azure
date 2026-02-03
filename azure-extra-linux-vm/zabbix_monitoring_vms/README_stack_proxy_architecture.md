@@ -224,6 +224,17 @@ You must register the proxy in the Zabbix frontend so the server knows to accept
 
 ![proxy success](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy.png)
 
+
+```bash
+# check logs
+sudo tail -f /var/log/zabbix/zabbix_proxy.log
+
+```
+
+```log
+6417:20260203:213337.648 received configuration data from server at "192.168.3.5", datalen 5474
+```
+
 https://www.zabbix.com/documentation/7.0/en/manual/appendix/config/zabbix_proxy
 
 
