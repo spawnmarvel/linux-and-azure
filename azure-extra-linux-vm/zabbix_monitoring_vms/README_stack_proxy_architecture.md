@@ -298,5 +298,24 @@ Proxy agent
 ![proxy agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_agent.png)
 
 
-## Get data from zabbix proxy to main zabbix proxy
+## Adding a New Host via the Proxy
 
+1. In the Web UI
+
+Go to Data collection → Hosts → Create host.
+
+Host name: (e.g., remote-vm-01).
+
+Templates: Link whatever you need (e.g., Linux by Zabbix agent).
+
+Monitored by proxy: Select vmchaos09.
+
+Interfaces: Add the Agent IP of that new machine (e.g., 192.168.3.10).
+
+2. On the New Machine (The Target)
+
+In that machine's zabbix_agentd.conf, you must point it to the Proxy IP, not the Main Server:
+
+Server=192.168.3.4 (Your Proxy IP)
+
+ServerActive=192.168.3.4 (If using active checks)
