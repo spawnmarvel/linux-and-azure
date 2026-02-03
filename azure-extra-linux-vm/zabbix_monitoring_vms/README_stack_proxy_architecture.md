@@ -287,5 +287,16 @@ Update host vmchaos09, add Ensure the template Linux by Zabbix agent active is l
 
 ![proxy template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_template.png)
 
+Check data.
+
+Proxy performance
+
+![proxy performance](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_performance.png)
+
+Proxy agent
+
+![proxy agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_agent.png)
+
+
 ## Get data from zabbix proxy to main zabbix proxy
 
