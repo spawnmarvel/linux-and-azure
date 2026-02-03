@@ -302,20 +302,20 @@ Proxy agent
 
 1. In the Web UI
 
-Go to Data collection → Hosts → Create host.
+- Go to Data collection → Hosts → Create host.
 
-Host name: (e.g., remote-vm-01).
+- Host name: (e.g., remote-vm-01).
 
-Templates: Link whatever you need (e.g., Linux by Zabbix agent).
+- Templates: Link whatever you need (e.g., Linux by Zabbix agent).
 
-Monitored by proxy: Select vmchaos09.
+- Monitored by proxy: Select vmchaos09.
 
-Interfaces: Add the Agent IP of that new machine (e.g., 192.168.3.10).
+- Interfaces: Add the Agent IP of that new machine (e.g., 192.168.3.10).
 
 2. On the New Machine (The Target)
 
-In that machine's zabbix_agentd.conf, you must point it to the Proxy IP, not the Main Server:
+- In that machine's zabbix_agentd.conf, you must point it to the Proxy IP, not the Main Server:
 
-Server=192.168.3.4 (Your Proxy IP)
+- Server=192.168.3.4 (Your Proxy IP)
 
-ServerActive=192.168.3.4 (If using active checks)
+- ServerActive=192.168.3.4 (If using active checks)
