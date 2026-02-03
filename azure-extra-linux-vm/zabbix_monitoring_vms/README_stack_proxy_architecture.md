@@ -319,3 +319,78 @@ Proxy agent
 - Server=192.168.3.4 (Your Proxy IP)
 
 - ServerActive=192.168.3.4 (If using active checks)
+
+## Set a "High Queue" Trigger (Optional but Recommended)
+
+One of the most common issues with proxies is a "queue" backup. You might want to check the item: 
+
+Zabbix proxy: Number of values waiting to be sent 
+
+If this number stays high (in the thousands) and doesn't go down, it means the connection between 192.168.3.4 and 192.168.3.5 is too slow or the Main Server's database is struggling.
+
+![proxy values](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_values.png)
+
+## Prepare MySQL for Monitoring on proxy todo
+
+```bash
+sudo mysql
+```
+
+Once inside the MySQL prompt, run these commands:
+
+```sql
+CREATE USER 'zbx_monitor'@'%' IDENTIFIED BY 'your_secure_password';
+GRANT REPLICATION CLIENT, PROCESS, SHOW DATABASES, SHOW VIEW ON *.* TO 'zbx_monitor'@'%';
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+Configure the Zabbix Agent 2
+
+Zabbix Agent 2 has a built-in MySQL plugin. You need to tell it how to log in
+
+```bash
+sudo nano /etc/zabbix/zabbix_agent2.d/plugins.d/mysql.conf
+
+```
+Add these lines (using the password you created in Step 1):
+
+```ini
+Plugins.Mysql.Sessions.Local.Uri=tcp://localhost:3306
+Plugins.Mysql.Sessions.Local.User=zbx_monitor
+Plugins.Mysql.Sessions.Local.Password=your_secure_password
+```
+
+```bash
+sudo systemctl restart zabbix-agent2
+
+```
+
+Link the Template in Main Zabbix
+
+- Click on vmchaos09.
+
+- In the Templates tab, add: MySQL by Zabbix agent 2.
+
+Note: Since your host is set up for "Active" monitoring, ensure you use the "Active" version of the template if available, or simply ensure the Agent 2 is configured to handle the plugin requests.
+
+- Go to the Macros tab on the host and click Inherited and host macros.
+
+- Find the macro {$MYSQL.DSN} and change its value to Local (this matches the session name we created in the config file).
+
+🧪 Quick Test
+To verify the agent can actually talk to MySQL before waiting for the UI, run this command on the proxy:
+
+```bash
+
+
+zabbix_agent2 -t mysql.ping[Local]
+# If it returns [t|1], the connection is successful!
+```
+
+Critical metrics to watch:
+
+* MySQL: Status: Is the database actually up?
+* MySQL: Queries per second: Shows the load the proxy is putting on its DB.
+* MySQL: Slow queries: If this increases, your proxy's disk I/O might be a bottleneck.
+* MySQL: Buffer pool utilization: Tells you if you need to give MySQL more RAM.
