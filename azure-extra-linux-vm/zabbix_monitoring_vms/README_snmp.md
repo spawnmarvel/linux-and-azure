@@ -212,3 +212,5 @@ vmsnmpsim01 Linux: Uptime (network) 19s	00:27:20	+00:00:30	Graph
 vmsnmpsim01 Linux: System object ID 6m 49s	NET-SNMP-MIB::netSnmpAgentOIDs.10		History
 
 ```
+
+## 4. Learning the "Dark Arts": SNMP Traps, push to zabbix todo
