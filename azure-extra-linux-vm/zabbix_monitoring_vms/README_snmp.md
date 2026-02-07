@@ -194,3 +194,5 @@ Even though Zabbix mainly uses numerical OIDs in the background for efficiency, 
 ## Zabbix pull snmp
 
 Now that you’ve proven the "plumbing" works with snmpwalk and snmptrap, it’s time to move into the Zabbix Web UI. This is where we turn those raw text lines into persistent monitoring, graphs, and triggers.
+
+![snmp host](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/snmp_host.png)
