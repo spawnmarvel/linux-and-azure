@@ -37,5 +37,7 @@ Since every device is different, SNMP uses a structured system to keep data orga
 
 Key SNMP Operations
 
+![snmp words](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/snmp_words.png)
+
 
 ## SNMP zabbix
