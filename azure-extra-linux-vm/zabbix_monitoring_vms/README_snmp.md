@@ -79,7 +79,7 @@ Because these VMs are in the same VNet, they can talk to each other on any port 
 
 - UDP Port 162: For Traps (Device -> Manager).
 
-## 3. Option B: Turn a Linux VM into an SNMP Device
+## 3. Option B: Turn a Linux VM into an SNMP Device pull from zabbix
 
 Rg-uksnmp-0001
 
@@ -202,3 +202,13 @@ Now that you’ve proven the "plumbing" works with snmpwalk and snmptrap, it’s
 Check status after 1-2 min
 
 ![snmp host status](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/snmp_status.png)
+
+data
+
+```log
+vmsnmpsim01 Linux: System location6m 49s	Sitting on the Dock of the Bay		History	
+vmsnmpsim01 Linux: System name 6m 49s	vmsnmpsim01		History	
+vmsnmpsim01 Linux: Uptime (network) 19s	00:27:20	+00:00:30	Graph	
+vmsnmpsim01 Linux: System object ID 6m 49s	NET-SNMP-MIB::netSnmpAgentOIDs.10		History
+
+```
