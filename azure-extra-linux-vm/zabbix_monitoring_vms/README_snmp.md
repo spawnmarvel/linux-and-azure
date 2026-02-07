@@ -144,6 +144,7 @@ sudo apt update -y
 # install client
 sudo apt install snmp
 
+# Those steps are not required for Zabbix to function. Zabbix is perfectly happy talking in "numerical" OIDs ($1.3.6.1...$).
 # Install the downloader:
 sudo apt install snmp-mibs-downloader -y
 
@@ -154,6 +155,7 @@ sudo download-mibs
 Tell SNMP to use them: Open the client config: 
 
 ```bash
+# The step are not required for Zabbix to function. Zabbix is perfectly happy talking in "numerical" OIDs ($1.3.6.1...$).
 sudo nano /etc/snmp/snmp.conf 
 # (not snmpd.conf!) 
 # Find the line that says mibs : and put a # in front of it to comment it out: #mibs :
