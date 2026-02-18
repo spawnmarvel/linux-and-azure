@@ -362,6 +362,24 @@ Go to Administration → Proxies.
 
 Click on vmchaos09.
 
+Set Connections to proxy to No encryption (since it's an Active proxy, the server doesn't "connect to" it)
+
+![psk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/psk.png)
+
+
+Verify the Encrypted Tunnel
+Check the Proxy logs on vmchaos09 to ensure the handshake is successful:
+
+```bash
+sudo tail -f /var/log/zabbix/zabbix_proxy.log
+# 1742:20260218:111859.108 received configuration data from server at "192.168.3.5", datalen 29926
+
+```
+
+![psk ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/psk_ok.png)
+
+
+
 
 
 
