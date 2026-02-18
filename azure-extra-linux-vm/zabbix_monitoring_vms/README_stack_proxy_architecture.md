@@ -387,6 +387,17 @@ htop
 sudo apt install btop -y
 btop
 
+# or ask the agent
+zabbix_get -s 127.0.0.1 -k system.uptime
+zabbix_get -s 127.0.0.1 -k system.uname
+# RAM available for processes (includes buffers/cache).
+zabbix_get -s 127.0.0.1 -k vm.memory.size[available]
+# Disk & I/O
+zabbix_get -s 127.0.0.1 -k vfs.dev.write[,operations]
+zabbix_get -s 127.0.0.1 -k vfs.dev.read[,operations]
+# Percentage of free space on the root (/) partition.
+zabbix_get -s 127.0.0.1 -k vfs.fs.size[/,pfree]
+
 ```
 ## Prepare MySQL for Monitoring on proxy todo
 
