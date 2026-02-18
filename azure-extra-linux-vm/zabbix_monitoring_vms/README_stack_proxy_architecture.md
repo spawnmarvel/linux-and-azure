@@ -378,6 +378,16 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 ![psk ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/psk_ok.png)
 
 
+## view proxy load with btop
+
+```bash
+top
+htop
+# or
+sudo apt install btop -y
+btop
+
+```
 ## Prepare MySQL for Monitoring on proxy todo
 
 ```bash
