@@ -330,6 +330,41 @@ If this number stays high (in the thousands) and doesn't go down, it means the c
 
 ![proxy values](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_values.png)
 
+## PSK (Pre-Shared Key) for encryption
+
+Moving to SSL (TLS) encryption is a smart move, especially in Zabbix 7.0. It ensures that the data being pushed from your proxy (vmchaos09) to your main server (vmzabbix02) cannot be intercepted or spoofed.
+
+Since you are using Active Proxy mode, we will use PSK (Pre-Shared Key). It is much simpler to manage than a full Certificate Authority (CA) setup but provides strong encryption
+
+```bash
+sudo mkdir -p /etc/zabbix/keys
+openssl rand -hex 32 | sudo tee /etc/zabbix/keys/proxy.psk
+
+```
+Copy the output of the key (the long string of numbers and letters). You will need it for the Web UI.
+
+Configure the Proxy for TLS
+Edit the proxy configuration file on vmchaos09:
+sudo nano /etc/zabbix/zabbix_proxy.conf
+
+```ini
+TLSConnect=psk
+TLSPSKIdentity=PSK_PROXY_001
+TLSPSKFile=/etc/zabbix/keys/proxy.psk
+```
+
+```bash
+sudo systemctl restart zabbix-proxy.service
+```
+
+
+Go to Administration → Proxies.
+
+Click on vmchaos09.
+
+
+
+
 ## Prepare MySQL for Monitoring on proxy todo
 
 ```bash
