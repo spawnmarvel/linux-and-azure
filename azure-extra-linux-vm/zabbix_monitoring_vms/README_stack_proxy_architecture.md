@@ -12,7 +12,6 @@ Architecture  with proxy:
 
 - Source zabbix on of the above, size l or m
 - Replica proxy on site with linki to source, size s, l or m
-- Could add grafana-zabbix plugin on the proxy
 - Zabbix plugin for Grafana, https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app/
 
 # How Does the Zabbix Proxy Roll Out Plan Work?
@@ -377,10 +376,6 @@ sudo tail -f /var/log/zabbix/zabbix_proxy.log
 ```
 
 ![psk ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/psk_ok.png)
-
-
-
-
 
 
 ## Prepare MySQL for Monitoring on proxy todo
