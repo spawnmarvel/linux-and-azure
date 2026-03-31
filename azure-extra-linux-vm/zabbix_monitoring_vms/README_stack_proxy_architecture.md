@@ -399,6 +399,40 @@ zabbix_get -s 127.0.0.1 -k vfs.dev.read[,operations]
 zabbix_get -s 127.0.0.1 -k vfs.fs.size[/,pfree]
 
 ```
+
+## Add trigger for proxy down
+
+By design, Zabbix Server doesn't automatically trigger a problem just because a Proxy goes offline. Instead, the items monitored by that proxy simply stop receiving data (becoming "Unknown" or staying at their last value), and the UI status in Administration > Proxies changes.
+
+Step 1: Add the "Last Access" Item
+Add an item to this host that specifically asks the Server database when it last heard from that proxy.
+
+* Name: Proxy Last Access
+* Type: Zabbix internal
+* Key: zabbix[proxy,"YourProxyName",lastaccess]
+* Note: Replace YourProxyName with the exact name from Administration > Proxies.
+* Type of information: Numeric (unsigned)
+* Units: unixtime
+* Update interval: 1m
+
+![proxy_time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_time.png)
+
+
+Step 2: Create the Trigger (The Alert)
+Now, create a trigger that fires if the "Last Access" time is too old compared to the current time.
+
+* Name: Zabbix proxy {HOST.NAME} is offline
+* Severity: High
+* Expression:
+
+```txt
+(now() - last(/My-Proxy-Health/zabbix[proxy,"YourProxyName",lastaccess])) > 300
+```
+
+![proxy_trigger](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_trigger.png)
+
+Result of proxu is down.
+
 ## Prepare MySQL for Monitoring on proxy todo
 
 ```bash
