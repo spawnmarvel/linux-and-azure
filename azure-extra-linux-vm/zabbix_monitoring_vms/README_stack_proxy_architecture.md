@@ -415,7 +415,7 @@ Add an item to this host that specifically asks the Server database when it last
 * Units: unixtime
 * Update interval: 1m
 
-![proxy_time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_time.png)
+![proxy_item](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_item.png)
 
 
 Step 2: Create the Trigger (The Alert)
