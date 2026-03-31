@@ -435,6 +435,10 @@ Result of proxy is down.
 
 ![proxy_zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_zabbix.png)
 
+The 122 in the Administration > Proxies screen (usually under the Required VPS or Item count columns) represents the total number of enabled items assigned to that proxy.
+
+The 106 in the "More than 100 items having missing data" alert is a dynamic count based on the Zabbix Server's queue.
+
 ## Prepare MySQL for Monitoring on proxy todo
 
 ```bash
