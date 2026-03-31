@@ -431,7 +431,9 @@ Now, create a trigger that fires if the "Last Access" time is too old compared t
 
 ![proxy_trigger](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_trigger.png)
 
-Result of proxu is down.
+Result of proxy is down.
+
+![proxy_zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_zabbix.png)
 
 ## Prepare MySQL for Monitoring on proxy todo
 
