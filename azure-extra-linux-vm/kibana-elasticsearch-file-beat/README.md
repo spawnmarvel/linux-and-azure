@@ -1125,3 +1125,7 @@ https://www.elastic.co/docs/explore-analyze/query-filter/languages/kql
 ### Kibana set up https
 
 https://www.elastic.co/docs/deploy-manage/security/set-up-basic-security-plus-https#encrypt-kibana-https
+
+# Test Grafana, Loki and Alloy
+
+This stack may be abit simpler.
