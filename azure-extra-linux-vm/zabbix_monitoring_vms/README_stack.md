@@ -2,6 +2,24 @@
 
 Example with Zabbix server and a Linux VM with Linux template as test bases for passiv or active agent.
 
+# Table of Contents: Zabbix & Linux Monitoring
+
+
+- [🔹 Introduction & Environment](#introduction--environment)
+- [🔹 Zabbix Trapper Items (Port 10051)](#zabbix-trapper-items-10051-inbound-to-zabbix-server)
+- [🔹 Agent Modes: Active vs. Passive](#zabbix-agent-active-10051-is-not-trapper-vs-passive-10050)
+- [🔹 Passive Agent Setup (Port 10050)](#install-zabbix-agent-default-with-passive-checks-and-template-linux-by-zabbix-agent-10050)
+- [🔹 User Parameters (Custom Metrics)](#user-parameters-optional-but-recommended)
+  - [Simple Parameters](#user-parameter-simple)
+  - [Advanced Parameters](#user-parameter-advanced)
+- [🔹 Active Agent Setup (Port 10051)](#install-zabbix-agent-and-template-linux-by-zabbix-agent-active-10051)
+- [🔹 HA & Multiple Servers](#ha-or-multiple-zabbix-server-by-same-agent)
+- [🔹 Maintenance & Upgrades](#upgrade-to-zabbix-agent-2)
+- [🔹 Templates & Resources](#templates-view-folder)
+
+
+---
+
 ## Zabbix 6 is installed (was upgraded to 7)
 
 
