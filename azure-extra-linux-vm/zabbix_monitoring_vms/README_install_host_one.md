@@ -1,5 +1,20 @@
 # Install on a single host
 
+# Table of Contents: Zabbix Single Host Installation
+
+- [🔹 Install on a single host](#install-on-a-single-host)
+- [🔹 Download and install Zabbix](#download-and-install-zabbix)
+- [🔹 Understanding --no-install-recommends](#--no-install-recommends)
+- [🔹 Install Zabbix (Step-by-Step)](#install-zabbix)
+- [🔹 Install MySQL](#install-mysql)
+- [🔹 Configure Zabbix MySQL](#configure-zabbix-mysql)
+- [🔹 Configure Frontend](#configure-frontend)
+- [🔹 Upgrade Minor (e.g., 6.0.26 to 6.0.27)](#upgrade-minor-from-6026-to-6027-port-443-to-repozabbixcom)
+- [🔹 Zabbix Version & Support Info](#zabbix-6027-©-2001–2024-zabbix-sia)
+- [🔹 Upgrade Major](#upgrade-major)
+
+---
+
 ## Download and install Zabbix
 
 https://www.zabbix.com/download?zabbix=6.0&os_distribution=ubuntu&os_version=22.04&components=server_frontend_agent&db=mysql&ws=apache
