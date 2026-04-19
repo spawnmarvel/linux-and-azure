@@ -1,5 +1,27 @@
 # Zabbix and SNMP
 
+
+# Table of Contents: Zabbix & SNMP Monitoring
+
+
+- [🔹 Zabbix and SNMP Overview](#zabbix-and-snmp)
+- [🔹 SNMP Agent & Traps](#snmp-agent)
+- [🔹 SNMP General Concepts](#snmp-general)
+  - [How it Works: The Players](#how-it-works-the-players)
+  - [The Dictionary: MIBs and OIDs](#the-dictionary-mibs-and-oids)
+  - [Key SNMP Operations](#key-snmp-operations)
+- [🔹 Option B: Turn a Linux VM into an SNMP Device](#3-option-b-turn-a-linux-vm-into-an-snmp-device)
+  - [Step 1: Installing the Agent](#step-1-installing-the-agent)
+  - [Step 2: Configuration (The Critical Part)](#step-2-the-configuration-the-critical-part)
+  - [Step 3: Restart and Verify](#step-3-restart-and-verify)
+- [🔹 The Big Test (From vmzabbix02)](#3-the-big-test-from-vmzabbix02)
+  - [Installing the MIB Downloader](#give-the-computer-the-dictionary-the-professional-way)
+  - [Configuring SNMP for MIB usage](#tell-snmp-to-use-them-open-the-client-config)
+- [🔹 Zabbix Integration (Pull)](#zabbix-pull-snmp)
+- [🔹 Learning the "Dark Arts": SNMP Traps](#4-learning-the-dark-arts-snmp-traps-push-to-zabbix-todo)
+
+---
+
 Simple Network Management Protocol is an Internet Standard protocol for collecting and organizing information about managed devices on IP networks and for modifying that information to change device behaviour.
 
 You may want to use SNMP monitoring on devices such as printers, network switches, routers or UPS that usually are SNMP-enabled and on which it would be ***impractical to attempt setting up complete operating systems and Zabbix agents.***
@@ -7,6 +29,8 @@ You may want to use SNMP monitoring on devices such as printers, network switche
 All solutions:
 
 https://www.zabbix.com/integrations/snmp#generic_snmp_snmp
+
+
 
 ## SNMP agent
 
