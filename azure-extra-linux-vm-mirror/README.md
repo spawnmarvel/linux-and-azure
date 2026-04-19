@@ -1,13 +1,23 @@
 # How to Setup a Local or Private Ubuntu Mirror
 
+# Table of Contents: Ubuntu Mirror Setup
+
+- [🔹 Introduction](#introduction)
+- [🔹 Topology](#topology)
+- [🔹 Tool Comparison (debmirror vs. others)](#debmirror-ubuntu-wiki)
+- [🔹 Virtual Machine Specifications](#virtual-machines)
+- [🔹 Zabbix Agent Mirroring Guide](#zabbix-agent-repository-mirroring-guide-ubuntu-2404)
+  - [1. Mirror Server Setup & Sync](#1-mirror-server-setup--initial-sync)
+  - [2. Client Configuration (Offline VM)](#2-client-configuration--test-offline-vm)
+- [🔹 Automation & Maintenance](#automating-mirror-synchronization-cron-job)
+- [🔹 Future Mirror Scopes](#3-mirroring-the-mysql-repository-ubuntu-2404-tbd)
 
 ## Introduction
 By default, Ubuntu systems get their updates straight from the internet at archive.ubuntu.com. In an environment with lots of Ubuntu systems (servers and/or desktops) this can cause a lot of internet traffic as each system needs to download the same updates.
 
 In an environment like this, it would be more efficient if one system would download all Ubuntu updates just once and distribute them to the clients. In this case, updates are distributed using the local network, removing any strain on the internet link
 
-## Why
-
+## Topology
 
 ```mermaid
 graph TD;
