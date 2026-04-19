@@ -552,12 +552,12 @@ Now lets enable UFW and only allow acces for ssh and dmzdocker03
 * ssh
 * 80 and 443 to the dmzdocker03 for apt
 
-Now run a new tags
+Now run
 
 * Run script for mirro script on dmzdocker03
 * Run apt on docker03getmirrortes
 
-### 📅 Automating Mirror Synchronization (Cron Job)
+### Automating Mirror Synchronization (Cron Job)
 Run the following steps on your Mirror Server (where your mirror files are located).
 
 Open the root user's crontab for editing. We use sudo crontab -e because the sync script needs root permissions to write to /var/www/html/zabbix_mirror/
@@ -621,7 +621,7 @@ Thu Nov 13 19:42:26 UTC 2025: Synchronization completed successfully.
 
 ```
 
-### 3. 💾 Mirroring the MySQL Repository (Ubuntu 24.04) tbd
+### 3. Mirroring the MySQL Repository (Ubuntu 24.04) tbd
 
 GOTO README_mysql.md
 
@@ -629,7 +629,7 @@ Yes, if you mirror the Single LTS Release (Ubuntu 24.04, Noble) limited to the a
 
 Yes, PHP is also hosted in the official Ubuntu repositories and will be included in your mirrored scope
 
-### 4. 💾 Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
+### 4. Mirroring the Ubuntu Repository (Ubuntu 24.04) tbd
 
 
 Mirror Scope	Approximate Required Size
@@ -650,7 +650,7 @@ dmzdocker03 (mirror master)
 
 Lets add a datadisk to the vm dmzdocker03
 
-### 5. 💾Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
+### 5. Mirroring zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent2
 
 To get the full set of Zabbix components—including the server, frontend, and associated utilities—you don't necessarily need to modify the mirror synchronization script (sync_zabbix_mirror.sh) because the existing setup already mirrors the entire repository path where those packages reside.
 
