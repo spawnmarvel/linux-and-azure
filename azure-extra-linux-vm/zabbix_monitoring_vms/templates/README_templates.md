@@ -262,13 +262,14 @@ zabbix_agent2 -V
 zabbix_agent2 (Zabbix) 6.0.40
 
 ```
+
 Lets try to configure it.
 Go to zabbix server and add, Website certificate by Zabbix agent 2.
 
 Just follow the link for the actual configuration.
 We are using a self signed cert with IP as CN, so that is used in both fields.
 
-It will take 15 min before zabbix does GET CERT.
+It will take 15 min before zabbix does GET CERT or you can manually trigger the cert: get item,by pressing execute now
 
 check with openssl
 
@@ -284,46 +285,18 @@ verify return:1
 
 ```
 
-recommended to add it
+recommended to add it to trusted store
 
-```bash
-echo | openssl s_client -connect vmzabbix02:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/vmzabbix02.crt
-Can't use SSL_get_servername
-depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
-verify error:num=18:self-signed certificate
-verify return:1
-depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
-verify return:1
-DONE
-
-sudo cp /tmp/vmzabbix02.crt /usr/local/share/ca-certificates/vmzabbix02_internal.crt
-sudo update-ca-certificates --fresh
-
-Clearing symlinks in /etc/ssl/certs...
-done.
-Updating certificates in /etc/ssl/certs...
-rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
-rehash: warning: skipping duplicate certificate in vmzabbix02.pem
-rehash: warning: skipping duplicate certificate in vmzabbix02_internal.pem
-148 added, 0 removed; done.
-Running hooks in /etc/ca-certificates/update.d...
-done.
-
-
-sudo zabbix_agent2 -t web.certificate.get[vmzabbix02,443]
-web.certificate.get[vmzabbix02,443]           [s|{"x509":{"version":3,"serial_number":"351a4ce4a5a29a16efc2a19aa17db88603b8fcba","signature_algorithm":"SHA256-RSA",
-
-
-```
 
 Ensure {$CERT.WEBSITE.HOSTNAME} is set to vmzabbix02
 
+Ensure {$CERT.WEBSITE.IP} is set to 127.0.0.1
 
-![cert agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert.jpg)
 
-After 15 min:
 
-![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok.jpg)
+After 15 min: or you can manually trigger the cert: get item,by pressing execute now
+
+![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok2.jpg)
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
 
