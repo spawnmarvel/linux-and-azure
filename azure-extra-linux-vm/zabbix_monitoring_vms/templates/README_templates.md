@@ -316,6 +316,9 @@ web.certificate.get[vmzabbix02,443]           [s|{"x509":{"version":3,"serial_nu
 
 ```
 
+Ensure {$CERT.WEBSITE.HOSTNAME} is set to vmzabbix02
+
+
 ![cert agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert.jpg)
 
 After 15 min:
