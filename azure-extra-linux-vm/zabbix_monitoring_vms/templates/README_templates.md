@@ -284,6 +284,38 @@ verify return:1
 
 ```
 
+recommended to add it
+
+```bash
+echo | openssl s_client -connect vmzabbix02:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/vmzabbix02.crt
+Can't use SSL_get_servername
+depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
+verify return:1
+DONE
+
+sudo cp /tmp/vmzabbix02.crt /usr/local/share/ca-certificates/vmzabbix02_internal.crt
+sudo update-ca-certificates --fresh
+
+Clearing symlinks in /etc/ssl/certs...
+done.
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+rehash: warning: skipping duplicate certificate in vmzabbix02.pem
+rehash: warning: skipping duplicate certificate in vmzabbix02_internal.pem
+148 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+
+
+sudo zabbix_agent2 -t web.certificate.get[vmzabbix02,443]
+web.certificate.get[vmzabbix02,443]           [s|{"x509":{"version":3,"serial_number":"351a4ce4a5a29a16efc2a19aa17db88603b8fcba","signature_algorithm":"SHA256-RSA",
+
+
+```
+
 ![cert agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert.jpg)
 
 After 15 min:
