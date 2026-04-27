@@ -270,6 +270,20 @@ We are using a self signed cert with IP as CN, so that is used in both fields.
 
 It will take 15 min before zabbix does GET CERT.
 
+check with openssl
+
+```bash
+openssl s_client -connect vmzabbix02:443 -servername vmzabbix02
+
+CONNECTED(00000003)
+depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 C = US, ST = NewYork, L = NYC, O = IT, CN = vmzabbix02
+verify return:1
+
+```
+
 ![cert agent](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert.jpg)
 
 After 15 min:
@@ -277,6 +291,9 @@ After 15 min:
 ![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok.jpg)
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
+
+
+
 
 ### Azure Cost Management by HTTP and Azure Virtual Machine by HTTP
 
