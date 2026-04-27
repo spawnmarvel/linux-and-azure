@@ -296,7 +296,7 @@ Ensure {$CERT.WEBSITE.IP} is set to 127.0.0.1
 
 After 15 min: or you can manually trigger the cert: get item,by pressing execute now
 
-![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok2.jpg)
+![cert agent ok](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/cert_ok2.png)
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/app/certificate_agent2/README.md
 
