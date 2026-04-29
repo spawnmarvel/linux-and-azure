@@ -242,4 +242,186 @@ vmsnmpsim01 Linux: System object ID 6m 49s	NET-SNMP-MIB::netSnmpAgentOIDs.10		Hi
 
 ```
 
-## 4. Learning the "Dark Arts": SNMP Traps, push to zabbix todo
+## 4. Learning the "Dark Arts": SNMP Traps, push to zabbix
+
+The Workflow
+1. The Device sends a trap packet (UDP port 162).
+2. snmptrapd (Linux daemon) on the Zabbix server receives it.
+3. A Receiver Script (Perl) parses the trap into a format Zabbix understands.
+4. Zabbix Server reads the parsed data and triggers an alert.
+
+Lets assume this: 
+* vmsnmpsim01 (192.168.3.6) running ubuntu 24.04 is a new vm, nothing is installed. 
+* vmzabbix02 (192.168.3.5) running same linux distro and is the zabbix server.
+
+Since you are starting with a fresh Ubuntu 24.04 VM for the simulator (vmsnmpsim01), we will take it from zero to a fully functioning SNMP node.
+
+1. Setup the "Managed Device" (vmsnmpsim01)
+Log into 192.168.3.6. We need to install the SNMP daemon and configure it to "listen" for Zabbix.
+
+### Step 1: Install the SNMP Daemon
+
+```bash
+sudo apt update && sudo apt install snmpd -y
+
+snmpd -version
+# NET-SNMP version:  5.9.4.pre2
+``` 
+
+Step 2: Configuration
+
+```bash
+# The default config is very restrictive. We need to open it up for your Zabbix server.
+
+# Backup the original:
+sudo cp /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.bak
+
+# Edit the file:
+sudo nano /etc/snmp/snmpd.conf
+
+# Update these specific lines:
+
+# Listening IP: Change agentAddress  udp:127.0.0.1:161 
+# to:
+agentAddress udp:161 # (This allows connections from the network).
+
+# Access Control: Add your community string and link it to the Zabbix IP:
+rocommunity learning-lab 192.168.3.5
+
+# Restart and Enable:
+
+sudo systemctl restart snmpd
+sudo systemctl enable snmpd
+```
+
+2. Setup the "Manager" (vmzabbix02)
+
+Log into 192.168.3.5. We need to ensure Zabbix is ready to "pull" data and "receive" traps.
+
+Step 1: Install Tools & MIBs
+To make your life easier during troubleshooting, install the client tools and the "dictionaries" (MIBs).
+
+```bash
+sudo apt update
+sudo apt install snmp snmp-mibs-downloader -y
+sudo download-mibs
+```
+
+Log example
+
+```txt
+Downloading documents and extracting MIB files.
+This will take some minutes.
+
+In case this process fails, it can always be repeated later by executing
+/usr/bin/download-mibs again.
+
+RFC1155-SMI: 119 lines.
+RFC1213-MIB: 2613 lines.
+NOTE: SMUX: ignored.
+SMUX-MIB: 158 lines.
+CLNS-MIB: 1294 lines.
+RFC1381-MIB: 1007 lines.
+RFC1382-MIB: 2627 lines.
+RFC1414-MIB: 131 lines.
+MIOX25-MIB: 708 lines.
+[...]
+
+```
+
+Note: Edit /etc/snmp/snmp.conf and comment out the line mibs : (add a #) to allow the tools to use the downloaded MIBs.
+
+
+### Step 2: Configure SNMP Trap Receiving
+
+Since we want to practice the "Dark Arts," let's set up the trap receiver.
+
+```bash
+
+# Install the handler:
+sudo apt install snmptrapd -y
+
+# Configure the trap daemon:
+sudo nano /etc/snmp/snmptrapd.conf
+# Add: 
+
+authCommunity log,execute,net learning-lab
+
+# Enable Traps in Zabbix Server:
+sudo nano /etc/zabbix/zabbix_server.conf
+Set StartSNMPTrapper=1.
+
+# Restart Zabbix:
+sudo systemctl restart zabbix-server snmptrapd
+```
+3. Verification Table
+
+```bash
+# Test Polling
+snmpwalk -v 2c -c learning-lab 192.168.3.6 system
+```
+
+A list of system info (Uptime, Name, etc.)
+```txt
+SNMPv2-MIB::sysDescr.0 = STRING: Linux vmsnmpsim01 6.17.0-1011-azure #11~24.04.2-Ubuntu SMP Wed Mar 25 22:46:36 UTC 2026 x86_64
+SNMPv2-MIB::sysObjectID.0 = OID: NET-SNMP-MIB::netSnmpAgentOIDs.10
+DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (135955) 0:22:39.55
+SNMPv2-MIB::sysContact.0 = STRING: Me <me@example.org>
+SNMPv2-MIB::sysName.0 = STRING: vmsnmpsim01
+SNMPv2-MIB::sysLocation.0 = STRING: Sitting on the Dock of the Bay
+SNMPv2-MIB::sysServices.0 = INTEGER: 72
+SNMPv2-MIB::sysORLastChange.0 = Timeticks: (0) 0:00:00.00
+[...]
+```
+Test connectivity
+
+```bash
+nc -vzu 192.168.3.6 161
+Connection to 192.168.3.6 161 port [udp/snmp] succeeded!
+```
+
+Simulate Trap
+
+```bash
+sudo touch /var/log/zabbix/zabbix_traps.log
+sudo chown zabbix:zabbix /var/log/zabbix/zabbix_traps.log
+sudo chmod 664 /var/log/zabbix/zabbix_traps.log
+
+# check that the file exists
+cat /var/log/zabbix/zabbix_traps.log
+## else create it
+# Create the file
+sudo touch /var/log/zabbix/zabbix_traps.log
+
+# Give ownership to the zabbix user, but allow the snmp group to write to it
+sudo chown zabbix:zabbix /var/log/zabbix/zabbix_traps.log
+sudo chmod 664 /var/log/zabbix/zabbix_traps.log
+
+# Run this command to see which user is running the snmptrapd process:
+ps aux | grep snmptrapd
+# Add the snmp user to the zabbix group so it has permission
+sudo usermod -a -G zabbix Debian-snmp
+
+# restart
+sudo systemctl daemon-reload
+sudo systemctl restart snmptrapd
+
+# test it
+snmptrap -v 2c -c learning-lab 127.0.0.1 '' 1.3.6.1.4.1.3.1.1 1.3.6.1.4.1.3.1.1 s "Manual Test"
+```
+
+Check journal for log for trap data.
+
+
+```bash
+sudo journalctl -u snmptrapd -n 20
+
+``` 
+```txt
+pr 29 19:46:18 vmzabbix02 snmptrapd[32552]: NET-SNMP version 5.9.4.pre2 AgentX subagent connected
+Apr 29 19:46:18 vmzabbix02 snmptrapd[32552]: NET-SNMP version 5.9.4.pre2
+Apr 29 19:47:13 vmzabbix02 snmptrapd[32552]: 2026-04-29 19:47:13 UDP: [127.0.0.1]:43085->[127.0.0.1]:162 [UDP: [127.0.0.1]:43085->[127.0.0.1>
+Apr 29 19:47:13 vmzabbix02 snmptrapd[32552]: DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (395025) 1:05:50.25        SNMPv2-MIB::snmpTra>
+```
+
+
