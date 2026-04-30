@@ -34,6 +34,27 @@ graph TD;
 
 https://louwrentius.com/how-to-setup-a-local-or-private-ubuntu-mirror.html
 
+## Topology tiered mirror
+
+This architecture—often called a tiered mirror or hub-and-spoke model—is highly effective for saving bandwidth and ensuring faster updates within an on-premise network.
+
+Since vm-a is in Azure, you only pay for the "egress" bandwidth once (to sync to vm-b), and then all your local vm-x servers pull from vm-b at local network speeds.
+
+The Architecture Flow
+1. Upstream (Internet): vm-a (Azure) syncs from official Ubuntu mirrors.
+- Install debmirror and a web server, Create a sync script
+- Note: Ensure you have enough disk space (a full mirror of one Ubuntu release/arch can be 100GB+)
+- sudo apt install debmirror apache2 gnupg xz-utils
+
+2. Downstream (Internal): vm-b (On-Prem) syncs from vm-a.
+- Instead of a complex debmirror setup here, you can simply use rsync to keep vm-b identical to vm-a. 
+- This is often faster and more reliable for slave nodes.
+- rsync -aP --delete user@vm-a-ip:/var/www/html/ubuntu /var/www/html/ubuntu
+- Just like the master, install apache2 on vm-b and point the document root to your mirror folder.
+
+3. Clients: All vm-x servers point their sources.list to vm-b.
+- On all your other servers, modify /etc/apt/sources.list (or create a file in /etc/apt/sources.list.d/) to point to your on-premise server
+
 ## debmirror ubuntu wiki
 
 | Feature | debmirror | apt-mirror | rsync |

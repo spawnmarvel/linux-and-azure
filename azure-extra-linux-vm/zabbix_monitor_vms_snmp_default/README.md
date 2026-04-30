@@ -49,6 +49,10 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_age
 
 ### User parameters
 
+#### Windows
+
+#### Linux
+
 ## Zabbix Linux by SNMP
 
 ### Install
