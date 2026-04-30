@@ -55,6 +55,8 @@ The Architecture Flow
 3. Clients: All vm-x servers point their sources.list to vm-b.
 - On all your other servers, modify /etc/apt/sources.list (or create a file in /etc/apt/sources.list.d/) to point to your on-premise server
 
+![tierd](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/tierd.png)
+
 ## debmirror ubuntu wiki
 
 | Feature | debmirror | apt-mirror | rsync |
