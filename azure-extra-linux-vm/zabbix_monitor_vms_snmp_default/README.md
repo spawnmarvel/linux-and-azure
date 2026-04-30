@@ -1,5 +1,20 @@
 # Zabbix monitor VM's and SNMP default
 
+# Table of Contents
+
+1. [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default)  
+   1.1 [Tasks](#tasks)  
+   1.2 [Stack and current version](#stack-and-current-version)  
+   1.3 [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active)  
+       - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)  
+       - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)  
+       - [Templates](#templates)  
+       - [User parameters](#user-parameters)  
+   1.4 [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)  
+       - [Install](#install)  
+       - [Templates](#templates-1)  
+   1.5 [Mysql tuning tbd](#mysql-tuning-tbd)
+
 ## Tasks
 
 * Use default agent 2 active / trap
