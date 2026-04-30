@@ -68,7 +68,14 @@ Hostname=vmhybrid01
 
 Note: For active agents, the Zabbix Agent interface (IP address) is not strictly required in the host configuration, as the agent initiates the connection.
 
+Data Collection and hosts
+
 ![windows_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_a.png)
+
+Monitoring and hosts
+
+![windows_items](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_items.png)
+
 
 
 
