@@ -2,19 +2,6 @@
 
 In Zabbix, the distinction between Active and Passive modes relates to which entity initiates the communication and data transfer between the Zabbix Server/Proxy and the Zabbix Agent.
 
-## Passive Mode (Server-Poll) Active Mode (Agent-Push)
-
-### Zabbix agents
-
-![p_vs_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/p_vs_a.png)
-
-### SNMP
-
-Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
-
-![sp_vs_sa](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/sp_vs_sa.png)
-
-# Table of Contents
 
 # Table of Contents
 
@@ -32,6 +19,17 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
    1.6 [Mysql tuning tbd](#mysql-tuning-tbd)
 
 
+## Passive Mode (Server-Poll) Active Mode (Agent-Push)
+
+### Zabbix agents
+
+![p_vs_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/p_vs_a.png)
+
+### SNMP
+
+Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
+
+![sp_vs_sa](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/sp_vs_sa.png)
 
 ## Tasks
 
