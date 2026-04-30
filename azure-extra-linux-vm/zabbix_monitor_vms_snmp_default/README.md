@@ -89,6 +89,11 @@ When you link "Windows by Zabbix agent active", it automatically pulls in the fo
 * Windows Physical Disks: Read/write latency and throughput.
 * Windows Services: Monitoring of critical system services.
 
+In Active Mode, your drive information does not appear instantly like a static field. It relies on a process called Low-Level Discovery (LLD).
+
+* The Wait Time: By default, this rule usually runs every 1 hour.
+* The Action: The Agent scans the Windows machine for drive letters (C:, D:, etc.) and sends that list to the Server.
+* The Result: Only after this scan completes will the individual items (e.g., "Used disk space on C:") be created and start appearing in your Latest Data or Items list.
 
 ![wind_discovery](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/wind_discovery.png)
 
