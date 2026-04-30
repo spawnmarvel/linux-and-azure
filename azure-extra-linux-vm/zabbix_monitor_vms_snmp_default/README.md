@@ -11,22 +11,38 @@
 
 * Zabbix, vmzabbix02, 192.168.3.5
 * Mysql, vmzabbix02, 192.168.3.5
-* New vm Zabbix agent 2 active trap
-* New vm Zabbix SNMP trap
+* vmhybrid01, 192.168.3.7, Windows by Zabbix agent active
+* New vm Linux by Zabbix agent active
+* New vm Linux by SNMP
 
-## Zabbix agent 2 active trap
+## Zabbix Windows/Linux by Zabbix agent active
 
-### Install
+### Install Windows by Zabbix agent active
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
+
+### Install Linux by Zabbix agent active
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
+
 
 ### Templates
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
 
 ### User parameters
 
-## Zabbix SNMP trap
+## Zabbix Linux by SNMP
 
 ### Install
 
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
+
 ### Templates
 
-## Mysql tuning
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
+
+## Mysql tuning tbd
 
