@@ -4,7 +4,13 @@ In Zabbix, the distinction between Active and Passive modes relates to which ent
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
+Zabbix agents
+
 ![p_vs_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/p_vs_a.png)
+
+SNMP
+
+![sp_vs_sa](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/sp_vs_sa.png)
 
 # Table of Contents
 
@@ -20,6 +26,8 @@ In Zabbix, the distinction between Active and Passive modes relates to which ent
        - [Install](#install)  
        - [Templates](#templates-1)  
    1.5 [Mysql tuning tbd](#mysql-tuning-tbd)
+
+
 
 ## Tasks
 
