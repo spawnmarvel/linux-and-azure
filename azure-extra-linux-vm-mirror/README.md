@@ -34,6 +34,8 @@ graph TD;
 
 https://louwrentius.com/how-to-setup-a-local-or-private-ubuntu-mirror.html
 
+![tierd1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm-mirror/images/tierd1.png)
+
 ## Topology tiered mirror
 
 This architecture—often called a tiered mirror or hub-and-spoke model—is highly effective for saving bandwidth and ensuring faster updates within an on-premise network.
