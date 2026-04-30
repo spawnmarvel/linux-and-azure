@@ -1,5 +1,11 @@
 # Zabbix monitor VM's and SNMP default
 
+In Zabbix, the distinction between Active and Passive modes relates to which entity initiates the communication and data transfer between the Zabbix Server/Proxy and the Zabbix Agent.
+
+## Passive Mode (Server-Poll) Active Mode (Agent-Push)
+
+
+
 # Table of Contents
 
 1. [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default)  
