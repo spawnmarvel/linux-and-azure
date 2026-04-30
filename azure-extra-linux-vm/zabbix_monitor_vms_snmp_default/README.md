@@ -4,7 +4,7 @@ In Zabbix, the distinction between Active and Passive modes relates to which ent
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
-
+![p_vs_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/p_vs_a.png)
 
 # Table of Contents
 
