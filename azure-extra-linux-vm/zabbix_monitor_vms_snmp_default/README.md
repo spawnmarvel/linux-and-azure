@@ -90,6 +90,9 @@ When you link "Windows by Zabbix agent active", it automatically pulls in the fo
 * Windows Services: Monitoring of critical system services.
 
 
+![wind_discovery](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/wind_discovery.png)
+
+
 
 ### User parameters windows
 
