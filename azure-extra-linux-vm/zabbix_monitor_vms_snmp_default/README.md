@@ -54,6 +54,25 @@ Template
 
 * https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
 
+Install
+
+* https://www.zabbix.com/download_agents?version=7.0+LTS&release=7.0.25&os=Windows&os_version=Server+2016+%2B&hardware=amd64&encryption=OpenSSL&packaging=MSI&show_legacy=0
+* zabbix_agent2-7.0.25-windows-amd64-openssl.msi
+* zabbix_agent2.conf
+
+```bash
+# Server=192.168.3.5
+ServerActive=192.168.3.5
+Hostname=vmhybrid01
+```
+
+Note: For active agents, the Zabbix Agent interface (IP address) is not strictly required in the host configuration, as the agent initiates the connection.
+
+![windows_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_a.png)
+
+
+
+
 ### User parameters windows
 
 ### Install Linux by Zabbix agent active
