@@ -76,7 +76,18 @@ Monitoring and hosts
 
 ![windows_items](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_items.png)
 
+In Zabbix, the "Windows by Zabbix agent active" template is a "master" or "parent" template. You generally do not need to manually select the other "active" items (CPU, Memory, Filesystem, etc.) because the master template already includes them as nested modules.  
 
+1. What is already included?
+
+When you link "Windows by Zabbix agent active", it automatically pulls in the following "active" modules:  
+
+* Windows CPU: Utilization, interrupt time, and queue length.
+* Windows Memory: Free/used memory and swap space.
+* Windows Filesystems: Disk space discovery and usage.
+* Windows Network: Interface discovery and traffic stats.
+* Windows Physical Disks: Read/write latency and throughput.
+* Windows Services: Monitoring of critical system services.
 
 
 
