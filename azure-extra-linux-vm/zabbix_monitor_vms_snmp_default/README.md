@@ -99,7 +99,7 @@ In Active Mode, your drive information does not appear instantly like a static f
 
 After discovery
 
-![wind_data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/wind_data.png)
+![wind_data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_data.png)
 
 
 
