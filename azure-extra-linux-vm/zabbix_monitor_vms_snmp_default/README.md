@@ -81,7 +81,22 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_
 
 ### Templates
 
+All templates
+
+* https://www.zabbix.com/integrations
+
+
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
+
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/net/fortinet/fortigate_snmp?at=release/6.4
+
+![all templates](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/templates.png)
+
 
 ## Mysql tuning tbd
 
