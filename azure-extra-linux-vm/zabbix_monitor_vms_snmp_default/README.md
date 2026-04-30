@@ -100,7 +100,10 @@ After discovery
 
 ![wind_data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_data.png)
 
+Dashboards
 
+
+![windows_disk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_disk.png)
 
 ### User parameters windows
 
