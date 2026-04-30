@@ -16,7 +16,17 @@
 
 ## Zabbix agent 2 active trap
 
+### Install
+
+### Templates
+
+### User parameters
+
 ## Zabbix SNMP trap
+
+### Install
+
+### Templates
 
 ## Mysql tuning
 
