@@ -107,6 +107,10 @@ Dashboards
 
 ### User parameters windows
 
+https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
+
+
+
 ### Install Linux by Zabbix agent active
 
 Template
@@ -116,6 +120,8 @@ Template
 
 ### User parameters linux
 
+
+https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 
 ## Zabbix Linux by SNMP
