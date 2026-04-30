@@ -69,6 +69,8 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_age
 
 ## Zabbix Linux by SNMP
 
+Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
+
 ### Install
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
