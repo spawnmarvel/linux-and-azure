@@ -26,7 +26,7 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
        - [User parameters](#user-parameters)  
    1.4 [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)  
        - [Install](#install)  
-       - [Templates](#templates-1)  
+    - [Templates](#templates-1)  
    1.5 [Mysql tuning tbd](#mysql-tuning-tbd)
 
 
@@ -50,24 +50,22 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 ### Install Windows by Zabbix agent active
 
-https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
+Template
+
+* https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
+
+### User parameters windows
 
 ### Install Linux by Zabbix agent active
 
-https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
+Template
+
+* https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
 
 
-### Templates
+### User parameters linux
 
-https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
 
-https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
-
-### User parameters
-
-#### Windows
-
-#### Linux
 
 ## Zabbix Linux by SNMP
 
@@ -79,12 +77,11 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
 
-### Templates
+## All Templates
 
 All templates
 
 * https://www.zabbix.com/integrations
-
 
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/windows_agent_active
