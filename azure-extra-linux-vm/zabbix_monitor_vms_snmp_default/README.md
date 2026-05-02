@@ -50,7 +50,7 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 We made a new zabbix and mysql for fun.
 
-Lets add ssl so we can use the octopus script after.
+Lets add ssl so we can use the octopus script after with runbook for change/ renew ssl easy.
 
 ```bash
 
