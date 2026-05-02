@@ -4,27 +4,24 @@ A project for maximizing all default monitoring and not write a single script.
 
 # Table of Contents
 
-# Table of Contents
-
-| Section | Subsection |
-|---------|------------|
-| [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default) | |
-| [Tasks](#tasks) | |
-| [Stack and current version](#stack-and-current-version) | |
-| [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active) | |
-|  | [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active) |
-|  | [User parameters windows](#user-parameters-windows) |
-|  | [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active) |
-|  | [User parameters linux](#user-parameters-linux) |
-| [Zabbix Linux by SNMP](#zabbix-linux-by-snmp) | |
-|  | [Install](#install) |
-|  | [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator) |
-|  | [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side) |
-|  | [Enable Zabbix Trapper](#enable-zabbix-trapper) |
-|  | [The Low-Cost Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side) |
-| [All Templates](#all-templates) | |
-| [Mysql tuning tbd](#mysql-tuning-tbd) | |
-
+* [Passive Mode (Server-Poll) Active Mode (Agent-Push)](#passive-mode-server-poll-active-mode-agent-push)
+    * [Zabbix agents](#zabbix-agents)
+    * [SNMP](#snmp)
+* [Tasks](#tasks)
+* [Stack and current version](#stack-and-current-version)
+* [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windows-linux-by-zabbix-agent-active)
+    * [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
+    * [User parameters windows](#user-parameters-windows)
+    * [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
+    * [User parameters linux](#user-parameters-linux)
+* [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
+    * [Install](#install)
+* [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
+* [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side)
+* [Enable Zabbix Trapper](#enable-zabbix-trapper)
+    * [The "Low-Cost" Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side)
+* [All Templates](#all-templates)
+* [Mysql tuning tbd](#mysql-tuning-tbd)
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
