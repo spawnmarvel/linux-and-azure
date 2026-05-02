@@ -184,6 +184,24 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
 
+## Simulate SNMP Trap Generator
+
+Since Zabbix requires a receiver to handle traps, you can set up a "Dummy Agent" on a cheap Linux VM to fire off traps whenever you want to test your Zabbix server's reaction.
+
+The Architecture
+
+To test this, you need two components in your Azure VNet:
+
+* The Receiver (Zabbix Server): Your existing Zabbix VM (192.168.3.5).
+* The Sender (The "Trap Generator"): A new, tiny Linux VM (e.g., vm-trap-sender).
+
+## Setting up the Trap Receiver (Zabbix Side)
+
+## Enable Zabbix Trapper
+
+### The "Low-Cost" Trap Generator (Sender Side)
+
+
 ## All Templates
 
 All templates
