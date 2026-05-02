@@ -108,8 +108,8 @@ Install
 * zabbix_agent2.conf
 
 ```bash
-# Server=192.168.3.5
-ServerActive=192.168.3.5
+# Server=172.16.0.4
+ServerActive=172.16.0.4
 Hostname=vmhybrid01
 ```
 
