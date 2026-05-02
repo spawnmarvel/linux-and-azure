@@ -122,6 +122,17 @@ Hostname=vmhybrid01
 
 Note: For active agents, the Zabbix Agent interface (IP address) is not strictly required in the host configuration, as the agent initiates the connection.
 
+However if you want to add a Powershell/Bash scripts thats uses zabbix_sender (example)
+
+```ps1
+# [...]
+C:\OP\Zabbix\zabbix_agent-7.0.24-windows-amd64-openssl\bin\zabbix_sender.exe -z 172.16.0.4 -s "vmhybrid01"  -k "WorkingSetMBTrapperPS1" -o $value
+[...]
+```
+Then you should add interface with the servers ip and use item equal to this:
+
+![item_ps1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/items_ps1.png)
+
 Data Collection and hosts
 
 ![windows_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_a.png)
