@@ -46,7 +46,7 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 * MySQL by Zabbix agent 2
 - https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/mysql_agent2
 * vmchaos03 ubuntu, Linux by Zabbix agent active
-* vmsnmp ubuntu, Linux by snmp
+* vmsnmp ubuntu (test true snmp), Linux by snmp
 
 We made a new zabbix and mysql for fun.
 
