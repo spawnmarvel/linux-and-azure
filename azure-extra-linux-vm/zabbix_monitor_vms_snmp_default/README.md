@@ -4,17 +4,24 @@ A project for maximizing all default monitoring and not write a single script.
 
 # Table of Contents
 
-1. [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default)  
-   1.1 [Tasks](#tasks)  
-   1.2 [Stack and current version](#stack-and-current-version)  
-   1.3 [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active)  
-       - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)  
-       - [User parameters windows](#user-parameters-windows)  
-       - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)  
-       - [User parameters linux](#user-parameters-linux)  
-   1.4 [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)  
-       - [Install](#install)  
-   1.5 [All Templates](#all-templates)  
+| Section | Subsection |
+|---------|------------|
+| [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default) | |
+| [Tasks](#tasks) | |
+| [Stack and current version](#stack-and-current-version) | |
+| [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active) | |
+|  | [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active) |
+|  | [User parameters windows](#user-parameters-windows) |
+|  | [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active) |
+|  | [User parameters linux](#user-parameters-linux) |
+| [Zabbix Linux by SNMP](#zabbix-linux-by-snmp) | |
+|  | [Install](#install) |
+| [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator) |
+|  | [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side) |
+|  | [Enable Zabbix Trapper](#enable-zabbix-trapper) |
+|  | [The Low-Cost Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side) |
+| [All Templates](#all-templates) | |
+| [Mysql tuning tbd](#mysql-tuning-tbd) | |
    1.6 [Mysql tuning tbd](#mysql-tuning-tbd)
 
 
