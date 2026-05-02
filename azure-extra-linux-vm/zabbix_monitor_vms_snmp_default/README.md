@@ -131,7 +131,7 @@ C:\OP\Zabbix\zabbix_agent-7.0.24-windows-amd64-openssl\bin\zabbix_sender.exe -z 
 ```
 Then you should add interface with the servers ip and use item equal to this:
 
-![item_ps1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/items_ps1.png)
+![item_ps1](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/item_ps1.png)
 
 Data Collection and hosts
 
