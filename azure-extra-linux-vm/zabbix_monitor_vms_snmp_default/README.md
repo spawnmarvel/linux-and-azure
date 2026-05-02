@@ -46,6 +46,53 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 * vmchaos03 ubuntu, Linux by Zabbix agent active
 * vmsnmp ubuntu, Linux by snmp
 
+We made a new zabbix and mysql for fun.
+
+Lets add ssl so we can use the octopus script after.
+
+```bash
+
+sudo a2enmod ssl
+sudo a2ensite default-ssl
+
+sudo openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+  -out vmzabbix03.crt -keyout vmzabbix03.key \
+  -subj "/C=NO/ST=Hordaland/L=BER/O=Socrates.inc/OU=IT/CN=vmzabbix03"
+
+# Move the certificate
+sudo mv vmzabbix03.crt /etc/ssl/certs/
+
+# Move the private key
+sudo mv vmzabbix03.key /etc/ssl/private/
+
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+
+# SSLCertificateFile    /etc/ssl/certs/vmzabbix03.crt
+# SSLCertificateKeyFile /etc/ssl/private/vmzabbix03.key
+
+sudo apache2ctl configtest
+# Syntax ok
+
+# redirect http
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+Add this to existing <VirtualHost *:80>:
+
+```txt
+
+[...]
+ServerName vmzabbix03
+# Redirect all HTTP traffic to HTTPS
+Redirect permanent / https://vmzabbix03/
+```
+
+Run the syntax check again to ensure the redirect is written correctly.
+
+```bash
+sudo apache2ctl configtest
+# syntax ok
+sudo systemctl restart apache2
+```
 ## Zabbix Windows/Linux by Zabbix agent active
 
 ### Install Windows by Zabbix agent active
