@@ -237,7 +237,7 @@ Note: For active agents, the Zabbix Agent interface (IP address) is not strictly
 
 Data Collection and hosts
 
-![linux_active](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/linyx_active.png)
+![linux_active](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/linux_active.png)
 
 ### User parameters linux
 
