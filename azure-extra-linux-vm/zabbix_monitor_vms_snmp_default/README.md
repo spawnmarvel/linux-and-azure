@@ -48,13 +48,13 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 ## Stack and current version
 
-* vmhybrid01, 192.168.3.7, Windows by Zabbix agent active
-* vmzabbix03, 172.16.0.4 Zabbix 7 LTS and MySql 8.4
+* vmhybrid01, 192.168.3.7, (and puplic ip) Windows by Zabbix agent active
+* vmzabbix03, 172.16.0.4, (and public ip) Zabbix 7 LTS and MySql 8.4
 - https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=server_frontend_agent_2&db=mysql&ws=apache
 * vmzabbix03 MySQL by Zabbix agent 2
 - https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/mysql_agent2
-* vmchaos03 ubuntu, Linux by Zabbix agent active
-* vmsnmp ubuntu (test true snmp), Linux by snmp
+* vmchaos03, 172.16.0.5, (only private ip) ubuntu, Linux by Zabbix agent active
+* vmsnmp03,  ubuntu (test true snmp), Linux by snmp
 
 We made a new zabbix and mysql for fun.
 
@@ -184,7 +184,7 @@ https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 ### Install Linux by Zabbix agent active
 
-vmchaos03, 172, Linux by Zabbix agent active
+vmchaos03, 172.16.0.5, Linux by Zabbix agent active
 
 Template
 
@@ -198,19 +198,32 @@ Add Zabbix repository, go the same pages as for install zabbix, but now select a
 
 ```bash
 # This the same as we used for vmzabbix03
-wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+# wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
 
-# Since this vm does not have a public ip, we can login to
+# Since this vm does not have a public ip and is offline, we can login to
 # vmzabbix03 and scp the same packet, then we use the same version.
-sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
+
+# Solution: Use vmzabbix03 as a "Jump Host" for Packages
+# Since you already have vmzabbix03 online, you can download the actual .deb installer files there and push them over, just like you did with the release package.
+
+# Run these on vmzabbix03 (the online VM):
+# Download the Zabbix Agent 2 package and its dependencies without installing them
+mkdir -p ~/zabbix_pkgs && cd ~/zabbix_pkgs
 sudo apt update
+apt-get download zabbix-agent2
 
-sudo apt install zabbix-agent2
-# optional plugins
-# sudo apt install zabbix-agent2-plugin-mongodb zabbix-agent2-plugin-mssql zabbix-agent2-plugin-postgresql
+# Move the actual software package to the offline VM
+scp *.deb imsdal@172.16.0.5:/home/imsdal/
 
+ssh imsdal@172.16.0.5
+# Install the local file directly bypassing the need for a repository
+sudo dpkg -i zabbix-agent2*.deb
+
+# If it complains about missing dependencies (like libssl), 
+# you'll need to download those on the online VM as well.
 sudo systemctl restart zabbix-agent2
 sudo systemctl enable zabbix-agent2
+
 ```
 Configure it
 
@@ -223,6 +236,8 @@ Hostname=vmchaos03
 Note: For active agents, the Zabbix Agent interface (IP address) is not strictly required in the host configuration, as the agent initiates the connection.
 
 Data Collection and hosts
+
+![linux_active](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/linyx_active.png)
 
 ### User parameters linux
 
