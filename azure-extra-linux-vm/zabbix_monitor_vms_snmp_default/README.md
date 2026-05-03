@@ -224,6 +224,9 @@ sudo dpkg -i zabbix-agent2*.deb
 sudo systemctl restart zabbix-agent2
 sudo systemctl enable zabbix-agent2
 
+
+# NB
+# Wingate www proxy services is installed on DNS to apt now works
 ```
 Configure it
 
