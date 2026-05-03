@@ -4,24 +4,26 @@ A project for maximizing all default monitoring and not write a single script.
 
 # Table of Contents
 
-* [Passive Mode (Server-Poll) Active Mode (Agent-Push)](#passive-mode-server-poll-active-mode-agent-push)
-    * [Zabbix agents](#zabbix-agents)
-    * [SNMP](#snmp)
-* [Tasks](#tasks)
-* [Stack and current version](#stack-and-current-version)
-* [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windows-linux-by-zabbix-agent-active)
-    * [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
-    * [User parameters windows](#user-parameters-windows)
-    * [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
-    * [User parameters linux](#user-parameters-linux)
-* [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
-    * [Install](#install)
-* [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
-* [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side)
-* [Enable Zabbix Trapper](#enable-zabbix-trapper)
-    * [The "Low-Cost" Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side)
-* [All Templates](#all-templates)
-* [Mysql tuning tbd](#mysql-tuning-tbd)
+- [Zabbix monitor VM's and SNMP default](#zabbix-monitor-vms-and-snmp-default)
+- [Table of Contents](#table-of-contents)
+  - [Passive Mode (Server-Poll) Active Mode (Agent-Push)](#passive-mode-server-poll-active-mode-agent-push)
+    - [Zabbix agents](#zabbix-agents)
+    - [SNMP](#snmp)
+  - [Tasks](#tasks)
+  - [Stack and current version](#stack-and-current-version)
+  - [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active)
+    - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
+    - [User parameters windows](#user-parameters-windows)
+    - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
+    - [User parameters linux](#user-parameters-linux)
+  - [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
+    - [Install](#install)
+  - [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
+  - [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side)
+  - [Enable Zabbix Trapper](#enable-zabbix-trapper)
+    - [The "Low-Cost" Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side)
+  - [All Templates](#all-templates)
+  - [Mysql tuning tbd](#mysql-tuning-tbd)
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
@@ -48,7 +50,8 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 * vmhybrid01, 192.168.3.7, Windows by Zabbix agent active
 * vmzabbix03, 172.16.0.4 Zabbix 7 LTS and MySql 8.4
-* MySQL by Zabbix agent 2
+- https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=server_frontend_agent_2&db=mysql&ws=apache
+* vmzabbix03 MySQL by Zabbix agent 2
 - https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/mysql_agent2
 * vmchaos03 ubuntu, Linux by Zabbix agent active
 * vmsnmp ubuntu (test true snmp), Linux by snmp
@@ -103,6 +106,8 @@ sudo systemctl restart apache2
 ## Zabbix Windows/Linux by Zabbix agent active
 
 ### Install Windows by Zabbix agent active
+
+vmhybrid01, 192.168.3.7, Windows by Zabbix agent active
 
 Template
 
@@ -179,10 +184,45 @@ https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 ### Install Linux by Zabbix agent active
 
+vmchaos03, 172, Linux by Zabbix agent active
+
 Template
 
 * https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_active
 
+Install
+
+Add Zabbix repository, go the same pages as for install zabbix, but now select agent 2
+
+* https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
+
+```bash
+# This the same as we used for vmzabbix03
+wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu24.04_all.deb
+
+# Since this vm does not have a public ip, we can login to
+# vmzabbix03 and scp the same packet, then we use the same version.
+sudo dpkg -i zabbix-release_latest_7.0+ubuntu24.04_all.deb
+sudo apt update
+
+sudo apt install zabbix-agent2
+# optional plugins
+# sudo apt install zabbix-agent2-plugin-mongodb zabbix-agent2-plugin-mssql zabbix-agent2-plugin-postgresql
+
+sudo systemctl restart zabbix-agent2
+sudo systemctl enable zabbix-agent2
+```
+Configure it
+
+```bash
+# Server=172.16.0.4
+ServerActive=172.16.0.4
+Hostname=vmchaos03
+```
+
+Note: For active agents, the Zabbix Agent interface (IP address) is not strictly required in the host configuration, as the agent initiates the connection.
+
+Data Collection and hosts
 
 ### User parameters linux
 
