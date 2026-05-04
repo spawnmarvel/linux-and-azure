@@ -14,8 +14,10 @@ A project for maximizing all default monitoring and not write a single script.
   - [Zabbix Windows/Linux by Zabbix agent active](#zabbix-windowslinux-by-zabbix-agent-active)
     - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
     - [User parameters windows](#user-parameters-windows)
+    - [Log monitor windows](#log-monitor-windows)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
     - [User parameters linux](#user-parameters-linux)
+    - [Log monitor linux](#log-monitor-linux)
   - [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
     - [Install](#install)
   - [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
@@ -181,7 +183,7 @@ Dashboards
 
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
-
+### Log monitor windows
 
 ### Install Linux by Zabbix agent active
 
@@ -248,6 +250,8 @@ Data Collection and hosts
 
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
+
+### Log monitor linux
 
 ## Zabbix Linux by SNMP
 
