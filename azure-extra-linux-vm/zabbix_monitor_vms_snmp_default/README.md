@@ -22,6 +22,7 @@ A project for maximizing all default monitoring and not write a single script.
   - [Setting up the Trap Receiver (Zabbix Side)](#setting-up-the-trap-receiver-zabbix-side)
   - [Enable Zabbix Trapper](#enable-zabbix-trapper)
     - [The "Low-Cost" Trap Generator (Sender Side)](#the-low-cost-trap-generator-sender-side)
+  - [References User parameter and log monitor](#references-user-parameter-and-log-monitor)
   - [All Templates](#all-templates)
   - [Mysql tuning tbd](#mysql-tuning-tbd)
 
@@ -275,6 +276,14 @@ To test this, you need two components in your Azure VNet:
 
 ### The "Low-Cost" Trap Generator (Sender Side)
 
+## References User parameter and log monitor
+
+5 User parameters
+* https://www.zabbix.com/documentation/7.0/en/manual/config/items/userparameters
+
+
+6 Log file monitoring
+* https://www.zabbix.com/documentation/7.0/en/manual/config/items/itemtypes/log_items
 
 ## All Templates
 
