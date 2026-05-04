@@ -106,7 +106,7 @@ sudo apache2ctl configtest
 # syntax ok
 sudo systemctl restart apache2
 ```
-## Zabbix Windows/Linux by Zabbix agent active
+## Zabbix Windows by Zabbix agent active
 
 ### Install Windows by Zabbix agent active
 
@@ -184,6 +184,8 @@ Dashboards
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 ### Log monitor windows
+
+## Zabbix Linux by Zabbix agent active
 
 ### Install Linux by Zabbix agent active
 
