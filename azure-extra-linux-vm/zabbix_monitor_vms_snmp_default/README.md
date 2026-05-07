@@ -423,7 +423,7 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_
 
 Data
 
-![ vmsnmp03 data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmsnmp03.png)
+![ vmsnmp03 data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmsnmp03_data.png)
 
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
