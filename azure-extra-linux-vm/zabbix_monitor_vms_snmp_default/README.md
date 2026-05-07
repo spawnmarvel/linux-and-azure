@@ -259,6 +259,8 @@ https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 ## Zabbix Linux by SNMP
 
+Yes, that is a pull-based monitoring method. In this configuration, Zabbix acts as the active collector, and the Linux server acts as the passive agent.
+
 Monitoring Linux via SNMP in Zabbix is achieved by installing snmpd, configuring community strings (v2c) or authentication (v3), and linking the "Linux by SNMP" template. This template discovers file systems, network interfaces, and CPU metrics via UDP port 161, with Zabbix integrations providing pre-configured monitoring
 
 Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
@@ -437,10 +439,10 @@ The Architecture
 
 To test this, you need two components in your Azure VNet:
 
-* The Receiver (Zabbix Server): Your existing Zabbix VM (192.168.3.5).
+* The Receiver (Zabbix Server): Your existing Zabbix VM (172.16.0.4).
 * The Sender (The "Trap Generator"): A new, tiny Linux VM (e.g., vm-trap-sender).
 
-We are using that on vmchaos03:
+We are using Linux by Zabbix agent active on vmchaos03:
 
 Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
 
