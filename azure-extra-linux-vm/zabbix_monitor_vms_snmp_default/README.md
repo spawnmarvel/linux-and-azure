@@ -393,7 +393,8 @@ sudo systemctl enable snmpd
 sudo systemctl status snmpd
 ```
 
-Remote Verification (Zabbix Server)
+### Remote Verification (Zabbix Server)
+
 The final step in the code development flow is to ensure the Zabbix Server (172.16.0.4) can pull the same data.
 
 ```bash
