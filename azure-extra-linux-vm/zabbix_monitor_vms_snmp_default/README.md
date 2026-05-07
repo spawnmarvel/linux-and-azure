@@ -232,6 +232,7 @@ sudo systemctl enable zabbix-agent2
 
 # NB
 # Wingate www proxy services is installed on DNS to apt now works
+# it was added after dpkg
 ```
 Configure it
 
@@ -275,9 +276,146 @@ Configuration
 Setup
 * Install snmpd agent on Linux OS, enable SNMPv2.
 
+Clarification
+* snmpd.conf: Configures how the server responds to queries.
+
+* snmp.conf: Configures how the tools (like snmpwalk or the agent itself) load MIB files.
+
 ```bash
+ssh imsdal@172.16.0.6
+
+# we added the procy for wingate also
+# nc -zv 192.168.3.7 3128
+
+# so we can apt 
+sudo apt update
+sudo apt upgrade
+
+# Step 1: Install SNMP Tools
+# Update repositories and install the SNMP daemon
+# Else get .deb and use -i dpkg
+sudo apt update
+sudo apt install snmpd snmp -y
+
+# Ubuntu does not include non-free MIBs by default. Run these commands to download them:
+
+# Install the downloader tool
+sudo apt update
+sudo apt install snmp-mibs-downloader -y
+
+# Download the MIBs
+sudo download-mibs
+
+# Check the client config file
+sudo grep "mibs" /etc/snmp/snmp.conf
+# If you see mibs :, you need to comment it out
+
+# Step 2: Configure snmpd.conf
+
+# Backup the original config
+sudo cp /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.bak
+
+# Edit the configuration
+sudo nano /etc/snmp/snmpd.conf
 
 ```
+snmpd.conf
+
+```txt
+###########################################################################
+# SECTION: System Information Setup
+###########################################################################
+sysLocation    "Azure VM - vmsnmp03"
+sysContact     "Admin <admin@example.org>"
+sysServices    72
+
+###########################################################################
+# SECTION: Agent Operating Mode
+###########################################################################
+master  agentx
+
+# Listen on all interfaces (required for Azure connectivity)
+agentAddress udp:161,udp6:[::1]:161
+
+###########################################################################
+# SECTION: Access Control Setup
+###########################################################################
+
+# Create a 'full' view so Zabbix can see CPU, RAM, and Disk metrics
+# The .1 OID represents the root of the entire tree
+view    allview    included   .1
+
+# 1. Update the community string to allow access to the 'allview'
+# 2. Ensure 172.16.0.4 is your Zabbix Server/Proxy IP
+rocommunity public 172.16.0.4 -V allview
+
+# ADD THIS: Allow the local machine for testing
+rocommunity public 127.0.0.1 -V allview
+
+###########################################################################
+# SECTION: Disk and Resource Monitoring
+# Required for Zabbix Low-Level Discovery (LLD)
+###########################################################################
+
+# This tells the agent to report all mounted partitions
+includeAllDisks 10%
+
+# Monitor specific load average thresholds (Optional but good for SNMP health)
+load 12 10 5
+
+###########################################################################
+# SECTION: Directory Inclusion
+###########################################################################
+# This line is correct and allows you to add modular configs
+includeDir /etc/snmp/snmpd.conf.d
+```
+
+Before restart
+
+```bash
+# sudo systemctl stop snmpd
+# sudo pkill -9 snmpd
+
+sudo service snmpd restart
+sudo ss -lunu | grep 161
+
+# Before restarting, you can verify if the agent accepts the configuration:
+sudo snmpd -f -Lo -C -c /etc/snmp/snmpd.conf
+# Turning on AgentX master support.
+# NET-SNMP version 5.9.4.pre2
+
+snmpwalk -v 2c -c public localhost .1.3.6.1.4.1.2021
+
+# Access Control: Your allview configuration is working because you can see objects under the .1.3.6.1.4.1.2021 OID (which the default "systemonly" view would block)
+
+sudo systemctl enable snmpd
+
+sudo systemctl status snmpd
+```
+
+Remote Verification (Zabbix Server)
+The final step in the code development flow is to ensure the Zabbix Server (172.16.0.4) can pull the same data.
+
+```bash
+
+sudo apt update
+
+sudo apt upgrade
+
+sudo apt install snmp
+# Replace <VM_IP> with the private IP of vmsnmp03
+snmpwalk -v 2c -c public 172.16.0.6 .1.3.6.1.4.1.2021.4.5.0
+# iso.3.6.1.4.1.2021.4.5.0 = INTEGER: 3954964
+```
+
+Zabbix Web UI Configuration
+
+1. Host Interface: Ensure the SNMP interface is set to 172.16.0.6 (or the correct private IP).
+
+2. Template: Link the "Linux by SNMP" template.
+
+3. Macros: Ensure {$SNMP_COMMUNITY} is set to public
+
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
 
