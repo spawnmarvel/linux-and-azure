@@ -417,7 +417,16 @@ Zabbix Web UI Configuration
 3. Macros: Ensure {$SNMP_COMMUNITY} is set to public
 
 
+![green vmsnmp03](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmsnmp03.png)
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
+
+Data
+
+![ vmsnmp03 data](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmsnmp03.png)
+
+
+https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
+
 
 ## Simulate SNMP Trap Generator
 
