@@ -440,9 +440,11 @@ To test this, you need two components in your Azure VNet:
 * The Receiver (Zabbix Server): Your existing Zabbix VM (192.168.3.5).
 * The Sender (The "Trap Generator"): A new, tiny Linux VM (e.g., vm-trap-sender).
 
-We tested with:
+We are using that on vmchaos03:
 
 Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
+
+![ vmchaos03](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmchaos03.png)
 
 
 ## References User parameter and log monitor
