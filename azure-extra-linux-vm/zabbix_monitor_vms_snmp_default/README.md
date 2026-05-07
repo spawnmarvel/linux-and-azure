@@ -179,6 +179,8 @@ Dashboards
 
 ### User parameters windows
 
+Make custom template with 10 items
+
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 ### Log monitor windows
@@ -247,6 +249,7 @@ Data Collection and hosts
 
 ### User parameters linux
 
+Make custom template with 10 items
 
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
