@@ -55,7 +55,7 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 * vmzabbix03 MySQL by Zabbix agent 2
 - https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/mysql_agent2
 * vmchaos03, 172.16.0.5, (only private ip) ubuntu, Linux by Zabbix agent active
-* vmsnmp03,  ubuntu (test true snmp), Linux by snmp
+* vmsnmp03,  ubuntu Linux by snmp
 
 We made a new zabbix and mysql for fun.
 
@@ -263,6 +263,21 @@ Monitoring Linux via SNMP in Zabbix is achieved by installing snmpd, configuring
 Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Zabbix handles the metrics efficiently. If you require true "active" agent functionality (where the agent sends data to the server), ***it is recommended to use the "Linux by Zabbix agent active" template instead of SNMP***
 
 ### Install
+
+Tested versions
+
+This template has been tested on:
+* Linux OS
+
+Configuration
+* Zabbix should be configured according to the instructions in the Templates out of the box section.
+
+Setup
+* Install snmpd agent on Linux OS, enable SNMPv2.
+
+```bash
+
+```
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/os/linux_snmp_snmp
 
