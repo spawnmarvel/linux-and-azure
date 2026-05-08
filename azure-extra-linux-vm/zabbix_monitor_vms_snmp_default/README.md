@@ -450,7 +450,7 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 
 
 
-So now we 
+So now we have the following:
 
 * vmzabbix03, Linux by Zabbix agent, MySQL by Zabbix agent 2, Zabbix server health
 * vmchaos03,  Linux by Zabbix agent active
