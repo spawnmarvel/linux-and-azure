@@ -449,6 +449,16 @@ Active Monitoring Note: While SNMP is primarily a polling (passive) protocol, Za
 ![ vmchaos03](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vmchaos03.png)
 
 
+
+So now we 
+
+* vmzabbix03, Linux by Zabbix agent, MySQL by Zabbix agent 2, Zabbix server health
+* vmchaos03,  Linux by Zabbix agent active
+* vmhybrid01, Windows by Zabbix agent active
+* vmsnmp03, Linux by SNMP
+
+![ total](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/total.png)
+
 ## References User parameter and log monitor
 
 5 User parameters
