@@ -459,6 +459,11 @@ So now we have the following:
 
 ![ total](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/total.png)
 
+
+Zabbix
+
+![ zabbix](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/zabbix.png)
+
 ## References User parameter and log monitor
 
 5 User parameters
