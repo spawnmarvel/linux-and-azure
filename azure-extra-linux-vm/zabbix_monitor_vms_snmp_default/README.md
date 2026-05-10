@@ -234,8 +234,48 @@ You can now go straight to your Zabbix Server web interface and create the item:
 
 ![vfs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vfs.png)
 
-### 2. 
+### 2. Zabbix Agent 2 has a built-in native function
 
+1. Directory & File Monitoring (vfs.dir.*)
+
+
+* vfs.dir.size[path]: Calculates the total size of a folder (e.g., check if your backup folder is too large).
+
+* vfs.file.contents[path]: Reads the entire content of a file (useful for small config files or version files).
+
+* vfs.file.cksum[path,mode]: Calculates a file checksum (CRC-32 by default). Used to detect if a configuration file or binary has been modified.
+
+* vfs.file.exists[path,include,exclude]: Returns 1 if the file exists and 0 if it doesn't
+
+* vfs.file.size[path,mode]: eturns the file size in bytes or the number of lines.
+
+* vfs.file.regmatch[path,regexp]: Searches for a specific string inside a file and returns 1 if found. Great for checking "Success" or "Error" flags without full log monitoring.
+
+2. Web & Certificate Monitoring (web.certificate.*)
+
+In older versions, you needed a complex script to check SSL expiration. In Agent 2, it is native.
+
+* web.certificate.get[hostname,port]: Returns all certificate details in JSON.
+
+* web.certificate.errors[hostname,port]: Returns any validation errors (expired, self-signed, etc.).
+
+* Trigger Tip: You can set an alert if the certificate has fewer than 30 days remaining.
+
+3. Modern Windows Performance Counters
+4. System & Network Reliability
+5. Http
+
+* web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process.
+
+💡 Pro-Tip: The "Discover" Command
+If you want to see every native key your specific Agent 2 supports, run this command on your Windows server:
+
+```cmd
+zabbix_agent2.exe -p
+
+
+
+```
 
 ### Log monitor windows
 
