@@ -13,11 +13,11 @@ A project for maximizing all default monitoring and not write a single script.
   - [Stack and current version](#stack-and-current-version)
   - [Zabbix Windows by Zabbix agent active](#zabbix-windows-by-zabbix-agent-active)
     - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
-    - [User parameters windows](#user-parameters-windows)
+    - [User parameters windows-native](#user-parameters-windows-native)
     - [Log monitor windows](#log-monitor-windows)
   - [Zabbix Linux by Zabbix agent active](#zabbix-linux-by-zabbix-agent-active)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
-    - [User parameters linux](#user-parameters-linux)
+    - [User parameters linux native](#user-parameters-linux-native)
     - [Log monitor linux](#log-monitor-linux)
   - [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
     - [Install](#install)
@@ -177,7 +177,7 @@ Dashboards
 
 ![windows_disk](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/windows_disk.png)
 
-### User parameters windows
+### User parameters windows native
 
 Make custom template with 10 items
 
@@ -342,7 +342,7 @@ Data Collection and hosts
 
 ![linux_active](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/linux_active.png)
 
-### User parameters linux
+### User parameters linux native
 
 Make custom template with 10 items
 
