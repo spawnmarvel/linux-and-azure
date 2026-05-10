@@ -13,7 +13,7 @@ A project for maximizing all default monitoring and not write a single script.
   - [Stack and current version](#stack-and-current-version)
   - [Zabbix Windows by Zabbix agent active](#zabbix-windows-by-zabbix-agent-active)
     - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
-    - [User parameters windows-native](#user-parameters-windows-native)
+    - [User parameters windows native](#user-parameters-windows-native)
     - [Log monitor windows](#log-monitor-windows)
   - [Zabbix Linux by Zabbix agent active](#zabbix-linux-by-zabbix-agent-active)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
