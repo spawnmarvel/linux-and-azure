@@ -183,6 +183,60 @@ Make custom template with 10 items
 
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
+### 1. Count all files in folder
+
+1. To count all files in a directory using a Zabbix Active Agent on Windows.
+
+Since you are on Zabbix 7.0, you don't actually need PowerShell to count files. Zabbix Agent 2 has a built-in native function to do this. This is faster, more secure, and bypasses the shell restriction entirely.
+
+
+ps1 test it
+
+```ps1
+(Get-ChildItem "C:\Program Files\GrafanaLabs\grafana\data\log" -File | Measure-Object).Count
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "(Get-ChildItem 'C:\Program Files\GrafanaLabs\grafana\data\log' -File | Measure-Object).Count"
+```
+
+
+The "Zabbix Agent Simulation" Test
+
+This is the gold standard for testing. It checks if the Zabbix Agent can actually execute the command through its own engine.
+
+* Run this from your current directory (c:\Program Files\Zabbix Agent 2):
+
+```cmd
+cd "c:\Program Files\Zabbix Agent 2"
+
+zabbix_agent2.exe -c zabbix_agent2.conf -t vfs.dir.count["C:\Program Files\GrafanaLabs\grafana\data\log",,,file]
+
+```
+Result
+
+```txt
+vfs.dir.count[C:\Program Files\GrafanaLabs\grafana\data\log,,,file][s|2]
+```
+
+
+🔵 How to set it up in the Zabbix Web UI
+
+You can now go straight to your Zabbix Server web interface and create the item:
+
+* Name: Grafana Log File Count
+
+* Type: Zabbix agent (active)
+
+* Key: vfs.dir.count["C:\Program Files\GrafanaLabs\grafana\data\log",,,file]
+
+* Type of information: Numeric (unsigned)
+
+* Update interval: 1m or 5m
+
+![vfs](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vfs.png)
+
+### 2. 
+
+
 ### Log monitor windows
 
 ## Zabbix Linux by Zabbix agent active
