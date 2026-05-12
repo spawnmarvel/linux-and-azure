@@ -247,7 +247,7 @@ You can now go straight to your Zabbix Server web interface and create the item:
 
 * vfs.file.exists[path,include,exclude]: Returns 1 if the file exists and 0 if it doesn't
 
-* vfs.file.size[path,mode]: eturns the file size in bytes or the number of lines.
+🔵 vfs.file.size[path,mode]: Returns the file size in bytes or the number of lines.
 
 * vfs.file.size[C:\Program Files\GrafanaLabs\grafana\data\log\grafana.log,bytes]
 
