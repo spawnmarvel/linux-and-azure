@@ -249,6 +249,16 @@ You can now go straight to your Zabbix Server web interface and create the item:
 
 * vfs.file.size[path,mode]: eturns the file size in bytes or the number of lines.
 
+* vfs.file.size[C:\Program Files\GrafanaLabs\grafana\data\log\grafana.log,bytes]
+
+* * bytes (default): Returns the actual size in bytes.
+* * lines: Returns the number of lines in the file
+
+![file size](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/file_size.png)
+
+
+
+
 * vfs.file.regmatch[path,regexp]: Searches for a specific string inside a file and returns 1 if found. Great for checking "Success" or "Error" flags without full log monitoring.
 
 2. Web & Certificate Monitoring (web.certificate.*)
