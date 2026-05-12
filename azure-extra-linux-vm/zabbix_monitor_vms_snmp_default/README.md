@@ -291,6 +291,12 @@ Or check out the docs for the full list
 
 ### Log monitor windows
 
+Zabbix can be used for centralized monitoring and analysis of log files with/without log rotation support.
+
+Notifications can be used to warn users when a log file contains certain strings or string patterns.
+
+https://www.zabbix.com/documentation/7.0/en/manual/config/items/itemtypes/log_items
+
 ## Zabbix Linux by Zabbix agent active
 
 ### Install Linux by Zabbix agent active
