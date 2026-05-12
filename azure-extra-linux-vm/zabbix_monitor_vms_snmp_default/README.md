@@ -252,7 +252,7 @@ You can now go straight to your Zabbix Server web interface and create the item:
 * * bytes (default): Returns the actual size in bytes.
 * * lines: Returns the number of lines in the file
 
-![vsf params](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vfs_parama.png)
+![vfs params](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vfs_params.png)
 
 * vfs.file.exists[path,include,exclude]: Returns 1 if the file exists and 0 if it doesn't
 
