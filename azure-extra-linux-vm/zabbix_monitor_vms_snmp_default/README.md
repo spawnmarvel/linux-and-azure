@@ -183,7 +183,7 @@ Make custom template with 10 items
 
 https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
-### 1. Count all files in folder
+### 1. Count all files in folder (native no scripts)
 
 1. To count all files in a directory using a Zabbix Active Agent on Windows.
 
