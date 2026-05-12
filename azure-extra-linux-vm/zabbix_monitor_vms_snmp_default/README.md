@@ -284,9 +284,9 @@ zabbix_agent2.exe -p
 
 ```
 
-Or check out the docs
+Or check out the docs for the full list
 
-https://www.zabbix.com/documentation/8.0/en/manual/config/items/itemtypes/zabbix_agent
+* https://www.zabbix.com/documentation/8.0/en/manual/config/items/itemtypes/zabbix_agent
 
 
 ### Log monitor windows
