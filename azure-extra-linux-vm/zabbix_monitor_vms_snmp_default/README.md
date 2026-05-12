@@ -239,13 +239,11 @@ You can now go straight to your Zabbix Server web interface and create the item:
 1. Directory & File Monitoring (vfs.dir.*)
 
 
-* vfs.dir.size[path]: Calculates the total size of a folder (e.g., check if your backup folder is too large).
+🔵  vfs.dir.size[path]: Calculates the total size of a folder (e.g., check if your backup folder is too large).
 
-* vfs.file.contents[path]: Reads the entire content of a file (useful for small config files or version files).
+🔵  vfs.dir.size[C:\Program Files\GrafanaLabs\grafana\data\log]
 
-* vfs.file.cksum[path,mode]: Calculates a file checksum (CRC-32 by default). Used to detect if a configuration file or binary has been modified.
-
-* vfs.file.exists[path,include,exclude]: Returns 1 if the file exists and 0 if it doesn't
+🔵  vfs.file.cksum[path,mode]: Calculates a file checksum (CRC-32 by default). Used to detect if a configuration file or binary has been modified.
 
 🔵 vfs.file.size[path,mode]: Returns the file size in bytes or the number of lines.
 
@@ -254,10 +252,11 @@ You can now go straight to your Zabbix Server web interface and create the item:
 * * bytes (default): Returns the actual size in bytes.
 * * lines: Returns the number of lines in the file
 
-![file size](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/file_size.png)
+![vsf params](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/vfs_parama.png)
 
+* vfs.file.exists[path,include,exclude]: Returns 1 if the file exists and 0 if it doesn't
 
-
+* vfs.file.contents[path]: Reads the entire content of a file (useful for small config files or version files).
 
 * vfs.file.regmatch[path,regexp]: Searches for a specific string inside a file and returns 1 if found. Great for checking "Success" or "Error" flags without full log monitoring.
 
@@ -283,9 +282,12 @@ If you want to see every native key your specific Agent 2 supports, run this com
 ```cmd
 zabbix_agent2.exe -p
 
-
-
 ```
+
+Or check out the docs
+
+https://www.zabbix.com/documentation/8.0/en/manual/config/items/itemtypes/zabbix_agent
+
 
 ### Log monitor windows
 
