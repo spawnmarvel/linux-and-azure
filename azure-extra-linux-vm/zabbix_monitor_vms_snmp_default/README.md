@@ -274,6 +274,8 @@ In older versions, you needed a complex script to check SSL expiration. In Agent
 4. System & Network Reliability
 5. Http
 
+* net.tcp.service[tcp,staccount.file.core.windows.net,445]: TCP port check is actually more accurate than an ICMP ping
+
 * web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process.
 
 💡 Pro-Tip: The "Discover" Command
