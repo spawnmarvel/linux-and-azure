@@ -278,7 +278,7 @@ In older versions, you needed a complex script to check SSL expiration. In Agent
 
 🔵 net.tcp.service[tcp,staccount.file.core.windows.net,445]: TCP port check is actually more accurate than an ICMP ping
 
-* last(/vmhybrid01/net.tcp.service[tcp,staccount.file.core.windows.net,445]) = 0
+* max(/vmhybrid01/net.tcp.service[tcp,staccount.file.core.windows.net,445],3m) = 0
 
 
 💡 Pro-Tip: The "Discover" Command
