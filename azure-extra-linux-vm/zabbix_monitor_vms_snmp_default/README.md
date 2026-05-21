@@ -274,7 +274,7 @@ In older versions, you needed a complex script to check SSL expiration. In Agent
 4. System & Network Reliability
 5. Http
 
-🔵 web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process.
+🔵 web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process. (Fetches the raw application landing page text).
 
 Example:
 
