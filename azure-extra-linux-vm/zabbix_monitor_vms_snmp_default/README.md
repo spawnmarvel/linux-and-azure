@@ -274,7 +274,18 @@ In older versions, you needed a complex script to check SSL expiration. In Agent
 4. System & Network Reliability
 5. Http
 
-* web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process.
+🔵 web.page.get[localhost,,80] : it’s a great way to verify that a local service (like WinGate's management interface, Grafana, or a local web server) is actually rendering content, rather than just having a "running" process.
+
+Example:
+
+* Web page is http://localhost:8983/solr/#/
+
+In zabbix:
+
+* key, web.page.get[localhost,"solr/index.html",8983]
+* numeric
+* Preproccessing, paramters HTTP/\d\.\d\s(\d+) and next box \1
+* This gives a 200 value in zabbix that we can make a trigger on
 
 🔵 net.tcp.service[tcp,staccount.file.core.windows.net,445]: TCP port check is actually more accurate than an ICMP ping
 
