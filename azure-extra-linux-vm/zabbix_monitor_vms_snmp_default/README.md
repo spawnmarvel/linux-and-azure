@@ -289,6 +289,9 @@ In zabbix:
 
 🔵 net.tcp.service[tcp,staccount.file.core.windows.net,445]: TCP port check is actually more accurate than an ICMP ping
 
+Example:
+* Update intervall is 1m, it can fail occasionally so set trigger to check max in 3 min
+* trigger:max(xxxxxx ,3m)=0
 * max(/vmhybrid01/net.tcp.service[tcp,staccount.file.core.windows.net,445],3m) = 0
 
 
