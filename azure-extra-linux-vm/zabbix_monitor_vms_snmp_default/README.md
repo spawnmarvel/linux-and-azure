@@ -1,6 +1,6 @@
 # Zabbix monitor VM's and SNMP default
 
-A project for maximizing all default monitoring and trying to not write a single script.
+A project for maximizing all default monitoring and trying to not write a single script, but use Zabbix Agent 2 built-in native functions.
 
 # Table of Contents
 
