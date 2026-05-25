@@ -623,3 +623,26 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/net/fortinet/f
 
 
 # AI 20h course
+
+
+Table of Contents
+
+🔹 The 80/20 Pareto Strategy for Zabbix Agent 2
+
+🔹 Phase 1: Native Plugin Foundations & Session Keys (Hours 1–5)
+
+🔹 Phase 2: OS-Level Mastery Without Scripts (Hours 6–10)
+
+🔹 Phase 3: Middleware & App Ingestion (Hours 11–15)
+
+🔹 Phase 4: Low-Level Network, TLS, & Enterprise Scaling (Hours 16–20)
+
+
+
+By mastering how Agent 2 natively packages data into JSON and how the Zabbix Server parses it via preprocessing, you completely eliminate the need for custom Bash or PowerShell wrappers.
+
+
+## Phase 1: Native Plugin Foundations & Session Keys (Hours 1–5)
+
+### Hour 1: Agent 2 Architecture & Go Runtime Mechanics
+
