@@ -24,7 +24,7 @@ A project for maximizing all default monitoring and trying to not write a single
   - [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
   - [References User parameter and log monitor](#references-user-parameter-and-log-monitor)
   - [All Templates](#all-templates)
-  - [Mysql tuning tbd](#mysql-tuning-tbd)
+- [AI 20h course](#ai-20h-course)
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
@@ -622,5 +622,4 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/net/fortinet/f
 ![all templates](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/templates.png)
 
 
-## Mysql tuning tbd
-
+# AI 20h course
