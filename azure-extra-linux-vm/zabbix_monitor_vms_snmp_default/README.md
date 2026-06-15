@@ -217,6 +217,12 @@ Result
 vfs.dir.count[C:\Program Files\GrafanaLabs\grafana\data\log,,,file][s|2]
 ```
 
+
+Note!!
+Check what parmeter you need, there is many (it can count files, dirs, sockets and more)
+
+vfs.dir.count[dir,<regex incl>,<regex excl>,<types incl>,<types excl>,<max depth>,<min size>,<max size>,<min age>,<max age>,<regex excl dir>]
+
 https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/zabbix_agent#vfs.dir.count
 
 
