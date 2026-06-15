@@ -217,6 +217,8 @@ Result
 vfs.dir.count[C:\Program Files\GrafanaLabs\grafana\data\log,,,file][s|2]
 ```
 
+https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/zabbix_agent#vfs.dir.count
+
 
 🔵 How to set it up in the Zabbix Web UI
 
