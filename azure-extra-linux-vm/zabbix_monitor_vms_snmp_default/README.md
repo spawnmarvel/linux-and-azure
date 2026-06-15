@@ -214,7 +214,7 @@ zabbix_agent2.exe -c zabbix_agent2.conf -t vfs.dir.count["C:\Program Files\Grafa
 Result
 
 ```txt
-vfs.dir.count[C:\Program Files\GrafanaLabs\grafana\data\log,,,file][s|2]
+vfs.dir.count["C:\Program Files\GrafanaLabs\grafana\data\log",,,file]
 ```
 
 
