@@ -224,7 +224,13 @@ Check what parmeter you need, there is many (it can count files, dirs, sockets a
 
 
 ```txt
-vfs.dir.count[dir,<regex incl>,<regex excl>,<types incl>,<types excl>,<max depth>,<min size>,<max size>,<min age>,<max age>,<regex excl dir>]
+vfs.dir.count[dir,<regex incl>,
+<regex excl>,
+<types incl>,
+<types excl>,
+<max depth>,
+<min size>,
+<max size>,<min age>,<max age>,<regex excl dir>]
 
 ```
 
