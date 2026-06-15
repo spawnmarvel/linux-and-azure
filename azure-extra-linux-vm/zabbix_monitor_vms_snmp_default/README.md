@@ -214,14 +214,19 @@ zabbix_agent2.exe -c zabbix_agent2.conf -t vfs.dir.count["C:\Program Files\Grafa
 Result
 
 ```txt
-vfs.dir.count[C:\Program Files\GrafanaLabs\grafana\data\log,,,file][s|2]
+vfs.dir.count["C:\Program Files\GrafanaLabs\grafana\data\log",,,file]
 ```
 
 
 Note!!
 Check what parmeter you need, there is many (it can count files, dirs, sockets and more)
 
+
+
+```txt
 vfs.dir.count[dir,<regex incl>,<regex excl>,<types incl>,<types excl>,<max depth>,<min size>,<max size>,<min age>,<max age>,<regex excl dir>]
+
+```
 
 https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/zabbix_agent#vfs.dir.count
 
