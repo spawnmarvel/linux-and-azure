@@ -189,6 +189,8 @@ https://www.zabbix.com/documentation/8.0/en/manual/config/items/userparameters
 
 Since you are on Zabbix 7.0, you don't actually need PowerShell to count files. Zabbix Agent 2 has a built-in native function to do this. This is faster, more secure, and bypasses the shell restriction entirely.
 
+This was tested for Zabbix 6.0 also.
+
 
 ps1 test it
 
