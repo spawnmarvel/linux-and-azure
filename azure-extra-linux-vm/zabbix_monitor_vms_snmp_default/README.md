@@ -335,6 +335,12 @@ Zabbix can be used for centralized monitoring and analysis of log files with/wit
 
 Notifications can be used to warn users when a log file contains certain strings or string patterns.
 
+To find target text faults or capture service crashes, the agent relies heavily on integrated file monitoring routines
+
+* log: Monitors lines within standard textual log files, with customizable regex filters.
+
+* logrt: Reads continuously updated log sets featuring regular expression log-rotation patterns.
+
 https://www.zabbix.com/documentation/7.0/en/manual/config/items/itemtypes/log_items
 
 ## Zabbix Linux by Zabbix agent active
