@@ -25,6 +25,7 @@ A project for maximizing all default monitoring and trying to not write a single
   - [References User parameter and log monitor](#references-user-parameter-and-log-monitor)
   - [All Templates](#all-templates)
 - [AI 20h course](#ai-20h-course)
+- [Zabbix Script Action](#zabbix-script-action)
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
@@ -673,3 +674,33 @@ By mastering how Agent 2 natively packages data into JSON and how the Zabbix Ser
 
 ### Hour 1: Agent 2 Architecture & Go Runtime Mechanics
 
+
+# Zabbix Script Action
+
+
+This keeps your Level 3 firewall rules unidirectional (outbound only).
+
+You have two primary ways to achieve this:
+
+Zabbix Media Type / Script Action (Real-time): Zabbix fires a script the exact millisecond a problem occurs and passes the details directly to the external server.
+
+External API Polling Script (Scheduled/Cron): A localized script runs on a schedule via cron, queries the Zabbix API locally, and forwards the payload.
+
+
+### Method 1: Zabbix Script Action (Recommended)
+
+This is the most efficient method because it doesn't require a continuous cron job loop. Zabbix pushes the data natively when an alert triggers.
+
+Go to Alerts ➔ Media types ➔ Create media type.
+
+Set Type to Script.
+
+Name the script (e.g., forward_alert.sh).
+
+Pass the necessary Zabbix macros as parameters:
+
+{ALERT.SUBJECT}
+
+{ALERT.MESSAGE}
+
+Create a global Trigger action that executes this media type whenever a new problem is created.
