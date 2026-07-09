@@ -31,6 +31,11 @@ A project for maximizing all default monitoring and trying to not write a single
 
 In Zabbix, the distinction between Active and Passive modes relates to which entity initiates the communication and data transfer between the Zabbix Server/Proxy and the Zabbix Agent.
 
+A Zabbix Agent can be configured to run in both Active and Passive modes at the exact same time. By default, the standard out-of-the-box Zabbix Agent configuration is set up to listen for passive polling from the server while simultaneously processing active metrics and pushing them up.
+
+While running both modes concurrently is common in standard corporate networks, you should avoid doing this inside your specific Purdue Model topology.
+
+
 ### Zabbix agents
 
 ![p_vs_a](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/p_vs_a.png)
