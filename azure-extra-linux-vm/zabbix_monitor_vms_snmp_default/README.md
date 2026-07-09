@@ -342,7 +342,7 @@ To find target text faults or capture service crashes, the agent relies heavily 
 
 * logrt: Reads continuously updated log sets featuring regular expression log-rotation patterns.
 
-https://www.zabbix.com/documentation/7.0/en/manual/config/items/itemtypes/log_items
+https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_items
 
 ## Zabbix Linux by Zabbix agent active
 
