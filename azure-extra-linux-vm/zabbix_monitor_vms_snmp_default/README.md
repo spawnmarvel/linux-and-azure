@@ -378,6 +378,44 @@ Create item.Configure the following fields:
 
 ![event item](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_item.png)
 
+Test failed logon
+
+
+Step 1: Verify Windows Logon Auditing is Enabled
+
+Log into your target Windows VM via your remote access gateway.
+
+Open PowerShell as an Administrator and check the current subcategory status:
+
+
+```ps1
+
+auditpol /get /subcategory:"Logon"
+
+# System audit policy
+# Category/Subcategory                      Setting
+# Logon/Logoff
+# Logon                                   Success and Failure
+
+```
+
+Look closely at the output. It must read Success and Failure or Failure.
+
+Step 2: Trigger a Simulated Failed Logon Attempt
+
+```cmd
+runas /user:ZabbixTestAccount cmd.exe
+```
+
+Step 3: Verify the Results in Zabbix
+
+
+![failed](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/failed.png)
+
+View it in zabbix
+
+![failed item](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/failed_item.png)
+
 ## Zabbix Linux by Zabbix agent active
 
 ### Install Linux by Zabbix agent active
