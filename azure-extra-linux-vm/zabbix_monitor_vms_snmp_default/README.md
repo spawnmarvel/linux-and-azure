@@ -429,12 +429,12 @@ View it in zabbix
 
 Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
 
-* eventlog[Application,,"Warning|Error",,,skip]
-* eventlog[System,,"Warning|Error",,,skip]
+* eventlog[Application,,"Warning|Error",,,,skip]
+* eventlog[System,,"Warning|Error",,,,skip]
 
 Listens specifically to the Application log for any event explicitly thrown by the "Group Policy" system flagged with an Error state.
 
-* eventlog[Application,"Group Policy",Error,,,skip]
+* eventlog[Application,"Group Policy",Error,,,,skip]
 
 
 Test it
