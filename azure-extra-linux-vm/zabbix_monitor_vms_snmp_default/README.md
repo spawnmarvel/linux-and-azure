@@ -334,6 +334,8 @@ Or check out the docs for the full list
 
 Zabbix can be used for centralized monitoring and analysis of log files with/without log rotation support.
 
+
+#### Log file monitoring
 Notifications can be used to warn users when a log file contains certain strings or string patterns.
 
 To find target text faults or capture service crashes, the agent relies heavily on integrated file monitoring routines
@@ -352,6 +354,8 @@ https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_it
 
 
 ![active_server](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/active_server.png)
+
+#### Eventlog Windows-specific item keys
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
 
