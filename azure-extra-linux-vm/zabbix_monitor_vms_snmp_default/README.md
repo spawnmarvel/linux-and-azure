@@ -451,7 +451,14 @@ Write-EventLog -LogName Application -Source "Application" -EntryType Error -Even
 
 Trigger example
 
-* count(/Template Windows Active Eventlog/eventlog[Application,,"Warning|Error",,,,skip],10m,"regexp","Group Policy processing failed")>0
+* count(/Lima eventlogs/eventlog[Application,,"Warning|Error",,,,skip],10m,"regexp","Aspen")>0
+
+Recovery expression
+
+* nodata(/Lima eventlogs/eventlog[Application,,"Warning|Error",,,,skip],10m)=1
+
+
+![event trigger](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_trigger.png)
 
 ## Zabbix Linux by Zabbix agent active
 
