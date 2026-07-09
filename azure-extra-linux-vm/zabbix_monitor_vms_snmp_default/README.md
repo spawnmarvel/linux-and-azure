@@ -449,6 +449,10 @@ Write-EventLog -LogName Application -Source "Application" -EntryType Error -Even
 ![event system 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_system2.png)
 
 
+Trigger example
+
+* count(/Template Windows Active Eventlog/eventlog[Application,,"Warning|Error",,,,skip],10m,"regexp","Group Policy processing failed")>0
+
 ## Zabbix Linux by Zabbix agent active
 
 ### Install Linux by Zabbix agent active
