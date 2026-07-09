@@ -355,7 +355,7 @@ https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_it
 
 ![active_server](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/active_server.png)
 
-#### Eventlog Windows-specific item keys
+#### Eventlog Track Failed Windows Logons (Audit Failure)
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
 
@@ -419,6 +419,27 @@ Step 3: Verify the Results in Zabbix
 View it in zabbix
 
 ![failed item](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/failed_item.png)
+
+#### Eventlog Stream All System Warnings and Errors, Track Active Directory Service Outages
+
+eventlog[System,,"Warning|Error",,,,skip]
+
+* Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
+
+eventlog[Application,"Group Policy",Error,,,,skip]
+
+* Listens specifically to the Application log for any event explicitly thrown by the "Group Policy" system flagged with an Error state.
+
+
+Test it
+
+```ps1
+Write-EventLog -LogName System -Source "EventLog" -EntryType Warning -EventId 9998 -Message "Zabbix Active Agent Test: Simulated System Warning payload."
+```
+
+
+![event system](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_system.png)
+
 
 ## Zabbix Linux by Zabbix agent active
 
