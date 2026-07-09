@@ -339,10 +339,44 @@ Notifications can be used to warn users when a log file contains certain strings
 To find target text faults or capture service crashes, the agent relies heavily on integrated file monitoring routines
 
 * log: Monitors lines within standard textual log files, with customizable regex filters.
-
 * logrt: Reads continuously updated log sets featuring regular expression log-rotation patterns.
 
+
+Make sure that in the agent configuration file:
+
+* 'Hostname' parameter matches the host name in the frontend
+* Servers in the 'ServerActive' parameter are specified for the processing of active checks
+
 https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_items
+
+
+
+![active_server](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/active_server.png)
+
+Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
+
+Instead of log or logrt, Windows nodes use a dedicated item key called eventlog.
+
+https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/zabbix_agent/win_keys?hl=eventlog
+
+
+Step-by-Step Implementation
+
+Navigate to Data collection ➔ Hosts (or edit your Windows master template).  
+
+Click Items ➔ 
+
+Create item.Configure the following fields:
+
+* Name: Windows Security Log: Failed LogonsType: 
+* Select Zabbix agent (active).
+* Key: eventlog[Security,,,,4625,,skip]
+* Type of information: 
+* Change this drop-down menu to Log.  
+* Click Add.
+
+
+![event item](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_item.png)
 
 ## Zabbix Linux by Zabbix agent active
 
