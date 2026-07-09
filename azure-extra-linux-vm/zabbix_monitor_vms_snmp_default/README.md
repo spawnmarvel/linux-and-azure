@@ -422,13 +422,13 @@ View it in zabbix
 
 #### Eventlog Stream All System Warnings and Errors, Track Active Directory Service Outages
 
-eventlog[System,,"Warning|Error",,,,skip]
+Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
 
-* Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
+* eventlog[System,,"Warning|Error",,,,skip]
 
-eventlog[Application,"Group Policy",Error,,,,skip]
+Listens specifically to the Application log for any event explicitly thrown by the "Group Policy" system flagged with an Error state.
 
-* Listens specifically to the Application log for any event explicitly thrown by the "Group Policy" system flagged with an Error state.
+* eventlog[Application,"Group Policy",Error,,,,skip]
 
 
 Test it
