@@ -425,6 +425,7 @@ View it in zabbix
 Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
 
 * eventlog[System,,"Warning|Error",,,,skip]
+* eventlog[Application,,"Warning|Error",,,,skip]
 
 Listens specifically to the Application log for any event explicitly thrown by the "Group Policy" system flagged with an Error state.
 
@@ -435,10 +436,12 @@ Test it
 
 ```ps1
 Write-EventLog -LogName System -Source "EventLog" -EntryType Warning -EventId 9998 -Message "Zabbix Active Agent Test: Simulated System Warning payload."
+
+Write-EventLog -LogName Application -Source "Application" -EntryType Error -EventId 9997 -Message "Group Policy processing failed. Simulated Zabbix Active Agent payload."
 ```
 
 
-![event system](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_system.png)
+![event system 2](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_system2.png)
 
 
 ## Zabbix Linux by Zabbix agent active
