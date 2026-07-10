@@ -460,6 +460,10 @@ Recovery expression
 
 ![event trigger](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_trigger.png)
 
+Example of other data collected
+
+![event other](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/event_other.png)
+
 ## Zabbix Linux by Zabbix agent active
 
 ### Install Linux by Zabbix agent active
