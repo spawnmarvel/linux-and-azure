@@ -14,6 +14,7 @@ A project for maximizing all default monitoring and trying to not write a single
   - [Zabbix Windows by Zabbix agent active](#zabbix-windows-by-zabbix-agent-active)
     - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
     - [User parameters windows native](#user-parameters-windows-native)
+    - [Item keys](#item-keys)
     - [Log monitor windows](#log-monitor-windows)
   - [Zabbix Linux by Zabbix agent active](#zabbix-linux-by-zabbix-agent-active)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
@@ -330,7 +331,10 @@ zabbix_agent2.exe -p
 
 ```
 
-Or check out the docs for the full list
+### Item keys
+
+Note that all item keys supported by Zabbix agent are also supported by the new generation Zabbix agent 2. See the additional item keys that you can use with the agent 2 only.
+
 
 * https://www.zabbix.com/documentation/8.0/en/manual/config/items/itemtypes/zabbix_agent
 
