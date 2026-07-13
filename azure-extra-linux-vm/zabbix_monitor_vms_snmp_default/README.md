@@ -16,6 +16,7 @@ A project for maximizing all default monitoring and trying to not write a single
     - [User parameters windows native](#user-parameters-windows-native)
     - [Item keys](#item-keys)
     - [Log monitor windows](#log-monitor-windows)
+    - [Eventlog](#Eventlog)
   - [Zabbix Linux by Zabbix agent active](#zabbix-linux-by-zabbix-agent-active)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
     - [User parameters linux native](#user-parameters-linux-native)
@@ -364,7 +365,7 @@ https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_it
 
 ![active_server](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/active_server.png)
 
-#### Eventlog Track Failed Windows Logons (Audit Failure)
+### Eventlog
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
 
