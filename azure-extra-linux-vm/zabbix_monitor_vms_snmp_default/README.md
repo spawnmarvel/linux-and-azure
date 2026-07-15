@@ -497,7 +497,7 @@ Item Key
 Result after running powershell
 
 
-![log append](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_append.png)
+![log append](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_level_append.png)
 
 ### Eventlog
 
