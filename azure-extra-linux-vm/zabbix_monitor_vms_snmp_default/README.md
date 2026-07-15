@@ -450,6 +450,13 @@ Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yy
 
 ```
 
+Application low now
+
+```log
+[2026-07-15 13:03:33] [WARNING] Warning Application has crashed due to 13
+[2026-07-15 13:03:33] [INFO] Quick log entry 20
+```
+
 
 ![log warning](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_warning.png)
 
