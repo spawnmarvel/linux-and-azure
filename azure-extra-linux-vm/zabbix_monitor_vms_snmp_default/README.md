@@ -460,6 +460,30 @@ Application low now
 
 ![log warning](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_warning.png)
 
+To get the log level in brackets
+
+Item name
+
+* Application Log Warning level
+
+Item key
+
+* log["C:\\appl\\logs\\application.log","\[WARNING\] (.*)",,,,\1]
+
+Send events
+
+```ps1
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [WARNING] Warning Application has crashed due to 17" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [WARNING] Your Application has crashed due to 17" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 24" -Encoding utf8
+```
+
+View result
+
+
+![log level](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_level.png)
+
+
 ### Eventlog
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
