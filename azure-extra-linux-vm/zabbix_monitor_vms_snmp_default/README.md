@@ -433,6 +433,27 @@ Agent must be active.
 ![log_entry](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_entry.png)
 
 
+If we want to track Warning for example
+
+Item Name
+
+* Application Log Warning
+
+Item Key
+
+* log["C:\\appl\\logs\\application.log","Warning (.*)",,,,\1]
+
+Lets create that item and send
+
+```ps1
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [WARNING] Warning Application has crashed due to 13" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 20" -Encoding utf8
+
+```
+
+
+![log warning](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_warning.png)
+
 ### Eventlog
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
