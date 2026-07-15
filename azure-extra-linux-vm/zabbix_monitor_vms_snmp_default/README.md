@@ -376,6 +376,9 @@ Use this script to generate keywords and logs
 
 ```ps1
 Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 3" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 4" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 5" -Encoding utf8
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 6" -Encoding utf8
 ```
 
 
@@ -386,6 +389,25 @@ Sometimes we may want to extract only the interesting value from a target file i
 Since Zabbix 2.2.0, log items have the ability to extract desired values from matched lines. This is accomplished by the additional output parameter in log and logrt items.
 
 Using the 'output' parameter allows to indicate the subgroup of the match that we may be interested in.
+
+Lets add it to the template we created below for eventlog (we are jumping a bit for section to section).
+
+![log template](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_template.png)
+
+How the Regular Expression and Capture Group Work
+
+* Zabbix matches the word "Info " (with the space).
+* The regular expression group (.*) captures everything remaining on that line:
+Name
+* Because the 6th parameter is set to \1, the item value in Zabbix will store only the captured message:
+
+* Application Log Info 
+
+key
+
+* log["C:\\appl\\logs\\application.log","Quick (.*)",,,,\1]
+
+Agent must be active.
 
 
 ![log_entry](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_entry.png)
