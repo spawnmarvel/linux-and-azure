@@ -484,6 +484,21 @@ View result
 ![log level](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_level.png)
 
 
+To get the full string with warning also
+
+Item name
+
+* Application Log Warning level appended
+
+Item Key
+
+* log["C:\\appl\\logs\\application.log","(\[WARNING\] .*)",,,,\1]
+
+Result after running powershell
+
+
+![log append](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_apppend.png)
+
 ### Eventlog
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
