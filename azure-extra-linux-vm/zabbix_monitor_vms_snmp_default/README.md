@@ -365,6 +365,32 @@ https://www.zabbix.com/documentation/3.4/en/manual/config/items/itemtypes/log_it
 
 ![active_server](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/active_server.png)
 
+
+### log
+
+Lets test log
+
+* Make folder/file on server C:\appl\logs\application.log
+
+Use this script to generate keywords and logs
+
+```ps1
+Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 3" -Encoding utf8
+```
+
+
+Extracting matching part of regular expression
+
+Sometimes we may want to extract only the interesting value from a target file instead of returning the whole line when a regular expression match is found.
+
+Since Zabbix 2.2.0, log items have the ability to extract desired values from matched lines. This is accomplished by the additional output parameter in log and logrt items.
+
+Using the 'output' parameter allows to indicate the subgroup of the match that we may be interested in.
+
+
+![log_entry](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/log_entry.png)
+
+
 ### Eventlog
 
 Just like standard text files monitored via log and logrt, monitoring the Windows Event Log requires that the item type be set explicitly to Zabbix agent (active)
