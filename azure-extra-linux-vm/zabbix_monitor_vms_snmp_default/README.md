@@ -381,6 +381,24 @@ Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yy
 Add-Content -Path "C:\appl\logs\application.log" -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] [INFO] Quick log entry 6" -Encoding utf8
 ```
 
+Example logs that will be generated
+
+```log
+[2026-07-15 12:18:49] [INFO] Quick log entry
+[2026-07-15 12:31:00] [INFO] Quick log entry
+[2026-07-15 12:31:06] [INFO] Quick log entry
+[2026-07-15 12:31:07] [INFO] Quick log entry
+[2026-07-15 12:31:38] [INFO] Quick log entry 1
+[2026-07-15 12:35:00] [INFO] Quick log entry 2
+[2026-07-15 12:35:49] [INFO] Quick log entry 3
+[2026-07-15 12:36:04] [INFO] Quick log entry 3
+[2026-07-15 12:36:54] [INFO] Quick log entry 3
+[2026-07-15 12:36:58] [INFO] Quick log entry 4
+[2026-07-15 12:37:04] [INFO] Quick log entry 5
+[2026-07-15 12:37:08] [INFO] Quick log entry 6
+[2026-07-15 12:43:00] [INFO] Quick log entry 16
+
+```
 
 Extracting matching part of regular expression
 
