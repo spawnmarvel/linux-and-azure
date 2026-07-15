@@ -396,7 +396,6 @@ Example logs that will be generated
 [2026-07-15 12:36:58] [INFO] Quick log entry 4
 [2026-07-15 12:37:04] [INFO] Quick log entry 5
 [2026-07-15 12:37:08] [INFO] Quick log entry 6
-[2026-07-15 12:43:00] [INFO] Quick log entry 16
 
 ```
 
