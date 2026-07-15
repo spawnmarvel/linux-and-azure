@@ -398,12 +398,14 @@ How the Regular Expression and Capture Group Work
 
 * Zabbix matches the word "Info " (with the space).
 * The regular expression group (.*) captures everything remaining on that line:
-Name
 * Because the 6th parameter is set to \1, the item value in Zabbix will store only the captured message:
+
+
+Item Name
 
 * Application Log Info 
 
-key
+Item key
 
 * log["C:\\appl\\logs\\application.log","Quick (.*)",,,,\1]
 
