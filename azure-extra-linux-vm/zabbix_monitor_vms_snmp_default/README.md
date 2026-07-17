@@ -568,6 +568,13 @@ View it in zabbix
 
 Monitors the overall System logs, automatically filtering out thousands of daily noisy Information alerts while forwarding critical system/hardware warnings and application crashes.
 
+* eventlog[name,<regexp>,<severity>,<source>,<eventid>,<maxlines>,<mode>]
+* eventlog.count[name,<regexp>,<severity>,<source>,<eventid>,<maxproclines>,<mode>]
+
+https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/zabbix_agent/win_keys#eventlog
+
+Example:
+
 * eventlog[Application,,"Warning|Error",,,,skip]
 * eventlog[System,,"Warning|Error",,,,skip]
 
