@@ -503,3 +503,106 @@ Critical metrics to watch:
 * MySQL: Queries per second: Shows the load the proxy is putting on its DB.
 * MySQL: Slow queries: If this increases, your proxy's disk I/O might be a bottleneck.
 * MySQL: Buffer pool utilization: Tells you if you need to give MySQL more RAM.
+
+
+## Zabbix proxy ubuntu 26.04 sqlite3 (update 28.08.2026)
+
+Lets test the new OS and use sqllite3 as database for zabbix proxy.
+
+* Zabbix server, vmzabbix03 172.16.0.4
+* Zabbix proxy, vmzabbixproxy03resolute2604 172.16.0.8
+
+https://www.zabbix.com/download?zabbix=7.0&os_distribution=ubuntu&os_version=26.04&components=proxy&db=sqlite3&ws=
+
+* 7 Lts, ubuntu 26.04, proxy, sqlite3 
+
+```bash
+# ssh from vmzabbix03 to vmzabbixproxy03resolute2604
+
+# configure proxy, The Squid Proxy / Routing via vmzabbix03
+# https://github.com/spawnmarvel/todo-and-current/blob/main/squid_proxy/README.md
+
+sudo apt update
+sudo apt upgrade
+
+sudo wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.0+ubuntu26.04_all.deb
+
+
+sudo dpkg -i zabbix-release_latest_7.0+ubuntu26.04_all.deb
+
+sudo apt update
+
+sudo apt install zabbix-proxy-sqlite3
+```
+
+d. Configure the database for Zabbix proxy
+Edit file /etc/zabbix/zabbix_proxy.conf and set DBName parameter.
+
+When using SQLite3 as the backend for Zabbix Proxy, setting DBName tells the proxy binary where to store its local file database.
+
+You do not need to configure DBUser or DBPassword. The proxy daemon will automatically create the database file at the path specified by DBName and set up the schema on its first startup.
+
+```bash
+sudo nano /etc/zabbix/zabbix_proxy.conf
+
+
+# 0 = Active Proxy (Proxy connects to Server and sends data)
+# 1 = Passive Proxy (Server connects to Proxy and pulls data)
+ProxyMode=0
+
+# Central Zabbix Server IP or FQDN in Zone 2.5
+Server=<IP_OF_ZABBIX_SERVER>
+
+# log
+LogFileSize=100
+
+# Exact name of this proxy as configured in Zabbix Frontend
+Hostname=vmzabbixproxy03resolute2604
+
+# db
+DBName=/var/lib/zabbix/zabbix_proxy.db
+
+
+sudo systemctl restart zabbix-proxy
+sudo systemctl enable zabbix-proxy
+
+# hm, error
+sudo tail -n 30 /var/log/zabbix/zabbix_proxy.log
+
+# 13317:20260828:121939.728 [Z3002] cannot create database '/var/lib/zabbix/zabbix_proxy.db': [0] unable to open database file
+
+# Ensure the directory exists
+sudo mkdir -p /var/lib/zabbix
+
+# Assign ownership to the zabbix user and group
+sudo chown -R zabbix:zabbix /var/lib/zabbix
+
+# Set read, write, execute permissions for the owner
+sudo chmod 750 /var/lib/zabbix
+
+sudo systemctl start zabbix-proxy
+sudo systemctl status zabbix-proxy
+zabbix-proxy.service - Zabbix Proxy
+     Loaded: loaded (/usr/lib/systemd/system/zabbix-proxy.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-08-28 12:21:42 UTC; 1min 33s ago
+
+```
+
+
+## Configure frontend
+
+Configure frontend
+
+
+Step 3: Register and Configure the Active Proxy in Zabbix Frontend
+Open your browser and log into the Zabbix Web UI (Zone 2.5).
+
+1. Navigate to Administration → Proxies.
+
+2. Click the Create proxy button in the top right corner.
+
+3. Configure the parameters as follows:
+
+* vmzabbixproxy03resolute2604
+* Active
+* Description optional
