@@ -608,3 +608,45 @@ Open your browser and log into the Zabbix Web UI (Zone 2.5).
 * Description optional
 
 ![proxy sql](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_sql.png)
+
+## Monitor proxy
+
+Configuring Zabbix Agent 2 for Active (Push) Mode
+On your proxy host (vmzabbixproxy03resolute2604), perform the following setup:
+
+
+```bash
+sudo apt update
+sudo apt install zabbix-agent2
+
+sudo nano /etc/zabbix/zabbix_agent2.conf
+# Comment out or leave Passive Server empty if you do not want inbound checks
+Server=127.0.0.1
+
+# Set ServerActive to your Zabbix Server IP (Zone 2.5) OR 127.0.0.1 (if pushing to local proxy)
+ServerActive=<IP_OF_ZABBIX_SERVER>
+
+# Exact hostname registered in the Zabbix Web UI
+Hostname=vmzabbixproxy03resolute2604
+
+
+sudo systemctl restart zabbix-agent2
+sudo systemctl enable zabbix-agent2
+
+```
+
+To process push-based active metrics in the Zabbix Server Web UI:
+
+* Go to Data collection → Hosts.
+
+* Edit or create the host vmzabbixproxy03resolute2604.
+
+* Under Templates, add Linux by Zabbix agent active.
+
+(Using the active variant ensures all items are configured for active push checks rather than passive poll checks).
+
+* An Agent interface IP is not strictly required for active-only items, but you can set the Agent IP to 127.0.0.1 or the local IP.
+
+* Click Update.
+
+![proxy sql monitor](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_sql_monitor.png)
