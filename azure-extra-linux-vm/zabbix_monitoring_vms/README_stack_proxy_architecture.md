@@ -606,3 +606,5 @@ Open your browser and log into the Zabbix Web UI (Zone 2.5).
 * vmzabbixproxy03resolute2604
 * Active
 * Description optional
+
+![proxy sql](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_sql.png)
