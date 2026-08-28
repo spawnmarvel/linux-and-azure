@@ -650,3 +650,31 @@ To process push-based active metrics in the Zabbix Server Web UI:
 * Click Update.
 
 ![proxy sql monitor](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitoring_vms/images/proxy_sql_monitor.png)
+
+In Zabbix 7.0 LTS, the default offline buffer retention is 1 hour.
+
+If the ProxyOfflineBuffer line remains commented out in /etc/zabbix/zabbix_proxy.conf, the proxy will preserve unsent historical data in the SQLite database for up to 1 hour during a network outage before the housekeeper starts purging older unsent records.
+
+
+```bash
+sudo grep '*Offline*' /etc/zabbix/zabbix_proxy.conf
+### Option: ProxyOfflineBuffer
+# ProxyOfflineBuffer=1
+
+sudo nano /etc/zabbix/zabbix_proxy.conf
+```
+
+If a 1-hour offline window is too short for your network resilience requirements, uncomment the setting in /etc/zabbix/zabbix_proxy.conf and set it to your preferred duration (e.g., 24 or 72 hours)
+
+```ini
+ProxyOfflineBuffer=72
+```
+
+```bash
+
+sudo grep 'Offline*' /etc/zabbix/zabbix_proxy.conf
+### Option: ProxyOfflineBuffer
+ProxyOfflineBuffer=72
+
+sudo systemctl restart zabbix-proxy
+```
