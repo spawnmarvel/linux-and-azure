@@ -19,7 +19,7 @@ By default, Ubuntu systems get their updates straight from the internet at archi
 
 In an environment like this, it would be more efficient if one system would download all Ubuntu updates just once and distribute them to the clients. In this case, updates are distributed using the local network, removing any strain on the internet link
 
-## Topology
+## Topology standard mirror
 
 ```mermaid
 graph TD;
