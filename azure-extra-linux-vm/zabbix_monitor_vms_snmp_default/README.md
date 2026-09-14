@@ -14,20 +14,36 @@ A project for maximizing all default monitoring and trying to not write a single
   - [Zabbix Windows by Zabbix agent active](#zabbix-windows-by-zabbix-agent-active)
     - [Install Windows by Zabbix agent active](#install-windows-by-zabbix-agent-active)
     - [User parameters windows native](#user-parameters-windows-native)
+    - [1. Count all files in folder (native no scripts)](#1-count-all-files-in-folder-native-no-scripts)
+    - [2. Zabbix Agent 2 has a built-in native function](#2-zabbix-agent-2-has-a-built-in-native-function)
     - [Item keys](#item-keys)
     - [Log monitor windows](#log-monitor-windows)
-    - [Eventlog](#Eventlog)
+      - [Log file monitoring](#log-file-monitoring)
+    - [log](#log)
+    - [Eventlog](#eventlog)
+      - [Eventlog Stream All System Warnings and Errors, Track Active Directory Service Outages](#eventlog-stream-all-system-warnings-and-errors-track-active-directory-service-outages)
   - [Zabbix Linux by Zabbix agent active](#zabbix-linux-by-zabbix-agent-active)
     - [Install Linux by Zabbix agent active](#install-linux-by-zabbix-agent-active)
     - [User parameters linux native](#user-parameters-linux-native)
     - [Log monitor linux](#log-monitor-linux)
   - [Zabbix Linux by SNMP](#zabbix-linux-by-snmp)
     - [Install](#install)
+    - [Remote Verification (Zabbix Server)](#remote-verification-zabbix-server)
   - [Simulate SNMP Trap Generator](#simulate-snmp-trap-generator)
   - [References User parameter and log monitor](#references-user-parameter-and-log-monitor)
   - [All Templates](#all-templates)
-- [AI 20h course](#ai-20h-course)
-- [Zabbix Script Action](#zabbix-script-action)
+  - [Supported functions](#supported-functions)
+    - [Aggregate functions](#aggregate-functions)
+    - [Foreach functions](#foreach-functions)
+    - [Bitwise functions](#bitwise-functions)
+    - [Date and time functions](#date-and-time-functions)
+    - [History functions](#history-functions)
+    - [Trend functions](#trend-functions)
+    - [Mathematical functions](#mathematical-functions)
+    - [Operator functions](#operator-functions)
+    - [Predictive functions](#predictive-functions)
+    - [String functions](#string-functions)
+
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
 
@@ -916,57 +932,80 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/net/fortinet/f
 ![all templates](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/templates.png)
 
 
-# AI 20h course
+## Supported functions
+
+### Aggregate functions
+
+Aggregate functions allow you to perform cluster-wide operations—such as calculating average CPU usage across an entire web farm or counting how many servers in a host group are offline.
+
+* Calculated Items: To create a new composite metric representing a group of hosts (e.g., total bandwidth used by Zone 2.0).
+* Trigger Expressions: To alert when a group threshold is breached (e.g., trigger an incident if more than 50% of web nodes fail).
+* 
+
+### Foreach functions
+
+### Bitwise functions
+
+### Date and time functions
+
+They do not require a specific item value as input—instead, they inspect the system clock on the Zabbix Server or Proxy when evaluating an expression.
+
+* Time-Constrained Triggers: Suppressing or firing alerts only during specific operational hours (e.g., business hours vs. off-hours).
+* Scheduled Maintenance Windows: Defining dynamic checks that align with backup or patching schedules.
+
+To create a trigger that fires 1 day before the second Friday of each month (which is always the second Thursday of the month), you need to combine two date/time constraints:
+
+- Day of Week: Thursday (dayofweek() = 4).
+
+- Day of Month: The second Thursday of any month must fall between day 7 and day 13 of that month.
+
+Enabling Allow manual close ensures that once the trigger fires on that second Thursday, it stays active in your Problems dashboard until an engineer explicitly acknowledges and manually closes it.
+
+* Name: Reminder: 1 Day Until Monthly Patching/Maintenance (2nd Friday)
+* Severity: Information (or Warning)
+* Expression
+
+```ini
+dayofweek() = 4 and dayofmonth() >= 7 and dayofmonth() <= 13 and time() >= 090000 and time() <= 090500
+```
+
+* OK event generation: Expression
+* PROBLEM event generation mode: Single
+* Allow manual close: ☑ Enabled
+
+### History functions
+
+History functions operate on high-frequency, granular raw data points stored in the history tables.
+
+* Time Scope: Short-term windows (minutes, hours) or specific count intervals (e.g., last #3 values).
+* Primary Use Cases: Real-time alerting, detecting sudden spikes, immediate threshold breaches, and short-term evaluation.
+* Common Functions: last(), min(), max(), avg(), sum(), change(), nodata().
+
+### Trend functions
+
+Trend functions operate on hourly aggregated statistics (minimum, maximum, average, count) stored in the trend tables.
+
+* Time Scope: Long-term historical windows (days, weeks, months, or years).
+* Primary Use Cases: Capacity planning, anomaly detection against historical baselines, month-over-month storage growth analysis, and long-term trend evaluation.
+* Common Functions: trendavg(), trendmin(), trendmax(), trendsum().
+* 
+
+### Mathematical functions
+
+### Operator functions
+
+### Predictive functions
+
+Predictive functions in Zabbix use historical data points to forecast future values or estimate when a metric will reach a critical threshold (such as running out of disk space).
+
+* Proactive Alerting: Triggering notifications before a hard drive fills up or memory exhausts.
+* Capacity Planning: Estimating future resource demands across host groups.
+* Calculated Items: Generating forecasted metric values for dashboard reporting.
 
 
-Table of Contents
+### String functions
 
-🔹 The 80/20 Pareto Strategy for Zabbix Agent 2
-
-🔹 Phase 1: Native Plugin Foundations & Session Keys (Hours 1–5)
-
-🔹 Phase 2: OS-Level Mastery Without Scripts (Hours 6–10)
-
-🔹 Phase 3: Middleware & App Ingestion (Hours 11–15)
-
-🔹 Phase 4: Low-Level Network, TLS, & Enterprise Scaling (Hours 16–20)
+https://www.zabbix.com/documentation/current/en/manual/appendix/functions
 
 
 
-By mastering how Agent 2 natively packages data into JSON and how the Zabbix Server parses it via preprocessing, you completely eliminate the need for custom Bash or PowerShell wrappers.
-
-
-## Phase 1: Native Plugin Foundations & Session Keys (Hours 1–5)
-
-### Hour 1: Agent 2 Architecture & Go Runtime Mechanics
-
-
-# Zabbix Script Action
-
-
-This keeps your Level 3 firewall rules unidirectional (outbound only).
-
-You have two primary ways to achieve this:
-
-Zabbix Media Type / Script Action (Real-time): Zabbix fires a script the exact millisecond a problem occurs and passes the details directly to the external server.
-
-External API Polling Script (Scheduled/Cron): A localized script runs on a schedule via cron, queries the Zabbix API locally, and forwards the payload.
-
-
-### Method 1: Zabbix Script Action (Recommended)
-
-This is the most efficient method because it doesn't require a continuous cron job loop. Zabbix pushes the data natively when an alert triggers.
-
-Go to Alerts ➔ Media types ➔ Create media type.
-
-Set Type to Script.
-
-Name the script (e.g., forward_alert.sh).
-
-Pass the necessary Zabbix macros as parameters:
-
-{ALERT.SUBJECT}
-
-{ALERT.MESSAGE}
-
-Create a global Trigger action that executes this media type whenever a new problem is created.
