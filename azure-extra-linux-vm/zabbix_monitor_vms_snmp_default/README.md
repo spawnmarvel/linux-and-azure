@@ -990,7 +990,10 @@ Trigger
 
 Reminder: 4.5 hours remaining until 16:00 deadline
 
-* last(/Lima Operational Schedule Reminders/zabbix[boottime]) > 0 and time() >= 113000 and time() <= 113500
+```ini
+last(/Lima Operational Schedule Reminders/zabbix[boottime]) > 0 and time() >= 113000 and time() <= 113500
+```
+
 * OK event generation, NONE
 * Allow manual close, check
 
@@ -1000,6 +1003,18 @@ It fired exactly as expected, just delayed due to time zone differences.
 The problem event fired at 01:30:09 PM (13:30:09). Since your expression evaluates time() >= 113000 and time() <= 113500, 11:30 AM UTC corresponds precisely to 01:30 PM CEST (UTC+2).
 
 ![time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/time.png)
+
+Correcting the Time Zone (If Needed)
+
+If you want the alert to trigger at 11:30 AM local time (CEST) instead of 01:30 PM:
+
+Option A (Trigger Adjustment): Offset the condition by 2 hours for local time:
+
+```ini
+last(/Lima Operational Schedule Reminders/zabbix[boottime]) > 0 and time() >= 093000 and time() <= 093500
+```
+
+Option B (PHP/System Time Zone): Ensure the date.timezone setting in your PHP configuration (/etc/php/.../fpm/php.ini or /etc/zabbix/php-fpm.conf) is set to Europe/Oslo and restart PHP-FPM / Zabbix Server.
 
 ### History functions
 
