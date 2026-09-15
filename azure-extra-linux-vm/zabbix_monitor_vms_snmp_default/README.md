@@ -995,6 +995,11 @@ Reminder: 4.5 hours remaining until 16:00 deadline
 * Allow manual close, check
 
 
+It fired exactly as expected, just delayed due to time zone differences.
+
+The problem event fired at 01:30:09 PM (13:30:09). Since your expression evaluates time() >= 113000 and time() <= 113500, 11:30 AM UTC corresponds precisely to 01:30 PM CEST (UTC+2).
+
+
 ### History functions
 
 History functions operate on high-frequency, granular raw data points stored in the history tables.
