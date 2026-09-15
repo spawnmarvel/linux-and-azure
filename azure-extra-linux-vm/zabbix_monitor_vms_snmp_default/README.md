@@ -973,6 +973,28 @@ dayofweek() = 4 and dayofmonth() >= 7 and dayofmonth() <= 13 and time() >= 09000
 * PROBLEM event generation mode: Single
 * Allow manual close: ☑ Enabled
 
+Template
+
+* Lima Operational Schedule Reminders
+* Template groups, Templates
+
+Item
+
+*  Name, lima.schedule.heartbeat
+*  Type, Zabbix internal
+*  key, zabbix[boottime]
+*  Update intervall, 1 m
+*  Numeric unsigned
+
+Trigger
+
+Reminder: 4.5 hours remaining until 16:00 deadline
+
+* last(/Lima Operational Schedule Reminders/zabbix[boottime]) > 0 and time() >= 113000 and time() <= 113500
+* OK event generation, NONE
+* Allow manual close, check
+
+
 ### History functions
 
 History functions operate on high-frequency, granular raw data points stored in the history tables.
