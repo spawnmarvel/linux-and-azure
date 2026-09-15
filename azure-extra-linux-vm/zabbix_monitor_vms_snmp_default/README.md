@@ -999,6 +999,7 @@ It fired exactly as expected, just delayed due to time zone differences.
 
 The problem event fired at 01:30:09 PM (13:30:09). Since your expression evaluates time() >= 113000 and time() <= 113500, 11:30 AM UTC corresponds precisely to 01:30 PM CEST (UTC+2).
 
+![time](https://github.com/spawnmarvel/linux-and-azure/blob/main/azure-extra-linux-vm/zabbix_monitor_vms_snmp_default/images/time.png)
 
 ### History functions
 
