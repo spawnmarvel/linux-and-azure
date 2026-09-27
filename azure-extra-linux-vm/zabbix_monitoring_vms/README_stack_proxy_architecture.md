@@ -2,8 +2,8 @@
 
 ## Table of content
 
-- [](#architectures)  
-- [](#zabbix-proxy-ubuntu-2604-sqlite3-update-28082026)
+- [architectures](#architectures)  
+- [zabbix-proxy-ubuntu-2604-sqlite3-update-28082026](#zabbix-proxy-ubuntu-2604-sqlite3-update-28082026)
 
 ## architectures
 
