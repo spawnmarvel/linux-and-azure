@@ -1,5 +1,10 @@
 ## stack with proxy and differnt architectures
 
+## Table of content
+
+- [](#architectures)  
+- [](#zabbix-proxy-ubuntu-2604-sqlite3-update-28082026)
+
 ## architectures
 
 Architecture:
