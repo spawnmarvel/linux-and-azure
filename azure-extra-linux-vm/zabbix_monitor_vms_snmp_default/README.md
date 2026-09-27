@@ -1068,6 +1068,10 @@ Example:
 ```
 * Required string, samples
 * Required status codes, 200
+  
+Authentication is many.
+
+* NTLM, username and password in macro so we can use the var.
 
   
 https://www.zabbix.com/documentation/current/en/manual/web_monitoring
