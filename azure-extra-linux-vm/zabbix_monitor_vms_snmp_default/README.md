@@ -43,6 +43,7 @@ A project for maximizing all default monitoring and trying to not write a single
     - [Operator functions](#operator-functions)
     - [Predictive functions](#predictive-functions)
     - [String functions](#string-functions)
+  - [Web scenarios](#web-scenarios)
 
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
@@ -1049,6 +1050,27 @@ Predictive functions in Zabbix use historical data points to forecast future val
 ### String functions
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/functions
+
+## Web scenarios
+
+
+With Zabbix you can check several availability aspects of web sites.
+
+Configuring steps:
+
+* URL, https://lima1.domain.com/DataREST.dll/History?
+* Post , in Raw data mode, attributes/values are displayed on a single line and concatenated with a & symbol.
+
+Example:
+
+```xml
+<Q f="D" allQuotes="1"><Tag><N><![CDATA[LIMA-18ABC]]></N><D><![CDATA[LIMA]]></D><F><![CDATA[VAL]]></F><HF>0</HF><St>1763387251000</St><Et>1763390851000</Et><RT>0</RT><X>1000</X><O>1</O></Tag></Q>
+```
+* Required string, samples
+* Required status codes, 200
+
+  
+https://www.zabbix.com/documentation/current/en/manual/web_monitoring
 
 
 
