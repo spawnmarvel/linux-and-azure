@@ -43,7 +43,7 @@ A project for maximizing all default monitoring and trying to not write a single
     - [Operator functions](#operator-functions)
     - [Predictive functions](#predictive-functions)
     - [String functions](#string-functions)
-  - [Web scenarios](#web-scenarios)
+  - [Web scenarios or http agent item](#web-scenarios-or-http-agent-item)
 
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
@@ -1051,8 +1051,10 @@ Predictive functions in Zabbix use historical data points to forecast future val
 
 https://www.zabbix.com/documentation/current/en/manual/appendix/functions
 
-## Web scenarios
+## Web scenarios or http agent item
 
+
+Web scenarios
 
 With Zabbix you can check several availability aspects of web sites.
 
@@ -1078,3 +1080,31 @@ https://www.zabbix.com/documentation/current/en/manual/web_monitoring
 
 
 
+Http agent because we need a template.
+
+
+1. Configure the Blueprint Template
+• Create a template and add two user macros under the Macros tab:
+	• {$WEB_USER} (Username)
+	• {$WEB_PASS} (Set type to Secret text for your password).
+2. Create the HTTP Agent Item
+• Type: HTTP agent
+• Key: http.history.check[service1] (Must use unique bracket values like [service2] when cloning later).
+• URL: https://{HOST.HOST}.domain.net/DT/DATA/BLEProcessDataREST.dll/History
+• Request Method / Body: Set to POST, select Raw data, and paste your query text into the box.
+• Headers: Add Content-Type matching your payload type (e.g., application/json).
+• Authentication: Select NTLM and insert your {$WEB_USER} and {$WEB_PASS} macros.
+3. Setup the Validation Filter (Preprocessing)
+• Go to the Preprocessing tab of the item.
+• Add a Regular expression step:
+	• Pattern: (?s)(?i).*samples.*
+	• Output: OK
+	• Custom on fail: Check the box and choose Set value to: samples missing
+4. Create the Alert Trigger
+• Go to the template Triggers tab and click Create trigger.
+• Set the expression to fire if the item fails to find the data text:
+last(/TemplateName/http.history.check[service1])="samples missing"
+5. Scale to 10 Monitors
+• Open your working item, scroll down, and click Clone.
+• Update the Name, update the bracket identifier in the Key (e.g., [service2]), and tweak the Request body for the next endpoint. Click Add.
+• Clone the trigger, update its name, and change its expression key to point to [service2]. Repeat this process for the remaining 8 endpoints.
