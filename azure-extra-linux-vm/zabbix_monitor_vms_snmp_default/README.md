@@ -1091,6 +1091,7 @@ Http agent because we need a template.
 • Create a template and add two user macros under the Macros tab:
 	• {$WEB_USER} (Username)
 	• {$WEB_PASS} (Set type to Secret text for your password).
+
 2. Create the HTTP Agent Item
 • Type: HTTP agent
 • Key: http.history.check[service1] (Must use unique bracket values like [service2] when cloning later).
@@ -1098,16 +1099,20 @@ Http agent because we need a template.
 • Request Method / Body: Set to POST, select Raw data, and paste your query text into the box.
 • Headers: Add Content-Type matching your payload type (e.g., application/json).
 • Authentication: Select NTLM and insert your {$WEB_USER} and {$WEB_PASS} macros.
+
 3. Setup the Validation Filter (Preprocessing)
 • Go to the Preprocessing tab of the item.
 • Add a Regular expression step:
+  • expected reponse {"data":[{"samples":[{"t":1790590083000,"v":73.14814814814815,"l":"Good","s":"Good","V":"Valid"}]}]}
 	• Pattern: (?s)(?i).*samples.*
 	• Output: OK
 	• Custom on fail: Check the box and choose Set value to: samples missing
+
 4. Create the Alert Trigger
 • Go to the template Triggers tab and click Create trigger.
 • Set the expression to fire if the item fails to find the data text:
 last(/TemplateName/http.history.check[service1])="samples missing"
+
 5. Scale to 10 Monitors
 • Open your working item, scroll down, and click Clone.
 • Update the Name, update the bracket identifier in the Key (e.g., [service2]), and tweak the Request body for the next endpoint. Click Add.
