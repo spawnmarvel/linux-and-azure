@@ -44,6 +44,8 @@ A project for maximizing all default monitoring and trying to not write a single
     - [Predictive functions](#predictive-functions)
     - [String functions](#string-functions)
   - [Web scenarios or http agent item](#web-scenarios-or-http-agent-item)
+    - [Web scenarios](#web-scenarios)
+    - [Http agent](#http-agent)
 
 
 ## Passive Mode (Server-Poll) Active Mode (Agent-Push)
@@ -1054,7 +1056,7 @@ https://www.zabbix.com/documentation/current/en/manual/appendix/functions
 ## Web scenarios or http agent item
 
 
-Web scenarios
+### Web scenarios
 
 With Zabbix you can check several availability aspects of web sites.
 
@@ -1079,6 +1081,8 @@ Authentication is many.
 https://www.zabbix.com/documentation/current/en/manual/web_monitoring
 
 
+
+### Http agent
 
 Http agent because we need a template.
 
