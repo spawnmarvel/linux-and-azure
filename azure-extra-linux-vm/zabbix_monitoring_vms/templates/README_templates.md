@@ -10,6 +10,8 @@ https://github.com/zabbix/community-templates
 - [](#active)
 - [](#passive)
 
+- [](#template-mysql-by-zabbix-agent)
+
 ### Template Linux by Zabbix agent
 
 Template Linux by Zabbix agent on dummy01 
