@@ -7,6 +7,8 @@ https://github.com/zabbix/community-templates
 ## Table of content
 
 - [template-linux-by-zabbix-agent](#template-linux-by-zabbix-agent)
+- [](#active)
+- [](#passive)
 
 ### Template Linux by Zabbix agent
 
