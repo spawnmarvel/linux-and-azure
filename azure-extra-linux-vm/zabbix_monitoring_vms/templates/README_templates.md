@@ -3,6 +3,11 @@
 Zabbix all templates
 https://github.com/zabbix/community-templates
 
+
+## Table of content
+
+- [template-linux-by-zabbix-agent](#template-linux-by-zabbix-agent)
+
 ### Template Linux by Zabbix agent
 
 Template Linux by Zabbix agent on dummy01 
